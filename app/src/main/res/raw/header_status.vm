@@ -1,0 +1,13 @@
+<html>
+<head>
+<style>
+table {border-spacing: 0;}
+.error {font-family: Verdana; font-size: 15pt; color: red; font-weight: bold; } 
+.info {font-family: Verdana; font-size: 15pt; color: black; }
+.title {font-family: Verdana; font-size: 18pt; color: #1F5DEE; font-weight: bold; }  
+.success {font-family: Verdana; font-size: 15pt; color: green; } 
+.warning {font-family: Verdana; font-size: 15pt; color: #DF7401; } 
+</style>
+</head>
+<body bgcolor="$bgColor">
+<table>

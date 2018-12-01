@@ -1,0 +1,3629 @@
+
+{
+  "dataSource": [
+    {
+      "dataStreamName": "detailed", 
+      "dataType": {
+        "field": [
+          {
+            "name": "activity_confidence", 
+            "format": "map"
+          }
+        ], 
+        "name": "com.google.activity.samples"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "device": {
+        "model": "Mi-4c", 
+        "version": "", 
+        "type": "phone", 
+        "uid": "122bcd38", 
+        "manufacturer": "Xiaomi"
+      }, 
+      "dataStreamId": "derived:com.google.activity.samples:com.google.android.gms:Xiaomi:Mi-4c:122bcd38:detailed", 
+      "type": "derived"
+    }, 
+    {
+      "dataStreamName": "hardware_tilt_manchego", 
+      "dataType": {
+        "field": [
+          {
+            "name": "activity_confidence", 
+            "format": "map"
+          }
+        ], 
+        "name": "com.google.activity.samples"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "device": {
+        "model": "Mi-4c", 
+        "version": "", 
+        "type": "phone", 
+        "uid": "122bcd38", 
+        "manufacturer": "Xiaomi"
+      }, 
+      "dataStreamId": "derived:com.google.activity.samples:com.google.android.gms:Xiaomi:Mi-4c:122bcd38:hardware_tilt_manchego", 
+      "type": "derived"
+    }, 
+    {
+      "dataStreamName": "smd_gouda", 
+      "dataType": {
+        "field": [
+          {
+            "name": "activity_confidence", 
+            "format": "map"
+          }
+        ], 
+        "name": "com.google.activity.samples"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "device": {
+        "model": "Mi-4c", 
+        "version": "", 
+        "type": "phone", 
+        "uid": "122bcd38", 
+        "manufacturer": "Xiaomi"
+      }, 
+      "dataStreamId": "derived:com.google.activity.samples:com.google.android.gms:Xiaomi:Mi-4c:122bcd38:smd_gouda", 
+      "type": "derived"
+    }, 
+    {
+      "dataStreamName": "software_tilt_froyo", 
+      "dataType": {
+        "field": [
+          {
+            "name": "activity_confidence", 
+            "format": "map"
+          }
+        ], 
+        "name": "com.google.activity.samples"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "device": {
+        "model": "Mi-4c", 
+        "version": "", 
+        "type": "phone", 
+        "uid": "122bcd38", 
+        "manufacturer": "Xiaomi"
+      }, 
+      "dataStreamId": "derived:com.google.activity.samples:com.google.android.gms:Xiaomi:Mi-4c:122bcd38:software_tilt_froyo", 
+      "type": "derived"
+    }, 
+    {
+      "dataStreamName": "vehicle_exit_tala", 
+      "dataType": {
+        "field": [
+          {
+            "name": "activity_confidence", 
+            "format": "map"
+          }
+        ], 
+        "name": "com.google.activity.samples"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "device": {
+        "model": "Mi-4c", 
+        "version": "", 
+        "type": "phone", 
+        "uid": "122bcd38", 
+        "manufacturer": "Xiaomi"
+      }, 
+      "dataStreamId": "derived:com.google.activity.samples:com.google.android.gms:Xiaomi:Mi-4c:122bcd38:vehicle_exit_tala", 
+      "type": "derived"
+    }, 
+    {
+      "dataStreamName": "activity_from_steps", 
+      "dataType": {
+        "field": [
+          {
+            "name": "activity", 
+            "format": "integer"
+          }
+        ], 
+        "name": "com.google.activity.segment"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "device": {
+        "model": "Mi-4c", 
+        "version": "", 
+        "type": "phone", 
+        "uid": "122bcd38", 
+        "manufacturer": "Xiaomi"
+      }, 
+      "dataStreamId": "derived:com.google.activity.segment:com.google.android.gms:Xiaomi:Mi-4c:122bcd38:activity_from_steps", 
+      "type": "derived"
+    }, 
+    {
+      "dataStreamName": "from_activity_samples<-derived:com.google.activity.samples:com.google.android.gms:Xiaomi:Mi-4c:122bcd38:detailed", 
+      "dataType": {
+        "field": [
+          {
+            "name": "activity", 
+            "format": "integer"
+          }
+        ], 
+        "name": "com.google.activity.segment"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.google.android.gms", 
+        "version": "1"
+      }, 
+      "device": {
+        "model": "Mi-4c", 
+        "version": "", 
+        "type": "phone", 
+        "uid": "122bcd38", 
+        "manufacturer": "Xiaomi"
+      }, 
+      "dataStreamId": "derived:com.google.activity.segment:com.google.android.gms:Xiaomi:Mi-4c:122bcd38:from_activity_samples<-derived:com.google.activity.samples:com.google.android.gms:Xiaomi:Mi-4c:122bcd38:detailed", 
+      "type": "derived"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "activity", 
+            "format": "integer"
+          }
+        ], 
+        "name": "com.google.activity.segment"
+      }, 
+      "dataStreamName": "merge_activity_segments", 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "dataStreamId": "derived:com.google.activity.segment:com.google.android.gms:merge_activity_segments", 
+      "type": "derived"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "activity", 
+            "format": "integer"
+          }
+        ], 
+        "name": "com.google.activity.segment"
+      }, 
+      "dataStreamName": "platform_activity_segments", 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "dataStreamId": "derived:com.google.activity.segment:com.google.android.gms:platform_activity_segments", 
+      "type": "derived"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "activity", 
+            "format": "integer"
+          }
+        ], 
+        "name": "com.google.activity.segment"
+      }, 
+      "dataStreamName": "session_activity_segment", 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "dataStreamId": "derived:com.google.activity.segment:com.google.android.gms:session_activity_segment", 
+      "type": "derived"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "activity", 
+            "format": "integer"
+          }
+        ], 
+        "name": "com.google.activity.segment"
+      }, 
+      "dataStreamName": "session_activity_segment", 
+      "application": {
+        "packageName": "com.moviz.gui"
+      }, 
+      "dataStreamId": "derived:com.google.activity.segment:com.moviz.gui:session_activity_segment", 
+      "type": "derived"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "activity", 
+            "format": "integer"
+          }
+        ], 
+        "name": "com.google.activity.segment"
+      }, 
+      "dataStreamName": "session_activity_segment", 
+      "application": {
+        "packageName": "com.pafers.gui"
+      }, 
+      "dataStreamId": "derived:com.google.activity.segment:com.pafers.gui:session_activity_segment", 
+      "type": "derived"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "calories", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.calories.bmr"
+      }, 
+      "dataStreamName": "from_height&weight", 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "dataStreamId": "derived:com.google.calories.bmr:com.google.android.gms:from_height&weight", 
+      "type": "derived"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "calories", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.calories.bmr"
+      }, 
+      "dataStreamName": "merged", 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "dataStreamId": "derived:com.google.calories.bmr:com.google.android.gms:merged", 
+      "type": "derived"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "calories", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.calories.expended"
+      }, 
+      "dataStreamName": "from_activities", 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "dataStreamId": "derived:com.google.calories.expended:com.google.android.gms:from_activities", 
+      "type": "derived"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "calories", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.calories.expended"
+      }, 
+      "dataStreamName": "from_bmr", 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "dataStreamId": "derived:com.google.calories.expended:com.google.android.gms:from_bmr", 
+      "type": "derived"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "calories", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.calories.expended"
+      }, 
+      "dataStreamName": "merge_calories_expended", 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "dataStreamId": "derived:com.google.calories.expended:com.google.android.gms:merge_calories_expended", 
+      "type": "derived"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "calories", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.calories.expended"
+      }, 
+      "dataStreamName": "platform_calories_expended", 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "dataStreamId": "derived:com.google.calories.expended:com.google.android.gms:platform_calories_expended", 
+      "type": "derived"
+    }, 
+    {
+      "dataStreamName": "from_activity<-raw:com.google.location.sample:com.google.android.gms:Micromax:Micromax A106:a721a580:", 
+      "dataType": {
+        "field": [
+          {
+            "name": "distance", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.distance.delta"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "device": {
+        "model": "Micromax A106", 
+        "version": "", 
+        "type": "phone", 
+        "uid": "a721a580", 
+        "manufacturer": "Micromax"
+      }, 
+      "dataStreamId": "derived:com.google.distance.delta:com.google.android.gms:Micromax:Micromax A106:a721a580:from_activity<-raw:com.google.location.sample:com.google.android.gms:Micromax:Micromax A106:a721a580:", 
+      "type": "derived"
+    }, 
+    {
+      "dataStreamName": "from_location<-raw:com.google.location.sample:com.google.android.gms:Micromax:Micromax A106:a721a580:", 
+      "dataType": {
+        "field": [
+          {
+            "name": "distance", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.distance.delta"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "device": {
+        "model": "Micromax A106", 
+        "version": "", 
+        "type": "phone", 
+        "uid": "a721a580", 
+        "manufacturer": "Micromax"
+      }, 
+      "dataStreamId": "derived:com.google.distance.delta:com.google.android.gms:Micromax:Micromax A106:a721a580:from_location<-raw:com.google.location.sample:com.google.android.gms:Micromax:Micromax A106:a721a580:", 
+      "type": "derived"
+    }, 
+    {
+      "dataStreamName": "from_activity<-raw:com.google.location.sample:com.google.android.gms:Xiaomi:Mi-4c:122bcd38:live_location", 
+      "dataType": {
+        "field": [
+          {
+            "name": "distance", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.distance.delta"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.google.android.gms", 
+        "version": "1"
+      }, 
+      "device": {
+        "model": "Mi-4c", 
+        "version": "", 
+        "type": "phone", 
+        "uid": "122bcd38", 
+        "manufacturer": "Xiaomi"
+      }, 
+      "dataStreamId": "derived:com.google.distance.delta:com.google.android.gms:Xiaomi:Mi-4c:122bcd38:from_activity<-raw:com.google.location.sample:com.google.android.gms:Xiaomi:Mi-4c:122bcd38:live_location", 
+      "type": "derived"
+    }, 
+    {
+      "dataStreamName": "from_location<-raw:com.google.location.sample:com.google.android.gms:Xiaomi:Mi-4c:122bcd38:live_location", 
+      "dataType": {
+        "field": [
+          {
+            "name": "distance", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.distance.delta"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.google.android.gms", 
+        "version": "1"
+      }, 
+      "device": {
+        "model": "Mi-4c", 
+        "version": "", 
+        "type": "phone", 
+        "uid": "122bcd38", 
+        "manufacturer": "Xiaomi"
+      }, 
+      "dataStreamId": "derived:com.google.distance.delta:com.google.android.gms:Xiaomi:Mi-4c:122bcd38:from_location<-raw:com.google.location.sample:com.google.android.gms:Xiaomi:Mi-4c:122bcd38:live_location", 
+      "type": "derived"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "distance", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.distance.delta"
+      }, 
+      "dataStreamName": "from_high_accuracy_location<-derived:com.google.location.sample:com.google.android.gms:merge_high_fidelity", 
+      "application": {
+        "packageName": "com.google.android.gms", 
+        "version": "1"
+      }, 
+      "dataStreamId": "derived:com.google.distance.delta:com.google.android.gms:from_high_accuracy_location<-derived:com.google.location.sample:com.google.android.gms:merge_high_fidelity", 
+      "type": "derived"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "distance", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.distance.delta"
+      }, 
+      "dataStreamName": "from_steps<-merge_step_deltas", 
+      "application": {
+        "packageName": "com.google.android.gms", 
+        "version": "1"
+      }, 
+      "dataStreamId": "derived:com.google.distance.delta:com.google.android.gms:from_steps<-merge_step_deltas", 
+      "type": "derived"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "distance", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.distance.delta"
+      }, 
+      "dataStreamName": "high_fidelity_from_activity<-derived:com.google.location.sample:com.google.android.gms:merge_high_fidelity", 
+      "application": {
+        "packageName": "com.google.android.gms", 
+        "version": "1"
+      }, 
+      "dataStreamId": "derived:com.google.distance.delta:com.google.android.gms:high_fidelity_from_activity<-derived:com.google.location.sample:com.google.android.gms:merge_high_fidelity", 
+      "type": "derived"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "distance", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.distance.delta"
+      }, 
+      "dataStreamName": "merge_distance_delta", 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "dataStreamId": "derived:com.google.distance.delta:com.google.android.gms:merge_distance_delta", 
+      "type": "derived"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "distance", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.distance.delta"
+      }, 
+      "dataStreamName": "platform_distance_delta", 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "dataStreamId": "derived:com.google.distance.delta:com.google.android.gms:platform_distance_delta", 
+      "type": "derived"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "distance", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.distance.delta"
+      }, 
+      "dataStreamName": "pruned_distance", 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "dataStreamId": "derived:com.google.distance.delta:com.google.android.gms:pruned_distance", 
+      "type": "derived"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "bpm", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.heart_rate.bpm"
+      }, 
+      "dataStreamName": "merge_heart_rate_bpm", 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "dataStreamId": "derived:com.google.heart_rate.bpm:com.google.android.gms:merge_heart_rate_bpm", 
+      "type": "derived"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "height", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.height"
+      }, 
+      "dataStreamName": "merge_height", 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "dataStreamId": "derived:com.google.height:com.google.android.gms:merge_height", 
+      "type": "derived"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "latitude", 
+            "format": "floatPoint"
+          }, 
+          {
+            "name": "longitude", 
+            "format": "floatPoint"
+          }, 
+          {
+            "name": "accuracy", 
+            "format": "floatPoint"
+          }, 
+          {
+            "optional": true, 
+            "name": "altitude", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.location.sample"
+      }, 
+      "dataStreamName": "merge_high_fidelity", 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "dataStreamId": "derived:com.google.location.sample:com.google.android.gms:merge_high_fidelity", 
+      "type": "derived"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "latitude", 
+            "format": "floatPoint"
+          }, 
+          {
+            "name": "longitude", 
+            "format": "floatPoint"
+          }, 
+          {
+            "name": "accuracy", 
+            "format": "floatPoint"
+          }, 
+          {
+            "optional": true, 
+            "name": "altitude", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.location.sample"
+      }, 
+      "dataStreamName": "merge_location_samples", 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "dataStreamId": "derived:com.google.location.sample:com.google.android.gms:merge_location_samples", 
+      "type": "derived"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "watts", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.power.sample"
+      }, 
+      "dataStreamName": "merge_power_sample", 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "dataStreamId": "derived:com.google.power.sample:com.google.android.gms:merge_power_sample", 
+      "type": "derived"
+    }, 
+    {
+      "dataStreamName": "", 
+      "dataType": {
+        "field": [
+          {
+            "name": "speed", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.speed"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "device": {
+        "model": "Micromax A106", 
+        "version": "", 
+        "type": "phone", 
+        "uid": "a721a580", 
+        "manufacturer": "Micromax"
+      }, 
+      "dataStreamId": "derived:com.google.speed:com.google.android.gms:Micromax:Micromax A106:a721a580:", 
+      "type": "derived"
+    }, 
+    {
+      "dataStreamName": "live_gps_speed", 
+      "dataType": {
+        "field": [
+          {
+            "name": "speed", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.speed"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "device": {
+        "model": "Mi-4c", 
+        "version": "", 
+        "type": "phone", 
+        "uid": "122bcd38", 
+        "manufacturer": "Xiaomi"
+      }, 
+      "dataStreamId": "derived:com.google.speed:com.google.android.gms:Xiaomi:Mi-4c:122bcd38:live_gps_speed", 
+      "type": "derived"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "speed", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.speed"
+      }, 
+      "dataStreamName": "merge_speed", 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "dataStreamId": "derived:com.google.speed:com.google.android.gms:merge_speed", 
+      "type": "derived"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "speed", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.speed"
+      }, 
+      "dataStreamName": "smoothed_speed<-merge_speed", 
+      "application": {
+        "packageName": "com.google.android.gms", 
+        "version": "1"
+      }, 
+      "dataStreamId": "derived:com.google.speed:com.google.android.gms:smoothed_speed<-merge_speed", 
+      "type": "derived"
+    }, 
+    {
+      "dataStreamName": "derive_step_cadence<-derived:com.google.step_count.cumulative:com.google.android.gms:Micromax:Micromax A106:a721a580:soft_step_counter", 
+      "dataType": {
+        "field": [
+          {
+            "name": "rpm", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.step_count.cadence"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "device": {
+        "model": "Micromax A106", 
+        "version": "", 
+        "type": "phone", 
+        "uid": "a721a580", 
+        "manufacturer": "Micromax"
+      }, 
+      "dataStreamId": "derived:com.google.step_count.cadence:com.google.android.gms:Micromax:Micromax A106:a721a580:derive_step_cadence<-derived:com.google.step_count.cumulative:com.google.android.gms:Micromax:Micromax A106:a721a580:soft_step_counter", 
+      "type": "derived"
+    }, 
+    {
+      "dataStreamName": "derive_step_cadence<-raw:com.google.step_count.cumulative:Xiaomi:Mi-4c:122bcd38:LSM6DB0 Step Counter Sensor", 
+      "dataType": {
+        "field": [
+          {
+            "name": "rpm", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.step_count.cadence"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.google.android.gms", 
+        "version": "1"
+      }, 
+      "device": {
+        "model": "Mi-4c", 
+        "version": "", 
+        "type": "phone", 
+        "uid": "122bcd38", 
+        "manufacturer": "Xiaomi"
+      }, 
+      "dataStreamId": "derived:com.google.step_count.cadence:com.google.android.gms:Xiaomi:Mi-4c:122bcd38:derive_step_cadence<-raw:com.google.step_count.cumulative:Xiaomi:Mi-4c:122bcd38:LSM6DB0 Step Counter Sensor", 
+      "type": "derived"
+    }, 
+    {
+      "dataStreamName": "soft_step_counter", 
+      "dataType": {
+        "field": [
+          {
+            "name": "steps", 
+            "format": "integer"
+          }
+        ], 
+        "name": "com.google.step_count.cumulative"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "device": {
+        "model": "Micromax A106", 
+        "version": "", 
+        "type": "phone", 
+        "uid": "a721a580", 
+        "manufacturer": "Micromax"
+      }, 
+      "dataStreamId": "derived:com.google.step_count.cumulative:com.google.android.gms:Micromax:Micromax A106:a721a580:soft_step_counter", 
+      "type": "derived"
+    }, 
+    {
+      "dataStreamName": "derive_step_deltas<-derived:com.google.step_count.cumulative:com.google.android.gms:Micromax:Micromax A106:a721a580:soft_step_counter", 
+      "dataType": {
+        "field": [
+          {
+            "name": "steps", 
+            "format": "integer"
+          }
+        ], 
+        "name": "com.google.step_count.delta"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "device": {
+        "model": "Micromax A106", 
+        "version": "", 
+        "type": "phone", 
+        "uid": "a721a580", 
+        "manufacturer": "Micromax"
+      }, 
+      "dataStreamId": "derived:com.google.step_count.delta:com.google.android.gms:Micromax:Micromax A106:a721a580:derive_step_deltas<-derived:com.google.step_count.cumulative:com.google.android.gms:Micromax:Micromax A106:a721a580:soft_step_counter", 
+      "type": "derived"
+    }, 
+    {
+      "dataStreamName": "derive_step_deltas<-raw:com.google.step_count.cumulative:Xiaomi:Mi-4c:122bcd38:LSM6DB0 Step Counter Sensor", 
+      "dataType": {
+        "field": [
+          {
+            "name": "steps", 
+            "format": "integer"
+          }
+        ], 
+        "name": "com.google.step_count.delta"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.google.android.gms", 
+        "version": "1"
+      }, 
+      "device": {
+        "model": "Mi-4c", 
+        "version": "", 
+        "type": "phone", 
+        "uid": "122bcd38", 
+        "manufacturer": "Xiaomi"
+      }, 
+      "dataStreamId": "derived:com.google.step_count.delta:com.google.android.gms:Xiaomi:Mi-4c:122bcd38:derive_step_deltas<-raw:com.google.step_count.cumulative:Xiaomi:Mi-4c:122bcd38:LSM6DB0 Step Counter Sensor", 
+      "type": "derived"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "steps", 
+            "format": "integer"
+          }
+        ], 
+        "name": "com.google.step_count.delta"
+      }, 
+      "dataStreamName": "estimated_steps", 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "dataStreamId": "derived:com.google.step_count.delta:com.google.android.gms:estimated_steps", 
+      "type": "derived"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "steps", 
+            "format": "integer"
+          }
+        ], 
+        "name": "com.google.step_count.delta"
+      }, 
+      "dataStreamName": "merge_step_deltas", 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "dataStreamId": "derived:com.google.step_count.delta:com.google.android.gms:merge_step_deltas", 
+      "type": "derived"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "weight", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.weight"
+      }, 
+      "dataStreamName": "merge_weight", 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "dataStreamId": "derived:com.google.weight:com.google.android.gms:merge_weight", 
+      "type": "derived"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "activity", 
+            "format": "integer"
+          }
+        ], 
+        "name": "com.google.activity.segment"
+      }, 
+      "dataStreamName": "user_input", 
+      "application": {
+        "packageName": "com.google.android.apps.fitness"
+      }, 
+      "dataStreamId": "raw:com.google.activity.segment:com.google.android.apps.fitness:user_input", 
+      "type": "raw"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "activity", 
+            "format": "integer"
+          }
+        ], 
+        "name": "com.google.activity.segment"
+      }, 
+      "dataStreamName": "", 
+      "application": {
+        "packageName": "com.moviz.gui"
+      }, 
+      "dataStreamId": "raw:com.google.activity.segment:com.moviz.gui:", 
+      "type": "raw"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "activity", 
+            "format": "integer"
+          }
+        ], 
+        "name": "com.google.activity.segment"
+      }, 
+      "dataStreamName": "", 
+      "application": {
+        "packageName": "com.pafers.gui"
+      }, 
+      "dataStreamId": "raw:com.google.activity.segment:com.pafers.gui:", 
+      "type": "raw"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "action", 
+            "format": "integer"
+          }, 
+          {
+            "name": "activity", 
+            "format": "integer"
+          }
+        ], 
+        "name": "com.google.android.apps.fitness.autodetect.event"
+      }, 
+      "dataStreamName": "autodetect_events", 
+      "application": {
+        "packageName": "com.google.android.apps.fitness", 
+        "name": "com.google.android.apps.fitness"
+      }, 
+      "dataStreamId": "raw:com.google.android.apps.fitness.autodetect.event:com.google.android.apps.fitness:autodetect_events", 
+      "type": "raw"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "calories", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.calories.expended"
+      }, 
+      "dataStreamName": "user_input", 
+      "application": {
+        "packageName": "com.google.android.apps.fitness"
+      }, 
+      "dataStreamId": "raw:com.google.calories.expended:com.google.android.apps.fitness:user_input", 
+      "type": "raw"
+    }, 
+    {
+      "name": "bhold_CALORIES_EXPENDED", 
+      "dataStreamName": "", 
+      "dataType": {
+        "field": [
+          {
+            "name": "calories", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.calories.expended"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.moviz.gui"
+      }, 
+      "device": {
+        "model": "BH - VISTA,.", 
+        "version": "", 
+        "type": "unknown", 
+        "uid": "33212807", 
+        "manufacturer": "bhold"
+      }, 
+      "dataStreamId": "raw:com.google.calories.expended:com.moviz.gui:bhold:BH - VISTA,.:33212807:", 
+      "type": "raw"
+    }, 
+    {
+      "name": "bh_CALORIES_EXPENDED", 
+      "dataStreamName": "", 
+      "dataType": {
+        "field": [
+          {
+            "name": "calories", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.calories.expended"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.moviz.gui"
+      }, 
+      "device": {
+        "model": "BH - VISTA,.", 
+        "version": "", 
+        "type": "unknown", 
+        "uid": "33212807", 
+        "manufacturer": "bh"
+      }, 
+      "dataStreamId": "raw:com.google.calories.expended:com.moviz.gui:bh:BH - VISTA,.:33212807:", 
+      "type": "raw"
+    }, 
+    {
+      "name": "bh", 
+      "dataStreamName": "", 
+      "dataType": {
+        "field": [
+          {
+            "name": "calories", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.calories.expended"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.pafers.gui"
+      }, 
+      "device": {
+        "model": "BH - VISTA,.", 
+        "version": "", 
+        "type": "unknown", 
+        "uid": "33212807", 
+        "manufacturer": "bh"
+      }, 
+      "dataStreamId": "raw:com.google.calories.expended:com.pafers.gui:bh:BH - VISTA,.:33212807:", 
+      "type": "raw"
+    }, 
+    {
+      "name": "bhold_CYCLING_WHEEL_RPM", 
+      "dataStreamName": "", 
+      "dataType": {
+        "field": [
+          {
+            "name": "rpm", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.cycling.wheel_revolution.rpm"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.moviz.gui"
+      }, 
+      "device": {
+        "model": "BH - VISTA,.", 
+        "version": "", 
+        "type": "unknown", 
+        "uid": "33212807", 
+        "manufacturer": "bhold"
+      }, 
+      "dataStreamId": "raw:com.google.cycling.wheel_revolution.rpm:com.moviz.gui:bhold:BH - VISTA,.:33212807:", 
+      "type": "raw"
+    }, 
+    {
+      "name": "bh_CYCLING_WHEEL_RPM", 
+      "dataStreamName": "", 
+      "dataType": {
+        "field": [
+          {
+            "name": "rpm", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.cycling.wheel_revolution.rpm"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.moviz.gui"
+      }, 
+      "device": {
+        "model": "BH - VISTA,.", 
+        "version": "", 
+        "type": "unknown", 
+        "uid": "33212807", 
+        "manufacturer": "bh"
+      }, 
+      "dataStreamId": "raw:com.google.cycling.wheel_revolution.rpm:com.moviz.gui:bh:BH - VISTA,.:33212807:", 
+      "type": "raw"
+    }, 
+    {
+      "name": "bh", 
+      "dataStreamName": "", 
+      "dataType": {
+        "field": [
+          {
+            "name": "rpm", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.cycling.wheel_revolution.rpm"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.pafers.gui"
+      }, 
+      "device": {
+        "model": "BH - VISTA,.", 
+        "version": "", 
+        "type": "unknown", 
+        "uid": "33212807", 
+        "manufacturer": "bh"
+      }, 
+      "dataStreamId": "raw:com.google.cycling.wheel_revolution.rpm:com.pafers.gui:bh:BH - VISTA,.:33212807:", 
+      "type": "raw"
+    }, 
+    {
+      "name": "bh", 
+      "dataStreamName": "", 
+      "dataType": {
+        "field": [
+          {
+            "name": "distance", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.distance.cumulative"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.pafers.gui"
+      }, 
+      "device": {
+        "model": "BH - VISTA,.", 
+        "version": "", 
+        "type": "unknown", 
+        "uid": "33212807", 
+        "manufacturer": "bh"
+      }, 
+      "dataStreamId": "raw:com.google.distance.cumulative:com.pafers.gui:bh:BH - VISTA,.:33212807:", 
+      "type": "raw"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "distance", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.distance.delta"
+      }, 
+      "dataStreamName": "user_input", 
+      "application": {
+        "packageName": "com.google.android.apps.fitness"
+      }, 
+      "dataStreamId": "raw:com.google.distance.delta:com.google.android.apps.fitness:user_input", 
+      "type": "raw"
+    }, 
+    {
+      "name": "bhold_DISTANCE_DELTA", 
+      "dataStreamName": "", 
+      "dataType": {
+        "field": [
+          {
+            "name": "distance", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.distance.delta"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.moviz.gui"
+      }, 
+      "device": {
+        "model": "BH - VISTA,.", 
+        "version": "", 
+        "type": "unknown", 
+        "uid": "33212807", 
+        "manufacturer": "bhold"
+      }, 
+      "dataStreamId": "raw:com.google.distance.delta:com.moviz.gui:bhold:BH - VISTA,.:33212807:", 
+      "type": "raw"
+    }, 
+    {
+      "name": "bh_DISTANCE_DELTA", 
+      "dataStreamName": "", 
+      "dataType": {
+        "field": [
+          {
+            "name": "distance", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.distance.delta"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.moviz.gui"
+      }, 
+      "device": {
+        "model": "BH - VISTA,.", 
+        "version": "", 
+        "type": "unknown", 
+        "uid": "33212807", 
+        "manufacturer": "bh"
+      }, 
+      "dataStreamId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:", 
+      "type": "raw"
+    }, 
+    {
+      "name": "bh", 
+      "dataStreamName": "", 
+      "dataType": {
+        "field": [
+          {
+            "name": "distance", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.distance.delta"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.pafers.gui"
+      }, 
+      "device": {
+        "model": "BH - VISTA,.", 
+        "version": "", 
+        "type": "unknown", 
+        "uid": "33212807", 
+        "manufacturer": "bh"
+      }, 
+      "dataStreamId": "raw:com.google.distance.delta:com.pafers.gui:bh:BH - VISTA,.:33212807:", 
+      "type": "raw"
+    }, 
+    {
+      "name": "geonaute_HEART_RATE", 
+      "dataStreamName": "", 
+      "dataType": {
+        "field": [
+          {
+            "name": "bpm", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.heart_rate.bpm"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.moviz.gui"
+      }, 
+      "device": {
+        "model": "BLE HR Device", 
+        "version": "", 
+        "type": "unknown", 
+        "uid": "2d99a343", 
+        "manufacturer": "geonaute"
+      }, 
+      "dataStreamId": "raw:com.google.heart_rate.bpm:com.moviz.gui:geonaute:BLE HR Device:2d99a343:", 
+      "type": "raw"
+    }, 
+    {
+      "name": "zephyr_HEART_RATE", 
+      "dataStreamName": "", 
+      "dataType": {
+        "field": [
+          {
+            "name": "bpm", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.heart_rate.bpm"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.moviz.gui"
+      }, 
+      "device": {
+        "model": "BLE HR Device", 
+        "version": "", 
+        "type": "unknown", 
+        "uid": "646431f7", 
+        "manufacturer": "zephyr"
+      }, 
+      "dataStreamId": "raw:com.google.heart_rate.bpm:com.moviz.gui:zephyr:BLE HR Device:646431f7:", 
+      "type": "raw"
+    }, 
+    {
+      "name": "geonaute_HEART_RATE", 
+      "dataStreamName": "", 
+      "dataType": {
+        "field": [
+          {
+            "name": "bpm", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.heart_rate.bpm"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.pafers.gui"
+      }, 
+      "device": {
+        "model": "BLE HR Device", 
+        "version": "", 
+        "type": "unknown", 
+        "uid": "2d99a343", 
+        "manufacturer": "geonaute"
+      }, 
+      "dataStreamId": "raw:com.google.heart_rate.bpm:com.pafers.gui:geonaute:BLE HR Device:2d99a343:", 
+      "type": "raw"
+    }, 
+    {
+      "name": "geonaute", 
+      "dataStreamName": "", 
+      "dataType": {
+        "field": [
+          {
+            "name": "bpm", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.heart_rate.bpm"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.pafers.gui"
+      }, 
+      "device": {
+        "model": "Cardiosport/ZT26B/000001/V1.0/V1.4/V1.4 BLE-HR", 
+        "version": "", 
+        "type": "unknown", 
+        "uid": "2d99a343", 
+        "manufacturer": "geonaute"
+      }, 
+      "dataStreamId": "raw:com.google.heart_rate.bpm:com.pafers.gui:geonaute:Cardiosport/ZT26B/000001/V1.0/V1.4/V1.4 BLE-HR:2d99a343:", 
+      "type": "raw"
+    }, 
+    {
+      "name": "zephyr_HEART_RATE", 
+      "dataStreamName": "", 
+      "dataType": {
+        "field": [
+          {
+            "name": "bpm", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.heart_rate.bpm"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.pafers.gui"
+      }, 
+      "device": {
+        "model": "BLE HR Device", 
+        "version": "", 
+        "type": "unknown", 
+        "uid": "646431f7", 
+        "manufacturer": "zephyr"
+      }, 
+      "dataStreamId": "raw:com.google.heart_rate.bpm:com.pafers.gui:zephyr:BLE HR Device:646431f7:", 
+      "type": "raw"
+    }, 
+    {
+      "name": "geonauteHEART_RATE", 
+      "dataStreamName": "", 
+      "dataType": {
+        "field": [
+          {
+            "name": "average", 
+            "format": "floatPoint"
+          }, 
+          {
+            "name": "max", 
+            "format": "floatPoint"
+          }, 
+          {
+            "name": "min", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.heart_rate.summary"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.pafers.gui"
+      }, 
+      "device": {
+        "model": "Cardiosport/ZT26B/000001/V1.0/V1.4/V1.4 BLE-HR", 
+        "version": "", 
+        "type": "unknown", 
+        "uid": "2d99a343", 
+        "manufacturer": "geonaute"
+      }, 
+      "dataStreamId": "raw:com.google.heart_rate.summary:com.pafers.gui:geonaute:Cardiosport/ZT26B/000001/V1.0/V1.4/V1.4 BLE-HR:2d99a343:", 
+      "type": "raw"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "height", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.height"
+      }, 
+      "dataStreamName": "user_input", 
+      "application": {
+        "packageName": "com.google.android.apps.fitness", 
+        "name": "com.google.android.apps.fitness"
+      }, 
+      "dataStreamId": "raw:com.google.height:com.google.android.apps.fitness:user_input", 
+      "type": "raw"
+    }, 
+    {
+      "dataStreamName": "", 
+      "dataType": {
+        "field": [
+          {
+            "name": "latitude", 
+            "format": "floatPoint"
+          }, 
+          {
+            "name": "longitude", 
+            "format": "floatPoint"
+          }, 
+          {
+            "name": "accuracy", 
+            "format": "floatPoint"
+          }, 
+          {
+            "optional": true, 
+            "name": "altitude", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.location.sample"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "device": {
+        "model": "Micromax A106", 
+        "version": "", 
+        "type": "phone", 
+        "uid": "a721a580", 
+        "manufacturer": "Micromax"
+      }, 
+      "dataStreamId": "raw:com.google.location.sample:com.google.android.gms:Micromax:Micromax A106:a721a580:", 
+      "type": "raw"
+    }, 
+    {
+      "dataStreamName": "live_location", 
+      "dataType": {
+        "field": [
+          {
+            "name": "latitude", 
+            "format": "floatPoint"
+          }, 
+          {
+            "name": "longitude", 
+            "format": "floatPoint"
+          }, 
+          {
+            "name": "accuracy", 
+            "format": "floatPoint"
+          }, 
+          {
+            "optional": true, 
+            "name": "altitude", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.location.sample"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.google.android.gms"
+      }, 
+      "device": {
+        "model": "Mi-4c", 
+        "version": "", 
+        "type": "phone", 
+        "uid": "122bcd38", 
+        "manufacturer": "Xiaomi"
+      }, 
+      "dataStreamId": "raw:com.google.location.sample:com.google.android.gms:Xiaomi:Mi-4c:122bcd38:live_location", 
+      "type": "raw"
+    }, 
+    {
+      "name": "bh_POWER_SAMPLE", 
+      "dataStreamName": "", 
+      "dataType": {
+        "field": [
+          {
+            "name": "watts", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.power.sample"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.pafers.gui"
+      }, 
+      "device": {
+        "model": "BH - VISTA,.", 
+        "version": "", 
+        "type": "unknown", 
+        "uid": "33212807", 
+        "manufacturer": "bh"
+      }, 
+      "dataStreamId": "raw:com.google.power.sample:com.pafers.gui:bh:BH - VISTA,.:33212807:", 
+      "type": "raw"
+    }, 
+    {
+      "name": "bhold_POWER", 
+      "dataStreamName": "", 
+      "dataType": {
+        "field": [
+          {
+            "name": "average", 
+            "format": "floatPoint"
+          }, 
+          {
+            "name": "max", 
+            "format": "floatPoint"
+          }, 
+          {
+            "name": "min", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.power.summary"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.moviz.gui"
+      }, 
+      "device": {
+        "model": "BH - VISTA,.", 
+        "version": "", 
+        "type": "unknown", 
+        "uid": "33212807", 
+        "manufacturer": "bhold"
+      }, 
+      "dataStreamId": "raw:com.google.power.summary:com.moviz.gui:bhold:BH - VISTA,.:33212807:", 
+      "type": "raw"
+    }, 
+    {
+      "name": "bh_POWER", 
+      "dataStreamName": "", 
+      "dataType": {
+        "field": [
+          {
+            "name": "average", 
+            "format": "floatPoint"
+          }, 
+          {
+            "name": "max", 
+            "format": "floatPoint"
+          }, 
+          {
+            "name": "min", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.power.summary"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.moviz.gui"
+      }, 
+      "device": {
+        "model": "BH - VISTA,.", 
+        "version": "", 
+        "type": "unknown", 
+        "uid": "33212807", 
+        "manufacturer": "bh"
+      }, 
+      "dataStreamId": "raw:com.google.power.summary:com.moviz.gui:bh:BH - VISTA,.:33212807:", 
+      "type": "raw"
+    }, 
+    {
+      "name": "bh_POWER", 
+      "dataStreamName": "", 
+      "dataType": {
+        "field": [
+          {
+            "name": "average", 
+            "format": "floatPoint"
+          }, 
+          {
+            "name": "max", 
+            "format": "floatPoint"
+          }, 
+          {
+            "name": "min", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.power.summary"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.pafers.gui"
+      }, 
+      "device": {
+        "model": "BH - VISTA,.", 
+        "version": "", 
+        "type": "unknown", 
+        "uid": "33212807", 
+        "manufacturer": "bh"
+      }, 
+      "dataStreamId": "raw:com.google.power.summary:com.pafers.gui:bh:BH - VISTA,.:33212807:", 
+      "type": "raw"
+    }, 
+    {
+      "name": "bhold_SPEED", 
+      "dataStreamName": "", 
+      "dataType": {
+        "field": [
+          {
+            "name": "average", 
+            "format": "floatPoint"
+          }, 
+          {
+            "name": "max", 
+            "format": "floatPoint"
+          }, 
+          {
+            "name": "min", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.speed.summary"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.moviz.gui"
+      }, 
+      "device": {
+        "model": "BH - VISTA,.", 
+        "version": "", 
+        "type": "unknown", 
+        "uid": "33212807", 
+        "manufacturer": "bhold"
+      }, 
+      "dataStreamId": "raw:com.google.speed.summary:com.moviz.gui:bhold:BH - VISTA,.:33212807:", 
+      "type": "raw"
+    }, 
+    {
+      "name": "bh_SPEED", 
+      "dataStreamName": "", 
+      "dataType": {
+        "field": [
+          {
+            "name": "average", 
+            "format": "floatPoint"
+          }, 
+          {
+            "name": "max", 
+            "format": "floatPoint"
+          }, 
+          {
+            "name": "min", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.speed.summary"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.moviz.gui"
+      }, 
+      "device": {
+        "model": "BH - VISTA,.", 
+        "version": "", 
+        "type": "unknown", 
+        "uid": "33212807", 
+        "manufacturer": "bh"
+      }, 
+      "dataStreamId": "raw:com.google.speed.summary:com.moviz.gui:bh:BH - VISTA,.:33212807:", 
+      "type": "raw"
+    }, 
+    {
+      "name": "bh_SPEED", 
+      "dataStreamName": "", 
+      "dataType": {
+        "field": [
+          {
+            "name": "average", 
+            "format": "floatPoint"
+          }, 
+          {
+            "name": "max", 
+            "format": "floatPoint"
+          }, 
+          {
+            "name": "min", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.speed.summary"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.pafers.gui"
+      }, 
+      "device": {
+        "model": "BH - VISTA,.", 
+        "version": "", 
+        "type": "unknown", 
+        "uid": "33212807", 
+        "manufacturer": "bh"
+      }, 
+      "dataStreamId": "raw:com.google.speed.summary:com.pafers.gui:bh:BH - VISTA,.:33212807:", 
+      "type": "raw"
+    }, 
+    {
+      "name": "bh", 
+      "dataStreamName": "", 
+      "dataType": {
+        "field": [
+          {
+            "name": "speed", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.speed"
+      }, 
+      "dataQualityStandard": [], 
+      "application": {
+        "packageName": "com.pafers.gui"
+      }, 
+      "device": {
+        "model": "BH - VISTA,.", 
+        "version": "", 
+        "type": "unknown", 
+        "uid": "33212807", 
+        "manufacturer": "bh"
+      }, 
+      "dataStreamId": "raw:com.google.speed:com.pafers.gui:bh:BH - VISTA,.:33212807:", 
+      "type": "raw"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "steps", 
+            "format": "integer"
+          }
+        ], 
+        "name": "com.google.step_count.cumulative"
+      }, 
+      "dataStreamName": "LSM6DB0 Step Counter Sensor", 
+      "device": {
+        "model": "Mi-4c", 
+        "version": "", 
+        "type": "phone", 
+        "uid": "122bcd38", 
+        "manufacturer": "Xiaomi"
+      }, 
+      "dataStreamId": "raw:com.google.step_count.cumulative:Xiaomi:Mi-4c:122bcd38:LSM6DB0 Step Counter Sensor", 
+      "type": "raw"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "steps", 
+            "format": "integer"
+          }
+        ], 
+        "name": "com.google.step_count.delta"
+      }, 
+      "dataStreamName": "user_input", 
+      "application": {
+        "packageName": "com.google.android.apps.fitness"
+      }, 
+      "dataStreamId": "raw:com.google.step_count.delta:com.google.android.apps.fitness:user_input", 
+      "type": "raw"
+    }, 
+    {
+      "dataQualityStandard": [], 
+      "dataType": {
+        "field": [
+          {
+            "name": "weight", 
+            "format": "floatPoint"
+          }
+        ], 
+        "name": "com.google.weight"
+      }, 
+      "dataStreamName": "user_input", 
+      "application": {
+        "packageName": "com.google.android.apps.fitness", 
+        "name": "com.google.android.apps.fitness"
+      }, 
+      "dataStreamId": "raw:com.google.weight:com.google.android.apps.fitness:user_input", 
+      "type": "raw"
+    }
+  ]
+}
+######################
+{
+  "dataQualityStandard": [], 
+  "dataType": {
+    "field": [
+      {
+        "name": "activity", 
+        "format": "integer"
+      }
+    ], 
+    "name": "com.google.activity.segment"
+  }, 
+  "dataStreamName": "", 
+  "application": {
+    "packageName": "com.moviz.gui"
+  }, 
+  "dataStreamId": "raw:com.google.activity.segment:com.moviz.gui:", 
+  "type": "raw"
+}
+{
+  "name": "bh_CALORIES_EXPENDED", 
+  "dataStreamName": "", 
+  "dataType": {
+    "field": [
+      {
+        "name": "calories", 
+        "format": "floatPoint"
+      }
+    ], 
+    "name": "com.google.calories.expended"
+  }, 
+  "dataQualityStandard": [], 
+  "application": {
+    "packageName": "com.moviz.gui"
+  }, 
+  "device": {
+    "model": "BH - VISTA,.", 
+    "version": "", 
+    "type": "unknown", 
+    "uid": "33212807", 
+    "manufacturer": "bh"
+  }, 
+  "dataStreamId": "raw:com.google.calories.expended:com.moviz.gui:bh:BH - VISTA,.:33212807:", 
+  "type": "raw"
+}
+
+{
+  "name": "bh_CYCLING_WHEEL_RPM", 
+  "dataStreamName": "", 
+  "dataType": {
+    "field": [
+      {
+        "name": "rpm", 
+        "format": "floatPoint"
+      }
+    ], 
+    "name": "com.google.cycling.wheel_revolution.rpm"
+  }, 
+  "dataQualityStandard": [], 
+  "application": {
+    "packageName": "com.moviz.gui"
+  }, 
+  "device": {
+    "model": "BH - VISTA,.", 
+    "version": "", 
+    "type": "unknown", 
+    "uid": "33212807", 
+    "manufacturer": "bh"
+  }, 
+  "dataStreamId": "raw:com.google.cycling.wheel_revolution.rpm:com.moviz.gui:bh:BH - VISTA,.:33212807:", 
+  "type": "raw"
+}
+{
+  "name": "bh_POWER", 
+  "dataStreamName": "", 
+  "dataType": {
+    "field": [
+      {
+        "name": "average", 
+        "format": "floatPoint"
+      }, 
+      {
+        "name": "max", 
+        "format": "floatPoint"
+      }, 
+      {
+        "name": "min", 
+        "format": "floatPoint"
+      }
+    ], 
+    "name": "com.google.power.summary"
+  }, 
+  "dataQualityStandard": [], 
+  "application": {
+    "packageName": "com.moviz.gui"
+  }, 
+  "device": {
+    "model": "BH - VISTA,.", 
+    "version": "", 
+    "type": "unknown", 
+    "uid": "33212807", 
+    "manufacturer": "bh"
+  }, 
+  "dataStreamId": "raw:com.google.power.summary:com.moviz.gui:bh:BH - VISTA,.:33212807:", 
+  "type": "raw"
+}
+{
+  "name": "bh_SPEED", 
+  "dataStreamName": "", 
+  "dataType": {
+    "field": [
+      {
+        "name": "average", 
+        "format": "floatPoint"
+      }, 
+      {
+        "name": "max", 
+        "format": "floatPoint"
+      }, 
+      {
+        "name": "min", 
+        "format": "floatPoint"
+      }
+    ], 
+    "name": "com.google.speed.summary"
+  }, 
+  "dataQualityStandard": [], 
+  "application": {
+    "packageName": "com.moviz.gui"
+  }, 
+  "device": {
+    "model": "BH - VISTA,.", 
+    "version": "", 
+    "type": "unknown", 
+    "uid": "33212807", 
+    "manufacturer": "bh"
+  }, 
+  "dataStreamId": "raw:com.google.speed.summary:com.moviz.gui:bh:BH - VISTA,.:33212807:", 
+  "type": "raw"
+}
+{
+  "name": "bh_DISTANCE_DELTA", 
+  "dataStreamName": "", 
+  "dataType": {
+    "field": [
+      {
+        "name": "distance", 
+        "format": "floatPoint"
+      }
+    ], 
+    "name": "com.google.distance.delta"
+  }, 
+  "dataQualityStandard": [], 
+  "application": {
+    "packageName": "com.moviz.gui"
+  }, 
+  "device": {
+    "model": "BH - VISTA,.", 
+    "version": "", 
+    "type": "unknown", 
+    "uid": "33212807", 
+    "manufacturer": "bh"
+  }, 
+  "dataStreamId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:", 
+  "type": "raw"
+}
+
+--
+{
+  "minStartTimeNs": "1418014912000000000", 
+  "maxEndTimeNs": "1418032912000000000", 
+  "dataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:", 
+  "point": [
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018800573000000", 
+      "endTimeNanos": "1418018805572000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 29.221963882446289
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018805573000000", 
+      "endTimeNanos": "1418018810561000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 31.934633255004883
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018810562000000", 
+      "endTimeNanos": "1418018815572000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 29.066452026367188
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018815573000000", 
+      "endTimeNanos": "1418018820665000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 31.507421493530273
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018820666000000", 
+      "endTimeNanos": "1418018825648000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 29.561944961547852
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018825649000000", 
+      "endTimeNanos": "1418018830666000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 30.999832153320312
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018830667000000", 
+      "endTimeNanos": "1418018835922000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 31.097875595092773
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018835923000000", 
+      "endTimeNanos": "1418018840941000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 29.216089248657227
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018840942000000", 
+      "endTimeNanos": "1418018845940000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 29.433631896972656
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018845941000000", 
+      "endTimeNanos": "1418018850929000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 28.619407653808594
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018850930000000", 
+      "endTimeNanos": "1418018855935000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 28.610813140869141
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018855936000000", 
+      "endTimeNanos": "1418018860921000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 29.499214172363281
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018860922000000", 
+      "endTimeNanos": "1418018865941000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 30.008731842041016
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018865942000000", 
+      "endTimeNanos": "1418018870941000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 28.884420394897461
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018870942000000", 
+      "endTimeNanos": "1418018875930000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 28.177883148193359
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018875931000000", 
+      "endTimeNanos": "1418018880931000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 29.198619842529297
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018880932000000", 
+      "endTimeNanos": "1418018885942000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 30.73655891418457
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018885943000000", 
+      "endTimeNanos": "1418018890929000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 30.036060333251953
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018890930000000", 
+      "endTimeNanos": "1418018895939000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 29.419290542602539
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018895940000000", 
+      "endTimeNanos": "1418018900940000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 30.453386306762695
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018900941000000", 
+      "endTimeNanos": "1418018905934000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 29.742536544799805
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018905935000000", 
+      "endTimeNanos": "1418018910951000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 30.548015594482422
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018910952000000", 
+      "endTimeNanos": "1418018915937000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 30.252130508422852
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018915938000000", 
+      "endTimeNanos": "1418018920922000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 29.911552429199219
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018920923000000", 
+      "endTimeNanos": "1418018925926000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 30.581663131713867
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018925927000000", 
+      "endTimeNanos": "1418018930932000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 31.596263885498047
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018930933000000", 
+      "endTimeNanos": "1418018935980000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 31.457241058349609
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018935981000000", 
+      "endTimeNanos": "1418018940980000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 30.780366897583008
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018940981000000", 
+      "endTimeNanos": "1418018945973000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 30.515405654907227
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018945974000000", 
+      "endTimeNanos": "1418018951044000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 30.759845733642578
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018951045000000", 
+      "endTimeNanos": "1418018956045000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 30.340465545654297
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018956046000000", 
+      "endTimeNanos": "1418018961084000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 32.212467193603516
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018961085000000", 
+      "endTimeNanos": "1418018966106000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 30.800882339477539
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018966107000000", 
+      "endTimeNanos": "1418018971097000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 31.060293197631836
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018971098000000", 
+      "endTimeNanos": "1418018976137000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 30.909246444702148
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018976138000000", 
+      "endTimeNanos": "1418018981126000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 32.357608795166016
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018981127000000", 
+      "endTimeNanos": "1418018986140000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 33.009635925292969
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018986141000000", 
+      "endTimeNanos": "1418018991163000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 34.011554718017578
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018991164000000", 
+      "endTimeNanos": "1418018996174000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 33.437248229980469
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418018996175000000", 
+      "endTimeNanos": "1418019001164000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 34.646377563476562
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019001165000000", 
+      "endTimeNanos": "1418019006259000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 34.285011291503906
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019006260000000", 
+      "endTimeNanos": "1418019011243000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 32.714744567871094
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019011244000000", 
+      "endTimeNanos": "1418019016242000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 31.273618698120117
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019016243000000", 
+      "endTimeNanos": "1418019021266000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 31.594106674194336
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019021267000000", 
+      "endTimeNanos": "1418019026265000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 31.106306076049805
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019026266000000", 
+      "endTimeNanos": "1418019031247000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 31.336183547973633
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019031248000000", 
+      "endTimeNanos": "1418019036345000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 32.16021728515625
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019036346000000", 
+      "endTimeNanos": "1418019041342000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 32.069278717041016
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019041343000000", 
+      "endTimeNanos": "1418019046336000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 32.384975433349609
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019046337000000", 
+      "endTimeNanos": "1418019051342000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 33.322433471679688
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019051343000000", 
+      "endTimeNanos": "1418019056389000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 33.57550048828125
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019056390000000", 
+      "endTimeNanos": "1418019061406000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 32.638080596923828
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019061407000000", 
+      "endTimeNanos": "1418019066409000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 31.882659912109375
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019066410000000", 
+      "endTimeNanos": "1418019071454000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 33.731082916259766
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019071455000000", 
+      "endTimeNanos": "1418019076466000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 34.028472900390625
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019076467000000", 
+      "endTimeNanos": "1418019081448000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 33.173107147216797
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019081449000000", 
+      "endTimeNanos": "1418019086465000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 33.055980682373047
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019086466000000", 
+      "endTimeNanos": "1418019091459000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 33.943698883056641
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019091460000000", 
+      "endTimeNanos": "1418019096537000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 34.439628601074219
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019096538000000", 
+      "endTimeNanos": "1418019101525000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 33.488174438476562
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019101526000000", 
+      "endTimeNanos": "1418019106525000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 34.120113372802734
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019106526000000", 
+      "endTimeNanos": "1418019111543000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 35.040714263916016
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019111544000000", 
+      "endTimeNanos": "1418019116567000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 35.106315612792969
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019116568000000", 
+      "endTimeNanos": "1418019121605000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 34.637229919433594
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019121606000000", 
+      "endTimeNanos": "1418019126612000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 36.922519683837891
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019126613000000", 
+      "endTimeNanos": "1418019131613000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 37.803855895996094
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019131614000000", 
+      "endTimeNanos": "1418019136701000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 37.63055419921875
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019136702000000", 
+      "endTimeNanos": "1418019141686000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 36.392757415771484
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019141687000000", 
+      "endTimeNanos": "1418019146687000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 36.800346374511719
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019146688000000", 
+      "endTimeNanos": "1418019151705000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 39.723110198974609
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019151706000000", 
+      "endTimeNanos": "1418019156726000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 40.35552978515625
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019156727000000", 
+      "endTimeNanos": "1418019161779000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 40.227298736572266
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019161780000000", 
+      "endTimeNanos": "1418019166786000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 38.733348846435547
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019166787000000", 
+      "endTimeNanos": "1418019171775000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 37.613258361816406
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019171776000000", 
+      "endTimeNanos": "1418019176817000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 38.179050445556641
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019176818000000", 
+      "endTimeNanos": "1418019181816000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 39.07086181640625
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019181817000000", 
+      "endTimeNanos": "1418019186860000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 38.193000793457031
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019186861000000", 
+      "endTimeNanos": "1418019191855000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 38.542709350585938
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019191856000000", 
+      "endTimeNanos": "1418019196900000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 37.865955352783203
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019196901000000", 
+      "endTimeNanos": "1418019201898000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 38.088096618652344
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019201899000000", 
+      "endTimeNanos": "1418019206941000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 38.829174041748047
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019206942000000", 
+      "endTimeNanos": "1418019211969000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 37.755596160888672
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019211970000000", 
+      "endTimeNanos": "1418019216966000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 39.140125274658203
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019216967000000", 
+      "endTimeNanos": "1418019221983000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 37.906070709228516
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019221984000000", 
+      "endTimeNanos": "1418019227020000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 37.118663787841797
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019227021000000", 
+      "endTimeNanos": "1418019232008000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 37.491115570068359
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019232009000000", 
+      "endTimeNanos": "1418019237009000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 37.911251068115234
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019237010000000", 
+      "endTimeNanos": "1418019242091000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 39.006969451904297
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019242092000000", 
+      "endTimeNanos": "1418019247054000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 36.850063323974609
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019247055000000", 
+      "endTimeNanos": "1418019252047000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 40.477066040039062
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628383", 
+      "startTimeNanos": "1418019252048000000", 
+      "endTimeNanos": "1418019257106000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 42.478713989257812
+        }
+      ], 
+      "dataTypeName": "com.google.distance.delta", 
+      "originDataSourceId": "raw:com.google.distance.delta:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+}
+
+--
+{
+  "minStartTimeNs": "1418014912000000000", 
+  "maxEndTimeNs": "1418032912000000000", 
+  "dataSourceId": "raw:com.google.speed.summary:com.moviz.gui:bh:BH - VISTA,.:33212807:", 
+  "point": [
+    {
+      "modifiedTimeMillis": "1480715628394", 
+      "startTimeNanos": "1418018800573000000", 
+      "endTimeNanos": "1418018805572000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 5.7777776718139648
+        }, 
+        {
+          "mapVal": [], 
+          "fpVal": 5.8888888359069824
+        }, 
+        {
+          "mapVal": [], 
+          "fpVal": 5.6944446563720703
+        }
+      ], 
+      "dataTypeName": "com.google.speed.summary", 
+      "originDataSourceId": "raw:com.google.speed.summary:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628394", 
+      "startTimeNanos": "1418018805573000000", 
+      "endTimeNanos": "1418018810561000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 6.4444446563720703
+        }, 
+        {
+          "mapVal": [], 
+          "fpVal": 6.6388888359069824
+        }, 
+        {
+          "mapVal": [], 
+          "fpVal": 6.2222223281860352
+        }
+      ], 
+      "dataTypeName": "com.google.speed.summary", 
+      "originDataSourceId": "raw:com.google.speed.summary:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+}
+
+{
+  "minStartTimeNs": "1418014912000000000", 
+  "maxEndTimeNs": "1418032912000000000", 
+  "dataSourceId": "raw:com.google.activity.segment:com.moviz.gui:", 
+  "point": [
+    {
+      "modifiedTimeMillis": "1480715576959", 
+      "startTimeNanos": "1418018800573000000", 
+      "endTimeNanos": "1418031284565000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "intVal": 18
+        }
+      ], 
+      "dataTypeName": "com.google.activity.segment", 
+      "originDataSourceId": "raw:com.google.activity.segment:com.moviz.gui:"
+    }
+  ]
+}
+
+{
+  "minStartTimeNs": "1418014912000000000", 
+  "maxEndTimeNs": "1418032912000000000", 
+  "dataSourceId": "raw:com.google.power.summary:com.moviz.gui:bh:BH - VISTA,.:33212807:", 
+  "point": [
+    {
+      "modifiedTimeMillis": "1480715628361", 
+      "startTimeNanos": "1418018800573000000", 
+      "endTimeNanos": "1418018805572000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 44.599998474121094
+        }, 
+        {
+          "mapVal": [], 
+          "fpVal": 91.0
+        }, 
+        {
+          "mapVal": [], 
+          "fpVal": 32.0
+        }
+      ], 
+      "dataTypeName": "com.google.power.summary", 
+      "originDataSourceId": "raw:com.google.power.summary:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628361", 
+      "startTimeNanos": "1418018805573000000", 
+      "endTimeNanos": "1418018810561000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 107.0
+        }, 
+        {
+          "mapVal": [], 
+          "fpVal": 111.0
+        }, 
+        {
+          "mapVal": [], 
+          "fpVal": 102.0
+        }
+      ], 
+      "dataTypeName": "com.google.power.summary", 
+      "originDataSourceId": "raw:com.google.power.summary:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628361", 
+      "startTimeNanos": "1418018810562000000", 
+      "endTimeNanos": "1418018815572000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 91.800003051757812
+        }, 
+        {
+          "mapVal": [], 
+          "fpVal": 97.0
+        }, 
+        {
+          "mapVal": [], 
+          "fpVal": 89.0
+        }
+      ], 
+      "dataTypeName": "com.google.power.summary", 
+      "originDataSourceId": "raw:com.google.power.summary:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628361", 
+      "startTimeNanos": "1418018815573000000", 
+      "endTimeNanos": "1418018820665000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 99.599998474121094
+        }, 
+        {
+          "mapVal": [], 
+          "fpVal": 104.0
+        }, 
+        {
+          "mapVal": [], 
+          "fpVal": 94.0
+        }
+      ], 
+      "dataTypeName": "com.google.power.summary", 
+      "originDataSourceId": "raw:com.google.power.summary:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628361", 
+      "startTimeNanos": "1418018820666000000", 
+      "endTimeNanos": "1418018825648000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 93.0
+        }, 
+        {
+          "mapVal": [], 
+          "fpVal": 102.0
+        }, 
+        {
+          "mapVal": [], 
+          "fpVal": 86.0
+        }
+      ], 
+      "dataTypeName": "com.google.power.summary", 
+      "originDataSourceId": "raw:com.google.power.summary:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715628361", 
+      "startTimeNanos": "1418018825649000000", 
+      "endTimeNanos": "1418018830666000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 92.199996948242188
+        }, 
+        {
+          "mapVal": [], 
+          "fpVal": 94.0
+        }, 
+        {
+          "mapVal": [], 
+          "fpVal": 88.0
+        }
+      ], 
+      "dataTypeName": "com.google.power.summary", 
+      "originDataSourceId": "raw:com.google.power.summary:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+}
+
+
+{
+  "minStartTimeNs": "1418014912000000000", 
+  "maxEndTimeNs": "1418032912000000000", 
+  "dataSourceId": "raw:com.google.cycling.wheel_revolution.rpm:com.moviz.gui:bh:BH - VISTA,.:33212807:", 
+  "point": [
+    {
+      "modifiedTimeMillis": "1480715577235", 
+      "startTimeNanos": "1418018800573000000", 
+      "endTimeNanos": "1418018805572000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 56.599998474121094
+        }
+      ], 
+      "dataTypeName": "com.google.cycling.wheel_revolution.rpm", 
+      "originDataSourceId": "raw:com.google.cycling.wheel_revolution.rpm:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715577235", 
+      "startTimeNanos": "1418018805573000000", 
+      "endTimeNanos": "1418018810561000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 61.799999237060547
+        }
+      ], 
+      "dataTypeName": "com.google.cycling.wheel_revolution.rpm", 
+      "originDataSourceId": "raw:com.google.cycling.wheel_revolution.rpm:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715577235", 
+      "startTimeNanos": "1418018810562000000", 
+      "endTimeNanos": "1418018815572000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 56.200000762939453
+        }
+      ], 
+      "dataTypeName": "com.google.cycling.wheel_revolution.rpm", 
+      "originDataSourceId": "raw:com.google.cycling.wheel_revolution.rpm:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715577235", 
+      "startTimeNanos": "1418018815573000000", 
+      "endTimeNanos": "1418018820665000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 59.200000762939453
+        }
+      ], 
+      "dataTypeName": "com.google.cycling.wheel_revolution.rpm", 
+      "originDataSourceId": "raw:com.google.cycling.wheel_revolution.rpm:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715577235", 
+      "startTimeNanos": "1418018820666000000", 
+      "endTimeNanos": "1418018825648000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 57.799999237060547
+        }
+      ], 
+      "dataTypeName": "com.google.cycling.wheel_revolution.rpm", 
+      "originDataSourceId": "raw:com.google.cycling.wheel_revolution.rpm:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480715577235", 
+      "startTimeNanos": "1418018825649000000", 
+      "endTimeNanos": "1418018830666000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 59.400001525878906
+        }
+      ], 
+      "dataTypeName": "com.google.cycling.wheel_revolution.rpm", 
+      "originDataSourceId": "raw:com.google.cycling.wheel_revolution.rpm:com.moviz.gui:bh:BH - VISTA,.:33212807:"
+    }, 
+}
+
+{
+  "minStartTimeNs": "1466308912000000000", 
+  "maxEndTimeNs": "1466326912000000000", 
+  "dataSourceId": "raw:com.google.heart_rate.bpm:com.moviz.gui:geonaute:BLE HR Device:2d99a343:", 
+  "point": [
+    {
+      "modifiedTimeMillis": "1480563005031", 
+      "startTimeNanos": "1466311705276000000", 
+      "endTimeNanos": "1466311705276000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 129.0
+        }
+      ], 
+      "dataTypeName": "com.google.heart_rate.bpm", 
+      "originDataSourceId": "raw:com.google.heart_rate.bpm:com.moviz.gui:geonaute:BLE HR Device:2d99a343:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480563005031", 
+      "startTimeNanos": "1466311710374000000", 
+      "endTimeNanos": "1466311710374000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 131.80000305175781
+        }
+      ], 
+      "dataTypeName": "com.google.heart_rate.bpm", 
+      "originDataSourceId": "raw:com.google.heart_rate.bpm:com.moviz.gui:geonaute:BLE HR Device:2d99a343:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480563005031", 
+      "startTimeNanos": "1466311715475000000", 
+      "endTimeNanos": "1466311715475000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 133.80000305175781
+        }
+      ], 
+      "dataTypeName": "com.google.heart_rate.bpm", 
+      "originDataSourceId": "raw:com.google.heart_rate.bpm:com.moviz.gui:geonaute:BLE HR Device:2d99a343:"
+    }, 
+    {
+      "modifiedTimeMillis": "1480563005031", 
+      "startTimeNanos": "1466311720572000000", 
+      "endTimeNanos": "1466311720572000000", 
+      "value": [
+        {
+          "mapVal": [], 
+          "fpVal": 135.19999694824219
+        }
+      ], 
+      "dataTypeName": "com.google.heart_rate.bpm", 
+      "originDataSourceId": "raw:com.google.heart_rate.bpm:com.moviz.gui:geonaute:BLE HR Device:2d99a343:"
+    }, 
+}

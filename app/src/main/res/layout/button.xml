@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- <TextView
+        android:id="@+id/actionTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:paddingLeft="5dp"
+    	android:paddingRight="5dp" />
+    <TextView
+        android:id="@+id/statusTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:paddingLeft="5dp"
+    	android:paddingRight="5dp" />-->
+     <TextView
+        android:id="@+id/pgrStatusTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:paddingLeft="5dp"
+    	android:paddingRight="5dp" />
+    <Button
+        android:id="@+id/upBTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/wv_up" />
+    <Button
+        android:id="@+id/downBTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/wv_down" />
+    <Button
+        android:id="@+id/playBTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/wv_start" />
+    <Button
+        android:id="@+id/pauseBTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/wv_pause" />
+    <Button
+        android:id="@+id/connectBTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/wv_connect" />
+    <Button
+        android:id="@+id/stopBTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/wv_stop" />    
+    <Button
+        android:id="@+id/exitBTN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/wv_exit" />
+</LinearLayout>

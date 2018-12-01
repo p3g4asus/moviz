@@ -1,0 +1,18 @@
+apply plugin: 'java'
+task copyTask(type: Copy) {
+    from 'build/libs/movizcomunication.jar'
+    into '../../../java/jars'
+}
+
+jar {
+    from sourceSets.main.allSource
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+task hello {
+    println 'hello world'
+}
+jar.finalizedBy copyTask

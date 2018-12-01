@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceScreen
+	        android:key="pref_device_scr"
+	        android:persistent="false" 
+	        android:title="@string/pref_scr_device" >
+        <ListPreference
+            android:dialogTitle="@string/pref_device_bluetooth_dtitle"
+            android:key="pref_device_bluetooth"
+            android:title="@string/pref_device_bluetooth_title" />
+        <ListPreference
+            android:dialogTitle="@string/pref_device_enabled_dtitle"
+           	android:key="pref_device_enabled"
+           	android:entries="@array/pref_device_enabled_entries"
+       		android:entryValues="@array/pref_device_enabled_values"
+           	android:title="@string/pref_device_enabled_title" />
+        <ListPreference
+            android:dialogTitle="@string/pref_device_type_dtitle"
+            android:key="pref_device_type"
+            android:title="@string/pref_device_type_title" />
+		<Preference
+            android:key="pref_device_remove"
+            android:persistent="false"
+            android:title="@string/pref_device_remove_title" />
+    </PreferenceScreen>
+
+</PreferenceScreen>

@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Moviz</string>
+    <string name="action_settings">Impostazioni</string>
+    <string name="exm_errs_user">Cartella database o utente selezionato non valido</string>
+    <string name="exm_errs_adapter">Problema alla scheda bluetooth. Non poso avviare la connessione</string>
+    <string name="exm_errs_discovery">Problema alla scheda bluetooth. Non poso avviare la ricerca</string>
+    <string name="exm_errs_stateerror">Problema alla scheda bluetooth. Stato di errore</string>
+    <string name="exm_errs_pinerror">%1$s: Problema nell\'inserimento del pin</string>
+    <string name="exm_errp_searchingdev">Ricerca dispositivo di tipo %1$s</string>
+    <string name="exm_errs_searcherror">Errore %1$d durante la scansione</string>
+    <string name="exm_errs_pairingerror">%1$s: Problema nell\'associazione al dispositivo</string>
+    <!-- <string name="errormsg_device">Dispositivo selezionato "%1$s" non valido</string>
+    <string name="errormsg_nobounded">Nessun dispositivo abilitato</string>-->
+    <string name="exm_errs_exception">Rilevati alcuni errori nella configurazione dei dispositivi:</string>
+    <string name="exm_errs_pafers_program">%1$s: File di programma selezionato "%2$s" non valido</string>
+    <string name="exm_errr_gatt_operationfailed">%2$s: Fallita operazione %1$s</string>
+    <string name="exm_errr_gatt_operationtimeout">%2$s: Timeout operazione %1$s</string>
+    <string name="exm_errs_notbound">%1$s: Dispositivo non associato</string>
+    <string name="exm_devm">%1$s</string>
+
+    
+    <string name="da_from">Data inizio</string>
+    <string name="da_to">Data fine</string>
+    <string name="da_nolimit">Ignora</string>
+    <string name="da_nothing">Annulla</string>
+    <string name="da_limit">Limita</string>
+    <string name="da_title">Filtra date</string>
+    
+    <string name="sessiondlg_title">Seleziona sessione</string>
+    <string name="sessiondlg_no">Annulla</string>
+    <string name="sessiondlg_dbquery">Interrogo database&#8230;</string>
+    <string name="sessiondlg_select">Seleziona</string>
+    <string name="sessionexportdlg_title">Sessioni esportate</string>
+    <string name="sessionexportdlg_error">ERRORE</string>
+    <string name="sessionexportdlg_notdone">SALTATO</string>
+    <string name="sessionexportdlg_exporting">Esporto sessioni&#8230;</string>
+    <string name="sessionexportdlg_cancelling">Cancello l\'esportazione&#8230;</string>
+    
+    <string name="exm_errp_connecting">In connessione&#8230;</string>
+    <string name="exm_errp_connectingdev">Dispositivi connessi %1$d. Tentativo %2$d. In connessione a:</string>
+    <string name="exm_errr_connectingdev">Dispositivi connessi %1$d. Tentativo %2$d. In connessione a:</string>
+    <string name="exm_errp_rebindingdev">Rilevati dispositivi non associati: Provo il rebind di:</string>
+    <string name="exm_errr_connecteddev">Dispositivo connesso %1$s</string>
+    <string name="exm_errp_activatingbluetooth">Attivo bluetooth&#8230;</string>
+    <string name="exm_errp_disablingbluetooth">Disattivo bluetooth&#8230;</string>
+    <string name="exm_errr_connectionlost">Persa la connessione a %1$s</string>
+    <string name="exm_errr_connectionfailed">Connessione fallita a %1$s</string>
+    <string name="exm_errr_pafers_program">Programma non valido %2$s per il dispositivo %1$s</string>
+    <string name="plot">Grafico</string>
+    <string name="button">Comandi</string>
+    <string name="ua_name">Nome</string>
+    <string name="ua_male">Maschio</string>
+    <string name="ua_female">Femmina</string>
+    <string name="ua_weight">Peso</string>
+    <string name="ua_height">Altezza</string>
+    <string name="ua_birthday">Nato il</string>
+    <string name="wv_up">Su</string>
+    <string name="wv_down">Giù</string>
+    <string name="wv_start">Start</string>
+    <string name="wv_connect">Connetti</string>
+    <string name="wv_disconnect">Disconnetti</string>
+    <string name="wv_stop">Stop</string>
+    <string name="wv_pause">Pausa</string>
+    <string name="wv_exit">Esci</string>
+    <string name="wv_ca_confirm">Conferma</string>
+    <string name="wv_ca_title">Conferma comando</string>
+    <string name="wv_ca_close">Chiudi</string>
+    <string name="pref_user_dtitle">Seleziona l\'utente</string>
+    <string name="pref_user_title">Utente</string>
+    <string name="pref_useradd_title">Aggiungi utente</string>
+    <string name="pref_useradd_ok">OK</string>
+    <string name="pref_useradd_ko">Annulla</string>
+    <string name="pref_db_add_title">Aggiungi</string>
+    <string name="pref_db_sel_title">Seleziona</string>
+    <string name="pref_db_sel_dtitle">Seleziona</string>
+    <string name="pref_db_edt_title">Modifica</string>
+    <string name="pref_db_rem_title">Rimuovi</string>
+    <string name="pref_db_exp_title">Esporta</string>
+    <string name="pref_db_cle_title">Pulisci</string>
+    <string name="pref_db_cle_dtitle">Durata minima (min)</string>
+    <string name="pref_db_joi_title">Unisci</string>
+    <string name="pref_db_joi_dtitle">Distanza massima (min)</string>    
+    <string name="pref_datef_title">Formato data</string>
+    <string name="pref_tcpport_title">Porta TCP</string>
+    <string name="pref_dbfold_title">Cartella sessioni</string>
+    <string name="pref_screenon_title">Rimani attivo</string>
+    <string name="pref_sessionpoints_title">Max punti grafico</string>
+    <string name="pref_updatefreq_title">Frequenza aggiornamento (ms)</string>
+    <string name="pref_cat_dbsession">Sessione</string>
+    <string name="pref_cat_dbuser">Utente</string>
+    <string name="pref_cat_user">Utente</string>
+    <string name="pref_cat_various">Altro</string>
+    <string name="pref_cat_device">Dispositivi</string>
+    <string name="pref_cat_template">Template</string>
+    <string name="pref_device_cat_remove">Elimina</string>
+    <string name="pref_device_pafers_cat_programs">Programmi</string>
+    <string name="pref_device_pafers_pfold_title">Cartella programmi</string>
+    <string name="pref_device_pafers_pfile_title">Programma</string>
+    <string name="pref_device_pafers_startdelay_title">Ritardo Start</string>
+    <string name="pref_scr_db">Gestione database</string>
+    <string name="pref_scr_device">Gestione dispositivi</string>
+    
+    <string name="pref_device_type_pafers">Pafers</string>
+    <string name="pref_device_type_zephyrhxm">ZephyrHxM</string>
+    <string name="pref_device_type_hrdevice">BLEHR</string>
+    <string name="pref_device_noname">NoName</string>
+    <string name="pref_device_nobound">NoBound</string>
+    <string name="pref_device_add_title">Aggiungi</string>
+    
+    <string name="pref_device_bluetooth_dtitle">Seleziona la periferica bluetooth</string>
+    <string name="pref_device_bluetooth_title">Periferica Bluetooth</string>
+    <string name="pref_device_bluetooth_noadapter">Bluetooth non rilevato</string>
+    <string name="pref_device_bluetooth_nobound">Clicka per cercare un dispositivo</string>
+    <string name="pref_device_enabled_title">Abilita</string>
+    <string name="pref_device_enabled_dtitle">Abilitazione dispositivo</string>
+    
+    <string name="pref_device_alias_title">Alias</string>
+    <string name="pref_device_alias_dtitle">Alias</string>
+
+    <string name="pref_device_orderd_title">Priorità</string>
+    <string name="pref_device_orderd_dtitle">Priorità</string>
+    
+    <string name="pref_device_type_dtitle">Tipo dispositivo</string>
+    <string name="pref_device_type_title">Tipo</string>
+    <string name="pref_device_remove_title">Elimina</string>
+    
+    <string name="pref_temp_status_title">Template stato</string>
+    <string name="pref_temp_status_dtitle">Selezione template stato</string>
+    
+    
+    <string name="pref_connretrydelay_title">Periodo riconnesione (s)</string>
+    <string name="pref_connretrynum_title">Tentativi riconnessione</string>
+    
+    <string name="pref_temp_workout_title">Template dati</string>
+    <string name="pref_temp_workout_dtitle">Selezione template dati</string>
+    
+    <string name="pref_temp_dir_title">Cartella template</string>
+    <string name="pref_temp_raw">Default</string>
+    
+    <string name="pref_device_enabled_enabled">Abilitato</string>
+    <string name="pref_device_enabled_disabled">Disabilitato</string>
+
+    <string name="pref_checkbox_checked">ON</string>
+    <string name="pref_checkbox_unchecked">OFF</string>
+
+    <string-array name="pref_device_enabled_entries">
+        <item>Indispensabile</item>
+        <item>Abilitato</item>
+        <item>Disabilitato</item>
+    </string-array>
+    <string-array name="pref_device_enabled_values">
+        <item>MAIN</item>
+        <item>ENABLED</item>
+        <item>DISABLED</item>
+    </string-array>
+    
+    <string name="select">Seleziona</string>
+    <string name="workout">Allenamento</string>
+    <string name="status">Status</string>
+    <string name="settings">Impostazioni</string>
+    <string name="change_settings">Cambia Impostazioni</string>
+    <string name="plt_session">Sessione</string>
+    <string name="plt_vars">Var</string>
+    <string name="plt_stats">Statistiche</string>
+
+    <string name="plt_title">Sessione</string>
+    <string name="plt_vars_dialog">Cosa grafico?</string>
+    <string name="plt_stats_dialog">Statistiche</string>
+    
+    <string name="plt_loading_db">Carico dal database dati %1$s del %2$s</string>
+    <string name="plt_loading_list">Creo liste plot %1$s del %2$s</string>
+
+    <string name="plt_date">Data</string>
+    <string name="plt_device">Device</string>
+    <string name="plt_device_desc">Dati device</string>
+    <string name="plt_device_sett">Impostazioni</string>
+    <string name="plt_device_user">Utente</string>
+    <string name="plt_sessiondesc">Desc</string>
+    <string name="plt_graph">Grafico sessione %1$s</string>
+    <string name="plt_graph_title">Produco grafico</string>
+    <string name="plt_km">km</string>
+    <string-array name="pref_datef_values">
+        <item>dd/MM/yy</item>
+        <item>MM/dd/yy</item>
+        <item>yy/MM/dd</item>
+    </string-array>
+    
+    <string name="device_rpm">RPM</string>
+    <string name="device_watt">Watt</string>
+    <string name="device_speed">Velocità</string>
+    <string name="device_pulse">Pulsazioni</string>
+    <string name="device_incline">Liv</string>
+    
+    <string name="device_mrpm">RPM (M)|||%2$.1f rpm</string>
+    <string name="device_mwatt">Watt (M)|||%2$.0f watt</string>
+    <string name="device_mspeed">Velocità (M)|||%2$.1f km/h</string>
+    <string name="device_mpulse">Pulsazioni (M)|||%2$.0f pul/min</string>
+    
+    <string name="device_length">Durata</string>
+    <string name="device_distance">Dist|||%2$.2f Km</string>
+    <string name="device_calorie">Calorie|||%1$d cal</string>
+    <string name="device_seconds">Secs</string>
+    <string name="device_cardio">Elettrocardiogramma</string>
+    <string name="device_strides">Passi|||%1$d pas</string>
+    <string name="device_beats">Battiti|||%1$d bat</string>
+    <string name="device_minutes">Mins</string>
+    <string name="device_status_program">Programma:</string>
+    <string name="device_status_battery">Batteria:</string>
+    
+	<string name="device_upd_stridesr">device_upd_stridesr</string>
+	<string name="device_upd_nbeatsr">device_upd_nbeatsr</string>
+	<string name="device_upd_okts">device_upd_okts</string>
+	<string name="device_upd_tsr">device_upd_tsr</string>
+	<string name="device_status_lastaction">device_status_lastaction</string>
+	<string name="device_status_devicestatus">device_status_devicestatus</string>
+	<string name="device_status_device">device_status_device</string>
+	<string name="device_status_laststatus">device_status_laststatus</string>
+	<string name="device_status_tcpstatus">device_status_tcpstatus</string>
+	<string name="device_status_tcpaddress">device_status_tcpaddress</string>
+	<string name="device_status_updaten">device_status_updaten</string>
+	<string name="device_status_starttime">device_status_starttime</string>
+	<string name="device_status_uname">device_status_uname</string>
+	<string name="device_status_uage">device_status_uage</string>
+	<string name="device_status_uismale">device_status_uismale</string>
+	<string name="device_status_uheight">device_status_uheight</string>
+	<string name="device_status_uweight">device_status_uweight</string>
+	<string name="device_upd_incline">device_upd_incline</string>
+	<string name="device_upd_pulse">device_upd_pulse</string>
+	<string name="device_upd_rpm">device_upd_rpm</string>
+	<string name="device_upd_watt">device_upd_watt</string>
+	<string name="device_upd_time">device_upd_time</string>
+	<string name="device_upd_timer">device_upd_timer</string>
+	<string name="device_upd_calorie">device_upd_calorie</string>
+	<string name="device_upd_distance">device_upd_distance</string>
+	<string name="device_upd_distancer">device_upd_distancer</string>
+	<string name="device_upd_speed">device_upd_speed</string>
+	<string name="device_upd_pulsemn">device_upd_pulsemn</string>
+	<string name="device_upd_rpmmn">device_upd_rpmmn</string>
+	<string name="device_upd_wattmn">device_upd_wattmn</string>
+	<string name="device_upd_speedmn">device_upd_speedmn</string>  
+	
+	
+    <string name="title_activity_main">Moviz</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_sub">SubActivity</string>
+    <string name="next">TouchProcessingActivity</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+    <string name="search_movies">Search Movies</string>
+
+    <string-array name="tabs">
+        <item>Allenamento</item>
+        <item>Stato</item>
+        <item>Grafico</item>
+        <item>Impostazioni</item>
+    </string-array>
+
+    <string name="title_activity_activity_using_tab_library">SlidingTabLayoutActivity</string>
+    <string name="action_tabs_using_library">SlidingTabLayoutExample</string>
+    <string name="title_activity_vector_test">VectorTestActivity</string>
+    <string name="action_vector_test_activity">VectorTestActivity</string>
+    <string name="error_timeout">Oops! Your Connection Timed Out</string>
+    <string name="error_auth_failure">Oops! RottenTomatoes Says It Doesn\'t Recognize You</string>
+    <string name="error_network">Oops! RottenTomatoes Server Just Messed Up</string>
+    <string name="error_parser">Oops! Data Received Was An Unreadable Mess</string>
+    <string name="title_activity_dynamic_tabs">Dynamic Tabs</string>
+    <string name="add_tab">Add Tab</string>
+    <string name="action_dynamic_tabs_activity">Dynamic Tabs</string>
+    <string name="title_activity_recycler_item_animations">RecyclerItemAnimations
+    </string>
+    <string name="action_recycler_item_animations">RecyclerItemAnimator</string>
+    <string name="action_add">+</string>
+    <string name="action_remove">-</string>
+    <string name="add_item">Add Item</string>
+    <string name="title_activity_activity_calling">Content A</string>
+    <string name="title_activity_activity_called">Content B</string>
+    <string name="action_activity_calling">ContentTransitions</string>
+    <string name="title_activity_activity_shared">Shared A</string>
+    <string name="title_activity_activity_shared_b">Shared B</string>
+    <string name="action_shared_transitions">SharedElementsTransition</string>
+    <string name="drawer_header_email">fulminedipegasus@gmail.com</string>
+    <string name="drawer_header_hi">Hi</string>
+    <string name="pref_device_type_wahoobluesc">Wahoo Blue SC</string>
+    <string name="device_status_batterylev">Liv Batteria:</string>
+    <string name="pref_device_wahoobluesc_wheeldiam_title">Diametro ruota (mm)</string>
+    <string name="device_crankrev">Ped/min</string>
+    <string name="pref_confsave_title">Salva Configurazione</string>
+    <string name="pref_confselect_dtitle">Seleziona Configurazione</string>
+    <string name="pref_confselect_title">Seleziona Configurazione</string>
+    <string name="pref_confdelete_title">Elimina Configurazione</string>
+    <string name="pref_confsh_title">Shortcut</string>
+    <string name="pref_device_wahoobluesc_currentgear_title">Marcia Corrente</string>
+    <string name="pref_device_wahoobluesc_gearfactor_title">Whl/Crk</string>
+
+</resources>

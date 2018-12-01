@@ -1,0 +1,612 @@
+
+12-01 16:19:55.167 26074-26074/com.moviz.gui I/GoogleFitService: Connected!!!
+12-01 16:19:55.389 26074-26230/com.moviz.gui I/GoogleFitService: Session number is 334
+12-01 16:19:55.389 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 0th [K=2]
+12-01 16:19:55.391 26074-26230/com.moviz.gui I/GoogleFitService: Processing fulminedipegasus@gmail.com
+12-01 16:19:55.521 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2691 for device bh
+12-01 16:20:01.022 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=2 Id Of Session = bh_141204_065640 Finish = 141204_074148 NV = 538
+12-01 16:20:01.023 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 1th [K=3]
+12-01 16:20:02.012 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12266 for device bh
+12-01 16:20:16.203 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=3 Id Of Session = bh_141204_171548 Finish = 141204_204104 NV = 2453
+12-01 16:20:16.203 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 2th [K=4]
+12-01 16:20:16.488 26074-26230/com.moviz.gui I/GoogleFitService: Size is 3907 for device bh
+12-01 16:20:21.926 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=4 Id Of Session = bh_141205_064226 Finish = 141205_074748 NV = 782
+12-01 16:20:21.926 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 3th [K=5]
+12-01 16:20:23.089 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12302 for device bh
+12-01 16:20:37.025 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=5 Id Of Session = bh_141206_070230 Finish = 141206_102820 NV = 2461
+12-01 16:20:37.026 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 4th [K=6]
+12-01 16:20:37.305 26074-26230/com.moviz.gui I/GoogleFitService: Size is 3897 for device bh
+12-01 16:20:42.536 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=6 Id Of Session = bh_141207_064459 Finish = 141207_075012 NV = 780
+12-01 16:20:42.537 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 5th [K=27]
+12-01 16:20:43.715 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12440 for device bh
+12-01 16:20:47.830 26074-26230/com.moviz.gui E/GoogleFitService: Diff for DataType{com.google.distance.delta[distance(f)]} = -500
+12-01 16:20:47.832 26074-26230/com.moviz.gui E/GoogleFitService: Should insert K=27 Id Of Session = bh_141208_070640 Finish = 141208_103444 NV = 2488
+12-01 16:20:47.832 26074-26230/com.moviz.gui E/GoogleFitService: Interrupped SC=2  at 27
+12-01 16:20:47.833 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 6th [K=28]
+12-01 16:20:48.149 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2711 for device bh
+12-01 16:20:53.611 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=28 Id Of Session = bh_141209_065714 Finish = 141209_074236 NV = 542
+12-01 16:20:53.611 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 7th [K=29]
+12-01 16:20:54.570 26074-26230/com.moviz.gui I/GoogleFitService: Size is 10773 for device bh
+12-01 16:21:08.473 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=29 Id Of Session = bh_141209_172411 Finish = 141209_202423 NV = 2155
+12-01 16:21:08.473 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 8th [K=30]
+12-01 16:21:08.682 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2696 for device bh
+12-01 16:21:13.950 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=30 Id Of Session = bh_141210_065538 Finish = 141210_074045 NV = 539
+12-01 16:21:13.950 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 9th [K=31]
+12-01 16:21:15.083 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12513 for device bh
+12-01 16:21:31.540 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=31 Id Of Session = bh_141210_171633 Finish = 141210_204545 NV = 2502
+12-01 16:21:31.541 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 10th [K=34]
+12-01 16:21:31.810 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2717 for device bh
+12-01 16:21:37.782 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=34 Id Of Session = bh_141211_065232 Finish = 141211_073757 NV = 544
+12-01 16:21:37.783 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 11th [K=35]
+12-01 16:21:38.040 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2733 for device bh
+12-01 16:21:43.009 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=35 Id Of Session = bh_141212_065515 Finish = 141212_074057 NV = 547
+12-01 16:21:43.010 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 12th [K=36]
+12-01 16:21:44.117 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12383 for device bh
+12-01 16:22:00.535 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=36 Id Of Session = bh_141212_171827 Finish = 141212_204540 NV = 2477
+12-01 16:22:00.536 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 13th [K=37]
+12-01 16:22:01.786 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12517 for device bh
+12-01 16:22:19.539 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=37 Id Of Session = bh_141213_070050 Finish = 141213_103019 NV = 2504
+12-01 16:22:19.540 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 14th [K=38]
+12-01 16:22:20.596 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12460 for device bh
+12-01 16:22:34.982 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=38 Id Of Session = bh_141214_070143 Finish = 141214_102959 NV = 2492
+12-01 16:22:34.982 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 15th [K=39]
+12-01 16:22:35.213 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2700 for device bh
+12-01 16:22:40.608 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=39 Id Of Session = bh_141215_065759 Finish = 141215_074309 NV = 540
+12-01 16:22:40.608 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 16th [K=40]
+12-01 16:22:40.851 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2717 for device bh
+12-01 16:22:45.958 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=40 Id Of Session = bh_141216_065714 Finish = 141216_074238 NV = 543
+12-01 16:22:45.958 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 17th [K=41]
+12-01 16:22:47.017 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12294 for device bh
+12-01 16:23:02.811 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=41 Id Of Session = bh_141216_180014 Finish = 141216_212555 NV = 2458
+12-01 16:23:02.811 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 18th [K=42]
+12-01 16:23:02.983 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2734 for device bh
+12-01 16:23:07.518 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=42 Id Of Session = bh_141217_065545 Finish = 141217_074127 NV = 547
+12-01 16:23:07.519 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 19th [K=43]
+12-01 16:23:07.735 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2727 for device bh
+12-01 16:23:13.072 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=43 Id Of Session = bh_141218_065522 Finish = 141218_074057 NV = 546
+12-01 16:23:13.072 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 20th [K=44]
+12-01 16:23:14.092 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12354 for device bh
+12-01 16:23:29.604 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=44 Id Of Session = bh_141218_171619 Finish = 141218_204259 NV = 2471
+12-01 16:23:29.605 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 21th [K=45]
+12-01 16:23:29.832 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2726 for device bh
+12-01 16:23:34.769 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=45 Id Of Session = bh_141219_065439 Finish = 141219_074016 NV = 545
+12-01 16:23:34.769 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 22th [K=46]
+12-01 16:23:35.759 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12296 for device bh
+12-01 16:23:50.678 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=46 Id Of Session = bh_141220_065918 Finish = 141220_102454 NV = 2459
+12-01 16:23:50.678 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 23th [K=47]
+12-01 16:23:50.967 26074-26230/com.moviz.gui I/GoogleFitService: Size is 3893 for device bh
+12-01 16:23:56.940 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=47 Id Of Session = bh_141221_064252 Finish = 141221_074759 NV = 779
+12-01 16:23:56.942 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 24th [K=48]
+12-01 16:23:57.171 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2716 for device bh
+12-01 16:24:02.434 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=48 Id Of Session = bh_141222_065527 Finish = 141222_074054 NV = 543
+12-01 16:24:02.434 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 25th [K=49]
+12-01 16:24:03.439 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12358 for device bh
+12-01 16:24:19.702 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=49 Id Of Session = bh_141222_171406 Finish = 141222_204050 NV = 2472
+12-01 16:24:19.702 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 26th [K=50]
+12-01 16:24:19.859 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2736 for device bh
+12-01 16:24:24.816 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=50 Id Of Session = bh_141223_065610 Finish = 141223_074156 NV = 547
+12-01 16:24:24.816 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 27th [K=51]
+12-01 16:24:25.877 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12300 for device bh
+12-01 16:24:45.590 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=51 Id Of Session = bh_141224_070017 Finish = 141224_102611 NV = 2460
+12-01 16:24:45.590 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 28th [K=52]
+12-01 16:24:46.670 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12327 for device bh
+12-01 16:25:02.553 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=52 Id Of Session = bh_141225_070048 Finish = 141225_102700 NV = 2465
+12-01 16:25:02.556 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 29th [K=53]
+12-01 16:25:03.557 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12357 for device bh
+12-01 16:25:18.623 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=53 Id Of Session = bh_141226_070012 Finish = 141226_102654 NV = 2472
+12-01 16:25:18.623 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 30th [K=54]
+12-01 16:25:18.951 26074-26230/com.moviz.gui I/GoogleFitService: Size is 3888 for device bh
+12-01 16:25:24.466 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=54 Id Of Session = bh_141227_064204 Finish = 141227_074706 NV = 778
+12-01 16:25:24.466 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 31th [K=55]
+12-01 16:25:25.514 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12357 for device bh
+12-01 16:25:41.334 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=55 Id Of Session = bh_141228_065844 Finish = 141228_102532 NV = 2472
+12-01 16:25:41.334 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 32th [K=56]
+12-01 16:25:41.631 26074-26230/com.moviz.gui I/GoogleFitService: Size is 3904 for device bh
+12-01 16:25:47.268 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=56 Id Of Session = bh_141229_064159 Finish = 141229_074719 NV = 781
+12-01 16:25:47.268 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 33th [K=57]
+12-01 16:25:48.227 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12384 for device bh
+12-01 16:26:02.953 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=57 Id Of Session = bh_141230_065833 Finish = 141230_102538 NV = 2477
+12-01 16:26:02.953 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 34th [K=58]
+12-01 16:26:03.255 26074-26230/com.moviz.gui I/GoogleFitService: Size is 3930 for device bh
+12-01 16:26:09.080 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=58 Id Of Session = bh_141231_064342 Finish = 141231_074927 NV = 786
+12-01 16:26:09.080 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 35th [K=59]
+12-01 16:26:10.036 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12394 for device bh
+12-01 16:26:25.158 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=59 Id Of Session = bh_150101_065855 Finish = 150101_102613 NV = 2479
+12-01 16:26:25.158 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 36th [K=60]
+12-01 16:26:25.372 26074-26230/com.moviz.gui I/GoogleFitService: Size is 3904 for device bh
+12-01 16:26:34.766 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=60 Id Of Session = bh_150102_064216 Finish = 150102_074735 NV = 781
+12-01 16:26:34.766 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 37th [K=61]
+12-01 16:26:35.715 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12460 for device bh
+12-01 16:26:51.517 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=61 Id Of Session = bh_150103_070001 Finish = 150103_102828 NV = 2492
+12-01 16:26:51.517 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 38th [K=62]
+12-01 16:26:51.822 26074-26230/com.moviz.gui I/GoogleFitService: Size is 3941 for device bh
+12-01 16:26:57.429 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=62 Id Of Session = bh_150104_064147 Finish = 150104_074740 NV = 788
+12-01 16:26:57.429 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 39th [K=63]
+12-01 16:26:58.318 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12449 for device bh
+12-01 16:27:13.560 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=63 Id Of Session = bh_150105_065946 Finish = 150105_102809 NV = 2490
+12-01 16:27:13.560 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 40th [K=64]
+12-01 16:27:13.844 26074-26230/com.moviz.gui I/GoogleFitService: Size is 3940 for device bh
+12-01 16:27:20.028 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=64 Id Of Session = bh_150106_064012 Finish = 150106_074606 NV = 788
+12-01 16:27:20.028 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 41th [K=65]
+12-01 16:27:20.255 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2735 for device bh
+12-01 16:27:26.122 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=65 Id Of Session = bh_150107_065448 Finish = 150107_074032 NV = 547
+12-01 16:27:26.122 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 42th [K=66]
+12-01 16:27:27.246 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12467 for device bh
+12-01 16:27:42.106 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=66 Id Of Session = bh_150107_171632 Finish = 150107_204507 NV = 2493
+12-01 16:27:42.106 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 43th [K=67]
+12-01 16:27:42.305 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2758 for device bh
+12-01 16:27:47.416 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=67 Id Of Session = bh_150108_065402 Finish = 150108_074009 NV = 552
+12-01 16:27:47.416 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 44th [K=68]
+12-01 16:27:47.647 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2763 for device bh
+12-01 16:27:53.457 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=68 Id Of Session = bh_150109_065256 Finish = 150109_073910 NV = 553
+12-01 16:27:53.458 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 45th [K=69]
+12-01 16:27:54.487 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12471 for device bh
+12-01 16:28:08.230 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=69 Id Of Session = bh_150109_171345 Finish = 150109_204217 NV = 2494
+12-01 16:28:08.230 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 46th [K=70]
+12-01 16:28:08.527 26074-26230/com.moviz.gui I/GoogleFitService: Size is 3921 for device bh
+12-01 16:28:13.993 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=70 Id Of Session = bh_150110_064247 Finish = 150110_074824 NV = 785
+12-01 16:28:13.993 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 47th [K=71]
+12-01 16:28:14.988 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12484 for device bh
+12-01 16:28:31.623 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=71 Id Of Session = bh_150111_065803 Finish = 150111_102654 NV = 2497
+12-01 16:28:31.624 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 48th [K=72]
+12-01 16:28:31.802 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2752 for device bh
+12-01 16:28:37.113 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=72 Id Of Session = bh_150112_065328 Finish = 150112_073931 NV = 551
+12-01 16:28:37.113 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 49th [K=73]
+12-01 16:28:37.348 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2751 for device bh
+12-01 16:28:43.110 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=73 Id Of Session = bh_150113_065413 Finish = 150113_074014 NV = 550
+12-01 16:28:43.110 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 50th [K=74]
+12-01 16:28:44.333 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12491 for device bh
+12-01 16:29:01.899 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=74 Id Of Session = bh_150113_171323 Finish = 150113_204226 NV = 2498
+12-01 16:29:01.899 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 51th [K=75]
+12-01 16:29:02.123 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2752 for device bh
+12-01 16:29:07.028 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=75 Id Of Session = bh_150114_065350 Finish = 150114_073952 NV = 551
+12-01 16:29:07.028 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 52th [K=76]
+12-01 16:29:07.276 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2753 for device bh
+12-01 16:29:13.981 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=76 Id Of Session = bh_150115_065401 Finish = 150115_074005 NV = 551
+12-01 16:29:13.981 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 53th [K=77]
+12-01 16:29:14.305 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2749 for device bh
+12-01 16:29:19.706 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=77 Id Of Session = bh_150116_065411 Finish = 150116_074009 NV = 550
+12-01 16:29:19.707 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 54th [K=78]
+12-01 16:29:20.740 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12485 for device bh
+12-01 16:29:35.917 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=78 Id Of Session = bh_150116_171331 Finish = 150116_204226 NV = 2497
+12-01 16:29:35.917 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 55th [K=79]
+12-01 16:29:36.174 26074-26230/com.moviz.gui I/GoogleFitService: Size is 3914 for device bh
+12-01 16:29:42.186 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=79 Id Of Session = bh_150117_064314 Finish = 150117_074843 NV = 783
+12-01 16:29:42.186 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 56th [K=80]
+12-01 16:29:43.133 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12485 for device bh
+12-01 16:29:59.906 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=80 Id Of Session = bh_150118_065749 Finish = 150118_102641 NV = 2497
+12-01 16:29:59.907 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 57th [K=81]
+12-01 16:30:00.134 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2751 for device bh
+12-01 16:30:05.077 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=81 Id Of Session = bh_150119_065418 Finish = 150119_074019 NV = 550
+12-01 16:30:05.077 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 58th [K=82]
+12-01 16:30:05.297 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2756 for device bh
+12-01 16:30:10.579 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=82 Id Of Session = bh_150120_065315 Finish = 150120_073920 NV = 551
+12-01 16:30:10.579 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 59th [K=83]
+12-01 16:30:11.520 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12467 for device bh
+12-01 16:30:26.195 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=83 Id Of Session = bh_150120_171426 Finish = 150120_204259 NV = 2494
+12-01 16:30:26.196 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 60th [K=84]
+12-01 16:30:26.390 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2754 for device bh
+12-01 16:30:31.415 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=84 Id Of Session = bh_150121_065423 Finish = 150121_074027 NV = 551
+12-01 16:30:31.416 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 61th [K=85]
+12-01 16:30:31.656 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2743 for device bh
+12-01 16:30:37.416 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=85 Id Of Session = bh_150122_065415 Finish = 150122_074008 NV = 549
+12-01 16:30:37.417 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 62th [K=86]
+12-01 16:30:38.251 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12438 for device bh
+12-01 16:30:53.567 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=86 Id Of Session = bh_150122_171610 Finish = 150122_204418 NV = 2488
+12-01 16:30:53.568 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 63th [K=87]
+12-01 16:30:53.885 26074-26230/com.moviz.gui I/GoogleFitService: Size is 3952 for device bh
+12-01 16:30:59.443 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=87 Id Of Session = bh_150123_064033 Finish = 150123_074636 NV = 791
+12-01 16:30:59.444 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 64th [K=101]
+12-01 16:31:02.562 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12458 for device bh
+12-01 16:31:02.746 26074-26230/com.moviz.gui I/GoogleFitService: Size is 41574 for device zephyr
+12-01 16:31:19.969 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=101 Id Of Session = bh_150124_065809 Finish = 150124_102731 NV = 4880
+12-01 16:31:19.970 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 65th [K=103]
+12-01 16:31:20.838 26074-26230/com.moviz.gui I/GoogleFitService: Size is 3945 for device bh
+12-01 16:31:20.889 26074-26230/com.moviz.gui I/GoogleFitService: Size is 13503 for device zephyr
+12-01 16:31:28.465 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=103 Id Of Session = bh_150125_064227 Finish = 150125_074940 NV = 1580
+12-01 16:31:28.466 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 66th [K=105]
+12-01 16:31:29.024 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2779 for device bh
+12-01 16:31:29.062 26074-26230/com.moviz.gui I/GoogleFitService: Size is 9605 for device zephyr
+12-01 16:31:35.607 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=105 Id Of Session = bh_150126_065253 Finish = 150126_073939 NV = 1114
+12-01 16:31:35.625 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 67th [K=107]
+12-01 16:31:36.316 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2755 for device bh
+12-01 16:31:36.371 26074-26230/com.moviz.gui I/GoogleFitService: Size is 9878 for device zephyr
+12-01 16:31:42.310 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=107 Id Of Session = bh_150127_065345 Finish = 150127_074100 NV = 1103
+12-01 16:31:42.310 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 68th [K=109]
+12-01 16:31:45.238 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12469 for device bh
+12-01 16:31:45.399 26074-26230/com.moviz.gui I/GoogleFitService: Size is 41684 for device zephyr
+12-01 16:32:05.735 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=109 Id Of Session = bh_150127_171453 Finish = 150127_204439 NV = 4994
+12-01 16:32:05.736 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 69th [K=111]
+12-01 16:32:06.337 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2755 for device bh
+12-01 16:32:06.375 26074-26230/com.moviz.gui I/GoogleFitService: Size is 9328 for device zephyr
+12-01 16:32:12.204 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=111 Id Of Session = bh_150128_065421 Finish = 150128_074040 NV = 1103
+12-01 16:32:12.205 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 70th [K=113]
+12-01 16:32:12.847 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2756 for device bh
+12-01 16:32:12.884 26074-26230/com.moviz.gui I/GoogleFitService: Size is 9739 for device zephyr
+12-01 16:32:19.077 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=113 Id Of Session = bh_150129_065332 Finish = 150129_073954 NV = 1103
+12-01 16:32:19.078 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 71th [K=115]
+12-01 16:32:22.163 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12450 for device bh
+12-01 16:32:22.324 26074-26230/com.moviz.gui I/GoogleFitService: Size is 41675 for device zephyr
+12-01 16:32:41.935 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=115 Id Of Session = bh_150129_171644 Finish = 150129_204615 NV = 4986
+12-01 16:32:41.936 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 72th [K=117]
+12-01 16:32:42.880 26074-26230/com.moviz.gui I/GoogleFitService: Size is 3929 for device bh
+12-01 16:32:42.932 26074-26230/com.moviz.gui I/GoogleFitService: Size is 13342 for device zephyr
+12-01 16:32:49.456 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=117 Id Of Session = bh_150130_064227 Finish = 150130_074830 NV = 1574
+12-01 16:32:49.456 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 73th [K=119]
+12-01 16:32:50.593 26074-26230/com.moviz.gui E/GoogleFitService: Interrupped SC=3  at 119
+12-01 16:32:50.594 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 74th [K=120]
+12-01 16:32:52.594 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12412 for device bh
+12-01 16:32:52.796 26074-26230/com.moviz.gui I/GoogleFitService: Size is 27256 for device zephyr
+12-01 16:33:06.189 26074-26230/com.moviz.gui E/GoogleFitService: Diff for DataType{com.google.calories.expended[calories(f)]} = -444
+12-01 16:33:06.191 26074-26230/com.moviz.gui E/GoogleFitService: Should insert K=120 Id Of Session = bh_150131_065640 Finish = 150131_102514 NV = 4092
+12-01 16:33:06.193 26074-26230/com.moviz.gui E/GoogleFitService: Interrupped SC=2  at 120
+12-01 16:33:06.196 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 75th [K=122]
+12-01 16:33:09.717 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12441 for device bh
+12-01 16:33:09.876 26074-26230/com.moviz.gui I/GoogleFitService: Size is 41608 for device zephyr
+12-01 16:33:27.627 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=122 Id Of Session = bh_150201_065533 Finish = 150201_102445 NV = 4980
+12-01 16:33:27.628 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 76th [K=124]
+12-01 16:33:28.283 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2756 for device bh
+12-01 16:33:28.319 26074-26230/com.moviz.gui I/GoogleFitService: Size is 9539 for device zephyr
+12-01 16:33:35.372 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=124 Id Of Session = bh_150202_065258 Finish = 150202_073932 NV = 1103
+12-01 16:33:35.373 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 77th [K=126]
+12-01 16:33:36.074 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2768 for device bh
+12-01 16:33:36.152 26074-26230/com.moviz.gui I/GoogleFitService: Size is 9697 for device zephyr
+12-01 16:33:43.025 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=126 Id Of Session = bh_150203_065302 Finish = 150203_073930 NV = 1109
+12-01 16:33:43.025 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 78th [K=128]
+12-01 16:33:46.036 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12454 for device bh
+12-01 16:33:46.221 26074-26230/com.moviz.gui I/GoogleFitService: Size is 41445 for device zephyr
+12-01 16:34:03.571 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=128 Id Of Session = bh_150203_171207 Finish = 150203_204136 NV = 4987
+12-01 16:34:03.572 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 79th [K=130]
+12-01 16:34:04.211 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2755 for device bh
+12-01 16:34:04.261 26074-26230/com.moviz.gui I/GoogleFitService: Size is 9471 for device zephyr
+12-01 16:34:10.796 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=130 Id Of Session = bh_150204_065305 Finish = 150204_073928 NV = 1103
+12-01 16:34:10.797 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 80th [K=132]
+12-01 16:34:11.408 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2765 for device bh
+12-01 16:34:11.452 26074-26230/com.moviz.gui I/GoogleFitService: Size is 9517 for device zephyr
+12-01 16:34:18.957 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=132 Id Of Session = bh_150205_065211 Finish = 150205_073845 NV = 1107
+12-01 16:34:18.958 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 81th [K=134]
+12-01 16:34:22.050 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12451 for device bh
+12-01 16:34:22.251 26074-26230/com.moviz.gui I/GoogleFitService: Size is 41138 for device zephyr
+12-01 16:34:40.052 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=134 Id Of Session = bh_150205_171356 Finish = 150205_204308 NV = 4985
+12-01 16:34:40.058 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 82th [K=136]
+12-01 16:34:41.031 26074-26230/com.moviz.gui I/GoogleFitService: Size is 3904 for device bh
+12-01 16:34:41.095 26074-26230/com.moviz.gui I/GoogleFitService: Size is 13071 for device zephyr
+12-01 16:34:47.565 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=136 Id Of Session = bh_150206_064155 Finish = 150206_074741 NV = 1563
+12-01 16:34:47.566 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 83th [K=138]
+12-01 16:34:47.622 26074-26230/com.moviz.gui E/GoogleFitService: Interrupped SC=3  at 138
+12-01 16:34:47.622 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 84th [K=139]
+12-01 16:34:48.018 26074-26230/com.moviz.gui E/GoogleFitService: Interrupped SC=3  at 139
+12-01 16:34:48.019 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 85th [K=140]
+12-01 16:34:51.235 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12443 for device bh
+12-01 16:34:51.409 26074-26230/com.moviz.gui I/GoogleFitService: Size is 41616 for device zephyr
+12-01 16:35:10.653 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=140 Id Of Session = bh_150207_065639 Finish = 150207_102546 NV = 4982
+12-01 16:35:10.654 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 86th [K=142]
+12-01 16:35:13.845 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12430 for device bh
+12-01 16:35:14.027 26074-26230/com.moviz.gui I/GoogleFitService: Size is 41700 for device zephyr
+12-01 16:35:33.345 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=142 Id Of Session = bh_150208_065617 Finish = 150208_102549 NV = 4979
+12-01 16:35:33.348 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 87th [K=144]
+12-01 16:35:33.897 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2765 for device bh
+12-01 16:35:33.939 26074-26230/com.moviz.gui I/GoogleFitService: Size is 9708 for device zephyr
+12-01 16:35:41.522 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=144 Id Of Session = bh_150209_065227 Finish = 150209_073907 NV = 1108
+12-01 16:35:41.523 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 88th [K=146]
+12-01 16:35:42.186 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2751 for device bh
+12-01 16:35:42.239 26074-26230/com.moviz.gui I/GoogleFitService: Size is 9903 for device zephyr
+12-01 16:35:50.840 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=146 Id Of Session = bh_150210_065223 Finish = 150210_073846 NV = 1102
+12-01 16:35:50.841 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 89th [K=148]
+12-01 16:35:52.719 26074-26230/com.moviz.gui I/GoogleFitService: Size is 8850 for device bh
+12-01 16:35:52.836 26074-26230/com.moviz.gui I/GoogleFitService: Size is 29430 for device zephyr
+12-01 16:36:06.715 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=148 Id Of Session = bh_150210_171344 Finish = 150210_194410 NV = 3544
+12-01 16:36:06.716 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 90th [K=150]
+12-01 16:36:07.679 26074-26230/com.moviz.gui I/GoogleFitService: Size is 3618 for device bh
+12-01 16:36:07.762 26074-26230/com.moviz.gui I/GoogleFitService: Size is 11934 for device zephyr
+12-01 16:36:15.065 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=150 Id Of Session = bh_150210_194440 Finish = 150210_204517 NV = 1449
+12-01 16:36:15.065 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 91th [K=152]
+12-01 16:36:15.674 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2752 for device bh
+12-01 16:36:15.713 26074-26230/com.moviz.gui I/GoogleFitService: Size is 9661 for device zephyr
+12-01 16:36:19.748 26074-26230/com.moviz.gui E/GoogleFitService: Diff for DataType{com.google.calories.expended[calories(f)]} = -34
+12-01 16:36:19.750 26074-26230/com.moviz.gui E/GoogleFitService: Should insert K=152 Id Of Session = bh_150211_065345 Finish = 150211_074041 NV = 1102
+12-01 16:36:19.754 26074-26230/com.moviz.gui E/GoogleFitService: Interrupped SC=2  at 152
+12-01 16:36:19.755 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 92th [K=154]
+12-01 16:36:20.428 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2756 for device bh
+12-01 16:36:20.469 26074-26230/com.moviz.gui I/GoogleFitService: Size is 9729 for device zephyr
+12-01 16:36:27.360 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=154 Id Of Session = bh_150212_065231 Finish = 150212_073901 NV = 1103
+12-01 16:36:27.361 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 93th [K=156]
+12-01 16:36:30.538 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12429 for device bh
+12-01 16:36:30.714 26074-26230/com.moviz.gui I/GoogleFitService: Size is 40773 for device zephyr
+12-01 16:36:51.246 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=156 Id Of Session = bh_150212_171419 Finish = 150212_204342 NV = 4976
+12-01 16:36:51.248 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 94th [K=158]
+12-01 16:36:52.157 26074-26230/com.moviz.gui I/GoogleFitService: Size is 3941 for device bh
+12-01 16:36:52.299 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12402 for device zephyr
+12-01 16:36:59.001 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=158 Id Of Session = bh_150213_064205 Finish = 150213_074818 NV = 1520
+12-01 16:36:59.002 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 95th [K=160]
+12-01 16:37:02.406 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12449 for device bh
+12-01 16:37:02.566 26074-26230/com.moviz.gui I/GoogleFitService: Size is 41817 for device zephyr
+12-01 16:37:20.987 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=160 Id Of Session = bh_150214_065654 Finish = 150214_102707 NV = 4984
+12-01 16:37:20.988 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 96th [K=162]
+12-01 16:37:24.483 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12511 for device bh
+12-01 16:37:24.668 26074-26230/com.moviz.gui I/GoogleFitService: Size is 41548 for device zephyr
+12-01 16:37:44.991 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=162 Id Of Session = bh_150215_065920 Finish = 150215_102937 NV = 5008
+12-01 16:37:44.997 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 97th [K=164]
+12-01 16:37:45.688 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2763 for device bh
+12-01 16:37:45.739 26074-26230/com.moviz.gui I/GoogleFitService: Size is 9818 for device zephyr
+12-01 16:37:51.411 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=164 Id Of Session = bh_150216_065405 Finish = 150216_074036 NV = 1106
+12-01 16:37:51.412 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 98th [K=166]
+12-01 16:37:52.024 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2760 for device bh
+12-01 16:37:52.093 26074-26230/com.moviz.gui I/GoogleFitService: Size is 9951 for device zephyr
+12-01 16:37:58.789 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=166 Id Of Session = bh_150217_065330 Finish = 150217_073956 NV = 1105
+12-01 16:37:58.790 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 99th [K=168]
+12-01 16:38:02.134 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12566 for device bh
+12-01 16:38:02.311 26074-26230/com.moviz.gui I/GoogleFitService: Size is 41026 for device zephyr
+12-01 16:38:22.877 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=168 Id Of Session = bh_150217_171237 Finish = 150217_204410 NV = 5033
+12-01 16:38:22.881 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 100th [K=170]
+12-01 16:38:23.680 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2756 for device bh
+12-01 16:38:23.728 26074-26230/com.moviz.gui I/GoogleFitService: Size is 9769 for device zephyr
+12-01 16:38:29.806 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=170 Id Of Session = bh_150218_065332 Finish = 150218_074002 NV = 1104
+12-01 16:38:29.807 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 101th [K=172]
+12-01 16:38:30.607 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2771 for device bh
+12-01 16:38:30.650 26074-26230/com.moviz.gui I/GoogleFitService: Size is 9705 for device zephyr
+12-01 16:38:37.834 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=172 Id Of Session = bh_150219_065259 Finish = 150219_073940 NV = 1110
+12-01 16:38:37.835 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 102th [K=174]
+12-01 16:38:40.843 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12430 for device bh
+12-01 16:38:41.013 26074-26230/com.moviz.gui I/GoogleFitService: Size is 40338 for device zephyr
+12-01 16:39:00.174 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=174 Id Of Session = bh_150219_171419 Finish = 150219_204226 NV = 4977
+12-01 16:39:00.175 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 103th [K=176]
+12-01 16:39:00.948 26074-26230/com.moviz.gui I/GoogleFitService: Size is 3917 for device bh
+12-01 16:39:01.007 26074-26230/com.moviz.gui I/GoogleFitService: Size is 13472 for device zephyr
+12-01 16:39:08.915 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=176 Id Of Session = bh_150220_064005 Finish = 150220_074554 NV = 1569
+12-01 16:39:08.916 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 104th [K=178]
+12-01 16:39:09.941 26074-26230/com.moviz.gui E/GoogleFitService: Interrupped SC=3  at 178
+12-01 16:39:09.942 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 105th [K=179]
+12-01 16:39:13.258 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12486 for device bh
+12-01 16:39:13.446 26074-26230/com.moviz.gui I/GoogleFitService: Size is 44122 for device zephyr
+12-01 16:39:32.078 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=179 Id Of Session = bh_150221_065837 Finish = 150221_104219 NV = 4997
+12-01 16:39:32.079 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 106th [K=181]
+12-01 16:39:33.041 26074-26230/com.moviz.gui I/GoogleFitService: Size is 3955 for device bh
+12-01 16:39:33.093 26074-26230/com.moviz.gui I/GoogleFitService: Size is 14035 for device zephyr
+12-01 16:39:40.068 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=181 Id Of Session = bh_150222_064101 Finish = 150222_074730 NV = 1583
+12-01 16:39:40.068 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 107th [K=183]
+12-01 16:39:40.797 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2750 for device bh
+12-01 16:39:40.841 26074-26230/com.moviz.gui I/GoogleFitService: Size is 10139 for device zephyr
+12-01 16:39:47.291 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=183 Id Of Session = bh_150223_065246 Finish = 150223_073900 NV = 1102
+12-01 16:39:47.292 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 108th [K=185]
+12-01 16:39:50.410 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12483 for device bh
+12-01 16:39:50.630 26074-26230/com.moviz.gui I/GoogleFitService: Size is 41966 for device zephyr
+12-01 16:40:09.856 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=185 Id Of Session = bh_150223_171324 Finish = 150223_204330 NV = 4998
+12-01 16:40:09.858 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 109th [K=187]
+12-01 16:40:10.486 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2765 for device bh
+12-01 16:40:10.705 26074-26230/com.moviz.gui I/GoogleFitService: Size is 9958 for device zephyr
+12-01 16:40:16.981 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=187 Id Of Session = bh_150224_065320 Finish = 150224_073949 NV = 1107
+12-01 16:40:16.982 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 110th [K=189]
+12-01 16:40:17.743 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2793 for device bh
+12-01 16:40:17.791 26074-26230/com.moviz.gui I/GoogleFitService: Size is 10275 for device zephyr
+12-01 16:40:25.068 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=189 Id Of Session = bh_150225_065237 Finish = 150225_073955 NV = 1119
+12-01 16:40:25.069 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 111th [K=191]
+12-01 16:40:28.153 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12513 for device bh
+12-01 16:40:28.321 26074-26230/com.moviz.gui I/GoogleFitService: Size is 41904 for device zephyr
+12-01 16:40:48.615 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=191 Id Of Session = bh_150225_171347 Finish = 150225_204410 NV = 5011
+12-01 16:40:48.616 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 112th [K=193]
+12-01 16:40:49.281 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2785 for device bh
+12-01 16:40:49.320 26074-26230/com.moviz.gui I/GoogleFitService: Size is 9919 for device zephyr
+12-01 16:40:55.697 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=193 Id Of Session = bh_150226_065237 Finish = 150226_074009 NV = 1115
+12-01 16:40:55.698 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 113th [K=195]
+12-01 16:40:58.928 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12555 for device bh
+12-01 16:40:59.216 26074-26230/com.moviz.gui I/GoogleFitService: Size is 42092 for device zephyr
+12-01 16:41:21.747 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=195 Id Of Session = bh_150227_065659 Finish = 150227_103149 NV = 5028
+12-01 16:41:21.759 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 114th [K=198]
+12-01 16:41:22.593 26074-26230/com.moviz.gui I/GoogleFitService: Size is 3955 for device bh
+12-01 16:41:22.695 26074-26230/com.moviz.gui I/GoogleFitService: Size is 13589 for device zephyr
+12-01 16:41:30.476 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=198 Id Of Session = bh_150228_064204 Finish = 150228_074835 NV = 1584
+12-01 16:41:30.476 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 115th [K=200]
+12-01 16:41:34.069 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12458 for device bh
+12-01 16:41:34.279 26074-26230/com.moviz.gui I/GoogleFitService: Size is 41924 for device zephyr
+12-01 16:41:53.111 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=200 Id Of Session = bh_150301_065657 Finish = 150301_102619 NV = 4990
+12-01 16:41:53.112 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 116th [K=202]
+12-01 16:41:53.664 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2774 for device bh
+12-01 16:41:53.701 26074-26230/com.moviz.gui I/GoogleFitService: Size is 10100 for device zephyr
+12-01 16:41:59.896 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=202 Id Of Session = bh_150302_065411 Finish = 150302_074046 NV = 1110
+12-01 16:41:59.897 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 117th [K=204]
+12-01 16:42:00.813 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2795 for device bh
+12-01 16:42:00.889 26074-26230/com.moviz.gui I/GoogleFitService: Size is 10257 for device zephyr
+12-01 16:42:07.720 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=204 Id Of Session = bh_150303_065326 Finish = 150303_074027 NV = 1119
+12-01 16:42:07.721 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 118th [K=206]
+12-01 16:42:10.912 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12515 for device bh
+12-01 16:42:11.106 26074-26230/com.moviz.gui I/GoogleFitService: Size is 42099 for device zephyr
+12-01 16:42:30.007 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=206 Id Of Session = bh_150303_171419 Finish = 150303_204441 NV = 5011
+12-01 16:42:30.009 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 119th [K=208]
+12-01 16:42:30.822 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2788 for device bh
+12-01 16:42:30.895 26074-26230/com.moviz.gui I/GoogleFitService: Size is 9626 for device zephyr
+12-01 16:42:37.079 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=208 Id Of Session = bh_150304_065303 Finish = 150304_073959 NV = 1117
+12-01 16:42:37.080 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 120th [K=210]
+12-01 16:42:37.649 26074-26230/com.moviz.gui E/GoogleFitService: Interrupped SC=3  at 210
+12-01 16:42:37.649 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 121th [K=211]
+12-01 16:42:38.151 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2798 for device bh
+12-01 16:42:38.196 26074-26230/com.moviz.gui I/GoogleFitService: Size is 10264 for device zephyr
+12-01 16:42:44.418 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=211 Id Of Session = bh_150305_065326 Finish = 150305_074056 NV = 1120
+12-01 16:42:44.418 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 122th [K=213]
+12-01 16:42:44.431 26074-26230/com.moviz.gui E/GoogleFitService: Interrupped SC=3  at 213
+12-01 16:42:44.432 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 123th [K=214]
+12-01 16:42:50.105 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12488 for device bh
+12-01 16:42:50.483 26074-26230/com.moviz.gui I/GoogleFitService: Size is 42752 for device zephyr
+12-01 16:43:08.417 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=214 Id Of Session = bh_150306_071739 Finish = 150306_105407 NV = 5001
+12-01 16:43:08.419 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 124th [K=216]
+12-01 16:43:09.672 26074-26230/com.moviz.gui I/GoogleFitService: Size is 3950 for device bh
+12-01 16:43:09.749 26074-26230/com.moviz.gui I/GoogleFitService: Size is 13702 for device zephyr
+12-01 16:43:17.248 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=216 Id Of Session = bh_150307_064222 Finish = 150307_074901 NV = 1581
+12-01 16:43:17.248 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 125th [K=218]
+12-01 16:43:22.652 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12524 for device bh
+12-01 16:43:23.028 26074-26230/com.moviz.gui I/GoogleFitService: Size is 42002 for device zephyr
+12-01 16:43:43.868 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=218 Id Of Session = bh_150308_065726 Finish = 150308_102803 NV = 5017
+12-01 16:43:43.870 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 126th [K=220]
+12-01 16:43:44.626 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2808 for device bh
+12-01 16:43:44.678 26074-26230/com.moviz.gui I/GoogleFitService: Size is 10040 for device zephyr
+12-01 16:43:50.888 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=220 Id Of Session = bh_150309_065342 Finish = 150309_074035 NV = 1116
+12-01 16:43:50.889 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 127th [K=222]
+12-01 16:43:51.590 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2793 for device bh
+12-01 16:43:51.650 26074-26230/com.moviz.gui I/GoogleFitService: Size is 10177 for device zephyr
+12-01 16:43:59.109 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=222 Id Of Session = bh_150310_065331 Finish = 150310_074009 NV = 1109
+12-01 16:43:59.110 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 128th [K=224]
+12-01 16:44:04.987 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12516 for device bh
+12-01 16:44:05.340 26074-26230/com.moviz.gui I/GoogleFitService: Size is 43069 for device zephyr
+12-01 16:44:24.613 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=224 Id Of Session = bh_150310_171517 Finish = 150310_204954 NV = 4970
+12-01 16:44:24.615 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 129th [K=226]
+12-01 16:44:24.629 26074-26230/com.moviz.gui E/GoogleFitService: Interrupped SC=3  at 226
+12-01 16:44:24.630 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 130th [K=227]
+12-01 16:44:25.244 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2809 for device bh
+12-01 16:44:25.283 26074-26230/com.moviz.gui I/GoogleFitService: Size is 10058 for device zephyr
+12-01 16:44:31.357 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=227 Id Of Session = bh_150312_065451 Finish = 150312_074148 NV = 1117
+12-01 16:44:31.358 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 131th [K=229]
+12-01 16:44:36.823 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12494 for device bh
+12-01 16:44:37.273 26074-26230/com.moviz.gui I/GoogleFitService: Size is 41878 for device zephyr
+12-01 16:44:55.603 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=229 Id Of Session = bh_150312_171342 Finish = 150312_204306 NV = 4971
+12-01 16:44:55.605 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 132th [K=231]
+12-01 16:44:56.821 26074-26230/com.moviz.gui I/GoogleFitService: Size is 3955 for device bh
+12-01 16:44:56.928 26074-26230/com.moviz.gui I/GoogleFitService: Size is 13748 for device zephyr
+12-01 16:45:04.877 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=231 Id Of Session = bh_150313_064205 Finish = 150313_074904 NV = 1574
+12-01 16:45:04.877 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 133th [K=233]
+12-01 16:45:04.886 26074-26230/com.moviz.gui E/GoogleFitService: Interrupped SC=3  at 233
+12-01 16:45:04.886 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 134th [K=234]
+12-01 16:45:10.122 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12483 for device bh
+12-01 16:45:10.469 26074-26230/com.moviz.gui I/GoogleFitService: Size is 42054 for device zephyr
+12-01 16:45:29.981 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=234 Id Of Session = bh_150314_065815 Finish = 150314_102655 NV = 4960
+12-01 16:45:29.982 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 135th [K=236]
+12-01 16:45:30.123 26074-26230/com.moviz.gui I/GoogleFitService: Size is 598 for device bh
+12-01 16:45:30.139 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2016 for device zephyr
+12-01 16:45:32.663 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=236 Id Of Session = bh_150315_065643 Finish = 150315_070742 NV = 239
+12-01 16:45:32.664 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 136th [K=238]
+12-01 16:45:37.705 26074-26230/com.moviz.gui I/GoogleFitService: Size is 11881 for device bh
+12-01 16:45:38.047 26074-26230/com.moviz.gui I/GoogleFitService: Size is 39445 for device zephyr
+12-01 16:45:55.645 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=238 Id Of Session = bh_150315_071030 Finish = 150315_102856 NV = 4712
+12-01 16:45:55.647 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 137th [K=240]
+12-01 16:45:56.514 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2800 for device bh
+12-01 16:45:56.631 26074-26230/com.moviz.gui I/GoogleFitService: Size is 10106 for device zephyr
+12-01 16:46:03.333 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=240 Id Of Session = bh_150316_065345 Finish = 150316_074038 NV = 1115
+12-01 16:46:03.334 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 138th [K=242]
+12-01 16:46:03.364 26074-26230/com.moviz.gui E/GoogleFitService: Interrupped SC=3  at 242
+12-01 16:46:03.364 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 139th [K=243]
+12-01 16:46:03.376 26074-26230/com.moviz.gui E/GoogleFitService: Interrupped SC=3  at 243
+12-01 16:46:03.376 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 140th [K=244]
+12-01 16:46:04.179 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2796 for device bh
+12-01 16:46:04.250 26074-26230/com.moviz.gui I/GoogleFitService: Size is 9742 for device zephyr
+12-01 16:46:10.894 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=244 Id Of Session = bh_150317_065701 Finish = 150317_074349 NV = 1109
+12-01 16:46:10.894 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 141th [K=246]
+12-01 16:46:15.846 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12459 for device bh
+12-01 16:46:16.220 26074-26230/com.moviz.gui I/GoogleFitService: Size is 38696 for device zephyr
+12-01 16:46:34.611 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=246 Id Of Session = bh_150317_171437 Finish = 150317_204345 NV = 4766
+12-01 16:46:34.612 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 142th [K=248]
+12-01 16:46:35.547 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2834 for device bh
+12-01 16:46:35.625 26074-26230/com.moviz.gui I/GoogleFitService: Size is 9976 for device zephyr
+12-01 16:46:40.233 26074-26230/com.moviz.gui E/GoogleFitService: Diff for DataType{com.google.calories.expended[calories(f)]} = -52
+12-01 16:46:40.234 26074-26230/com.moviz.gui E/GoogleFitService: Should insert K=248 Id Of Session = bh_150318_065332 Finish = 150318_074051 NV = 1124
+12-01 16:46:40.234 26074-26230/com.moviz.gui E/GoogleFitService: Interrupped SC=2  at 248
+12-01 16:46:40.235 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 143th [K=250]
+12-01 16:46:40.943 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2778 for device bh
+12-01 16:46:41.014 26074-26230/com.moviz.gui I/GoogleFitService: Size is 9928 for device zephyr
+12-01 16:46:48.012 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=250 Id Of Session = bh_150319_065303 Finish = 150319_073932 NV = 1104
+12-01 16:46:48.013 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 144th [K=252]
+12-01 16:46:49.688 26074-26230/com.moviz.gui I/GoogleFitService: Size is 4800 for device bh
+12-01 16:46:49.817 26074-26230/com.moviz.gui I/GoogleFitService: Size is 16609 for device zephyr
+12-01 16:46:56.965 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=252 Id Of Session = bh_150319_171629 Finish = 150319_184030 NV = 1911
+12-01 16:46:56.966 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 145th [K=254]
+12-01 16:46:59.999 26074-26230/com.moviz.gui I/GoogleFitService: Size is 7713 for device bh
+12-01 16:47:00.215 26074-26230/com.moviz.gui I/GoogleFitService: Size is 25643 for device zephyr
+12-01 16:47:13.396 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=254 Id Of Session = bh_150319_184054 Finish = 150319_205007 NV = 3066
+12-01 16:47:13.399 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 146th [K=256]
+12-01 16:47:14.643 26074-26230/com.moviz.gui I/GoogleFitService: Size is 3981 for device bh
+12-01 16:47:14.784 26074-26230/com.moviz.gui I/GoogleFitService: Size is 13522 for device zephyr
+12-01 16:47:21.513 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=256 Id Of Session = bh_150320_062754 Finish = 150320_073443 NV = 1582
+12-01 16:47:21.514 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 147th [K=258]
+12-01 16:47:26.906 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12505 for device bh
+12-01 16:47:27.240 26074-26230/com.moviz.gui I/GoogleFitService: Size is 41575 for device zephyr
+12-01 16:47:47.965 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=258 Id Of Session = bh_150321_065714 Finish = 150321_102651 NV = 4970
+12-01 16:47:47.967 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 148th [K=260]
+12-01 16:47:53.217 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12493 for device bh
+12-01 16:47:53.637 26074-26230/com.moviz.gui I/GoogleFitService: Size is 41650 for device zephyr
+12-01 16:48:14.714 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=260 Id Of Session = bh_150322_065708 Finish = 150322_102724 NV = 4966
+12-01 16:48:14.715 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 149th [K=262]
+12-01 16:48:14.724 26074-26230/com.moviz.gui E/GoogleFitService: Interrupped SC=3  at 262
+12-01 16:48:14.724 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 150th [K=263]
+12-01 16:48:14.730 26074-26230/com.moviz.gui E/GoogleFitService: Interrupped SC=3  at 263
+12-01 16:48:14.730 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 151th [K=264]
+12-01 16:48:15.569 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2806 for device bh
+12-01 16:48:15.668 26074-26230/com.moviz.gui I/GoogleFitService: Size is 10066 for device zephyr
+12-01 16:48:21.678 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=264 Id Of Session = bh_150323_065526 Finish = 150323_074224 NV = 1111
+12-01 16:48:21.678 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 152th [K=266]
+12-01 16:48:22.395 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2827 for device bh
+12-01 16:48:22.469 26074-26230/com.moviz.gui I/GoogleFitService: Size is 10017 for device zephyr
+12-01 16:48:26.780 26074-26230/com.moviz.gui E/GoogleFitService: Diff for DataType{com.google.calories.expended[calories(f)]} = -56
+12-01 16:48:26.783 26074-26230/com.moviz.gui E/GoogleFitService: Should insert K=266 Id Of Session = bh_150324_065155 Finish = 150324_073947 NV = 1132
+12-01 16:48:26.783 26074-26230/com.moviz.gui E/GoogleFitService: Interrupped SC=2  at 266
+12-01 16:48:26.784 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 153th [K=268]
+12-01 16:48:32.170 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12509 for device bh
+12-01 16:48:32.513 26074-26230/com.moviz.gui I/GoogleFitService: Size is 41645 for device zephyr
+12-01 16:48:53.156 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=268 Id Of Session = bh_150324_171914 Finish = 150324_204925 NV = 5011
+12-01 16:48:53.158 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 154th [K=270]
+12-01 16:48:53.178 26074-26230/com.moviz.gui I/GoogleFitService: Size is 99 for device bh
+12-01 16:48:55.417 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=270 Id Of Session = bh_150325_065315 Finish = 150325_065453 NV = 20
+12-01 16:48:55.417 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 155th [K=271]
+12-01 16:48:56.269 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2761 for device bh
+12-01 16:48:56.345 26074-26230/com.moviz.gui I/GoogleFitService: Size is 9654 for device zephyr
+12-01 16:49:02.879 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=271 Id Of Session = bh_150325_065537 Finish = 150325_074147 NV = 1105
+12-01 16:49:02.880 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 156th [K=273]
+12-01 16:49:03.829 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2805 for device bh
+12-01 16:49:03.903 26074-26230/com.moviz.gui I/GoogleFitService: Size is 9728 for device zephyr
+12-01 16:49:10.197 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=273 Id Of Session = bh_150326_065226 Finish = 150326_073956 NV = 1124
+12-01 16:49:10.197 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 157th [K=275]
+12-01 16:49:15.502 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12498 for device bh
+12-01 16:49:15.881 26074-26230/com.moviz.gui I/GoogleFitService: Size is 41683 for device zephyr
+12-01 16:49:31.372 26074-26230/com.moviz.gui E/GoogleFitService: Diff for DataType{com.google.calories.expended[calories(f)]} = -476
+12-01 16:49:31.373 26074-26230/com.moviz.gui E/GoogleFitService: Should insert K=275 Id Of Session = bh_150326_171629 Finish = 150326_204720 NV = 5004
+12-01 16:49:31.374 26074-26230/com.moviz.gui E/GoogleFitService: Interrupped SC=2  at 275
+12-01 16:49:31.375 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 158th [K=277]
+12-01 16:49:32.546 26074-26230/com.moviz.gui I/GoogleFitService: Size is 3990 for device bh
+12-01 16:49:32.646 26074-26230/com.moviz.gui I/GoogleFitService: Size is 13847 for device zephyr
+12-01 16:49:39.525 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=277 Id Of Session = bh_150327_063644 Finish = 150327_074425 NV = 1599
+12-01 16:49:39.526 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 159th [K=279]
+12-01 16:49:44.803 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12471 for device bh
+12-01 16:49:45.184 26074-26230/com.moviz.gui I/GoogleFitService: Size is 41386 for device zephyr
+12-01 16:50:03.073 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=279 Id Of Session = bh_150328_065708 Finish = 150328_102649 NV = 4994
+12-01 16:50:03.074 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 160th [K=281]
+12-01 16:50:08.381 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12501 for device bh
+12-01 16:50:08.767 26074-26230/com.moviz.gui I/GoogleFitService: Size is 41540 for device zephyr
+12-01 16:50:29.267 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=281 Id Of Session = bh_150329_065716 Finish = 150329_102746 NV = 5008
+12-01 16:50:29.269 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 161th [K=283]
+12-01 16:50:30.079 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2794 for device bh
+12-01 16:50:30.157 26074-26230/com.moviz.gui I/GoogleFitService: Size is 9460 for device zephyr
+12-01 16:50:36.952 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=283 Id Of Session = bh_150330_065318 Finish = 150330_074031 NV = 1119
+12-01 16:50:36.952 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 162th [K=285]
+12-01 16:50:37.791 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2800 for device bh
+12-01 16:50:37.868 26074-26230/com.moviz.gui I/GoogleFitService: Size is 9818 for device zephyr
+12-01 16:50:44.827 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=285 Id Of Session = bh_150331_065343 Finish = 150331_074103 NV = 1121
+12-01 16:50:44.827 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 163th [K=287]
+12-01 16:50:50.156 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12489 for device bh
+12-01 16:50:50.554 26074-26230/com.moviz.gui I/GoogleFitService: Size is 40627 for device zephyr
+12-01 16:51:08.836 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=287 Id Of Session = bh_150331_171441 Finish = 150331_204429 NV = 5001
+12-01 16:51:08.841 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 164th [K=289]
+12-01 16:51:09.685 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2791 for device bh
+12-01 16:51:09.787 26074-26230/com.moviz.gui I/GoogleFitService: Size is 9924 for device zephyr
+12-01 16:51:17.556 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=289 Id Of Session = bh_150401_065339 Finish = 150401_074047 NV = 1118
+12-01 16:51:17.557 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 165th [K=291]
+12-01 16:51:18.372 26074-26230/com.moviz.gui I/GoogleFitService: Size is 2793 for device bh
+12-01 16:51:18.448 26074-26230/com.moviz.gui I/GoogleFitService: Size is 10069 for device zephyr
+12-01 16:51:24.634 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=291 Id Of Session = bh_150402_065249 Finish = 150402_073955 NV = 1119
+12-01 16:51:24.634 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 166th [K=293]
+12-01 16:51:29.990 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12491 for device bh
+12-01 16:51:30.362 26074-26230/com.moviz.gui I/GoogleFitService: Size is 41518 for device zephyr
+12-01 16:51:49.244 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=293 Id Of Session = bh_150402_171421 Finish = 150402_204405 NV = 5000
+12-01 16:51:49.249 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 167th [K=295]
+12-01 16:51:50.610 26074-26230/com.moviz.gui I/GoogleFitService: Size is 3993 for device bh
+12-01 16:51:50.718 26074-26230/com.moviz.gui I/GoogleFitService: Size is 13617 for device zephyr
+12-01 16:51:58.766 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=295 Id Of Session = bh_150403_063558 Finish = 150403_074310 NV = 1599
+12-01 16:51:58.767 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 168th [K=297]
+12-01 16:52:04.156 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12480 for device bh
+12-01 16:52:04.520 26074-26230/com.moviz.gui I/GoogleFitService: Size is 41251 for device zephyr
+12-01 16:52:23.850 26074-26230/com.moviz.gui V/GoogleFitService: NOTHING K=297 Id Of Session = bh_150404_065720 Finish = 150404_102740 NV = 4998
+12-01 16:52:23.853 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 169th [K=299]
+12-01 16:52:29.179 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12537 for device bh
+12-01 16:52:29.554 26074-26230/com.moviz.gui I/GoogleFitService: Size is 40855 for device zephyr
+12-01 16:52:44.932 26074-26230/com.moviz.gui E/GoogleFitService: Diff for DataType{com.google.calories.expended[calories(f)]} = -485
+12-01 16:52:44.934 26074-26230/com.moviz.gui E/GoogleFitService: Should insert K=299 Id Of Session = bh_150405_065429 Finish = 150405_102636 NV = 5022
+12-01 16:52:44.941 26074-26230/com.moviz.gui E/GoogleFitService: Interrupped SC=2  at 299
+12-01 16:52:44.947 26074-26230/com.moviz.gui I/GoogleFitService: Processing session 170th [K=301]
+12-01 16:52:50.333 26074-26230/com.moviz.gui I/GoogleFitService: Size is 12509 for device bh
+12-01 16:52:50.718 26074-26230/com.moviz.gui I/GoogleFitService: Size is 41372 for device zephyr

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:key="pref_cat_device"
+        android:title="@string/pref_cat_device">
+        <Preference
+            android:key="pref_device_add"
+            android:title="@string/pref_device_add_title" />
+        <com.moviz.gui.preference.ConfNamePreference
+            android:key="pref_confsave"
+            android:title="@string/pref_confsave_title"
+            android:persistent="false"></com.moviz.gui.preference.ConfNamePreference>
+        <ListPreference
+            android:key="pref_confsh"
+            android:dialogTitle="@string/pref_confselect_dtitle"
+            android:title="@string/pref_confsh_title"
+            android:persistent="false"></ListPreference>
+        <ListPreference
+            android:key="pref_confdelete"
+            android:dialogTitle="@string/pref_confselect_dtitle"
+            android:title="@string/pref_confdelete_title"
+            android:persistent="false"></ListPreference>
+        <ListPreference
+            android:key="pref_confselect"
+            android:dialogTitle="@string/pref_confselect_dtitle"
+            android:title="@string/pref_confselect_title"
+            android:persistent="true"></ListPreference>
+    </PreferenceCategory>
+
+    <!--
+         android:entries="@array/pref_syncConnectionTypes_entries"
+        android:entryValues="@array/pref_syncConnectionTypes_values"
+        android:defaultValue="@string/pref_syncConnectionTypes_default"
+    -->
+    <PreferenceCategory android:title="@string/pref_cat_user">
+        <ListPreference
+            android:dialogTitle="@string/pref_user_dtitle"
+            android:key="pref_user"
+            android:defaultValue="-1"
+            android:title="@string/pref_user_title" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/pref_cat_template">
+        <Preference
+            android:key="pref_temp_dir"
+            android:title="@string/pref_temp_dir_title" />
+        <ListPreference
+            android:dialogTitle="@string/pref_temp_status_dtitle"
+            android:key="pref_temp_status"
+            android:defaultValue="r"
+            android:title="@string/pref_temp_status_title" />
+
+        <ListPreference
+            android:dialogTitle="@string/pref_temp_workout_dtitle"
+            android:key="pref_temp_workout"
+            android:defaultValue="r"
+            android:title="@string/pref_temp_workout_title" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/pref_cat_various">
+        <PreferenceScreen
+            android:key="pref_db"
+            android:persistent="false"
+            android:title="@string/pref_scr_db">
+            <PreferenceCategory android:title="@string/pref_cat_dbuser">
+                <ListPreference
+                    android:dialogTitle="@string/pref_db_sel_dtitle"
+                    android:key="pref_db_usel"
+                    android:persistent="false"
+                    android:defaultValue="-1"
+                    android:title="@string/pref_db_sel_title" />
+                <Preference
+                    android:key="pref_db_uadd"
+                    android:persistent="false"
+                    android:title="@string/pref_db_add_title" />
+                <Preference
+                    android:key="pref_db_urem"
+                    android:persistent="false"
+                    android:title="@string/pref_db_rem_title" />
+                <Preference
+                    android:key="pref_db_uedt"
+                    android:persistent="false"
+                    android:title="@string/pref_db_edt_title" />
+            </PreferenceCategory>
+            <PreferenceCategory android:title="@string/pref_cat_dbsession">
+                <Preference
+                    android:key="pref_db_srem"
+                    android:persistent="false"
+                    android:title="@string/pref_db_rem_title" />
+                <Preference
+                    android:key="pref_db_sjoi"
+                    android:persistent="false"
+                    android:title="@string/pref_db_joi_title" />
+                <!-- <com.pafers.gui.DBJoinPreference
+                    android:dialogTitle="@string/pref_db_joi_dtitle"
+                    android:key="pref_db_sjoi"
+                    android:persistent="false"
+                    android:defaultValue="10"
+                    android:title="@string/pref_db_joi_title" /> -->
+                <com.moviz.gui.preference.DBCleanPreference
+                    android:dialogTitle="@string/pref_db_cle_dtitle"
+                    android:key="pref_db_scle"
+                    android:persistent="false"
+                    android:defaultValue="10"
+                    android:title="@string/pref_db_cle_title" />
+                <Preference
+                    android:key="pref_db_sexp"
+                    android:persistent="false"
+                    android:title="@string/pref_db_exp_title" />
+            </PreferenceCategory>
+            <Preference
+                android:key="pref_dbfold"
+                android:title="@string/pref_dbfold_title" />
+        </PreferenceScreen>
+        <ListPreference
+            android:entryValues="@array/pref_datef_values"
+            android:key="pref_datef"
+            android:defaultValue="dd/MM/yy"
+            android:title="@string/pref_datef_title" />
+        <CheckBoxPreference
+            android:key="pref_screenon"
+            android:defaultValue="true"
+            android:title="@string/pref_screenon_title" />
+        <com.moviz.gui.preference.TCPPortPreference
+            android:key="pref_tcpport"
+            android:defaultValue="3456"
+            android:inputType="number"
+            android:title="@string/pref_tcpport_title" />
+        <com.moviz.gui.preference.MaxSessionPointsPreference
+            android:key="pref_connretrydelay"
+            android:defaultValue="30"
+            android:inputType="number"
+            android:title="@string/pref_connretrydelay_title" />
+        <com.moviz.gui.preference.MaxSessionPointsPreference
+            android:key="pref_connretrynum"
+            android:defaultValue="5"
+            android:inputType="number"
+            android:title="@string/pref_connretrynum_title" />
+        <com.moviz.gui.preference.MaxSessionPointsPreference
+            android:key="pref_sessionpoints"
+            android:defaultValue="0"
+            android:inputType="number"
+            android:title="@string/pref_sessionpoints_title" />
+        <com.moviz.gui.preference.MaxSessionPointsPreference
+            android:key="pref_updatefreq"
+            android:defaultValue="2000"
+            android:inputType="number"
+            android:title="@string/pref_updatefreq_title" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

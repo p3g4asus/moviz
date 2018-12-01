@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="0.65"
+    android:orientation="vertical" >
+   <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.35"
+            android:labelFor="@+id/dateTV"
+            android:text="@string/plt_date" />
+
+        <TextView
+            android:id="@+id/dateTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.65"
+            android:ems="10" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.35"
+            android:labelFor="@+id/deviceTV"
+            android:text="@string/plt_device" />
+
+        <TextView
+            android:id="@+id/deviceTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.65"
+            android:ems="10" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.35"
+            android:labelFor="@+id/lengthTV"
+            android:text="@string/device_length" />
+
+        <TextView
+            android:id="@+id/lengthTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.65"
+            android:ems="10" />
+    </LinearLayout>
+
+</LinearLayout>
