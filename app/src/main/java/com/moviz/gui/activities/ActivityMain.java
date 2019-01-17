@@ -1,6 +1,7 @@
 package com.moviz.gui.activities;
 
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
@@ -13,8 +14,10 @@ import android.content.IntentFilter;
 import android.content.IntentSender;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Vibrator;
@@ -68,6 +71,7 @@ import com.moviz.workers.DeviceManagerService;
 import com.moviz.workers.DeviceManagerService.DeviceManagerBinder;
 import com.moviz.workers.GoogleFitService;
 
+import java.io.File;
 import java.util.GregorianCalendar;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -137,7 +141,7 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
     private void startGoogleFitService() {
         if (GoogleFitService.getStatus() == GoogleFitService.MyStatus.IDLE && !mAuthInProgress) {
             Intent gattServiceIntent = new Intent(this, GoogleFitService.class);
-            gattServiceIntent.putExtra(GoogleFitService.FIT_EXTRA_DB_PATH, sharedPref.getString("pref_dbfold", res == null ? "" : SettingsFragment.getDefaultDbFolder(res)) + "/old/00_pafersmain.db");
+            gattServiceIntent.putExtra(GoogleFitService.FIT_EXTRA_DB_PATH, sharedPref.getString("pref_dbfold", res == null ? "" : SettingsFragment.getDefaultDbFolder(this)) + "/old/00_pafersmain.db");
             gattServiceIntent.putExtra(GoogleFitService.FIT_EXTRA_SESSION_NUMBER, 0);
             gattServiceIntent.putExtra(GoogleFitService.FIT_EXTRA_SESSION_OFFSET, 0);
             gattServiceIntent.putExtra(GoogleFitService.FIT_EXTRA_REPEAT_AFTER_SYNCH, -1);
@@ -207,6 +211,34 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
         }
     }
 
+    public  boolean isStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (    checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED &&
+                    checkSelfPermission(Manifest.permission.BODY_SENSORS) == PackageManager.PERMISSION_GRANTED &&
+                    checkSelfPermission(Manifest.permission.GET_ACCOUNTS) == PackageManager.PERMISSION_GRANTED &&
+                    checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                    checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+                   ) {
+                Log.v(TAG,"Permission is granted");
+                return true;
+            } else {
+                Log.v(TAG,"Permission is revoked");
+                requestPermissions(new String[]{
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.BODY_SENSORS,
+                        Manifest.permission.GET_ACCOUNTS,
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                }, 1);
+                return false;
+            }
+        }
+        else { //permission is automatically granted on sdk<23 upon installation
+            Log.v(TAG,"Permission is granted");
+            return true;
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -233,14 +265,29 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
         }
         res = getResources();
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
-        intStartService();
-        setupProgressDialog();
-        sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        // updateTimerInit();
-        if (deadState== DeviceManagerService.DeadState.NOTSTARTED)
-            startGoogleFitService();
-        adjustScreenOn();
 
+        if(isStoragePermissionGranted()){
+            intStartService();
+            setupProgressDialog();
+            sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            // updateTimerInit();
+            if (deadState== DeviceManagerService.DeadState.NOTSTARTED)
+                startGoogleFitService();
+            adjustScreenOn();
+        }
+
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        for (int g:grantResults) {
+            if (g!=PackageManager.PERMISSION_GRANTED)
+                return;
+        }
+        Log.v(TAG,"Permission: "+permissions[0]+ "was "+grantResults[0]);
+        Toast.makeText(this,R.string.auth_ok_restart,Toast.LENGTH_LONG);
     }
 
     private void showError(String message) {

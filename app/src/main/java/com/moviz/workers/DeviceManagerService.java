@@ -425,7 +425,7 @@ public class DeviceManagerService extends Service implements CommandProcessor {
         } catch (Exception e1) {
             e1.printStackTrace();
         }
-        String newfold = sharedPref.getString("pref_dbfold", res == null ? "" : SettingsFragment.getDefaultDbFolder(res));
+        String newfold = sharedPref.getString("pref_dbfold", res == null ? "" : SettingsFragment.getDefaultDbFolder(this));
         if (dbFold==null || !newfold.equals(dbFold) || sqlite==null) {
             try {
                 closeDB();
@@ -777,8 +777,8 @@ public class DeviceManagerService extends Service implements CommandProcessor {
                             feedback = new Intent(Messages.EXCEPTION_MESSAGE);
                         }
                         feedback.putExtra("except" + i, (Parcelable) e);
-                        i++;
                     }
+                    i++;
                 }
             }
         }

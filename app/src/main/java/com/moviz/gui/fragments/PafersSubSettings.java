@@ -42,11 +42,24 @@ public class PafersSubSettings extends DeviceSubSettings {
 
     }
 
-    private void setupFolderProgramSearch() {
-        new ProgramFoldDialogChange(root, sharedPref, pProgramFold, getDefaultProgramFolder(res), res.getString(R.string.select));
+    private void setupFolderProgramSearch(Context ctx) {
+        String v = getDefaultProgramFolder(ctx);
+        String key = pProgramFold.getKey();
+        if (sharedPref.getString(key,null)==null) {
+            sharedPref.edit().putString(pProgramFold.getKey(), v).commit(); // finally save changes
+            listener.onPreferenceChange(pProgramFold,v);
+            listener.onPreferenceChange(pProgramFile,"");
+            pProgramFile.setSummary(null);
+        }
+        File f = new File(v);
+        if (!f.exists())
+            f.mkdirs();
+        pProgramFold.setDefaultValue(v);
+        pProgramFold.setSummary(v);
+        //new ProgramFoldDialogChange(root, sharedPref, pProgramFold, getDefaultProgramFolder(res), res.getString(R.string.select));
     }
 
-    private void setupFileSearch() {
+    private void setupFileSearch(final Context ctx) {
 
         pProgramFile.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
@@ -56,7 +69,7 @@ public class PafersSubSettings extends DeviceSubSettings {
                 final Activity a = root.getActivity();
                 if (a != null) {
                     File mPath = new File(sharedPref.getString("pref_devicepriv_pafers_" + myId + "_pfold",
-                            getDefaultProgramFolder(res)));
+                            getDefaultProgramFolder(ctx)));
                     final FileDialog fileDialog = new FileDialog(a, mPath);
                     /*
 					 * fileDialog.addFileListener(new
@@ -101,8 +114,8 @@ public class PafersSubSettings extends DeviceSubSettings {
         BindSummaryToValueListener.CallInfo ci = new BindSummaryToValueListener.CallInfo(BindSummaryToValueListener.SUMMARY_LISTENER_NOTIFY,dev);
         listener.addPreference(pProgramFold,null,ci);
         if (currentVF == null)
-            listener.onPreferenceChange(pProgramFold, currentVF = getDefaultProgramFolder(res));
-        setupFolderProgramSearch();
+            listener.onPreferenceChange(pProgramFold, currentVF = getDefaultProgramFolder(ctx));
+        setupFolderProgramSearch(ctx);
 
         pProgramFile = new Preference(ctx);
         pProgramFile.setKey("pref_devicepriv_pafers_" + myId + "_pfile");
@@ -116,7 +129,7 @@ public class PafersSubSettings extends DeviceSubSettings {
             listener.onPreferenceChange(pProgramFile, currentFF = currentVF + "/man1" + ProgramParser.PROGRAMFILE_EXTENSION);
         pProgramFile.setSummary(ProgramParser.extractName(currentFF));
 
-        setupFileSearch();
+        setupFileSearch(ctx);
 
         ci = new BindSummaryToValueListener.CallInfo(BindSummaryToValueListener.SUMMARY_LISTENER_NOTIFY,dev);
         pStartDelay = new MaxSessionPointsPreference(ctx);
@@ -134,8 +147,8 @@ public class PafersSubSettings extends DeviceSubSettings {
 
     }
 
-    public static String getDefaultProgramFolder(Resources res) {
-        return SettingsFragment.getDefaultAppDir(res) + "/programs";
+    public static String getDefaultProgramFolder(Context ctx) {
+        return SettingsFragment.getDefaultAppDir(ctx) + "/programs";
     }
 
     @Override

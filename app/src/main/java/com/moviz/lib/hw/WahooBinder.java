@@ -85,20 +85,19 @@ public class WahooBinder extends DeviceBinder {
 
     private final HardwareConnector.Listener mHardwareConnectorCallback = new HardwareConnector.Listener() {
 
-        @Override
+        /*@Override
         public void connectedSensor(SensorConnection sensorConnection) {
             Log.v(TAG, "mHardwareConnectorCallback.connectedSensor " + sensorConnection);
         }
-
-        @Override
-        public void connectorStateChanged(HardwareConnectorTypes.NetworkType networkType,
-                                          HardwareConnectorEnums.HardwareConnectorState hardwareState) {
-            Log.v(TAG, "mHardwareConnectorCallback.connectorStateChanged " + networkType + " " + hardwareState);
-        }
-
         @Override
         public void disconnectedSensor(SensorConnection sensorConnection) {
             Log.v(TAG, "mHardwareConnectorCallback.disconnectedSensor " + sensorConnection);
+        }*/
+
+        @Override
+        public void onHardwareConnectorStateChanged(HardwareConnectorTypes.NetworkType networkType,
+                                          HardwareConnectorEnums.HardwareConnectorState hardwareState) {
+            Log.v(TAG, "mHardwareConnectorCallback.connectorStateChanged " + networkType + " " + hardwareState);
         }
 
         @Override
@@ -196,7 +195,7 @@ public class WahooBinder extends DeviceBinder {
                         mHardwareConnector = new HardwareConnector(mBase.getContext(), mHardwareConnectorCallback);
                         Logger.setLogLevel(Log.VERBOSE);
                     }
-                    if (mHardwareConnector.startDiscovery(mDiscoveryListener).getBtleDiscoveryResultCode()!=DiscoveryResult.DiscoveryResultCode.SUCCESS)
+                    if (mHardwareConnector.startDiscovery(mDiscoveryListener).getResult(HardwareConnectorTypes.NetworkType.BTLE)!=DiscoveryResult.DiscoveryResultCode.SUCCESS)
                         bldevb.postDeviceError(new ParcelableMessage("exm_errr_connectionfailed"));
                     else {
                         endDiscovery.setDataProcessor((WahooDataProcessor) bldevb);

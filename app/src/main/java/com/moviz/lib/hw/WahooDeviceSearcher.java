@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.moviz.gui.app.CA;
@@ -70,20 +71,20 @@ public class WahooDeviceSearcher implements DeviceSearcher {
 
     private final HardwareConnector.Listener mHardwareConnectorCallback = new HardwareConnector.Listener() {
 
-        @Override
+        /*@Override
         public void connectedSensor(SensorConnection sensorConnection) {
             Log.v(TAG, "mHardwareConnectorCallback.connectedSensor " + sensorConnection);
         }
 
         @Override
-        public void connectorStateChanged(HardwareConnectorTypes.NetworkType networkType,
-                                          HardwareConnectorEnums.HardwareConnectorState hardwareState) {
-            Log.v(TAG, "mHardwareConnectorCallback.connectorStateChanged " + networkType + " " + hardwareState);
-        }
-
-        @Override
         public void disconnectedSensor(SensorConnection sensorConnection) {
             Log.v(TAG, "mHardwareConnectorCallback.disconnectedSensor " + sensorConnection);
+        }*/
+
+        @Override
+        public void onHardwareConnectorStateChanged(HardwareConnectorTypes.NetworkType networkType,
+                                          HardwareConnectorEnums.HardwareConnectorState hardwareState) {
+            Log.v(TAG, "mHardwareConnectorCallback.connectorStateChanged " + networkType + " " + hardwareState);
         }
 
         @Override
@@ -118,13 +119,13 @@ public class WahooDeviceSearcher implements DeviceSearcher {
                 mHandler.postDelayed(endDiscovery, 10000);
                 DiscoveryResult res = mHardwareConnector.startDiscovery(mDiscoveryListener);
                 DiscoveryResult.DiscoveryResultCode rc;
-                if ((rc = res.getBtleDiscoveryResultCode()) != DiscoveryResult.DiscoveryResultCode.SUCCESS) {
+                if ((rc = res.getResult(HardwareConnectorTypes.NetworkType.BTLE)) != DiscoveryResult.DiscoveryResultCode.SUCCESS) {
                     CA.lbm.sendBroadcast(new Intent(DEVICE_SEARCH_ERROR).putExtra(DEVICE_ERROR_CODE, (Parcelable) new ParcelableMessage("exm_errs_searcherror").put(rc.ordinal())));
                 }
             } else
                 CA.lbm.sendBroadcast(new Intent(DEVICE_SEARCH_ERROR).putExtra(DEVICE_ERROR_CODE, (Parcelable) new ParcelableMessage("exm_errs_adapter")));
         } else {
-            mHardwareConnector.stopDiscovery();
+            mHardwareConnector.stopDiscovery(mDiscoveryListener);
             mHandler.removeCallbacks(endDiscovery);
         }
     }

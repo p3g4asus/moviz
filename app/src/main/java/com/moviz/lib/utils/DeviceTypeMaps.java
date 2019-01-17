@@ -6,12 +6,15 @@ import com.moviz.gui.R;
 import com.moviz.gui.fragments.DeviceSubSettings;
 import com.moviz.gui.fragments.PafersSubSettings;
 import com.moviz.gui.fragments.WahooBlueSCSubSettings;
+import com.moviz.lib.comunication.plus.holder.PKeiserM3iHolder;
 import com.moviz.lib.hw.BLDeviceSearcher;
 import com.moviz.lib.hw.BLEBinder;
 import com.moviz.lib.hw.BLEDeviceSearcher;
 import com.moviz.lib.hw.BluetoothChatBinder;
 import com.moviz.lib.hw.DeviceBinder;
 import com.moviz.lib.hw.DeviceSearcher;
+import com.moviz.lib.hw.KeiserM3iDevice;
+import com.moviz.lib.hw.NonConnectableBinder;
 import com.moviz.lib.hw.PafersBinder;
 import com.moviz.lib.hw.WahooBlueSCBinder;
 import com.moviz.lib.hw.WahooDeviceSearcher;
@@ -53,6 +56,7 @@ public class DeviceTypeMaps {
     static {
         Map<DeviceType, UpdateDatabasable> aMap = new HashMap<DeviceType, UpdateDatabasable>();
         aMap.put(DeviceType.pafers, new PPafersHolder());
+        aMap.put(DeviceType.keiserm3i, new PKeiserM3iHolder());
         aMap.put(DeviceType.zephyrhxm, new PZephyrHxMHolder());
         aMap.put(DeviceType.hrdevice, new PHRDeviceHolder());
         aMap.put(DeviceType.wahoobluesc, new PWahooBlueSCHolder());
@@ -64,6 +68,7 @@ public class DeviceTypeMaps {
     static {
         Map<DeviceType, Integer> aMap = new HashMap<DeviceType, Integer>();
         aMap.put(DeviceType.pafers, R.string.pref_device_type_pafers);
+        aMap.put(DeviceType.keiserm3i, R.string.pref_device_type_keiserm3i);
         aMap.put(DeviceType.zephyrhxm, R.string.pref_device_type_zephyrhxm);
         aMap.put(DeviceType.hrdevice, R.string.pref_device_type_hrdevice);
         aMap.put(DeviceType.wahoobluesc, R.string.pref_device_type_wahoobluesc);
@@ -77,7 +82,9 @@ public class DeviceTypeMaps {
         BLDeviceSearcher bds = new BLDeviceSearcher();
         aMap.put(DeviceType.pafers, bds);
         aMap.put(DeviceType.zephyrhxm, bds);
-        aMap.put(DeviceType.hrdevice, new BLEDeviceSearcher());
+        BLEDeviceSearcher bleds = new BLEDeviceSearcher();
+        aMap.put(DeviceType.keiserm3i, bleds);
+        aMap.put(DeviceType.hrdevice, bleds);
         aMap.put(DeviceType.wahoobluesc, new WahooDeviceSearcher());
         type2search = Collections.unmodifiableMap(aMap);
     }
@@ -89,6 +96,7 @@ public class DeviceTypeMaps {
         aMap.put(null, new String[]{"pref_temp_status", "pref_temp_workout", "pref_user"});
         aMap.put(DeviceType.pafers, new String[]{"pfold", "pfile"});
         aMap.put(DeviceType.zephyrhxm, new String[0]);
+        aMap.put(DeviceType.keiserm3i, new String[0]);
         aMap.put(DeviceType.hrdevice, new String[0]);
         aMap.put(DeviceType.wahoobluesc, new String[]{"wheeldiam","gearfactor","currentgear"});
         type2confsave = Collections.unmodifiableMap(aMap);
@@ -99,6 +107,7 @@ public class DeviceTypeMaps {
     static {
         Map<DeviceType, SessionExporter> aMap = new HashMap<DeviceType, SessionExporter>();
         aMap.put(DeviceType.pafers, new PafersSessionExporter());
+        aMap.put(DeviceType.keiserm3i, new PafersSessionExporter());
         aMap.put(DeviceType.zephyrhxm, new ZephyrHxMSessionExporter());
         aMap.put(DeviceType.hrdevice, new HRDeviceSessionExporter());
         aMap.put(DeviceType.wahoobluesc, new WahooBlueSCSessionExporter());
@@ -110,6 +119,7 @@ public class DeviceTypeMaps {
     static {
         Map<DeviceType, Class<? extends PlotProcessor>> aMap = new HashMap<DeviceType, Class<? extends PlotProcessor>>();
         aMap.put(DeviceType.pafers, PafersPlotProcessor.class);
+        aMap.put(DeviceType.keiserm3i, PafersPlotProcessor.class);
         aMap.put(DeviceType.zephyrhxm, ZephyrHxMPlotProcessor.class);
         aMap.put(DeviceType.hrdevice, HRDevicePlotProcessor.class);
         aMap.put(DeviceType.wahoobluesc, WahooBlueSCPlotProcessor.class);
@@ -124,6 +134,7 @@ public class DeviceTypeMaps {
         aMap.put(DeviceType.wahoobluesc, WahooBlueSCSubSettings.class);
         aMap.put(DeviceType.zephyrhxm, null);
         aMap.put(DeviceType.hrdevice, null);
+        aMap.put(DeviceType.keiserm3i, null);
         type2settingsclass = Collections.unmodifiableMap(aMap);
     }
 
@@ -135,6 +146,7 @@ public class DeviceTypeMaps {
         aMap.put(DeviceType.zephyrhxm, ZephyrHxMDevice.class);
         aMap.put(DeviceType.hrdevice, HRDevice.class);
         aMap.put(DeviceType.wahoobluesc, WahooBlueSCDevice.class);
+        aMap.put(DeviceType.keiserm3i, KeiserM3iDevice.class);
         type2deviceclass = Collections.unmodifiableMap(aMap);
     }
 
@@ -143,6 +155,7 @@ public class DeviceTypeMaps {
     static {
         Map<DeviceType, Class<? extends UpdateCommandMessage>> aMap = new HashMap<DeviceType, Class<? extends UpdateCommandMessage>>();
         aMap.put(DeviceType.pafers, com.moviz.lib.comunication.message.PafersWorkoutMessage.class);
+        aMap.put(DeviceType.keiserm3i, com.moviz.lib.comunication.message.PafersWorkoutMessage.class);
         aMap.put(DeviceType.zephyrhxm, ZephyrHxMWorkoutMessage.class);
         aMap.put(DeviceType.hrdevice, com.moviz.lib.comunication.message.HRDeviceWorkoutMessage.class);
         aMap.put(DeviceType.wahoobluesc, WahooBlueSCWorkoutMessage.class);
@@ -154,6 +167,7 @@ public class DeviceTypeMaps {
     static {
         Map<DeviceType, DeviceBinder> aMap = new HashMap<DeviceType, DeviceBinder>();
         aMap.put(DeviceType.pafers, new PafersBinder());
+        aMap.put(DeviceType.keiserm3i, new NonConnectableBinder());
         aMap.put(DeviceType.zephyrhxm, new BluetoothChatBinder());
         aMap.put(DeviceType.hrdevice, new BLEBinder());
         aMap.put(DeviceType.wahoobluesc, new WahooBlueSCBinder());

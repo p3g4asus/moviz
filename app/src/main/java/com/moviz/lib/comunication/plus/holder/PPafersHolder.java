@@ -9,6 +9,8 @@ import android.os.Parcelable;
 import com.moviz.lib.googlefit.GoogleFitPointTransformer;
 import com.moviz.lib.googlefit.PafersFitTransformer;
 
+import java.lang.reflect.Constructor;
+
 public class PPafersHolder extends com.moviz.lib.comunication.holder.PafersHolder implements Parcelable, UpdateDatabasable, Joinable {
     private static PafersFitTransformer transformer = new PafersFitTransformer();
 
@@ -50,6 +52,7 @@ public class PPafersHolder extends com.moviz.lib.comunication.holder.PafersHolde
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         // TODO Auto-generated method stub
+        dest.writeString(getClass().getName());
         dest.writeDouble(distance);
         dest.writeDouble(speed);
         dest.writeInt(time);
@@ -133,7 +136,15 @@ public class PPafersHolder extends com.moviz.lib.comunication.holder.PafersHolde
     public static final Creator<PPafersHolder> CREATOR = new Creator<PPafersHolder>() {
         @Override
         public PPafersHolder createFromParcel(Parcel parcel) {
-            return new PPafersHolder(parcel);
+            String cln = parcel.readString();
+            try {
+                Class<? extends PPafersHolder> c = (Class<? extends PPafersHolder>) Class.forName(cln);
+                Constructor co = c.getConstructor(Parcel.class);
+                return (PPafersHolder) co.newInstance(parcel);
+            }
+            catch (Exception e) {
+            }
+            return null;
         }
 
         @Override

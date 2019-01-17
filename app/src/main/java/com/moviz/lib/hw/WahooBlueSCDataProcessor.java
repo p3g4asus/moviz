@@ -229,14 +229,14 @@ public class WahooBlueSCDataProcessor extends WahooDataProcessor implements Cran
 
     @Override
     public void onCrankRevsData(CrankRevs.Data data) {
-        Log.v(TAG, "New Cap onCrankRevsData " + data.getAccumCrankRevs());
-        updateVal(PWahooBlueSCHolder.SensorType.CRANK, data.getAccumCrankRevs(), data.getCrankSpeed().asRevolutionsPerMinute());
+        Log.v(TAG, "New Cap onCrankRevsData " + data.getAccumulatedCrankRevs());
+        updateVal(PWahooBlueSCHolder.SensorType.CRANK, data.getAccumulatedCrankRevs(), data.getCrankSpeed().asRevolutionsPerMinute());
     }
 
     @Override
     public void onWheelRevsData(WheelRevs.Data data) {
-        Log.v(TAG, "New Cap onWheelRevsData " + data.getAccumWheelRevs());
-        updateVal(PWahooBlueSCHolder.SensorType.WHEEL, data.getAccumWheelRevs(), data.getWheelSpeed().asRevolutionsPerMinute());
+        Log.v(TAG, "New Cap onWheelRevsData " + data.getAccumulatedWheelRevs());
+        updateVal(PWahooBlueSCHolder.SensorType.WHEEL, data.getAccumulatedWheelRevs(), data.getWheelSpeed().asRevolutionsPerMinute());
     }
 
     @Override

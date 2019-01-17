@@ -299,17 +299,24 @@ public class SettingsFragment extends PreferenceFragment implements CommandProce
     ;
 
 
-    public static String getDefaultAppDir(Resources res) {
-        return Environment.getExternalStorageDirectory() + "/"
-                + res.getString(R.string.app_name);
+    public static String getDefaultAppDir(Context ctx) {
+        File[] strg = ctx.getExternalFilesDirs(null);
+        File dest = strg[0];
+        for (File f:strg) {
+            if (Environment.isExternalStorageRemovable(f)) {
+                dest = f;
+                break;
+            }
+        }
+        return dest.getAbsolutePath();
     }
 
-    public static String getDefaultDbFolder(Resources res) {
-        return getDefaultAppDir(res) + "/sessions";
+    public static String getDefaultDbFolder(Context ctx) {
+        return getDefaultAppDir(ctx) + "/sessions";
     }
 
-    public static String getDefaultTempFolder(Resources res) {
-        return getDefaultAppDir(res) + "/templates";
+    public static String getDefaultTempFolder(Context ctx) {
+        return getDefaultAppDir(ctx) + "/templates";
     }
 
     private void setupTemplateList(final String tp, ListPreference lp) {
@@ -446,24 +453,44 @@ public class SettingsFragment extends PreferenceFragment implements CommandProce
     }
 
     private void setupFolderDbSearch() {
-        new FolderDialogChange(this, sharedPref, pDbFold, getDefaultDbFolder(res), res.getString(R.string.select)) {
+        String v = getDefaultDbFolder(ctx);
+        String key = pDbFold.getKey();
+        if (sharedPref.getString(key,null)==null)
+            prefEditor.putString(pDbFold.getKey(), v).commit(); // finally save changes
+        File f = new File(v);
+        if (!f.exists())
+            f.mkdirs();
+        pDbFold.setDefaultValue(v);
+        pDbFold.setSummary(v);
+        /*new FolderDialogChange(this, sharedPref, pDbFold, getDefaultDbFolder(res), res.getString(R.string.select)) {
             @Override
             public void afterchange(Preference pref, String value) {
                 BindSummaryToValueListener.CallInfo ci = mPCList.getCallInfo(pref);
                 if (ci != null && ci.notifying())
                     mPCList.notifyChange(ci, pref, value);
             }
-        };
+        };*/
     }
 
     private void setupFolderTemplateSearch() {
-        new FolderDialogChange(this, sharedPref, pDirTemp, getDefaultTempFolder(res), res.getString(R.string.select)) {
+        String v = getDefaultTempFolder(ctx);
+        String key = pDirTemp.getKey();
+        if (sharedPref.getString(key,null)==null)
+            prefEditor.putString(pDirTemp.getKey(), v).commit(); // finally save changes
+        File f = new File(v);
+        if (!f.exists())
+            f.mkdirs();
+        pDirTemp.setDefaultValue(v);
+        pDirTemp.setSummary(v);
+        setupTemplateList("status", pStatusTemp);
+        setupTemplateList("workout", pWorkTemp);
+        /*new FolderDialogChange(this, sharedPref, pDirTemp, getDefaultTempFolder(res), res.getString(R.string.select)) {
             @Override
             public void afterchange(Preference p, String newv) {
                 setupTemplateList("status", pStatusTemp);
                 setupTemplateList("workout", pWorkTemp);
             }
-        };
+        };*/
     }
 
     private void saveConfData(String name) {
@@ -823,7 +850,7 @@ public class SettingsFragment extends PreferenceFragment implements CommandProce
             public boolean onPreferenceClick(Preference preference) {
                 Activity a = getActivity();
                 if (a != null)
-                    new SessionExporterAction(null, null, pDateF.getValue(), sharedPref.getString("pref_dbfold", getDefaultDbFolder(res))).show(a);
+                    new SessionExporterAction(null, null, pDateF.getValue(), sharedPref.getString("pref_dbfold", getDefaultDbFolder(ctx))).show(a);
                 return true;
             }
         });

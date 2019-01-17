@@ -120,6 +120,7 @@ public abstract class DeviceDataProcessor implements DeviceConnectionListener, C
 
     public synchronized void setBluetoothState(BluetoothState newState) {
         if (newState != mBluetoothState) {
+            Log.i(TAG,"New state for device "+mBluetoothDevice.getName()+": "+newState);
             this.mBluetoothState = newState;
             if (newState == BluetoothState.CONNECTED) {
                 onDeviceConnected(mDeviceHolder, mDeviceHolder.innerDevice());

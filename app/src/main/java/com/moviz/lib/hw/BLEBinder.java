@@ -1,20 +1,12 @@
 package com.moviz.lib.hw;
 
-import android.annotation.TargetApi;
-import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGattCharacteristic;
-import android.bluetooth.le.BluetoothLeScanner;
-import android.bluetooth.le.ScanCallback;
-import android.bluetooth.le.ScanFilter;
-import android.bluetooth.le.ScanResult;
-import android.bluetooth.le.ScanSettings;
-import android.os.Build;
-import android.os.Handler;
-import android.os.Looper;
+import android.bluetooth.le.ScanRecord;
 import android.util.Log;
 
 import com.movisens.smartgattlib.Descriptor;
+import com.moviz.lib.comunication.plus.holder.PUserHolder;
 import com.moviz.lib.comunication.plus.message.DeviceChangeRequestMessage;
 import com.moviz.lib.hw.gatt.CharacteristicChangeListener;
 import com.moviz.lib.hw.gatt.ConnectionStateChangedListener;
@@ -24,72 +16,41 @@ import com.moviz.lib.hw.gatt.operations.GattCharacteristicReadOperation;
 import com.moviz.lib.hw.gatt.operations.GattDisconnectOperation;
 import com.moviz.lib.hw.gatt.operations.GattOperation;
 import com.moviz.lib.hw.gatt.operations.GattSetNotificationOperation;
-import com.moviz.lib.comunication.plus.holder.PUserHolder;
 import com.moviz.lib.utils.ParcelableMessage;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class BLEBinder extends DeviceBinder {
+public class BLEBinder extends DeviceBinder implements BLESearchCallback {
     private GattManager mGattManager = null;
-    private BluetoothAdapter mBluetoothAdapter = null;
-    private BluetoothLeScanner mLEScanner;
-    private ScanSettings mSettings;
-    private MyScanCallback mScanCallback = new MyScanCallback();
-    private BluetoothAdapter.LeScanCallback mLeScanCallback =
-            new BluetoothAdapter.LeScanCallback() {
-                @Override
-                public void onLeScan(final BluetoothDevice bd, int rssi,
-                                     byte[] scanRecord) {
-                    onScanResult(bd);
-                }
-            };
+    private BLEDataProcessor dataProcessor = null;
 
-    private Handler mHandler = new Handler(Looper.myLooper());
+    private BLEDeviceSearcher mLEScanner = new BLEDeviceSearcher(this,10000,null);
 
-    private EndDiscoveryRunnable endDiscovery = new EndDiscoveryRunnable();
 
-    private class EndDiscoveryRunnable implements Runnable {
-        public BLEDataProcessor getDataProcessor() {
-            return dataProcessor;
-        }
-
-        private BLEDataProcessor dataProcessor = null;
-
-        public void stopDiscovery() {
-            if (Build.VERSION.SDK_INT < 21) {
-                mBluetoothAdapter.stopLeScan(mLeScanCallback);
-            } else {
-                mLEScanner.stopScan(mScanCallback);
-            }
-        }
-
-        @Override
-        public void run() {
-            stopDiscovery();
-            if (dataProcessor!=null) {
-                dataProcessor.postDeviceError(new ParcelableMessage("exm_errr_connectionfailed"));
-                dataProcessor = null;
-            }
-        }
-
-        public void setDataProcessor(BLEDataProcessor wd) {
-            dataProcessor = wd;
-        }
-    };
-
-    private void onScanResult(BluetoothDevice dev) {
-        BLEDataProcessor bldevb = endDiscovery.getDataProcessor();
-        if (bldevb!=null) {
-            if (dev.getAddress().equals(bldevb.getDeviceAddress())) {
-                mHandler.removeCallbacks(endDiscovery);
-                endDiscovery.stopDiscovery();
-                BLEDevice device = (BLEDevice) bldevb.getDevice();
+    @Override
+    public void onScanOk(BluetoothDevice dev, ScanRecord rec) {
+        if (dataProcessor!=null) {
+            if (dev.getAddress().equals(dataProcessor.getDeviceAddress())) {
+                mLEScanner.stopSearch();
+                BLEDevice device = (BLEDevice) dataProcessor.getDevice();
                 long foundOnce = System.currentTimeMillis();
                 device.sendMessage(new DeviceChangeRequestMessage(device.innerDevice(),"tmpfoundonce",foundOnce+""));
                 device.setFoundOnce(foundOnce);
-                onScanResultOK(bldevb);
+                onScanResultOK(dataProcessor);
             }
+        }
+    }
+
+    @Override
+    public void onScanError(int code) {
+        onScanTimeout();
+    }
+
+    @Override
+    public void onScanTimeout() {
+        if (dataProcessor!=null) {
+            dataProcessor.postDeviceError(new ParcelableMessage("exm_errr_connectionfailed"));
+            dataProcessor = null;
         }
     }
 
@@ -162,32 +123,6 @@ public class BLEBinder extends DeviceBinder {
         dp.setCharacteristic(readOnceChar, notifyChar);
     }
 
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private class MyScanCallback extends ScanCallback {
-
-
-        public MyScanCallback() {
-        }
-        @Override
-        public void onScanResult(int callbackType, ScanResult result) {
-            BLEBinder.this.onScanResult(result.getDevice());
-        }
-
-        @Override
-        public void onBatchScanResults(List<ScanResult> results) {
-            for (ScanResult sr : results) {
-                onScanResult(1, sr);
-            }
-        }
-
-        @Override
-        public void onScanFailed(int errorCode) {
-            mHandler.removeCallbacks(endDiscovery);
-            endDiscovery.run();
-        }
-    }
-
     @Override
     public boolean connect(GenericDevice device, PUserHolder us) {
         if (device == null) {
@@ -197,52 +132,17 @@ public class BLEBinder extends DeviceBinder {
         }
         else {
             final BLEDataProcessor bldevb = (BLEDataProcessor) newDp(device);
-            if (mBluetoothAdapter == null) {
-                mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-                if (mBluetoothAdapter != null) {
-                    if (Build.VERSION.SDK_INT >= 21) {
-                        mLEScanner = mBluetoothAdapter.getBluetoothLeScanner();
-                        mSettings = new ScanSettings.Builder()
-                                .setScanMode(ScanSettings.SCAN_MODE_LOW_POWER)
-                                .build();
-                    }
-                } else {
-                    bldevb.postDeviceError(new ParcelableMessage("exm_errr_connectionfailed"));
-                    return false;
-                }
-
-            }
 
             BluetoothState bst = bldevb.getBluetoothState();
             if (bst != BluetoothState.CONNECTING && bst != BluetoothState.CONNECTED) {
                 bldevb.setUser(us);
                 bldevb.setBluetoothState(BluetoothState.CONNECTING);
                 if (((BLEDevice)device).getFoundOnce()==0) {
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (Build.VERSION.SDK_INT < 21) {
-                                if (!mBluetoothAdapter.startLeScan(mLeScanCallback)) {
-                                    bldevb.postDeviceError(new ParcelableMessage("exm_errr_connectionfailed"));
-                                    return;
-                                }
-                            } else {
-                                ArrayList<ScanFilter> filts = new ArrayList<>();
-                                filts.add(new ScanFilter.Builder().setDeviceAddress(bldevb.getDeviceAddress()).build());
-                                mLEScanner.startScan(new ArrayList<ScanFilter>(), mSettings, mScanCallback);
-                            }
-                            endDiscovery.setDataProcessor(bldevb);
-                            mHandler.postDelayed(endDiscovery, 10000);
-                        }
-                    });
+                    dataProcessor = bldevb;
+                    mLEScanner.startSearch(null);
                 }
                 else {
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            onScanResultOK(bldevb);
-                        }
-                    });
+                    onScanResultOK(bldevb);
                 }
                 return true;
             } else

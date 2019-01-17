@@ -6,6 +6,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanFilter;
+import android.bluetooth.le.ScanRecord;
 import android.bluetooth.le.ScanResult;
 import android.bluetooth.le.ScanSettings;
 import android.content.Context;
@@ -28,23 +29,42 @@ import java.util.List;
  * Created by Matteo on 23/10/2016.
  */
 
-public class BLEDeviceSearcher implements DeviceSearcher {
+public class BLEDeviceSearcher implements DeviceSearcher,BLESearchCallback {
+    private final String TAG  = getClass().getSimpleName();
     private Handler mHandler = new Handler();
     private BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     private BluetoothLeScanner mLEScanner;
-    private ScanSettings mSettings;
+    private ScanSettings.Builder mSettings;
     private ScanCallback mScanCallback;
     private ArrayList<PDeviceHolder> resultsList = new ArrayList<>();
     private HashMap<String, Boolean> addrMap = new HashMap<>();
+    private BLESearchCallback searchCallback = this;
+
+    public long getScanTimeout() {
+        return mScanTimeout;
+    }
+
+    public void setScanTimeout(long mScanTimeout) {
+        this.mScanTimeout = mScanTimeout;
+    }
+
+    private long mScanTimeout = 10000;
 
     public BLEDeviceSearcher() {
         if (mBluetoothAdapter != null && Build.VERSION.SDK_INT >= 21) {
             mLEScanner = mBluetoothAdapter.getBluetoothLeScanner();
             mSettings = new ScanSettings.Builder()
-                    .setScanMode(ScanSettings.SCAN_MODE_LOW_POWER)
-                    .build();
+                    .setScanMode(ScanSettings.SCAN_MODE_LOW_POWER);
             mScanCallback = new MyScanCallback();
         }
+    }
+
+    public BLEDeviceSearcher(BLESearchCallback sc, long timeout, ScanSettings.Builder scan) {
+        this();
+        searchCallback = sc;
+        mScanTimeout = timeout;
+        if (scan!=null)
+            mSettings = scan;
     }
 
     private void scanLeDevice(final boolean enable) {
@@ -52,26 +72,27 @@ public class BLEDeviceSearcher implements DeviceSearcher {
             resultsList.clear();
             addrMap.clear();
             if (mBluetoothAdapter != null) {
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (Build.VERSION.SDK_INT < 21) {
-                            mBluetoothAdapter.stopLeScan(mLeScanCallback);
-                        } else {
-                            mLEScanner.stopScan(mScanCallback);
+                if (mScanTimeout>0)
+                    mHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (Build.VERSION.SDK_INT < 21) {
+                                mBluetoothAdapter.stopLeScan(mLeScanCallback);
+                            } else {
+                                mLEScanner.stopScan(mScanCallback);
+                            }
+                            searchCallback.onScanTimeout();
                         }
-                        CA.lbm.sendBroadcast(new Intent(DEVICE_SEARCH_END).putExtra(DEVICE_FOUND, resultsList.toArray(new PDeviceHolder[0])));
-                    }
-                }, 10000);
+                    }, mScanTimeout);
                 if (Build.VERSION.SDK_INT < 21) {
                     if (!mBluetoothAdapter.startLeScan(mLeScanCallback)) {
-                        CA.lbm.sendBroadcast(new Intent(DEVICE_SEARCH_ERROR).putExtra(DEVICE_ERROR_CODE, (Parcelable) new ParcelableMessage("exm_errs_searcherror").put(100)));
+                        searchCallback.onScanError(100);
                     }
                 } else {
-                    mLEScanner.startScan(new ArrayList<ScanFilter>(), mSettings, mScanCallback);
+                    mLEScanner.startScan(new ArrayList<ScanFilter>(), mSettings.build(), mScanCallback);
                 }
             } else
-                CA.lbm.sendBroadcast(new Intent(DEVICE_SEARCH_ERROR).putExtra(DEVICE_ERROR_CODE, (Parcelable) new ParcelableMessage("exm_errs_adapter")));
+                onScanError(-1);
         } else {
             if (Build.VERSION.SDK_INT < 21) {
                 mBluetoothAdapter.stopLeScan(mLeScanCallback);
@@ -81,7 +102,8 @@ public class BLEDeviceSearcher implements DeviceSearcher {
         }
     }
 
-    private void onScanResult(BluetoothDevice bd) {
+    @Override
+    public void onScanOk(BluetoothDevice bd, ScanRecord rec) {
         String addr = bd.getAddress();
         if (!addrMap.containsKey(addr)) {
             resultsList.add(new PDeviceHolder(-1, addr, bd.getName(), "", DeviceType.hrdevice, "", "", true));
@@ -89,13 +111,27 @@ public class BLEDeviceSearcher implements DeviceSearcher {
         }
     }
 
+    @Override
+    public void onScanError(int errorCode) {
+        Log.e(TAG, "onScanError Error Code: " + errorCode);
+        if (errorCode<0)
+            CA.lbm.sendBroadcast(new Intent(DEVICE_SEARCH_ERROR).putExtra(DEVICE_ERROR_CODE, (Parcelable) new ParcelableMessage("exm_errs_adapter")));
+        else
+            CA.lbm.sendBroadcast(new Intent(DEVICE_SEARCH_ERROR).putExtra(DEVICE_ERROR_CODE, (Parcelable) new ParcelableMessage("exm_errs_searcherror").put(errorCode)));
+    }
+
+    @Override
+    public void onScanTimeout() {
+        CA.lbm.sendBroadcast(new Intent(DEVICE_SEARCH_END).putExtra(DEVICE_FOUND, resultsList.toArray(new PDeviceHolder[0])));
+    }
+
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private class MyScanCallback extends ScanCallback {
 
         @Override
         public void onScanResult(int callbackType, ScanResult result) {
-            Log.i("callbackType", String.valueOf(callbackType));
-            BLEDeviceSearcher.this.onScanResult(result.getDevice());
+            Log.i(TAG, "onScanResult "+result.getDevice().getName()+"/"+result.getDevice().getAddress());
+            searchCallback.onScanOk(result.getDevice(),result.getScanRecord());
 
         }
 
@@ -108,8 +144,8 @@ public class BLEDeviceSearcher implements DeviceSearcher {
 
         @Override
         public void onScanFailed(int errorCode) {
-            Log.e("Scan Failed", "Error Code: " + errorCode);
-            CA.lbm.sendBroadcast(new Intent(DEVICE_SEARCH_ERROR).putExtra(DEVICE_ERROR_CODE, (Parcelable) new ParcelableMessage("exm_errs_searcherror").put(errorCode)));
+            Log.i(TAG, "onScanFailed "+errorCode);
+            searchCallback.onScanError(errorCode);
         }
     }
 
@@ -119,7 +155,8 @@ public class BLEDeviceSearcher implements DeviceSearcher {
                 @Override
                 public void onLeScan(final BluetoothDevice bd, int rssi,
                                      byte[] scanRecord) {
-                    onScanResult(bd);
+
+                    searchCallback.onScanOk(bd,null);
                 }
             };
 
