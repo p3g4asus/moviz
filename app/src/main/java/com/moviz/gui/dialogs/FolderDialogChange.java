@@ -3,7 +3,7 @@ package com.moviz.gui.dialogs;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.preference.Preference;
+import android.support.v7.preference.Preference;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 

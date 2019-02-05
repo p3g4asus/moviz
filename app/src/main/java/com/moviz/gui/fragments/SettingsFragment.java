@@ -17,12 +17,13 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
-import android.preference.CheckBoxPreference;
-import android.preference.EditTextPreference;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceManager;
-import android.support.v4.preference.PreferenceFragment;
+import android.support.v7.preference.CheckBoxPreference;
+import android.support.v7.preference.EditTextPreference;
+import android.support.v7.preference.ListPreference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceDialogFragmentCompat;
+import android.support.v7.preference.PreferenceFragmentCompat;
+import android.support.v7.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -35,11 +36,11 @@ import android.widget.RadioButton;
 
 import com.moviz.gui.R;
 import com.moviz.gui.activities.ActivityMain;
-import com.moviz.gui.dialogs.FolderDialogChange;
 import com.moviz.gui.dialogs.MultipleSessionSelectDialog;
 import com.moviz.gui.preference.BindSummaryToValueListener;
 import com.moviz.gui.preference.ConfNamePreference;
 import com.moviz.gui.preference.DBCleanPreference;
+import com.moviz.gui.preference.PreferenceDialogDisplay;
 import com.moviz.gui.util.SessionExporterAction;
 import com.moviz.lib.comunication.DeviceType;
 import com.moviz.lib.comunication.message.BaseMessage;
@@ -77,7 +78,8 @@ import static com.moviz.gui.preference.BindSummaryToValueListener.SUMMARY_LISTEN
 import static com.moviz.gui.preference.BindSummaryToValueListener.SUMMARY_NOTIFY;
 import static com.moviz.lib.comunication.holder.DeviceHolder.CONF_DATA_TERMINATOR;
 
-public class SettingsFragment extends PreferenceFragment implements CommandProcessor {
+public class SettingsFragment extends PreferenceFragmentCompat implements CommandProcessor {
+    private static final String DIALOG_FRAGMENT_TAG = SettingsFragment.class.getName()+".DIALOGFRAGMENT";
     private Context ctx = null;
     private List<PUserHolder> allUsers = null;
     private SharedPreferences sharedPref = null;
@@ -352,8 +354,25 @@ public class SettingsFragment extends PreferenceFragment implements CommandProce
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onDisplayPreferenceDialog(Preference preference) {
+        // check if dialog is already showing
+        if (getFragmentManager().findFragmentByTag(DIALOG_FRAGMENT_TAG) != null) {
+            return;
+        }
+
+        PreferenceDialogFragmentCompat f = null;
+        if (preference instanceof PreferenceDialogDisplay)
+            f = ((PreferenceDialogDisplay) preference).onDisplayPreferenceDialog();
+        else
+            super.onDisplayPreferenceDialog(preference);
+        if (f != null) {
+            f.setTargetFragment(this, 0);
+            f.show(getFragmentManager(), DIALOG_FRAGMENT_TAG);
+        }
+    }
+
+    @Override
+    public void onCreatePreferences(Bundle savedInstanceState,String t) {
         ctx = getActivity().getApplicationContext();
         // Load the preferences from an XML resource
         res = getResources();

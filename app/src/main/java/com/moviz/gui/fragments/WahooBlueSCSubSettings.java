@@ -2,8 +2,8 @@ package com.moviz.gui.fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.Preference;
-import android.preference.PreferenceScreen;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
 
 import com.moviz.gui.R;
 import com.moviz.gui.preference.BindSummaryToValueListener;

@@ -1,10 +1,10 @@
 package com.moviz.gui.preference;
 
 import android.content.SharedPreferences;
-import android.preference.CheckBoxPreference;
-import android.preference.EditTextPreference;
-import android.preference.ListPreference;
-import android.preference.Preference;
+import android.support.v7.preference.CheckBoxPreference;
+import android.support.v7.preference.EditTextPreference;
+import android.support.v7.preference.ListPreference;
+import android.support.v7.preference.Preference;
 
 import com.moviz.gui.R;
 import com.moviz.lib.comunication.plus.holder.PDeviceHolder;

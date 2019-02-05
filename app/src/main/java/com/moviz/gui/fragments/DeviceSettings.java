@@ -1,20 +1,18 @@
 package com.moviz.gui.fragments;
 
-import android.app.Dialog;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Resources;
-import android.preference.CheckBoxPreference;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceManager;
-import android.preference.PreferenceScreen;
-import android.support.v4.preference.PreferenceFragment;
+import android.support.v7.preference.CheckBoxPreference;
+import android.support.v7.preference.ListPreference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceCategory;
+import android.support.v7.preference.PreferenceFragmentCompat;
+import android.support.v7.preference.PreferenceManager;
+import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
-import android.widget.BaseAdapter;
 
 import com.moviz.gui.R;
 import com.moviz.gui.preference.AliasPreference;
@@ -40,7 +38,7 @@ import java.util.regex.Pattern;
 public class DeviceSettings {
     protected SharedPreferences sharedPref;
     protected PreferenceCategory root;
-    protected PreferenceFragment host;
+    protected PreferenceFragmentCompat host;
     DynamicListPreference pBluetooth;
     protected ListPreference pType;
     protected CheckBoxPreference pEnabled;
@@ -55,7 +53,7 @@ public class DeviceSettings {
     protected PDeviceHolder dev = null;
     protected DeviceSubSettings subSettings;
     protected static MySQLiteHelper sqlite;
-    protected PreferenceFragment pf;
+    protected PreferenceFragmentCompat pf;
     protected Context ctx;
     protected BindSummaryToValueListener listener;
     protected CommandManager mBinder;
@@ -169,11 +167,11 @@ public class DeviceSettings {
 
     protected void setRootTitle() {
         String titl = getScreenTitle();
-        Dialog dia = rootScreen.getDialog();
-        if (dia != null)
-            dia.setTitle(titl);
+        //Dialog dia = rootScreen.getDialog();
+        //if (dia != null)
+         //   dia.setTitle(titl);
         rootScreen.setTitle(titl);
-        ((BaseAdapter) pf.getPreferenceScreen().getRootAdapter()).notifyDataSetChanged();
+        //((BaseAdapter) pf.getPreferenceScreen().getRootAdapter()).notifyDataSetChanged();
     }
 
     protected void setupBluetoothList(PDeviceHolder devh, PDeviceHolder[] deviceFound) {
@@ -344,7 +342,7 @@ public class DeviceSettings {
 
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                rootScreen.getDialog().dismiss();
+                //rootScreen.getDialog().dismiss();
                 Editor pEdit = sharedPref.edit();
                 if (subSettings != null)
                     subSettings.removePrefs(rootScreen, pEdit);
@@ -380,7 +378,7 @@ public class DeviceSettings {
         }
     }
 
-    public DeviceSettings restore(PreferenceFragment p, Context ct, BindSummaryToValueListener listen, PDeviceHolder d, String rootkey, CommandManager bnd, CommandProcessor source) {
+    public DeviceSettings restore(PreferenceFragmentCompat p, Context ct, BindSummaryToValueListener listen, PDeviceHolder d, String rootkey, CommandManager bnd, CommandProcessor source) {
         dev = d;
         myId = dev.getId();
         mBinder = bnd;
@@ -462,7 +460,7 @@ public class DeviceSettings {
         return this;
     }
 
-    public static DeviceSettings newDevice(PreferenceFragment pf, Context ctx, BindSummaryToValueListener listener, String rootkey, CommandManager bnd, CommandProcessor source) {
+    public static DeviceSettings newDevice(PreferenceFragmentCompat pf, Context ctx, BindSummaryToValueListener listener, String rootkey, CommandManager bnd, CommandProcessor source) {
         DeviceSettings ds = new DeviceSettings();
         PDeviceHolder d = new PDeviceHolder();
         ds.restore(pf, ctx, listener, d, rootkey, bnd, source);
@@ -490,7 +488,7 @@ public class DeviceSettings {
             return false;
     }
 
-    public static void restoreAll(PreferenceFragment pf, Context ctx, BindSummaryToValueListener listener, String rootkey, List<DeviceSettings> lst, CommandManager bnd, CommandProcessor source) {
+    public static void restoreAll(PreferenceFragmentCompat pf, Context ctx, BindSummaryToValueListener listener, String rootkey, List<DeviceSettings> lst, CommandManager bnd, CommandProcessor source) {
         lst.clear();
         sqlite = MySQLiteHelper.newInstance(null, null);
         pf.getPreferenceScreen().setOrderingAsAdded(true);

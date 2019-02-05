@@ -1,11 +1,9 @@
 package com.moviz.gui.preference;
 
-import android.app.Dialog;
 import android.content.Context;
-import android.preference.ListPreference;
 import android.util.AttributeSet;
 
-public class DynamicListPreference extends ListPreference {
+public class DynamicListPreference extends CustomListPreference {
     public interface DynamicListPreferenceOnClickListener {
         public void onClick(DynamicListPreference preference);
     }
@@ -29,9 +27,8 @@ public class DynamicListPreference extends ListPreference {
     }
 
     public void openList() {
-        Dialog dlg = getDialog();
-        if (dlg!=null)
-            dlg.cancel();
+        if (isDialogOpen())
+            getDialog().cancel();
         super.onClick();
     }
 

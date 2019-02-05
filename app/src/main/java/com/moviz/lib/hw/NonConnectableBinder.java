@@ -3,6 +3,7 @@ package com.moviz.lib.hw;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.le.ScanRecord;
 import android.bluetooth.le.ScanSettings;
+import android.os.Build;
 import android.os.Handler;
 import android.util.Log;
 import android.util.SparseArray;
@@ -57,15 +58,18 @@ public class NonConnectableBinder extends DeviceBinder implements BLESearchCallb
                 bldevb.setUser(us);
                 bldevb.setBluetoothState(BluetoothState.CONNECTING);
                 if (needsStart) {
-                    long st = bldevb.getScanTimeout();
                     if (mLEScanner==null) {
                         mScanBetween = bldevb.mScanBetween;
-                        mLEScanner = new BLEDeviceSearcher(this, st, new ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY).setReportDelay(0));
+                        ScanSettings.Builder sst = new ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY).setReportDelay(0);
+                        if (Build.VERSION.SDK_INT >= 23) {
+                            sst.setMatchMode(ScanSettings.MATCH_MODE_AGGRESSIVE)
+                                    .setNumOfMatches(ScanSettings.MATCH_NUM_MAX_ADVERTISEMENT)
+                                    .setCallbackType(ScanSettings.CALLBACK_TYPE_ALL_MATCHES).setReportDelay(0);
+                        }
+                        mLEScanner = new BLEDeviceSearcher(this, 0,sst);
                     }
                     else {
-                        if (st>mLEScanner.getScanTimeout())
-                            mLEScanner.setScanTimeout(st);
-                        st = bldevb.getScanBetween();
+                        long st = bldevb.getScanBetween();
                         if (st<mScanBetween)
                             mScanBetween = st;
                     }
@@ -86,11 +90,9 @@ public class NonConnectableBinder extends DeviceBinder implements BLESearchCallb
         r = new Runnable() {
             @Override
             public void run() {
-                if (bldevb.timeout())
-                    disconnect(bldevb.mDeviceHolder);
-                else
-                    acquireData(bldevb);
+                disconnect(bldevb.mDeviceHolder);
                 Log.i(TAG,"Timeout detected for "+bldevb.mDeviceHolder);
+                onScanTimeout();
             }
         };
         bldevb.setTimeoutRunnable(r);

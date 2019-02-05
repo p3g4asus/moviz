@@ -3,15 +3,14 @@ package com.moviz.gui.preference;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.os.Bundle;
-import android.preference.EditTextPreference;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public abstract class ValidatedEditTextPreference extends EditTextPreference {
+public abstract class ValidatedEditTextPreference extends CustomEditTextPreference {
     public ValidatedEditTextPreference(Context ctx, AttributeSet attrs,
                                        int defStyle) {
         super(ctx, attrs, defStyle);
@@ -63,8 +62,8 @@ public abstract class ValidatedEditTextPreference extends EditTextPreference {
     }
 
     @Override
-    protected void showDialog(Bundle state) {
-        super.showDialog(state);
+    public void onBindDialogView(View view) {
+        super.onBindDialogView(view);
         EditText et = getEditText();
         et.setInputType(getInputType());
         et.removeTextChangedListener(m_watcher);
@@ -73,7 +72,7 @@ public abstract class ValidatedEditTextPreference extends EditTextPreference {
     }
 
     @Override
-    protected void onDialogClosed(boolean positiveResult) {
+    public void onDialogClosed(boolean positiveResult) {
         super.onDialogClosed(positiveResult);
 
         if (positiveResult) {

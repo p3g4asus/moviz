@@ -4,10 +4,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Resources;
-import android.preference.Preference;
-import android.preference.PreferenceManager;
-import android.preference.PreferenceScreen;
-import android.support.v4.preference.PreferenceFragment;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceManager;
+import android.support.v7.preference.PreferenceScreen;
+import android.support.v7.preference.PreferenceFragmentCompat;
 
 import com.moviz.gui.preference.BindSummaryToValueListener;
 import com.moviz.lib.comunication.plus.holder.PDeviceHolder;
@@ -20,12 +20,12 @@ public abstract class DeviceSubSettings {
     protected long myId;
     protected SharedPreferences sharedPref;
     protected Resources res;
-    protected PreferenceFragment root;
+    protected PreferenceFragmentCompat root;
     protected CommandManager mBinder = null;
     protected CommandProcessor mCommandProcessorSource;
     protected BindSummaryToValueListener listener;
 
-    public void restore(PreferenceFragment pf, Context ctx, BindSummaryToValueListener listen, PreferenceScreen rootScreen, PDeviceHolder d, CommandManager bnd, CommandProcessor source) {
+    public void restore(PreferenceFragmentCompat pf, Context ctx, BindSummaryToValueListener listen, PreferenceScreen rootScreen, PDeviceHolder d, CommandManager bnd, CommandProcessor source) {
         dev = d;
         mBinder = bnd;
         listener = listen;

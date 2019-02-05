@@ -1,10 +1,11 @@
 package com.moviz.gui.preference;
 
 import android.content.Context;
-import android.os.Bundle;
+import android.support.v7.preference.PreferenceDialogFragmentCompat;
 import android.text.InputType;
 import android.text.method.DigitsKeyListener;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.EditText;
 
 import org.json.JSONArray;
@@ -48,8 +49,9 @@ public class GearFactorPreference extends ValidatedEditTextPreference {
     }
 
     @Override
-    protected void showDialog(Bundle state) {
-        super.showDialog(state);
+    public void onBindDialogView(View view) {
+        super.onBindDialogView(view);
+        PreferenceDialogFragmentCompat f = super.onDisplayPreferenceDialog();
         EditText et = getEditText();
         et.setKeyListener(DigitsKeyListener.getInstance("0123456789.,"));
     }
