@@ -26,7 +26,10 @@
             android:title="@string/pref_confselect_title"
             android:persistent="true"></ListPreference>
     </PreferenceCategory>
-
+    <!--<PreferenceScreen
+        android:key="pref_scr_device"
+        android:persistent="false"
+        android:title="" />-->
     <!--
          android:entries="@array/pref_syncConnectionTypes_entries"
         android:entryValues="@array/pref_syncConnectionTypes_values"

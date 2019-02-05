@@ -21,9 +21,11 @@ import android.support.v7.preference.CheckBoxPreference;
 import android.support.v7.preference.EditTextPreference;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceDialogFragmentCompat;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceManager;
+import android.support.v7.preference.PreferenceScreen;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -372,68 +374,95 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Comman
     }
 
     @Override
+    public void onNavigateToScreen(PreferenceScreen preferenceScreen){
+        SettingsFragment applicationPreferencesFragment = new SettingsFragment();
+        Bundle args = new Bundle();
+        args.putString("rootKey", preferenceScreen.getKey());
+        applicationPreferencesFragment.setArguments(args);
+        getFragmentManager()
+                .beginTransaction()
+                .replace(getId(), applicationPreferencesFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
     public void onCreatePreferences(Bundle savedInstanceState,String t) {
+        Bundle b;
+        String key;
         ctx = getActivity().getApplicationContext();
         // Load the preferences from an XML resource
         res = getResources();
-
-        addPreferencesFromResource(R.xml.preferences);
-        pUser = (ListPreference) findPreference("pref_user");
-        pUserSel = (ListPreference) findPreference("pref_db_usel");
-        pDateF = (ListPreference) findPreference("pref_datef");
-        pStatusTemp = (ListPreference) findPreference("pref_temp_status");
-        pWorkTemp = (ListPreference) findPreference("pref_temp_workout");
-        pDirTemp = (Preference) findPreference("pref_temp_dir");
-        pDevAdd = (Preference) findPreference("pref_device_add");
-        pUserAdd = (Preference) findPreference("pref_db_uadd");
-        pUserRem = (Preference) findPreference("pref_db_urem");
-        pUserEdt = (Preference) findPreference("pref_db_uedt");
-        pSessRem = (Preference) findPreference("pref_db_srem");
-        pSessJoi = (Preference) findPreference("pref_db_sjoi");
-        pSessExp = (Preference) findPreference("pref_db_sexp");
-        pSessCle = (DBCleanPreference) findPreference("pref_db_scle");
-        //pSessJoi = (DBJoinPreference)findPreference("pref_db_sjoi");
-        pTcpPort = (EditTextPreference) findPreference("pref_tcpport");
-        pSessionPoints = (EditTextPreference) findPreference("pref_sessionpoints");
-        pConnRetryDelay = (EditTextPreference) findPreference("pref_connretrydelay");
-        pConnRetryNum = (EditTextPreference) findPreference("pref_connretrynum");
-        pUpdateFreq = (EditTextPreference) findPreference("pref_updatefreq");
-        pConfSelect = (ListPreference) findPreference("pref_confselect");
-        pConfDelete = (ListPreference) findPreference("pref_confdelete");
-        pConfSh = (ListPreference) findPreference("pref_confsh");
-        pConfSave = (ConfNamePreference) findPreference("pref_confsave");
-        pScreenOn = (CheckBoxPreference) findPreference("pref_screenon");
-        pDbFold = (Preference) findPreference("pref_dbfold");
         sharedPref = PreferenceManager.getDefaultSharedPreferences(ctx);
-        dateFormat = sharedPref.getString("pref_datef", "dd/MM/yy");
         prefEditor = sharedPref.edit();
         mPCList = new MyPListener(sharedPref);
-        setupConfSelectList();
-        setupFolderDbSearch();
-        setupDateFormat();
-        setupUserList();
-        setupSessionList();
-        setupTemplateList("status", pStatusTemp);
-        setupTemplateList("workout", pWorkTemp);
-        setupFolderTemplateSearch();
-        DeviceSettings.restoreAll(this, getActivity(), mPCList, "pref_cat_device", deviceSettings, mBinder, this);
-        mPCList.addPreference(pUser, null, new MyPListener.CallInfo(SUMMARY_LISTENER_NOTIFY));
-        mPCList.addPreference(pUserSel, null, new MyPListener.CallInfo(BindSummaryToValueListener.SUMMARY_LISTENER));
-        mPCList.addPreference(pDbFold, null, new MyPListener.CallInfo(SUMMARY_NOTIFY));
-        mPCList.addPreference(pDateF, null, new MyPListener.CallInfo(BindSummaryToValueListener.SUMMARY_LISTENER_NOTIFY));
-        mPCList.addPreference(pStatusTemp, null, new MyPListener.CallInfo(SUMMARY_LISTENER));
-        mPCList.addPreference(pWorkTemp, null, new MyPListener.CallInfo(SUMMARY_LISTENER));
-        mPCList.addPreference(pDirTemp, null, new MyPListener.CallInfo(SUMMARY));
-        mPCList.addPreference(pTcpPort, null, new MyPListener.CallInfo(SUMMARY));
-        mPCList.addPreference(pSessionPoints, null, new MyPListener.CallInfo(SUMMARY));
-        mPCList.addPreference(pConnRetryDelay, null, new MyPListener.CallInfo(SUMMARY_NOTIFY));
-        mPCList.addPreference(pConnRetryNum, null, new MyPListener.CallInfo(SUMMARY_NOTIFY));
-        mPCList.addPreference(pUpdateFreq, null, new MyPListener.CallInfo(SUMMARY_NOTIFY));
-        mPCList.addPreference(pConfSelect, null, new MyPListener.CallInfo(SUMMARY_NOTIFY));
-        mPCList.addPreference(pConfDelete, null, new MyPListener.CallInfo(LISTENER));
-        mPCList.addPreference(pConfSh, null, new MyPListener.CallInfo(LISTENER));
-        mPCList.addPreference(pConfSave, null, new MyPListener.CallInfo(LISTENER));
-        //bindPreferenceSummaryToValue(pScreenOn);
+        if((b = getArguments()) != null && (key = b.getString("rootKey"))!=null) {
+            long id = Long.parseLong(key.substring(DeviceSettings.SCREEN_KEY.length()));
+            MySQLiteHelper sqlite = MySQLiteHelper.newInstance(null, null);
+            PDeviceHolder d = new PDeviceHolder();
+            d.setId(id);
+            sqlite.getValue(d);
+            //setPreferencesFromResource(R.xml.preferences, DeviceSettings.SCREEN_KEY);
+            DeviceSettings ss = new DeviceSettings().restore(this, getActivity(), mPCList, d, null, mBinder, this);
+            deviceSettings.add(ss);
+            setPreferenceScreen(ss.getPrefereceScreen());
+        }
+        else {
+            setPreferencesFromResource(R.xml.preferences, t);
+            pUser = (ListPreference) findPreference("pref_user");
+            pUserSel = (ListPreference) findPreference("pref_db_usel");
+            pDateF = (ListPreference) findPreference("pref_datef");
+            pStatusTemp = (ListPreference) findPreference("pref_temp_status");
+            pWorkTemp = (ListPreference) findPreference("pref_temp_workout");
+            pDirTemp = (Preference) findPreference("pref_temp_dir");
+            pDevAdd = (Preference) findPreference("pref_device_add");
+            pUserAdd = (Preference) findPreference("pref_db_uadd");
+            pUserRem = (Preference) findPreference("pref_db_urem");
+            pUserEdt = (Preference) findPreference("pref_db_uedt");
+            pSessRem = (Preference) findPreference("pref_db_srem");
+            pSessJoi = (Preference) findPreference("pref_db_sjoi");
+            pSessExp = (Preference) findPreference("pref_db_sexp");
+            pSessCle = (DBCleanPreference) findPreference("pref_db_scle");
+            //pSessJoi = (DBJoinPreference)findPreference("pref_db_sjoi");
+            pTcpPort = (EditTextPreference) findPreference("pref_tcpport");
+            pSessionPoints = (EditTextPreference) findPreference("pref_sessionpoints");
+            pConnRetryDelay = (EditTextPreference) findPreference("pref_connretrydelay");
+            pConnRetryNum = (EditTextPreference) findPreference("pref_connretrynum");
+            pUpdateFreq = (EditTextPreference) findPreference("pref_updatefreq");
+            pConfSelect = (ListPreference) findPreference("pref_confselect");
+            pConfDelete = (ListPreference) findPreference("pref_confdelete");
+            pConfSh = (ListPreference) findPreference("pref_confsh");
+            pConfSave = (ConfNamePreference) findPreference("pref_confsave");
+            pScreenOn = (CheckBoxPreference) findPreference("pref_screenon");
+            pDbFold = (Preference) findPreference("pref_dbfold");
+            dateFormat = sharedPref.getString("pref_datef", "dd/MM/yy");
+            setupConfSelectList();
+            setupFolderDbSearch();
+            setupDateFormat();
+            setupUserList();
+            setupSessionList();
+            setupTemplateList("status", pStatusTemp);
+            setupTemplateList("workout", pWorkTemp);
+            setupFolderTemplateSearch();
+            DeviceSettings.restoreAll(this, getActivity(), mPCList, "pref_cat_device", deviceSettings, mBinder, this);
+            mPCList.addPreference(pUser, null, new MyPListener.CallInfo(SUMMARY_LISTENER_NOTIFY));
+            mPCList.addPreference(pUserSel, null, new MyPListener.CallInfo(BindSummaryToValueListener.SUMMARY_LISTENER));
+            mPCList.addPreference(pDbFold, null, new MyPListener.CallInfo(SUMMARY_NOTIFY));
+            mPCList.addPreference(pDateF, null, new MyPListener.CallInfo(BindSummaryToValueListener.SUMMARY_LISTENER_NOTIFY));
+            mPCList.addPreference(pStatusTemp, null, new MyPListener.CallInfo(SUMMARY_LISTENER));
+            mPCList.addPreference(pWorkTemp, null, new MyPListener.CallInfo(SUMMARY_LISTENER));
+            mPCList.addPreference(pDirTemp, null, new MyPListener.CallInfo(SUMMARY));
+            mPCList.addPreference(pTcpPort, null, new MyPListener.CallInfo(SUMMARY));
+            mPCList.addPreference(pSessionPoints, null, new MyPListener.CallInfo(SUMMARY));
+            mPCList.addPreference(pConnRetryDelay, null, new MyPListener.CallInfo(SUMMARY_NOTIFY));
+            mPCList.addPreference(pConnRetryNum, null, new MyPListener.CallInfo(SUMMARY_NOTIFY));
+            mPCList.addPreference(pUpdateFreq, null, new MyPListener.CallInfo(SUMMARY_NOTIFY));
+            mPCList.addPreference(pConfSelect, null, new MyPListener.CallInfo(SUMMARY_NOTIFY));
+            mPCList.addPreference(pConfDelete, null, new MyPListener.CallInfo(LISTENER));
+            mPCList.addPreference(pConfSh, null, new MyPListener.CallInfo(LISTENER));
+            mPCList.addPreference(pConfSave, null, new MyPListener.CallInfo(LISTENER));
+            //bindPreferenceSummaryToValue(pScreenOn);
+        }
 
     }
 
@@ -522,12 +551,13 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Comman
     }
 
     private void setConfNoNotification(String name) {
-        prefEditor.putString(pConfSelect.getKey(),name);
+        prefEditor.putString("pref_confselect",name);
         mPCList.reflectExternalChangeOnPreference(pConfSelect,name);
     }
 
     private class MyPListener extends BindSummaryToValueListener {
 
+        @Override
         public void notifyChange(CallInfo ci, Preference p, String value) {
             if (p == pUser)
                 manageUserChange(value, mBinder, SettingsFragment.this);
@@ -537,7 +567,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Comman
             } else if (mBinder != null) {
                 String pkey = p.getKey();
 
-                mBinder.postMessage(new DeviceChangedMessage(!pkey.startsWith("pref_devicepriv") ? DeviceChangedMessage.Reason.BECAUSE_DEVICE_CHANGED :
+                mBinder.postMessage(new DeviceChangedMessage(!pkey.startsWith(PDeviceHolder.SUBSETTING_KEY_PREFIX) ? DeviceChangedMessage.Reason.BECAUSE_DEVICE_CHANGED :
                         DeviceChangedMessage.Reason.BECAUSE_DEVICE_CONF_CHANGED, ci.device, pkey, value), SettingsFragment.this);
             }
         }
@@ -594,10 +624,10 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Comman
                 PDeviceHolder d = ci.device;
                 if (
                         d!=null && (
-                        pkey.startsWith("pref_device_enabled") ||
+                        pkey.startsWith(DeviceSettings.ENABLED_KEY) ||
                         (
-                                pkey.startsWith(pkeystart = "pref_devicepriv_" + (devTp = d.getType()).name() + "_" + d.getId() + "_") &&
-                                arrayContains(DeviceTypeMaps.type2confsave.get(devTp), pkey.substring(pkeystart.length()))
+                                pkey.startsWith(pkeystart = PDeviceHolder.getSubSettingKey(d,"")) &&
+                                arrayContains(DeviceTypeMaps.type2confsave.get(d.getType()), pkey.substring(pkeystart.length()))
                         )
                     ))
                     setConfNoNotification(null);
@@ -622,7 +652,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Comman
         return intent;
     }
 
-    private boolean arrayContains(String[] strings, String key) {
+    public static boolean arrayContains(String[] strings, String key) {
         for (String s:strings)
             if (s.equals(key))
                 return true;
@@ -1017,18 +1047,28 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Comman
         } else if (hs2 instanceof DeviceChangedMessage) {
             DeviceChangedMessage dcm = (DeviceChangedMessage) hs2;
             PDeviceHolder devh = dcm.getDev();
-            if (devh == null) {
+            if (devh == null && pStatusTemp!=null) {
                 pStatusTemp.setValue(sharedPref.getString(pStatusTemp.getKey(), ""));
                 pWorkTemp.setValue(sharedPref.getString(pWorkTemp.getKey(), ""));
                 setupTemplateList("status", pStatusTemp);
                 setupTemplateList("workout", pWorkTemp);
             } else {
+                if (dcm.getWhy()== DeviceChangedMessage.Reason.BECAUSE_DEVICE_REMOVED) {
+                    PreferenceCategory cat = (PreferenceCategory) findPreference("pref_device_cat");
+                    if (cat!=null) {
+                        for (DeviceSettings ds : deviceSettings) {
+                            if (ds.getDevice().equals(devh))
+                                cat.removePreference(ds.getPrefereceScreen());
+                        }
+                    }
+                }
+
                 for (DeviceSettings ds : deviceSettings) {
                     if (ds.processExternalDeviceChange(devh))
                         break;
                 }
             }
-        } else if (hs2 instanceof UserSetMessage) {
+        } else if (hs2 instanceof UserSetMessage && pUser!=null) {
             String newv = ((UserSetMessage) hs2).getUser().getId()+"";
             mPCList.addPreference(pUser,null,new BindSummaryToValueListener.CallInfo(SUMMARY));
             pUser.setValue(newv);

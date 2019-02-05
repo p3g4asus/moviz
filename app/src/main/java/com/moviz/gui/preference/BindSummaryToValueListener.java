@@ -116,6 +116,8 @@ public abstract class BindSummaryToValueListener implements Preference.OnPrefere
     }
 
     public void reflectExternalChangeOnPreference(Preference p, Object v) {
+        if (p==null)
+            return;
         CallInfo ci = callMap.get(p);
         int origFlag = 0;
         if (ci!=null) {

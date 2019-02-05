@@ -20,6 +20,11 @@ public class DeviceHolder implements EncDec, Holderable, Comparable<DeviceHolder
     protected boolean enabled = false;
     public static String CONF_DATA_TERMINATOR = "----";
     public static Pattern CONF_DATA_STARTER = Pattern.compile("^@([^ ]+) ([01])$");
+    public static String SUBSETTING_KEY_PREFIX = "pref_devicepriv_";
+
+    public static String getSubSettingKey(DeviceHolder d, String post) {
+        return SUBSETTING_KEY_PREFIX + d.getType().name() + "_" + d.getId() + "_"+post;
+    }
 
     public String getAdditionalSettings() {
         return additionalSettings;
@@ -298,7 +303,7 @@ public class DeviceHolder implements EncDec, Holderable, Comparable<DeviceHolder
 
     public String serializeAdditionalSettings(Map<String, ?> all, boolean prefixAdded) {
         String ser = "";
-        String startswith = prefixAdded ? "pref_devicepriv_" + type.name() + "_" + id + "_" : "";
+        String startswith = prefixAdded ? getSubSettingKey(this,"") : "";
         int lensw = startswith.length();
         for (Map.Entry<String, ?> sett : all.entrySet()) {
             String key = sett.getKey();

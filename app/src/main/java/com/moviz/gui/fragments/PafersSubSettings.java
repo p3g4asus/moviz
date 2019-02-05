@@ -4,11 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.content.res.Resources;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.Preference.OnPreferenceChangeListener;
-import android.support.v7.preference.PreferenceScreen;
 import android.support.v4.app.Fragment;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceScreen;
 import android.util.Log;
 
 import com.moviz.gui.R;
@@ -16,6 +14,7 @@ import com.moviz.gui.dialogs.FileDialog;
 import com.moviz.gui.dialogs.FolderDialogChange;
 import com.moviz.gui.preference.BindSummaryToValueListener;
 import com.moviz.gui.preference.MaxSessionPointsPreference;
+import com.moviz.lib.comunication.plus.holder.PDeviceHolder;
 import com.moviz.lib.program.ProgramParser;
 
 import java.io.File;
@@ -68,7 +67,7 @@ public class PafersSubSettings extends DeviceSubSettings {
                 // TODO Auto-generated method stub
                 final Activity a = root.getActivity();
                 if (a != null) {
-                    File mPath = new File(sharedPref.getString("pref_devicepriv_pafers_" + myId + "_pfold",
+                    File mPath = new File(sharedPref.getString(PDeviceHolder.getSubSettingKey(dev,"pfold"),
                             getDefaultProgramFolder(ctx)));
                     final FileDialog fileDialog = new FileDialog(a, mPath);
                     /*
@@ -107,7 +106,7 @@ public class PafersSubSettings extends DeviceSubSettings {
         Map<String, String> setMap = dev.deserializeAdditionalSettings();
         String currentVF, currentFF;
         pProgramFold = new Preference(ctx);
-        pProgramFold.setKey("pref_devicepriv_pafers_" + myId + "_pfold");
+        pProgramFold.setKey(PDeviceHolder.getSubSettingKey(dev,"pfold"));
         pProgramFold.setTitle(R.string.pref_device_pafers_pfold_title);
         pProgramFold.setPersistent(false);
         currentVF = setMap.get("pfold");
@@ -118,7 +117,7 @@ public class PafersSubSettings extends DeviceSubSettings {
         setupFolderProgramSearch(ctx);
 
         pProgramFile = new Preference(ctx);
-        pProgramFile.setKey("pref_devicepriv_pafers_" + myId + "_pfile");
+        pProgramFile.setKey(PDeviceHolder.getSubSettingKey(dev,"pfile"));
         pProgramFile.setTitle(R.string.pref_device_pafers_pfile_title);
         pProgramFile.setPersistent(false);
 
@@ -133,7 +132,7 @@ public class PafersSubSettings extends DeviceSubSettings {
 
         ci = new BindSummaryToValueListener.CallInfo(BindSummaryToValueListener.SUMMARY_LISTENER_NOTIFY,dev);
         pStartDelay = new MaxSessionPointsPreference(ctx);
-        pStartDelay.setKey("pref_devicepriv_pafers_" + myId + "_startdelay");
+        pStartDelay.setKey(PDeviceHolder.getSubSettingKey(dev,"startdelay"));
         pStartDelay.setTitle(R.string.pref_device_pafers_startdelay_title);
         listener.addPreference(pStartDelay,null,ci);
         currentFF = setMap.get("startdelay");
@@ -168,9 +167,9 @@ public class PafersSubSettings extends DeviceSubSettings {
         } catch (Exception e) {
 
         }
-        pEdit.remove("pref_devicepriv_pafers_" + myId + "_pfold");
-        pEdit.remove("pref_devicepriv_pafers_" + myId + "_pfile");
-        pEdit.remove("pref_devicepriv_pafers_" + myId + "_startdelay");
+        pEdit.remove(PDeviceHolder.getSubSettingKey(dev,"pfold"));
+        pEdit.remove(PDeviceHolder.getSubSettingKey(dev,"pfile"));
+        pEdit.remove(PDeviceHolder.getSubSettingKey(dev,"startdelay"));
         myId = -1;
         dev = null;
     }

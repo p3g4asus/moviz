@@ -36,6 +36,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DeviceSettings {
+    public static String ENABLED_KEY = "pref_device_enabled";
+    public static String SCREEN_KEY = "pref_scr_device";
     protected SharedPreferences sharedPref;
     protected PreferenceCategory root;
     protected PreferenceFragmentCompat host;
@@ -84,7 +86,7 @@ public class DeviceSettings {
                             currentd = devh;
                             if (newenabled != devh.isEnabled()) {
                                 currentd.setEnabled(newenabled);
-                                pEdit.putBoolean(key = "pref_device_enabled" + devh.getId(),newenabled);
+                                pEdit.putBoolean(key = ENABLED_KEY + devh.getId(),newenabled);
                                 Log.v(TAG,"Putting "+key+" "+newenabled);
                                 rv = true;
                                 reason = DeviceChangedMessage.Reason.BECAUSE_DEVICE_CHANGED;
@@ -115,7 +117,7 @@ public class DeviceSettings {
                             additionalS.put(key,value);
                             Log.v(TAG,"Putting "+key+" "+value);
                             pEdit.putString(
-                                    "pref_devicepriv_" + currentd.getType().name() + "_" + currentd.getId() + "_" + key,
+                                    PDeviceHolder.getSubSettingKey(currentd,key),
                                     value);
                             rv = true;
                         }
@@ -330,7 +332,7 @@ public class DeviceSettings {
     }
 
     protected void bluetoothRefresh(PDeviceHolder source, PDeviceHolder[] deviceFound) {
-        if (dev != null && (source.equals(dev) || (dev.getAddress().isEmpty() && dev.getType().equals(source.getType())))) {
+        if (pBluetooth!=null && dev != null && (source.equals(dev) || (dev.getAddress().isEmpty() && dev.getType().equals(source.getType())))) {
             setupBluetoothList(dev, deviceFound);
             onPreferenceChange(pBluetooth, pBluetooth.getValue());
             pBluetooth.openList();
@@ -347,7 +349,9 @@ public class DeviceSettings {
                 if (subSettings != null)
                     subSettings.removePrefs(rootScreen, pEdit);
                 pEdit.commit();
-                deviceCat.removePreference(rootScreen);
+                if (deviceCat!=null)
+                    deviceCat.removePreference(rootScreen);
+
                 removeFromDB();
                 return true;
             }
@@ -390,11 +394,13 @@ public class DeviceSettings {
         listener = listen;
         sharedPref = PreferenceManager.getDefaultSharedPreferences(ctx);
         res = pf.getResources();
-        deviceCat = (PreferenceCategory) pf.findPreference(rootkey);
+        if (rootkey!=null)
+            deviceCat = (PreferenceCategory) pf.findPreference(rootkey);
         rootScreen = pf.getPreferenceManager().createPreferenceScreen(ctx);
         rootScreen.setOrderingAsAdded(true);
-        rootScreen.setKey("pref_scr_device" + myId);
+        rootScreen.setKey(SCREEN_KEY + myId);
         rootScreen.setPersistent(false);
+        //if (deviceCat==null) {
         pBluetooth = new DynamicListPreference(ctx);
         pBluetooth.setKey("pref_device_bluetooth" + myId);
         pBluetooth.setPersistent(false);
@@ -402,7 +408,7 @@ public class DeviceSettings {
         pBluetooth.setTitle(R.string.pref_device_bluetooth_title);
         pBluetooth.setOnClickListner(pBluetoothList);
         setupBluetoothList(dev, null);
-        listener.addPreference(pBluetooth,pBluetooth.getValue(),new BindSummaryToValueListener.CallInfo(BindSummaryToValueListener.SUMMARY_LISTENER_NOTIFY,dev));
+        listener.addPreference(pBluetooth, pBluetooth.getValue(), new BindSummaryToValueListener.CallInfo(BindSummaryToValueListener.SUMMARY_LISTENER_NOTIFY, dev));
 
         pAlias = new AliasPreference(ctx);
         pAlias.setKey("pref_device_alias" + myId);
@@ -410,7 +416,7 @@ public class DeviceSettings {
         pAlias.setDialogTitle(R.string.pref_device_alias_dtitle);
         pAlias.setTitle(R.string.pref_device_alias_title);
         pAlias.setText(dev.getAlias());
-        listener.addPreference(pAlias,pAlias.getText(),new BindSummaryToValueListener.CallInfo(BindSummaryToValueListener.SUMMARY_LISTENER,dev));
+        listener.addPreference(pAlias, pAlias.getText(), new BindSummaryToValueListener.CallInfo(BindSummaryToValueListener.SUMMARY_LISTENER, dev));
 
         pOrderd = new MaxSessionPointsPreference(ctx);
         pOrderd.setKey("pref_device_orderd" + myId);
@@ -418,17 +424,17 @@ public class DeviceSettings {
         pOrderd.setDialogTitle(R.string.pref_device_orderd_dtitle);
         pOrderd.setTitle(R.string.pref_device_orderd_title);
         pOrderd.setText(dev.getOrderd() + "");
-        listener.addPreference(pOrderd,pOrderd.getText(),new BindSummaryToValueListener.CallInfo(BindSummaryToValueListener.SUMMARY_LISTENER_NOTIFY,dev));
+        listener.addPreference(pOrderd, pOrderd.getText(), new BindSummaryToValueListener.CallInfo(BindSummaryToValueListener.SUMMARY_LISTENER_NOTIFY, dev));
 
         pEnabled = new CheckBoxPreference(ctx);
-        pEnabled.setKey("pref_device_enabled" + myId);
+        pEnabled.setKey(ENABLED_KEY + myId);
         pEnabled.setPersistent(false);
         pEnabled.setTitle(R.string.pref_device_enabled_title);
         //pEnabled.setDialogTitle(R.string.pref_device_enabled_dtitle);
         //pEnabled.setEntries(R.array.pref_device_enabled_entries);
         //pEnabled.setEntryValues(R.array.pref_device_enabled_values);
         pEnabled.setChecked(dev.isEnabled());
-        listener.addPreference(pEnabled,pEnabled.isChecked()+"",new BindSummaryToValueListener.CallInfo(BindSummaryToValueListener.SUMMARY_LISTENER_NOTIFY,dev));
+        listener.addPreference(pEnabled, pEnabled.isChecked() + "", new BindSummaryToValueListener.CallInfo(BindSummaryToValueListener.SUMMARY_LISTENER_NOTIFY, dev));
 
         pType = new ListPreference(ctx);
         pType.setKey("pref_device_type" + myId);
@@ -436,7 +442,7 @@ public class DeviceSettings {
         pType.setDialogTitle(R.string.pref_device_type_dtitle);
         pType.setTitle(R.string.pref_device_type_title);
         setupTypesList(dev);
-        listener.addPreference(pType,pType.getValue(),new BindSummaryToValueListener.CallInfo(BindSummaryToValueListener.SUMMARY_LISTENER_NOTIFY,dev));
+        listener.addPreference(pType, pType.getValue(), new BindSummaryToValueListener.CallInfo(BindSummaryToValueListener.SUMMARY_LISTENER_NOTIFY, dev));
 
         pRemove = new Preference(ctx);
         pRemove.setKey("pref_device_remove" + myId);
@@ -455,8 +461,12 @@ public class DeviceSettings {
         //category.setKey("pref_device_cat_remove"+myId);
         //category.addPreference(pRemove);
         //rootScreen.addPreference(category);
+        /*}
+        else*/
+        if (deviceCat!=null)
+            deviceCat.addPreference(rootScreen);
         setRootTitle();
-        deviceCat.addPreference(rootScreen);
+
         return this;
     }
 
@@ -511,4 +521,11 @@ public class DeviceSettings {
     public DeviceSettings() {
     }
 
+    public PreferenceScreen getPrefereceScreen() {
+        return rootScreen;
+    }
+
+    public PDeviceHolder getDevice() {
+        return dev;
+    }
 }

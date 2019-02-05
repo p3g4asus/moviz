@@ -10,6 +10,7 @@ import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.PreferenceFragmentCompat;
 
 import com.moviz.gui.preference.BindSummaryToValueListener;
+import com.moviz.lib.comunication.holder.DeviceHolder;
 import com.moviz.lib.comunication.plus.holder.PDeviceHolder;
 import com.moviz.lib.db.MySQLiteHelper;
 import com.moviz.lib.utils.CommandManager;

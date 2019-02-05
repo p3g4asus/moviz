@@ -10,6 +10,7 @@ import com.moviz.gui.preference.BindSummaryToValueListener;
 import com.moviz.gui.preference.GearFactorPreference;
 import com.moviz.gui.preference.MaxSessionPointsPreference;
 import com.moviz.gui.preference.WheelDiameterPreference;
+import com.moviz.lib.comunication.plus.holder.PDeviceHolder;
 
 import java.util.Map;
 
@@ -27,7 +28,7 @@ public class WahooBlueSCSubSettings extends DeviceSubSettings {
         Map<String, String> setMap = dev.deserializeAdditionalSettings();
         String currentFF;
         pWheelDiam = new WheelDiameterPreference(ctx);
-        pWheelDiam.setKey("pref_devicepriv_" + dev.getType().name() + "_" + myId + "_wheeldiam");
+        pWheelDiam.setKey(PDeviceHolder.getSubSettingKey(dev,"wheeldiam"));
         pWheelDiam.setTitle(R.string.pref_device_wahoobluesc_wheeldiam_title);
         pWheelDiam.setOnPreferenceChangeListener(listener);
         currentFF = setMap.get("wheeldiam");
@@ -39,7 +40,7 @@ public class WahooBlueSCSubSettings extends DeviceSubSettings {
         rootScreen.addPreference(pWheelDiam);
 
         pGearFactor = new GearFactorPreference(ctx);
-        pGearFactor.setKey("pref_devicepriv_" + dev.getType().name() + "_" + myId + "_gearfactor");
+        pGearFactor.setKey(PDeviceHolder.getSubSettingKey(dev,"gearfactor"));
         pGearFactor.setTitle(R.string.pref_device_wahoobluesc_gearfactor_title);
         pGearFactor.setOnPreferenceChangeListener(listener);
         currentFF = setMap.get("gearfactor");
@@ -51,7 +52,7 @@ public class WahooBlueSCSubSettings extends DeviceSubSettings {
         rootScreen.addPreference(pGearFactor);
 
         pCurrentGear = new MaxSessionPointsPreference(ctx);
-        pCurrentGear.setKey("pref_devicepriv_" + dev.getType().name() + "_" + myId + "_currentgear");
+        pCurrentGear.setKey(PDeviceHolder.getSubSettingKey(dev,"currentgear"));
         pCurrentGear.setTitle(R.string.pref_device_wahoobluesc_currentgear_title);
         pCurrentGear.setOnPreferenceChangeListener(listener);
         currentFF = setMap.get("currentgear");
@@ -90,9 +91,9 @@ public class WahooBlueSCSubSettings extends DeviceSubSettings {
             rootScreen.removePreference(pCurrentGear);
         } catch (Exception e) {
         }
-        pEdit.remove("pref_devicepriv_" + dev.getType().name() + "_" + myId + "_gearfactor");
-        pEdit.remove("pref_devicepriv_" + dev.getType().name() + "_" + myId + "_currentgear");
-        pEdit.remove("pref_devicepriv_" + dev.getType().name() + "_" + myId + "_wheeldiam");
+        pEdit.remove(PDeviceHolder.getSubSettingKey(dev,"gearfactor"));
+        pEdit.remove(PDeviceHolder.getSubSettingKey(dev,"currentgear"));
+        pEdit.remove(PDeviceHolder.getSubSettingKey(dev,"wheeldiam"));
         myId = -1;
         dev = null;
     }

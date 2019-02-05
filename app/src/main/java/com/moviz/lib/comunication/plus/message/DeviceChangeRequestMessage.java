@@ -1,5 +1,6 @@
 package com.moviz.lib.comunication.plus.message;
 
+import com.moviz.gui.fragments.DeviceSubSettings;
 import com.moviz.lib.comunication.message.BaseMessage;
 import com.moviz.lib.comunication.plus.holder.PDeviceHolder;
 
@@ -26,7 +27,7 @@ public class DeviceChangeRequestMessage implements BaseMessage {
     }
 
     public static String fullkeyFromKey(String k,PDeviceHolder devh) {
-        return "pref_devicepriv_" + devh.getType().name() + "_" + devh.getId() + "_" + k;
+        return PDeviceHolder.getSubSettingKey(devh,k);
     }
 
     public String getValue() {
