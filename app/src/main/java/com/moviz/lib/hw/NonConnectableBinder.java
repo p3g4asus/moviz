@@ -96,7 +96,7 @@ public class NonConnectableBinder extends DeviceBinder implements BLESearchCallb
             }
         };
         bldevb.setTimeoutRunnable(r);
-        mHandler.postDelayed(r,bldevb.getScanBetween()+mLEScanner.getScanTimeout());
+        mHandler.postDelayed(r,bldevb.getScanBetween()+bldevb.getScanTimeout());
     }
 
     @Override
