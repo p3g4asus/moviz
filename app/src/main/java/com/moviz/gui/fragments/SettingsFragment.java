@@ -381,8 +381,8 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Comman
         applicationPreferencesFragment.setArguments(args);
         getFragmentManager()
                 .beginTransaction()
-                .replace(getId(), applicationPreferencesFragment)
-                .addToBackStack(null)
+                .replace(getId(), applicationPreferencesFragment,preferenceScreen.getKey())
+                .addToBackStack(preferenceScreen.getKey())
                 .commit();
     }
 
@@ -402,10 +402,12 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Comman
             PDeviceHolder d = new PDeviceHolder();
             d.setId(id);
             sqlite.getValue(d);
-            //setPreferencesFromResource(R.xml.preferences, DeviceSettings.SCREEN_KEY);
-            DeviceSettings ss = new DeviceSettings().restore(this, getActivity(), mPCList, d, null, mBinder, this);
-            deviceSettings.add(ss);
-            setPreferenceScreen(ss.getPrefereceScreen());
+            setPreferencesFromResource(R.xml.preferences, DeviceSettings.SCREEN_KEY);
+            Preference pp = findPreference("pref_temp_dir2");
+            Log.d(TAG,"This is pp "+pp);
+            //DeviceSettings ss = new DeviceSettings().restore(this, getActivity(), mPCList, d, null, mBinder, this);
+            //deviceSettings.add(ss);
+            //setPreferenceScreen(ss.getPrefereceScreen());
         }
         else {
             setPreferencesFromResource(R.xml.preferences, t);
