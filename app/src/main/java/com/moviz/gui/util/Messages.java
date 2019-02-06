@@ -32,4 +32,5 @@ public interface Messages {
     String TCPSEND_MESSAGE = "tcpsend";
 
     String EXCEPTION_MESSAGE = "exception";
+    String DEVICESUB_MESSAGE = "devicesub";
 }

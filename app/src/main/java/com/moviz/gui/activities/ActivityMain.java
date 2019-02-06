@@ -341,7 +341,10 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
         @Override
         public void onReceive(Context context, Intent intent) {
             String msg = intent.getAction();
-            if (msg.equals(GoogleFitService.FIT_NOTIFY_INTENT)) {
+            if (msg.equals(Messages.DEVICESUB_MESSAGE)) {
+                mAdapter.setSettingsFragmentTag(intent.getStringExtra(SettingsFragment.SETTINGS_KEY));
+            }
+            else if (msg.equals(GoogleFitService.FIT_NOTIFY_INTENT)) {
                 if (intent.hasExtra(GoogleFitService.FIT_EXTRA_NOTIFY_FAILED_STATUS_CODE) &&
                         intent.hasExtra(GoogleFitService.FIT_EXTRA_NOTIFY_FAILED_STATUS_CODE)) {
                     //Recreate the connection result
@@ -443,7 +446,10 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
     @Override
     public void onBackPressed() {
         int ci = mPager.getCurrentItem();
-        mPager.setCurrentItem(ci > 0 ? ci - 1 : mAdapter.getCount() - 1);
+        if (ci==TAB_SETTINGS_FRAGMENT && mAdapter!=null && mAdapter.getSettingsFragmentTag()!=null)
+            CA.lbm.sendBroadcast(new Intent(Messages.DEVICESUB_MESSAGE));
+        else
+            mPager.setCurrentItem(ci > 0 ? ci - 1 : mAdapter.getCount() - 1);
     }
 
     @Override
@@ -498,6 +504,7 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
             }
             IntentFilter intentf = new IntentFilter();
             intentf.addAction(Messages.EXCEPTION_MESSAGE);
+            intentf.addAction(Messages.DEVICESUB_MESSAGE);
             intentf.addAction(GoogleFitService.FIT_NOTIFY_INTENT);
             CA.lbm.registerReceiver(messageReceiver, intentf);
             CA.lbm.sendBroadcast(new Intent(Messages.CMDGETCONSTATUS_MESSAGE).putExtra("t", lastIbernationTime));
@@ -543,7 +550,7 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
         mAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         mPager.setAdapter(mAdapter);
         //when the page changes in the ViewPager, step the Tabs accordingly
-        mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+        mPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 mTabHost.setSelectedNavigationItem(position);
@@ -775,13 +782,37 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
     }
 
     private class ViewPagerAdapter extends FragmentStatePagerAdapter {
-
+        private String settingsFragmentTag = null;
         int icons[] = {R.drawable.ic_action_workout,
                 R.drawable.ic_action_status,
                 R.drawable.ic_action_plot,
                 R.drawable.ic_action_settings};
 
         FragmentManager fragmentManager;
+        SettingsFragment settingsFragment = new SettingsFragment();
+
+        public String getSettingsFragmentTag() {
+            return settingsFragmentTag;
+        }
+
+
+        @Override
+        public int getItemPosition(Object object)
+        {
+            Bundle b;
+            String s;
+            if (object!=null && object instanceof SettingsFragment && (b = ((SettingsFragment)object).getArguments())!=null && (((s = b.getString(SettingsFragment.SETTINGS_KEY))!=null && settingsFragmentTag==null) ||
+                    (s == null && settingsFragmentTag!=null) || !s.equals(settingsFragmentTag)))
+                return POSITION_NONE;
+            return POSITION_UNCHANGED;
+        }
+
+        public void setSettingsFragmentTag(String settingsFragmentTag) {
+            if (settingsFragmentTag != this.settingsFragmentTag) {
+                this.settingsFragmentTag = settingsFragmentTag;
+                notifyDataSetChanged();
+            }
+        }
 
         public ViewPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -799,7 +830,14 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
                     fragment = new StatusFragment();
                     break;
                 case TAB_SETTINGS_FRAGMENT:
-                    fragment = new SettingsFragment();
+                    if (settingsFragment!=null) {
+                        fragmentManager.beginTransaction().remove(settingsFragment).commit();
+                    }
+                    Bundle b = new Bundle();
+                    b.putString(SettingsFragment.SETTINGS_KEY,settingsFragmentTag);
+                    settingsFragment = new SettingsFragment();
+                    settingsFragment.setArguments(b);
+                    fragment = settingsFragment;
                     break;
                 case TAB_PLOT_FRAGMENT:
                     fragment = new PlotFragment();

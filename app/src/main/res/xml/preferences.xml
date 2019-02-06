@@ -26,7 +26,7 @@
             android:title="@string/pref_confselect_title"
             android:persistent="true"></ListPreference>
     </PreferenceCategory>
-    <PreferenceScreen
+    <!--<PreferenceScreen
         android:key="pref_scr_device"
         android:persistent="false"
         android:title="888888888">
@@ -35,7 +35,7 @@
                 android:key="pref_temp_dir2"
                 android:title="Puppe" />
         </PreferenceCategory>
-    </PreferenceScreen>
+    </PreferenceScreen>-->
     <!--
          android:entries="@array/pref_syncConnectionTypes_entries"
         android:entryValues="@array/pref_syncConnectionTypes_values"

@@ -38,11 +38,13 @@ import android.widget.RadioButton;
 
 import com.moviz.gui.R;
 import com.moviz.gui.activities.ActivityMain;
+import com.moviz.gui.app.CA;
 import com.moviz.gui.dialogs.MultipleSessionSelectDialog;
 import com.moviz.gui.preference.BindSummaryToValueListener;
 import com.moviz.gui.preference.ConfNamePreference;
 import com.moviz.gui.preference.DBCleanPreference;
 import com.moviz.gui.preference.PreferenceDialogDisplay;
+import com.moviz.gui.util.Messages;
 import com.moviz.gui.util.SessionExporterAction;
 import com.moviz.lib.comunication.DeviceType;
 import com.moviz.lib.comunication.message.BaseMessage;
@@ -118,6 +120,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Comman
     private DeviceManagerBinder mBinder;
     private MyPListener mPCList;
     protected final static String TAG = SettingsFragment.class.getSimpleName();
+    public final static String SETTINGS_KEY = "SettingsFragment.SETTINGS_KEY";
 
     private String dateFormat;
 
@@ -375,20 +378,12 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Comman
 
     @Override
     public void onNavigateToScreen(PreferenceScreen preferenceScreen){
-        SettingsFragment applicationPreferencesFragment = new SettingsFragment();
-        Bundle args = new Bundle();
-        args.putString("rootKey", preferenceScreen.getKey());
-        applicationPreferencesFragment.setArguments(args);
-        getFragmentManager()
-                .beginTransaction()
-                .replace(getId(), applicationPreferencesFragment,preferenceScreen.getKey())
-                .addToBackStack(preferenceScreen.getKey())
-                .commit();
+        CA.lbm.sendBroadcast(new Intent(Messages.DEVICESUB_MESSAGE).putExtra(SETTINGS_KEY,preferenceScreen.getKey()));
     }
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState,String t) {
-        Bundle b;
+        Bundle b = getArguments();
         String key;
         ctx = getActivity().getApplicationContext();
         // Load the preferences from an XML resource
@@ -396,18 +391,22 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Comman
         sharedPref = PreferenceManager.getDefaultSharedPreferences(ctx);
         prefEditor = sharedPref.edit();
         mPCList = new MyPListener(sharedPref);
-        if((b = getArguments()) != null && (key = b.getString("rootKey"))!=null) {
-            long id = Long.parseLong(key.substring(DeviceSettings.SCREEN_KEY.length()));
-            MySQLiteHelper sqlite = MySQLiteHelper.newInstance(null, null);
-            PDeviceHolder d = new PDeviceHolder();
-            d.setId(id);
-            sqlite.getValue(d);
-            setPreferencesFromResource(R.xml.preferences, DeviceSettings.SCREEN_KEY);
-            Preference pp = findPreference("pref_temp_dir2");
-            Log.d(TAG,"This is pp "+pp);
-            //DeviceSettings ss = new DeviceSettings().restore(this, getActivity(), mPCList, d, null, mBinder, this);
-            //deviceSettings.add(ss);
-            //setPreferenceScreen(ss.getPrefereceScreen());
+        if(b != null && (key = b.getString(SETTINGS_KEY))!=null) {
+            if (key.startsWith(DeviceSettings.SCREEN_KEY)) {
+                long id = Long.parseLong(key.substring(DeviceSettings.SCREEN_KEY.length()));
+                MySQLiteHelper sqlite = MySQLiteHelper.newInstance(null, null);
+                PDeviceHolder d = new PDeviceHolder();
+                d.setId(id);
+                sqlite.getValue(d);
+                //setPreferencesFromResource(R.xml.preferences, DeviceSettings.SCREEN_KEY);
+                //Preference pp = findPreference("pref_temp_dir2");
+                //Log.d(TAG,"This is pp "+pp);
+                DeviceSettings ss = new DeviceSettings().restore(this, getActivity(), mPCList, d, null, mBinder, this);
+                deviceSettings.add(ss);
+                setPreferenceScreen(ss.getPrefereceScreen());
+            }
+            else
+                setPreferencesFromResource(R.xml.preferences, key);
         }
         else {
             setPreferencesFromResource(R.xml.preferences, t);
