@@ -75,6 +75,12 @@ public class PafersDeviceSimulator implements DeviceSimulator {
         if (!wasinpause && !inPause()) {
             sumTime += (now - lastUpdateTime);
             nUpdates++;
+            if (f.speed<0) {
+                if (f.time==0)
+                    f.speed = 0;
+                else
+                    f.speed = f.distance/((double)f.time/3600.00);
+            }
             sumSpeed += f.speed;
             sumRpm += f.rpm;
             sumWatt += f.watt;

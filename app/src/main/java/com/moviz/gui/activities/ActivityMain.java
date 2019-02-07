@@ -810,8 +810,10 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
 
         public void setSettingsFragmentTag(String settingsFragmentTag) {
             if (settingsFragmentTag != this.settingsFragmentTag) {
-                if (this.settingsFragmentTag!=null && settingsFragment!=null)
+                if (this.settingsFragmentTag!=null && settingsFragment!=null) {
                     settingsFragment.removeCommandProcessor();
+                    fragmentManager.beginTransaction().remove(settingsFragment).commit();
+                }
                 this.settingsFragmentTag = settingsFragmentTag;
 
                 notifyDataSetChanged();
@@ -834,9 +836,9 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
                     fragment = new StatusFragment();
                     break;
                 case TAB_SETTINGS_FRAGMENT:
-                    if (settingsFragment!=null) {
+                    /*if (settingsFragment!=null) {
                         fragmentManager.beginTransaction().remove(settingsFragment).commit();
-                    }
+                    }*/
                     Bundle b = new Bundle();
                     b.putString(SettingsFragment.SETTINGS_KEY, settingsFragmentTag);
                     if (settingsFragmentTag==null)

@@ -60,7 +60,7 @@ public class KeiserM3iDataProcessor extends NonConnectableDataProcessor {
             if ((dist & 32768) != 0)
                 k3.distance = (dist&0x7FFF)/10.0;
             else
-                k3.distance = dist/10.0/1.60934;
+                k3.distance = dist/10.0*1.60934;
             if (minor >= 0x21 && arr.length > (index + 14)) {
                 // Raw Gear Value
                 k3.incline = arr[index + 14];
@@ -69,6 +69,7 @@ public class KeiserM3iDataProcessor extends NonConnectableDataProcessor {
             k3.pulseMn/=10.0;
             k3.rpm/=10;
             k3.rpmMn/=10.0;
+            k3.speed = -1.0;
             performUpdate(k3);
             // Sets broadcast to valid
             return true;

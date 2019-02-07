@@ -113,27 +113,29 @@ public class StatusReceiver implements DeviceListenerPlus {
         //Log.d("DevUpdateSTA", "" + upd+" updN "+upd.getUpdateN());
         int cm = 0;
         PStatusHolder status = statusMap.get(devh);
-        DeviceUpdate lastUpdate = updateMap.get(devh);
-        if (lastUpdate == null || !lastUpdate.equals(upd)) {
-            if (lastUpdate == null || lastUpdate.getUpdateN() != upd.getUpdateN())
-                cm |= MODIFIED_UPDATEN;
-            if (upd != null) {
-                if (lastUpdate == null)
-                    try {
-                        lastUpdate = upd.getClass().newInstance();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                lastUpdate.copyFrom(upd);
+        if (status!=null) {
+            DeviceUpdate lastUpdate = updateMap.get(devh);
+            if (lastUpdate == null || !lastUpdate.equals(upd)) {
+                if (lastUpdate == null || lastUpdate.getUpdateN() != upd.getUpdateN())
+                    cm |= MODIFIED_UPDATEN;
+                if (upd != null) {
+                    if (lastUpdate == null)
+                        try {
+                            lastUpdate = upd.getClass().newInstance();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    lastUpdate.copyFrom(upd);
+                }
+                status.updateN = upd.getUpdateN();
+                cm |= MODIFIED_UPDATE;
             }
-            status.updateN = upd.getUpdateN();
-            cm |= MODIFIED_UPDATE;
+            if ((cm & MODIFIED_UPDATE) != 0)
+                postDeviceUpdate(devh, lastUpdate);
+            if ((cm & MODIFIED_UPDATEN) != 0)
+                postDeviceStatus(devh, status);
+            //Log.d("DevUpdateSTA", "" + upd+" updN "+upd.getUpdateN()+" ccm = "+cm);
         }
-        if ((cm & MODIFIED_UPDATE) != 0)
-            postDeviceUpdate(devh, lastUpdate);
-        if ((cm & MODIFIED_UPDATEN) != 0)
-            postDeviceStatus(devh, status);
-        //Log.d("DevUpdateSTA", "" + upd+" updN "+upd.getUpdateN()+" ccm = "+cm);
     }
 
     @Override
@@ -183,12 +185,14 @@ public class StatusReceiver implements DeviceListenerPlus {
     @Override
     public void onUserSet(GenericDevice dev, PDeviceHolder devh, PUserHolder us) {
         PStatusHolder status = statusMap.get(devh);
-        if (status.session != null) {
-            status.session.setUser(us);
+        if (status!=null) {
+            if (status.session != null) {
+                status.session.setUser(us);
+            }
+            privStatus.lastAction = Messages.USER_MESSAGE;
+            manageFlags(MODIFIED_ACTION);
+            postDeviceStatus(devh, status);
         }
-        privStatus.lastAction = Messages.USER_MESSAGE;
-        manageFlags(MODIFIED_ACTION);
-        postDeviceStatus(devh, status);
 
     }
 
@@ -196,37 +200,43 @@ public class StatusReceiver implements DeviceListenerPlus {
     public void onDeviceDescription(GenericDevice dev, PDeviceHolder devh,
                                     String desc) {
         PStatusHolder status = statusMap.get(devh);
-        String tmp;
-        if (status.session != null) {
-            PDeviceHolder devh2 = (PDeviceHolder) status.session.getDevice();
-            tmp = devh2.getDescription();
-            if (!tmp.equals(devh.getDescription())) {
-                devh.setDescription(tmp);
+        if (status!= null) {
+            String tmp;
+            if (status.session != null) {
+                PDeviceHolder devh2 = (PDeviceHolder) status.session.getDevice();
+                tmp = devh2.getDescription();
+                if (!tmp.equals(devh.getDescription())) {
+                    devh.setDescription(tmp);
+                }
             }
+            privStatus.lastAction = Messages.DEVICEDESCRIPTIONCHANGED_MESSAGE;
+            manageFlags(MODIFIED_ACTION);
+            postDeviceStatus(devh, status);
         }
-        privStatus.lastAction = Messages.DEVICEDESCRIPTIONCHANGED_MESSAGE;
-        manageFlags(MODIFIED_ACTION);
-        postDeviceStatus(devh, status);
     }
 
     @Override
     public void onDeviceStatusChange(GenericDevice dev, PDeviceHolder devh,
                                      PHolderSetter hs) {
         PStatusHolder status = statusMap.get(devh);
-        //Log.i("StatusReceiver","STAT1 "+msg+" - "+devh+" - "+stat);
-        status.newHolder(hs);
-        status.lastStatus = com.moviz.lib.comunication.DeviceStatus.valueOf(hs.get(0).getString());
-        privStatus.lastAction = Messages.STATUSCHANGE_MESSAGE;
-        manageFlags(MODIFIED_ACTION);
-        postDeviceStatus(devh, status);
+        if (status!=null) {
+            //Log.i("StatusReceiver","STAT1 "+msg+" - "+devh+" - "+stat);
+            status.newHolder(hs);
+            status.lastStatus = com.moviz.lib.comunication.DeviceStatus.valueOf(hs.get(0).getString());
+            privStatus.lastAction = Messages.STATUSCHANGE_MESSAGE;
+            manageFlags(MODIFIED_ACTION);
+            postDeviceStatus(devh, status);
+        }
     }
 
     @Override
     public void onDeviceSession(GenericDevice dev, PDeviceHolder devh,
                                 PSessionHolder ses) {
         PStatusHolder status = statusMap.get(devh);
-        status.session = ses;
-        postDeviceStatus(devh, status);
+        if (status!=null) {
+            status.session = ses;
+            postDeviceStatus(devh, status);
+        }
     }
 
     @Override

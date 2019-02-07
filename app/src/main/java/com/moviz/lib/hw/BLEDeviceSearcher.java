@@ -59,6 +59,14 @@ public class BLEDeviceSearcher implements DeviceSearcher,BLESearchCallback {
         }
     }
 
+    public ScanSettings.Builder getSettings() {
+        return mSettings;
+    }
+
+    public void setSettings(ScanSettings.Builder mSettings) {
+        this.mSettings = mSettings;
+    }
+
     public BLEDeviceSearcher(BLESearchCallback sc, long timeout, ScanSettings.Builder scan) {
         this();
         searchCallback = sc==null?this:sc;

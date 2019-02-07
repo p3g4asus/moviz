@@ -10,7 +10,7 @@ public abstract class NonConnectableDataProcessor extends DeviceDataProcessor {
         return mScanTimeout;
     }
 
-    public static int twoByteConcat(byte lower, byte higher)
+    public static int twoByteConcat(int lower, int higher)
     {
         return (higher << 8) | lower;
     }

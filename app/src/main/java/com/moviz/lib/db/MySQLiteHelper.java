@@ -3,11 +3,13 @@ package com.moviz.lib.db;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.util.LongSparseArray;
 
+import com.moviz.gui.app.CA;
 import com.moviz.lib.comunication.DeviceType;
 import com.moviz.lib.comunication.holder.DeviceHolder;
 import com.moviz.lib.comunication.holder.DeviceUpdate;
@@ -524,12 +526,17 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         if (id >= 0) {
             db.update(dbl.getTableName(), cvs[0], "_id=" + id, null);
         } else {
-            int i = 0;
-            for (ContentValues cv : cvs) {
-                id = db.insertWithOnConflict(dbl.getTableName(), null, cv,dbl.getConflictPolicy());
-                if (id >= 0 && i == 0)
-                    dbl.setId(id);
-                i++;
+            try {
+                int i = 0;
+                for (ContentValues cv : cvs) {
+                    id = db.insertWithOnConflict(dbl.getTableName(), null, cv, dbl.getConflictPolicy());
+                    if (id >= 0 && i == 0)
+                        dbl.setId(id);
+                    i++;
+                }
+            } catch (SQLException sqle) {
+                CA.logException(sqle);
+                db.execSQL(dbl.toDBTable());
             }
         }
     }

@@ -296,5 +296,6 @@
     <string name="pref_device_wahoobluesc_gearfactor_title">Whl/Crk</string>
     <string name="pref_device_type_keiserm3i">Keiser M3i</string>
     <string name="auth_ok_restart">Authorization OK. Please restart app</string>
+    <string name="pref_device_m3i_machineid_title">ID Macchina</string>
 
 </resources>

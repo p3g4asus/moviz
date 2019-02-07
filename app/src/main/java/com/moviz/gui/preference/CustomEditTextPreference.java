@@ -114,6 +114,7 @@ public class CustomEditTextPreference extends EditTextPreference implements Pref
         }
         @Override
         public void onDialogClosed(boolean positiveResult) {
+            super.onDialogClosed(positiveResult);
             getCustomizablePreference().onDialogClosed(positiveResult);
         }
         @Override
