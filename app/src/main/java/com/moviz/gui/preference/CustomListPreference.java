@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 package com.moviz.gui.preference;
-import android.support.v7.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Bundle;
-import android.support.v7.preference.PreferenceDialogFragmentCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.ListPreference;
+import android.support.v7.preference.PreferenceDialogFragmentCompat;
 import android.util.AttributeSet;
 import android.view.View;
 public class CustomListPreference extends ListPreference implements PreferenceDialogDisplay {

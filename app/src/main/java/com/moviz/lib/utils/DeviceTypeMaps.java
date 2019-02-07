@@ -1,6 +1,8 @@
 package com.moviz.lib.utils;
 
+import android.bluetooth.le.ScanSettings;
 import android.content.res.Resources;
+import android.os.Build;
 
 import com.moviz.gui.R;
 import com.moviz.gui.fragments.DeviceSubSettings;
@@ -83,9 +85,16 @@ public class DeviceTypeMaps {
         aMap.put(DeviceType.pafers, bds);
         aMap.put(DeviceType.zephyrhxm, bds);
         BLEDeviceSearcher bleds = new BLEDeviceSearcher();
-        aMap.put(DeviceType.keiserm3i, bleds);
         aMap.put(DeviceType.hrdevice, bleds);
         aMap.put(DeviceType.wahoobluesc, new WahooDeviceSearcher());
+        ScanSettings.Builder sst = new ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY).setReportDelay(0);
+        if (Build.VERSION.SDK_INT >= 23) {
+            sst.setMatchMode(ScanSettings.MATCH_MODE_AGGRESSIVE)
+                    .setNumOfMatches(ScanSettings.MATCH_NUM_MAX_ADVERTISEMENT)
+                    .setCallbackType(ScanSettings.CALLBACK_TYPE_ALL_MATCHES).setReportDelay(0);
+        }
+        bleds = new BLEDeviceSearcher(null,10000,sst);
+        aMap.put(DeviceType.keiserm3i, bleds);
         type2search = Collections.unmodifiableMap(aMap);
     }
 

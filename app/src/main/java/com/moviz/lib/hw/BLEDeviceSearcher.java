@@ -61,7 +61,7 @@ public class BLEDeviceSearcher implements DeviceSearcher,BLESearchCallback {
 
     public BLEDeviceSearcher(BLESearchCallback sc, long timeout, ScanSettings.Builder scan) {
         this();
-        searchCallback = sc;
+        searchCallback = sc==null?this:sc;
         mScanTimeout = timeout;
         if (scan!=null)
             mSettings = scan;

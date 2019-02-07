@@ -148,8 +148,12 @@ public class ProgramParser {
     }
 
     public static String extractName(String path) {
-        File fmp = new File(path);
-        return removeExt(fmp.getName());
+        if (path==null)
+            return "";
+        else {
+            File fmp = new File(path);
+            return removeExt(fmp.getName());
+        }
     }
 
     public void parse() throws Exception {

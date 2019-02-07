@@ -789,7 +789,8 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
                 R.drawable.ic_action_settings};
 
         FragmentManager fragmentManager;
-        SettingsFragment settingsFragment = new SettingsFragment();
+        SettingsFragment settingsFragment = null;
+        SettingsFragment nullFragment = new SettingsFragment();
 
         public String getSettingsFragmentTag() {
             return settingsFragmentTag;
@@ -809,7 +810,10 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
 
         public void setSettingsFragmentTag(String settingsFragmentTag) {
             if (settingsFragmentTag != this.settingsFragmentTag) {
+                if (this.settingsFragmentTag!=null && settingsFragment!=null)
+                    settingsFragment.removeCommandProcessor();
                 this.settingsFragmentTag = settingsFragmentTag;
+
                 notifyDataSetChanged();
             }
         }
@@ -834,8 +838,11 @@ public class ActivityMain extends ActionBarActivity implements MaterialTabListen
                         fragmentManager.beginTransaction().remove(settingsFragment).commit();
                     }
                     Bundle b = new Bundle();
-                    b.putString(SettingsFragment.SETTINGS_KEY,settingsFragmentTag);
-                    settingsFragment = new SettingsFragment();
+                    b.putString(SettingsFragment.SETTINGS_KEY, settingsFragmentTag);
+                    if (settingsFragmentTag==null)
+                        settingsFragment = nullFragment;
+                    else
+                        settingsFragment = new SettingsFragment();
                     settingsFragment.setArguments(b);
                     fragment = settingsFragment;
                     break;

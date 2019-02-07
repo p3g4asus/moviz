@@ -121,6 +121,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Comman
     private MyPListener mPCList;
     protected final static String TAG = SettingsFragment.class.getSimpleName();
     public final static String SETTINGS_KEY = "SettingsFragment.SETTINGS_KEY";
+    private String debugTag = null;
 
     private String dateFormat;
 
@@ -392,6 +393,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Comman
         prefEditor = sharedPref.edit();
         mPCList = new MyPListener(sharedPref);
         if(b != null && (key = b.getString(SETTINGS_KEY))!=null) {
+            debugTag = key;
             if (key.startsWith(DeviceSettings.SCREEN_KEY)) {
                 long id = Long.parseLong(key.substring(DeviceSettings.SCREEN_KEY.length()));
                 MySQLiteHelper sqlite = MySQLiteHelper.newInstance(null, null);
@@ -1039,12 +1041,19 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Comman
 
     }
 
+    public void removeCommandProcessor() {
+        if (mBinder!=null)
+            mBinder.removeCommandProcessor(SettingsFragment.this, BluetoothRefreshMesssage.class, DeviceChangedMessage.class, UserSetMessage.class);
+    }
+
     @Override
     public BaseMessage processCommand(BaseMessage hs2) {
         if (hs2 instanceof BluetoothRefreshMesssage) {
-            BluetoothRefreshMesssage brm = (BluetoothRefreshMesssage) hs2;
-            for (DeviceSettings devs : deviceSettings)
-                devs.bluetoothRefresh(brm.getSource(), brm.getDevices());
+            if (debugTag!=null) {
+                BluetoothRefreshMesssage brm = (BluetoothRefreshMesssage) hs2;
+                for (DeviceSettings devs : deviceSettings)
+                    devs.bluetoothRefresh(brm.getSource(), brm.getDevices());
+            }
         } else if (hs2 instanceof DeviceChangedMessage) {
             DeviceChangedMessage dcm = (DeviceChangedMessage) hs2;
             PDeviceHolder devh = dcm.getDev();
@@ -1058,15 +1067,20 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Comman
                     PreferenceCategory cat = (PreferenceCategory) findPreference("pref_device_cat");
                     if (cat!=null) {
                         for (DeviceSettings ds : deviceSettings) {
-                            if (ds.getDevice().equals(devh))
+                            if (ds.getDevice().equals(devh)) {
                                 cat.removePreference(ds.getPrefereceScreen());
+                                deviceSettings.remove(ds);
+                                break;
+                            }
                         }
                     }
+                    CA.lbm.sendBroadcast(new Intent(Messages.DEVICESUB_MESSAGE));
                 }
-
-                for (DeviceSettings ds : deviceSettings) {
-                    if (ds.processExternalDeviceChange(devh))
-                        break;
+                else {
+                    for (DeviceSettings ds : deviceSettings) {
+                        if (ds.processExternalDeviceChange(devh))
+                            break;
+                    }
                 }
             }
         } else if (hs2 instanceof UserSetMessage && pUser!=null) {

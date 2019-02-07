@@ -25,23 +25,34 @@ import android.support.v7.preference.PreferenceDialogFragmentCompat;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.EditText;
+
+import com.moviz.gui.R;
+
 public class CustomEditTextPreference extends EditTextPreference implements PreferenceDialogDisplay {
     private PreferenceDialogFragmentCompat mFragment;
+    private EditText mEditText;
     public CustomEditTextPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+        setDialogLayoutResource(R.layout.edit_text_preference);
     }
     public CustomEditTextPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        setDialogLayoutResource(R.layout.edit_text_preference);
     }
     public CustomEditTextPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+        setDialogLayoutResource(R.layout.edit_text_preference);
     }
     public CustomEditTextPreference(Context context) {
         super(context);
+        setDialogLayoutResource(R.layout.edit_text_preference);
     }
+    public void setEditText(View v) {
+        mEditText = (EditText) v.findViewById(android.R.id.edit);
+    }
+
     public EditText getEditText() {
-        return mFragment != null ? (EditText) mFragment.getDialog().findViewById(android.R.id.edit)
-                : null;
+        return mEditText;
     }
     @Override
     public boolean isDialogOpen() {
@@ -91,7 +102,9 @@ public class CustomEditTextPreference extends EditTextPreference implements Pref
         @Override
         protected void onBindDialogView(View view) {
             super.onBindDialogView(view);
-            getCustomizablePreference().onBindDialogView(view);
+            CustomEditTextPreference p = getCustomizablePreference();
+            p.setEditText(view);
+            p.onBindDialogView(view);
         }
         @Override
         protected void onPrepareDialogBuilder(AlertDialog.Builder builder) {
