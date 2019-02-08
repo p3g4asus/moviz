@@ -1,5 +1,8 @@
 package com.moviz.lib.hw;
 
+import android.bluetooth.le.ScanRecord;
+import android.util.SparseArray;
+
 import com.moviz.lib.comunication.DeviceStatus;
 import com.moviz.lib.comunication.message.BaseMessage;
 import com.moviz.lib.comunication.plus.holder.PDeviceHolder;
@@ -21,6 +24,26 @@ public class KeiserM3iDataProcessor extends NonConnectableDataProcessor {
         super(15000,50);
         for (DeviceInfo.Type tp : infoKeys)
             infoMap.put(tp.toString(), "");
+    }
+
+    public static String getMachineId(ScanRecord rec) {
+        SparseArray<byte[]> sp = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            sp = rec.getManufacturerSpecificData();
+        }
+        byte[] bt = null;
+        if (sp != null && sp.size() > 0)
+            bt = sp.get(sp.keyAt(0));
+        if (bt!=null && bt.length>6) {
+            int index = 0;
+
+            // Moves index past prefix bits (some platforms remove prefix bits from data)
+            if (bt[index] == 2 && bt[index + 1] == 1)
+                index += 2;
+            return ""+((int)bt[index+3]);
+        }
+        else
+            return "";
     }
 
     @Override

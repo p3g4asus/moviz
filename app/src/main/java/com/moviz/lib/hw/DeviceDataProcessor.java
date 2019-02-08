@@ -69,6 +69,7 @@ public abstract class DeviceDataProcessor implements DeviceConnectionListener, C
         ctx = c;
         mDeviceHolder = device;
         mSim = sim;
+        mDeviceName = device.device.getName();
         mAddress = device.getAddress();
         pushSettingsChange();
 

@@ -39,6 +39,16 @@ public class NonConnectableBinder extends DeviceBinder implements BLESearchCallb
         }
     }
 
+    protected BLEDeviceSearcher bulildScanner() {
+        ScanSettings.Builder sst = new ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY).setReportDelay(0);
+        if (Build.VERSION.SDK_INT >= 23) {
+            sst.setMatchMode(ScanSettings.MATCH_MODE_AGGRESSIVE)
+                    .setNumOfMatches(ScanSettings.MATCH_NUM_MAX_ADVERTISEMENT)
+                    .setCallbackType(ScanSettings.CALLBACK_TYPE_ALL_MATCHES).setReportDelay(0);
+        }
+        return new BLEDeviceSearcher(this, 0,sst);
+    }
+
 
 
     @Override
@@ -60,13 +70,7 @@ public class NonConnectableBinder extends DeviceBinder implements BLESearchCallb
                 if (needsStart) {
                     if (mLEScanner==null) {
                         mScanBetween = bldevb.mScanBetween;
-                        ScanSettings.Builder sst = new ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY).setReportDelay(0);
-                        if (Build.VERSION.SDK_INT >= 23) {
-                            sst.setMatchMode(ScanSettings.MATCH_MODE_AGGRESSIVE)
-                                    .setNumOfMatches(ScanSettings.MATCH_NUM_MAX_ADVERTISEMENT)
-                                    .setCallbackType(ScanSettings.CALLBACK_TYPE_ALL_MATCHES).setReportDelay(0);
-                        }
-                        mLEScanner = new BLEDeviceSearcher(this, 0,sst);
+                        mLEScanner = bulildScanner();
                     }
                     else {
                         long st = bldevb.getScanBetween();
@@ -99,9 +103,13 @@ public class NonConnectableBinder extends DeviceBinder implements BLESearchCallb
         mHandler.postDelayed(r,bldevb.getScanBetween()+bldevb.getScanTimeout());
     }
 
+    protected NonConnectableDataProcessor dataProcessorFromDevice(BluetoothDevice dev, ScanRecord rec) {
+        return (NonConnectableDataProcessor)mDevices.get(dev.getAddress());
+    }
+
     @Override
     public void onScanOk(BluetoothDevice dev, ScanRecord rec) {
-        final NonConnectableDataProcessor bldevb = (NonConnectableDataProcessor)mDevices.get(dev.getAddress());
+        final NonConnectableDataProcessor bldevb = dataProcessorFromDevice(dev,rec);
         Log.i(TAG,"onScanOK "+dev.getName()+"/"+dev.getAddress());
         if (bldevb!=null) {
             BluetoothState btst = bldevb.getBluetoothState();

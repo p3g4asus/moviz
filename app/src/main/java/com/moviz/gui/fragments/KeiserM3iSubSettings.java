@@ -13,7 +13,7 @@ import com.moviz.lib.comunication.plus.holder.PDeviceHolder;
 
 import java.util.Map;
 
-public class M3iSubSettings extends DeviceSubSettings {
+public class KeiserM3iSubSettings extends DeviceSubSettings {
     private MachineIDPreference pMachineId;
     @Override
     protected void doRestore(Context ctx, PreferenceScreen rootScreen) {

@@ -1,11 +1,10 @@
 package com.moviz.lib.utils;
 
-import android.bluetooth.le.ScanSettings;
 import android.content.res.Resources;
-import android.os.Build;
 
 import com.moviz.gui.R;
 import com.moviz.gui.fragments.DeviceSubSettings;
+import com.moviz.gui.fragments.KeiserM3iSubSettings;
 import com.moviz.gui.fragments.PafersSubSettings;
 import com.moviz.gui.fragments.WahooBlueSCSubSettings;
 import com.moviz.lib.comunication.plus.holder.PKeiserM3iHolder;
@@ -15,7 +14,9 @@ import com.moviz.lib.hw.BLEDeviceSearcher;
 import com.moviz.lib.hw.BluetoothChatBinder;
 import com.moviz.lib.hw.DeviceBinder;
 import com.moviz.lib.hw.DeviceSearcher;
+import com.moviz.lib.hw.KeiserM3iBinder;
 import com.moviz.lib.hw.KeiserM3iDevice;
+import com.moviz.lib.hw.KeiserM3iDeviceSearcher;
 import com.moviz.lib.hw.NonConnectableBinder;
 import com.moviz.lib.hw.PafersBinder;
 import com.moviz.lib.hw.WahooBlueSCBinder;
@@ -87,14 +88,7 @@ public class DeviceTypeMaps {
         BLEDeviceSearcher bleds = new BLEDeviceSearcher();
         aMap.put(DeviceType.hrdevice, bleds);
         aMap.put(DeviceType.wahoobluesc, new WahooDeviceSearcher());
-        ScanSettings.Builder sst = new ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY).setReportDelay(0);
-        if (Build.VERSION.SDK_INT >= 23) {
-            sst.setMatchMode(ScanSettings.MATCH_MODE_AGGRESSIVE)
-                    .setNumOfMatches(ScanSettings.MATCH_NUM_MAX_ADVERTISEMENT)
-                    .setCallbackType(ScanSettings.CALLBACK_TYPE_ALL_MATCHES).setReportDelay(0);
-        }
-        bleds = new BLEDeviceSearcher(null,10000,sst);
-        aMap.put(DeviceType.keiserm3i, bleds);
+        aMap.put(DeviceType.keiserm3i, new KeiserM3iDeviceSearcher());
         type2search = Collections.unmodifiableMap(aMap);
     }
 
@@ -105,7 +99,7 @@ public class DeviceTypeMaps {
         aMap.put(null, new String[]{"pref_temp_status", "pref_temp_workout", "pref_user"});
         aMap.put(DeviceType.pafers, new String[]{"pfold", "pfile"});
         aMap.put(DeviceType.zephyrhxm, new String[0]);
-        aMap.put(DeviceType.keiserm3i, new String[0]);
+        aMap.put(DeviceType.keiserm3i, new String[] {"machineids"});
         aMap.put(DeviceType.hrdevice, new String[0]);
         aMap.put(DeviceType.wahoobluesc, new String[]{"wheeldiam","gearfactor","currentgear"});
         type2confsave = Collections.unmodifiableMap(aMap);
@@ -143,7 +137,7 @@ public class DeviceTypeMaps {
         aMap.put(DeviceType.wahoobluesc, WahooBlueSCSubSettings.class);
         aMap.put(DeviceType.zephyrhxm, null);
         aMap.put(DeviceType.hrdevice, null);
-        aMap.put(DeviceType.keiserm3i, null);
+        aMap.put(DeviceType.keiserm3i, KeiserM3iSubSettings.class);
         type2settingsclass = Collections.unmodifiableMap(aMap);
     }
 
@@ -176,7 +170,7 @@ public class DeviceTypeMaps {
     static {
         Map<DeviceType, DeviceBinder> aMap = new HashMap<DeviceType, DeviceBinder>();
         aMap.put(DeviceType.pafers, new PafersBinder());
-        aMap.put(DeviceType.keiserm3i, new NonConnectableBinder());
+        aMap.put(DeviceType.keiserm3i, new KeiserM3iBinder());
         aMap.put(DeviceType.zephyrhxm, new BluetoothChatBinder());
         aMap.put(DeviceType.hrdevice, new BLEBinder());
         aMap.put(DeviceType.wahoobluesc, new WahooBlueSCBinder());
