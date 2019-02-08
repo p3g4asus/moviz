@@ -15,7 +15,7 @@ public class KeiserM3iDevice extends GenericDevice {
 
     @Override
     protected Class<? extends DeviceSimulator> getSimulatorClass() {
-        return PafersDeviceSimulator.class;
+        return KeiserM3iDeviceSimulator.class;
     }
 
     @Override

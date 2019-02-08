@@ -4,28 +4,28 @@ import com.moviz.lib.comunication.holder.DeviceUpdate;
 import com.moviz.lib.comunication.plus.holder.PPafersHolder;
 
 public class PafersDeviceSimulator implements DeviceSimulator {
-    private static final int DETECT_PAUSE_THRESHOLD = 2;
-    private static final int FIRST_MOVE_THRESHOLD = 5;
-    private static final int VALID_PULSE_THRESHOLD = 50;
+    protected static final int DETECT_PAUSE_THRESHOLD = 2;
+    protected static final int FIRST_MOVE_THRESHOLD = 5;
+    protected static final int VALID_PULSE_THRESHOLD = 50;
 
-    private long lastUpdateTime;
-    private long sessionStart;
-    private int nUpdates;
-    private int nPulses;
-    private long sumWatt;
-    private long sumTime;
-    private double sumSpeed;
-    private long sumPulse;
-    private long sumRpm;
-    private int firstMove;
-    private short time_o;
-    private short calorie_o;
-    private double distance_o;
-    private short time_old;
-    private short calorie_old;
-    private double distance_old;
+    protected long lastUpdateTime;
+    protected long sessionStart;
+    protected int nUpdates;
+    protected int nPulses;
+    protected long sumWatt;
+    protected long sumTime;
+    protected double sumSpeed;
+    protected long sumPulse;
+    protected long sumRpm;
+    protected int firstMove;
+    protected short time_o;
+    protected short calorie_o;
+    protected double distance_o;
+    protected short time_old;
+    protected short calorie_old;
+    protected double distance_old;
 
-    private int zeroRpm;
+    protected int zeroRpm;
 
     public PafersDeviceSimulator() {
         reset();
@@ -75,12 +75,6 @@ public class PafersDeviceSimulator implements DeviceSimulator {
         if (!wasinpause && !inPause()) {
             sumTime += (now - lastUpdateTime);
             nUpdates++;
-            if (f.speed<0) {
-                if (f.time==0)
-                    f.speed = 0;
-                else
-                    f.speed = f.distance/((double)f.time/3600.00);
-            }
             sumSpeed += f.speed;
             sumRpm += f.rpm;
             sumWatt += f.watt;
