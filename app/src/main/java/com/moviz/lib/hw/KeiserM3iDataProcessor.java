@@ -61,7 +61,8 @@ public class KeiserM3iDataProcessor extends NonConnectableDataProcessor {
             index += 2;
         int mayor = arr[index++];
         int minor = arr[index++];
-        if (mayor==0x06 && arr.length> (index +13)) {
+        int dt;
+        if (mayor==0x06 && arr.length>(index +13) && ((dt = arr[index]&0xFF)==0 || dt>=128 || dt<=227)) {
             if (infoMap.get(DeviceInfo.Type.FIRMWARE_REVISION.toString()).isEmpty()) {
                 infoMap.put(DeviceInfo.Type.DEVICE_NAME.toString(), devh.getName());
                 infoMap.put(DeviceInfo.Type.FIRMWARE_REVISION.toString(), String.format("0x%02X", mayor));

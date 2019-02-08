@@ -30,9 +30,6 @@ public abstract class NonConnectableDataProcessor extends DeviceDataProcessor {
     }
 
     protected long mScanBetween = 500;
-    protected int mMaxTimeouts = 10;
-
-    protected int nErrors = 0;
 
     public NonConnectableDataProcessor() {
         super();
@@ -48,17 +45,8 @@ public abstract class NonConnectableDataProcessor extends DeviceDataProcessor {
         return null;
     }
 
-    public boolean timeout() {
-        nErrors++;
-        if (nErrors>=mMaxTimeouts)
-            return true;
-        else
-            return false;
-    }
-
     @Override
     public boolean onReadData(GenericDevice dev, PDeviceHolder devh, byte[] arr, int length) {
-        nErrors = 0;
         return parseData(dev, devh, arr, length);
     }
 

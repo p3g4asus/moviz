@@ -119,13 +119,13 @@ public class NonConnectableBinder extends DeviceBinder implements BLESearchCallb
                     sp = rec.getManufacturerSpecificData();
                 }
                 byte[] bt = null;
-                if (sp != null && sp.size() > 0)
-                    bt = sp.get(sp.keyAt(0));
-                bldevb.onReadData(bldevb.mDeviceHolder, bldevb.mDeviceHolder.innerDevice(), bt, bt == null ? 0 : bt.length);
+                if (sp != null && sp.size() > 0 && (bt = sp.get(sp.keyAt(0)))!=null && bt.length>0 &&
+                    bldevb.onReadData(bldevb.mDeviceHolder, bldevb.mDeviceHolder.innerDevice(), bt, bt.length)) {
 
-                if (btst == BluetoothState.CONNECTING)
-                    bldevb.setBluetoothState(BluetoothState.CONNECTED);
-                acquireData(bldevb);
+                    if (btst == BluetoothState.CONNECTING)
+                        bldevb.setBluetoothState(BluetoothState.CONNECTED);
+                    acquireData(bldevb);
+                }
             }
         }
     }
