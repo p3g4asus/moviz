@@ -114,13 +114,13 @@ public class NonConnectableBinder extends DeviceBinder implements BLESearchCallb
         if (bldevb!=null) {
             BluetoothState btst = bldevb.getBluetoothState();
             if (btst!=BluetoothState.DISCONNECTING) {
-                SparseArray<byte[]> sp = null;
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                    sp = rec.getManufacturerSpecificData();
-                }
-                byte[] bt = null;
-                if (sp != null && sp.size() > 0 && (bt = sp.get(sp.keyAt(0)))!=null && bt.length>0 &&
-                    bldevb.onReadData(bldevb.mDeviceHolder, bldevb.mDeviceHolder.innerDevice(), bt, bt.length)) {
+                SparseArray<byte[]> sp;
+                byte[] bt;
+
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP &&
+                        (sp = rec.getManufacturerSpecificData()) != null && sp.size() > 0 &&
+                        (bt = sp.get(sp.keyAt(0)))!=null && bt.length>0 &&
+                        bldevb.onReadData(bldevb.mDeviceHolder, bldevb.mDeviceHolder.innerDevice(), bt, bt.length)) {
 
                     if (btst == BluetoothState.CONNECTING)
                         bldevb.setBluetoothState(BluetoothState.CONNECTED);
