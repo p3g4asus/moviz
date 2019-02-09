@@ -11,6 +11,7 @@ import com.moviz.lib.comunication.plus.holder.PPafersHolder;
 import com.wahoofitness.connector.capabilities.DeviceInfo;
 
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class KeiserM3iDataProcessor extends NonConnectableDataProcessor {
     protected static final DeviceInfo.Type[] infoKeys = new DeviceInfo.Type[]{
@@ -20,6 +21,31 @@ public class KeiserM3iDataProcessor extends NonConnectableDataProcessor {
             DeviceInfo.Type.SYSTEM_ID
     };
     private LinkedHashMap<String, String> infoMap = new LinkedHashMap<>();
+    private int buffSize = KeiserM3iDeviceSimulator.DIST_BUFF_SIZE;
+
+    @Override
+    public void onDeviceConnectionFailed(GenericDevice dev, PDeviceHolder devh) {
+        super.onDeviceConnectionFailed(dev, devh);
+        resetcls();
+    }
+
+    @Override
+    public void onDeviceDisconnected(GenericDevice dev, PDeviceHolder devh) {
+        super.onDeviceDisconnected(dev, devh);
+        resetcls();
+    }
+
+    @Override
+    public void onDeviceConnected(GenericDevice dev, PDeviceHolder devh) {
+        super.onDeviceConnected(dev, devh);
+        resetcls();
+    }
+
+    private void resetcls() {
+        ((KeiserM3iDeviceSimulator) mSim).setBuffSize(buffSize);
+        setStatusVar(".buffsize", buffSize);
+    }
+
     public KeiserM3iDataProcessor() {
         super(15000,50);
         for (DeviceInfo.Type tp : infoKeys)
@@ -95,6 +121,17 @@ public class KeiserM3iDataProcessor extends NonConnectableDataProcessor {
         }
 
         return false;
+    }
+
+    @Override
+    public void pushSettingsChange() {
+        Map<String, String> adds = mDeviceHolder.innerDevice().deserializeAdditionalSettings();
+        try {
+            buffSize = Integer.parseInt(adds.get("buffsize"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            buffSize = KeiserM3iDeviceSimulator.DIST_BUFF_SIZE;
+        }
     }
 
     public void performUpdate(PPafersHolder statistic) {

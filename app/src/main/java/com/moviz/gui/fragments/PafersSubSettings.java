@@ -13,7 +13,7 @@ import com.moviz.gui.R;
 import com.moviz.gui.dialogs.FileDialog;
 import com.moviz.gui.dialogs.FolderDialogChange;
 import com.moviz.gui.preference.BindSummaryToValueListener;
-import com.moviz.gui.preference.MaxSessionPointsPreference;
+import com.moviz.gui.preference.IntPreference;
 import com.moviz.lib.comunication.plus.holder.PDeviceHolder;
 import com.moviz.lib.program.ProgramParser;
 
@@ -23,7 +23,7 @@ import java.util.Map;
 public class PafersSubSettings extends DeviceSubSettings {
     private Preference pProgramFold;
     private Preference pProgramFile;
-    private MaxSessionPointsPreference pStartDelay;
+    private IntPreference pStartDelay;
 
     private class ProgramFoldDialogChange extends FolderDialogChange {
 
@@ -103,41 +103,38 @@ public class PafersSubSettings extends DeviceSubSettings {
 
     @Override
     public void doRestore(Context ctx, PreferenceScreen rootScreen) {
-        Map<String, String> setMap = dev.deserializeAdditionalSettings();
-        String currentVF, currentFF;
+        String currentVF;
         pProgramFold = new Preference(ctx);
         pProgramFold.setKey(PDeviceHolder.getSubSettingKey(dev,"pfold"));
         pProgramFold.setTitle(R.string.pref_device_pafers_pfold_title);
         pProgramFold.setPersistent(false);
-        currentVF = setMap.get("pfold");
+        manageDefault(pProgramFold,getDefaultProgramFolder(ctx));
+        currentVF = devSettMap.get("pfold");
+        /*currentVF = setMap.get("pfold");
         BindSummaryToValueListener.CallInfo ci = new BindSummaryToValueListener.CallInfo(BindSummaryToValueListener.SUMMARY_LISTENER_NOTIFY,dev);
         listener.addPreference(pProgramFold,null,ci);
         if (currentVF == null)
-            listener.onPreferenceChange(pProgramFold, currentVF = getDefaultProgramFolder(ctx));
+            listener.onPreferenceChange(pProgramFold, currentVF = getDefaultProgramFolder(ctx));*/
         setupFolderProgramSearch(ctx);
 
         pProgramFile = new Preference(ctx);
         pProgramFile.setKey(PDeviceHolder.getSubSettingKey(dev,"pfile"));
         pProgramFile.setTitle(R.string.pref_device_pafers_pfile_title);
         pProgramFile.setPersistent(false);
-
-        currentFF = setMap.get("pfile");
-        ci = new BindSummaryToValueListener.CallInfo(BindSummaryToValueListener.LISTENER|BindSummaryToValueListener.NOTIFY,dev);
+        manageDefault(pProgramFile,currentVF + "/man1" + ProgramParser.PROGRAMFILE_EXTENSION);
+        currentVF = devSettMap.get("pfile");
+        /*ci = new BindSummaryToValueListener.CallInfo(BindSummaryToValueListener.LISTENER|BindSummaryToValueListener.NOTIFY,dev);
         listener.addPreference(pProgramFile,null,ci);
         if (currentFF == null)
-            listener.onPreferenceChange(pProgramFile, currentFF = currentVF + "/man1" + ProgramParser.PROGRAMFILE_EXTENSION);
-        pProgramFile.setSummary(ProgramParser.extractName(currentFF));
+            listener.onPreferenceChange(pProgramFile, currentFF = currentVF + "/man1" + ProgramParser.PROGRAMFILE_EXTENSION);*/
+        pProgramFile.setSummary(ProgramParser.extractName(currentVF));
 
         setupFileSearch(ctx);
 
-        ci = new BindSummaryToValueListener.CallInfo(BindSummaryToValueListener.SUMMARY_LISTENER_NOTIFY,dev);
-        pStartDelay = new MaxSessionPointsPreference(ctx);
+        pStartDelay = new IntPreference(ctx);
         pStartDelay.setKey(PDeviceHolder.getSubSettingKey(dev,"startdelay"));
         pStartDelay.setTitle(R.string.pref_device_pafers_startdelay_title);
-        listener.addPreference(pStartDelay,null,ci);
-        currentFF = setMap.get("startdelay");
-        if (currentFF == null)
-            listener.onPreferenceChange(pStartDelay, "2000");
+        manageDefault(pStartDelay,"2000");
 
 
         rootScreen.addPreference(pProgramFold);

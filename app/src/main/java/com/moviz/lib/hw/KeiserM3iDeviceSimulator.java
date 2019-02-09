@@ -9,13 +9,25 @@ public class KeiserM3iDeviceSimulator extends PafersDeviceSimulator {
     protected short calorie_o_2 = 0;
     protected double distance_o_2 = 0;
     protected short last_received_time = 0;
-    protected long lastTimeDist = 0;
     protected int dist_buff_size = 0;
     protected int dist_buff_idx = 0;
+    protected int buffSize = DIST_BUFF_SIZE;
     protected double[] dist_buff = new double[DIST_BUFF_SIZE];
     protected long[] dist_buff_time = new long[DIST_BUFF_SIZE];
     protected double dist_acc = 0.0;
     protected double old_dist = -1.0;
+
+    public void setBuffSize(int siz) {
+        if (siz!=buffSize) {
+            this.buffSize = siz;
+            dist_buff = new double[buffSize];
+            dist_buff_time = new long[buffSize];
+            dist_buff_idx = 0;
+            dist_buff_size = 0;
+            dist_acc = 0.0;
+            old_dist = -1.0;
+        }
+    }
 
 
     @Override
@@ -25,11 +37,12 @@ public class KeiserM3iDeviceSimulator extends PafersDeviceSimulator {
         calorie_o_2 = 0;
         distance_o_2 = 0;
         last_received_time = 0;
-        lastTimeDist = 0;
         dist_buff_size = 0;
         dist_buff_idx = 0;
         dist_acc = 0.0;
         old_dist = -1.0;
+        dist_buff = new double[buffSize];
+        dist_buff_time = new long[buffSize];
     }
 
     @Override
@@ -54,8 +67,8 @@ public class KeiserM3iDeviceSimulator extends PafersDeviceSimulator {
         }
         else {
             double acc;
-            if (dist_buff_size == DIST_BUFF_SIZE) {
-                if (dist_buff_idx == DIST_BUFF_SIZE)
+            if (dist_buff_size == buffSize) {
+                if (dist_buff_idx == buffSize)
                     dist_buff_idx = 0;
                 dist_acc -= dist_buff[dist_buff_idx];
                 t = now - dist_buff_time[dist_buff_idx];

@@ -128,27 +128,28 @@
             android:key="pref_screenon"
             android:defaultValue="true"
             android:title="@string/pref_screenon_title" />
-        <com.moviz.gui.preference.TCPPortPreference
+        <com.moviz.gui.preference.IntPreference
+            max="65535"
             android:key="pref_tcpport"
             android:defaultValue="3456"
             android:inputType="number"
             android:title="@string/pref_tcpport_title" />
-        <com.moviz.gui.preference.MaxSessionPointsPreference
+        <com.moviz.gui.preference.IntPreference
             android:key="pref_connretrydelay"
             android:defaultValue="30"
             android:inputType="number"
             android:title="@string/pref_connretrydelay_title" />
-        <com.moviz.gui.preference.MaxSessionPointsPreference
+        <com.moviz.gui.preference.IntPreference
             android:key="pref_connretrynum"
             android:defaultValue="5"
             android:inputType="number"
             android:title="@string/pref_connretrynum_title" />
-        <com.moviz.gui.preference.MaxSessionPointsPreference
+        <com.moviz.gui.preference.IntPreference
             android:key="pref_sessionpoints"
             android:defaultValue="0"
             android:inputType="number"
             android:title="@string/pref_sessionpoints_title" />
-        <com.moviz.gui.preference.MaxSessionPointsPreference
+        <com.moviz.gui.preference.IntPreference
             android:key="pref_updatefreq"
             android:defaultValue="2000"
             android:inputType="number"

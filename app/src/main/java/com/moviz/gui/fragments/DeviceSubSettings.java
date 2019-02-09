@@ -16,6 +16,8 @@ import com.moviz.lib.db.MySQLiteHelper;
 import com.moviz.lib.utils.CommandManager;
 import com.moviz.lib.utils.CommandProcessor;
 
+import java.util.Map;
+
 public abstract class DeviceSubSettings {
     protected PDeviceHolder dev;
     protected long myId;
@@ -25,6 +27,7 @@ public abstract class DeviceSubSettings {
     protected CommandManager mBinder = null;
     protected CommandProcessor mCommandProcessorSource;
     protected BindSummaryToValueListener listener;
+    protected Map<String, String> devSettMap;
 
     public void restore(PreferenceFragmentCompat pf, Context ctx, BindSummaryToValueListener listen, PreferenceScreen rootScreen, PDeviceHolder d, CommandManager bnd, CommandProcessor source) {
         dev = d;
@@ -35,6 +38,7 @@ public abstract class DeviceSubSettings {
         myId = d.getId();
         res = pf.getResources();
         sharedPref = PreferenceManager.getDefaultSharedPreferences(ctx);
+        devSettMap = dev.deserializeAdditionalSettings();
         doRestore(ctx, rootScreen);
     }
 
@@ -46,6 +50,20 @@ public abstract class DeviceSubSettings {
 
     public abstract void processExternalDeviceChange();
     //PHolderSetter packSettings();
+
+    protected void manageDefault(Preference pref, String val) {
+        String pre = DeviceHolder.getSubSettingKey(dev,"");
+        String mapkey = pref.getKey().substring(pre.length());
+
+        String currentFF = devSettMap.get(mapkey);
+        pref.setOnPreferenceChangeListener(listener);
+        BindSummaryToValueListener.CallInfo ci = new BindSummaryToValueListener.CallInfo(BindSummaryToValueListener.SUMMARY_LISTENER_NOTIFY,dev);
+        listener.addPreference(pref,null,ci);
+        if (currentFF == null || currentFF.isEmpty())
+            listener.onPreferenceChange(pref, val);
+        else
+            listener.onPreferenceChange(pref, currentFF);
+    }
 
     protected boolean manageEdit(Preference pref, String val) {
         String keycomp = pref.getKey();

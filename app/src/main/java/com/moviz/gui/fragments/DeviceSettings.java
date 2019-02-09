@@ -18,7 +18,7 @@ import com.moviz.gui.R;
 import com.moviz.gui.preference.AliasPreference;
 import com.moviz.gui.preference.BindSummaryToValueListener;
 import com.moviz.gui.preference.DynamicListPreference;
-import com.moviz.gui.preference.MaxSessionPointsPreference;
+import com.moviz.gui.preference.IntPreference;
 import com.moviz.lib.comunication.DeviceType;
 import com.moviz.lib.comunication.holder.DeviceHolder;
 import com.moviz.lib.comunication.plus.holder.Databasable;
@@ -48,7 +48,7 @@ public class DeviceSettings {
     protected PreferenceCategory deviceCat;
     protected Preference pRemove;
     protected AliasPreference pAlias;
-    protected MaxSessionPointsPreference pOrderd;
+    protected IntPreference pOrderd;
     protected BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     protected Resources res = null;
     protected long myId = -1;
@@ -418,7 +418,7 @@ public class DeviceSettings {
         pAlias.setText(dev.getAlias());
         listener.addPreference(pAlias, pAlias.getText(), new BindSummaryToValueListener.CallInfo(BindSummaryToValueListener.SUMMARY_LISTENER, dev));
 
-        pOrderd = new MaxSessionPointsPreference(ctx);
+        pOrderd = new IntPreference(ctx);
         pOrderd.setKey("pref_device_orderd" + myId);
         pOrderd.setPersistent(false);
         pOrderd.setDialogTitle(R.string.pref_device_orderd_dtitle);

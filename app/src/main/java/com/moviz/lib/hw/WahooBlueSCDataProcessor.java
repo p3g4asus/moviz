@@ -52,6 +52,12 @@ public class WahooBlueSCDataProcessor extends WahooDataProcessor implements Cran
         resetcls();
     }
 
+    @Override
+    public void onDeviceConnected(GenericDevice dev, PDeviceHolder devh) {
+        super.onDeviceConnected(dev, devh);
+        resetcls();
+    }
+
     private void resetcls() {
         ((WahooBlueSCDeviceSimulator) mSim).setUser(mCurrentUser);
         ((WahooBlueSCDeviceSimulator) mSim).setWheelDiam(wheelDiam);
@@ -146,12 +152,6 @@ public class WahooBlueSCDataProcessor extends WahooDataProcessor implements Cran
             DeviceInfo.Type.SERIAL_NUMBER
     };
     private LinkedHashMap<String, String> infoMap = new LinkedHashMap<>();
-
-    @Override
-    public void onDeviceConnected(GenericDevice dev, PDeviceHolder devh) {
-        super.onDeviceConnected(dev, devh);
-        resetcls();
-    }
 
     public WahooBlueSCDataProcessor() {
         for (DeviceInfo.Type tp : infoKeys)

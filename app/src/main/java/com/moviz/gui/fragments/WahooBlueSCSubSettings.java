@@ -8,7 +8,7 @@ import android.support.v7.preference.PreferenceScreen;
 import com.moviz.gui.R;
 import com.moviz.gui.preference.BindSummaryToValueListener;
 import com.moviz.gui.preference.GearFactorPreference;
-import com.moviz.gui.preference.MaxSessionPointsPreference;
+import com.moviz.gui.preference.IntPreference;
 import com.moviz.gui.preference.WheelDiameterPreference;
 import com.moviz.lib.comunication.plus.holder.PDeviceHolder;
 
@@ -21,45 +21,28 @@ import java.util.Map;
 public class WahooBlueSCSubSettings extends DeviceSubSettings {
     private WheelDiameterPreference pWheelDiam;
     private GearFactorPreference pGearFactor;
-    private MaxSessionPointsPreference pCurrentGear;
+    private IntPreference pCurrentGear;
 
     @Override
     public void doRestore(Context ctx, PreferenceScreen rootScreen) {
-        Map<String, String> setMap = dev.deserializeAdditionalSettings();
-        String currentFF;
         pWheelDiam = new WheelDiameterPreference(ctx);
         pWheelDiam.setKey(PDeviceHolder.getSubSettingKey(dev,"wheeldiam"));
         pWheelDiam.setTitle(R.string.pref_device_wahoobluesc_wheeldiam_title);
-        pWheelDiam.setOnPreferenceChangeListener(listener);
-        currentFF = setMap.get("wheeldiam");
-        BindSummaryToValueListener.CallInfo ci = new BindSummaryToValueListener.CallInfo(BindSummaryToValueListener.SUMMARY_LISTENER_NOTIFY,dev);
-        listener.addPreference(pWheelDiam,null,ci);
-        if (currentFF == null)
-            listener.onPreferenceChange(pWheelDiam, "711");
+        manageDefault(pWheelDiam,"711");
 
         rootScreen.addPreference(pWheelDiam);
 
         pGearFactor = new GearFactorPreference(ctx);
         pGearFactor.setKey(PDeviceHolder.getSubSettingKey(dev,"gearfactor"));
         pGearFactor.setTitle(R.string.pref_device_wahoobluesc_gearfactor_title);
-        pGearFactor.setOnPreferenceChangeListener(listener);
-        currentFF = setMap.get("gearfactor");
-        ci = new BindSummaryToValueListener.CallInfo(BindSummaryToValueListener.SUMMARY_LISTENER_NOTIFY,dev);
-        listener.addPreference(pGearFactor,null,ci);
-        if (currentFF == null)
-            listener.onPreferenceChange(pGearFactor, "2.0, 1.8");
+        manageDefault(pGearFactor,"2.0, 1.8");
 
         rootScreen.addPreference(pGearFactor);
 
-        pCurrentGear = new MaxSessionPointsPreference(ctx);
+        pCurrentGear = new IntPreference(ctx);
         pCurrentGear.setKey(PDeviceHolder.getSubSettingKey(dev,"currentgear"));
         pCurrentGear.setTitle(R.string.pref_device_wahoobluesc_currentgear_title);
-        pCurrentGear.setOnPreferenceChangeListener(listener);
-        currentFF = setMap.get("currentgear");
-        ci = new BindSummaryToValueListener.CallInfo(BindSummaryToValueListener.SUMMARY_LISTENER_NOTIFY,dev);
-        listener.addPreference(pCurrentGear,null,ci);
-        if (currentFF == null)
-            listener.onPreferenceChange(pCurrentGear, "0");
+        manageDefault(pCurrentGear,"0");
 
         rootScreen.addPreference(pCurrentGear);
     }
