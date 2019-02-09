@@ -90,10 +90,6 @@ public class KeiserM3iDataProcessor extends NonConnectableDataProcessor {
                 k3.incline = arr[index + 14];
             }
             performUpdate(k3);
-            k3.pulse/=10;
-            k3.pulseMn/=10.0;
-            k3.rpm/=10;
-            k3.rpmMn/=10.0;
             // Sets broadcast to valid
             return true;
         }

@@ -72,7 +72,12 @@ public class KeiserM3iDeviceSimulator extends PafersDeviceSimulator {
                 f.speed = dist_acc / ((double) t / 3600000.00);
             old_dist = realdist;
         }
-        return super.step(du);
+        boolean out =  super.step(du);
+        f.pulse/=10;
+        f.pulseMn/=10.0;
+        f.rpm/=10;
+        f.rpmMn/=10.0;
+        return out;
     }
 
     @Override
