@@ -13,7 +13,7 @@ import java.util.Arrays;
  */
 
 public class WahooBlueSCDeviceSimulator implements DeviceSimulator {
-    private static final int FIRST_MOVE_THRESHOLD = 0;
+    private static final int FIRST_MOVE_THRESHOLD = 4;
     protected final String TAG = getClass().getSimpleName();
     protected double[] gearFactor = new double[]{2.0,1.8};
     protected long wheelDiam = 667;
@@ -46,7 +46,7 @@ public class WahooBlueSCDeviceSimulator implements DeviceSimulator {
         protected int nUpdates;
         protected long sumTime;
         protected double sumSpeed;
-        protected int firstMove;
+        protected int countMove,countStop;
         protected long sensVal_o, sensVal_old;
         protected long wheelDiam = 667;
         protected PUserHolder user = null;
@@ -87,7 +87,7 @@ public class WahooBlueSCDeviceSimulator implements DeviceSimulator {
         private long sessionStart;
 
         public boolean inPause() {
-            return firstMove < FIRST_MOVE_THRESHOLD || System.currentTimeMillis()-lastUpdateTime>=PAUSE_DELAY_DETECT_THRESHOLD;
+            return countMove < FIRST_MOVE_THRESHOLD || System.currentTimeMillis()-lastUpdateTime>=PAUSE_DELAY_DETECT_THRESHOLD;
         }
 
         public IntUpdater() {
@@ -100,7 +100,8 @@ public class WahooBlueSCDeviceSimulator implements DeviceSimulator {
             nUpdates = 0;
             sumTime = 0;
             sumSpeed = 0.0;
-            firstMove = 0;
+            countMove = 0;
+            countStop = FIRST_MOVE_THRESHOLD;
             lastValue = 0;
             sensVal_o = 0;
             sensVal_old = 0;
@@ -121,12 +122,16 @@ public class WahooBlueSCDeviceSimulator implements DeviceSimulator {
             long now = System.currentTimeMillis();
             long diff = now-lastUpdateTime;
             if (sh.sensVal == lastValue || diff>PAUSE_DELAY_DETECT_THRESHOLD) {
-                firstMove = 0;
+                if (countStop < FIRST_MOVE_THRESHOLD)
+                    countStop++;
+                if (countStop==FIRST_MOVE_THRESHOLD)
+                    countMove = 0;
             }
             else {
-                if (firstMove < FIRST_MOVE_THRESHOLD)
-                    firstMove++;
                 wasinpause = inPause();
+                if (countMove < FIRST_MOVE_THRESHOLD)
+                    countMove++;
+                countStop = 0;
             }
             double pconv = sh.sensSpd;
             //sh.sensSpd = convertSensSpd(sh.sensSpd);
