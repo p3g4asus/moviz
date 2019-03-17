@@ -21,13 +21,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Vibrator;
-import android.support.v7.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
@@ -71,7 +71,6 @@ import com.moviz.workers.DeviceManagerService;
 import com.moviz.workers.DeviceManagerService.DeviceManagerBinder;
 import com.moviz.workers.GoogleFitService;
 
-import java.io.File;
 import java.util.GregorianCalendar;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -82,7 +81,7 @@ import it.neokree.materialtabs.MaterialTabListener;
 import no.nordicsemi.android.log.Logger;
 
 
-public class ActivityMain extends ActionBarActivity implements MaterialTabListener, View.OnClickListener, View.OnLongClickListener, CommandProcessor {
+public class ActivityMain extends AppCompatActivity implements MaterialTabListener, View.OnClickListener, View.OnLongClickListener, CommandProcessor {
 
     public final static int TAB_WORKOUT_FRAGMENT = 0;
     public final static int TAB_STATUS_FRAGMENT = 1;

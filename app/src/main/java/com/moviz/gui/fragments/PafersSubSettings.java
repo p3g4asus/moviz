@@ -115,12 +115,14 @@ public class PafersSubSettings extends DeviceSubSettings {
         listener.addPreference(pProgramFold,null,ci);
         if (currentVF == null)
             listener.onPreferenceChange(pProgramFold, currentVF = getDefaultProgramFolder(ctx));*/
-        setupFolderProgramSearch(ctx);
 
         pProgramFile = new Preference(ctx);
         pProgramFile.setKey(PDeviceHolder.getSubSettingKey(dev,"pfile"));
         pProgramFile.setTitle(R.string.pref_device_pafers_pfile_title);
         pProgramFile.setPersistent(false);
+
+        setupFolderProgramSearch(ctx);
+
         manageDefault(pProgramFile,currentVF + "/man1" + ProgramParser.PROGRAMFILE_EXTENSION);
         currentVF = devSettMap.get("pfile");
         /*ci = new BindSummaryToValueListener.CallInfo(BindSummaryToValueListener.LISTENER|BindSummaryToValueListener.NOTIFY,dev);

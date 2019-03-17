@@ -450,11 +450,11 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Comman
             DeviceSettings.restoreAll(this, getActivity(), mPCList, "pref_cat_device", deviceSettings, mBinder, this);
             mPCList.addPreference(pUser, null, new MyPListener.CallInfo(SUMMARY_LISTENER_NOTIFY));
             mPCList.addPreference(pUserSel, null, new MyPListener.CallInfo(BindSummaryToValueListener.SUMMARY_LISTENER));
-            mPCList.addPreference(pDbFold, null, new MyPListener.CallInfo(SUMMARY_NOTIFY));
             mPCList.addPreference(pDateF, null, new MyPListener.CallInfo(BindSummaryToValueListener.SUMMARY_LISTENER_NOTIFY));
             mPCList.addPreference(pStatusTemp, null, new MyPListener.CallInfo(SUMMARY_LISTENER));
             mPCList.addPreference(pWorkTemp, null, new MyPListener.CallInfo(SUMMARY_LISTENER));
             mPCList.addPreference(pDirTemp, null, new MyPListener.CallInfo(SUMMARY));
+            mPCList.addPreference(pDbFold, null, new MyPListener.CallInfo(SUMMARY_NOTIFY));
             mPCList.addPreference(pTcpPort, null, new MyPListener.CallInfo(SUMMARY));
             mPCList.addPreference(pSessionPoints, null, new MyPListener.CallInfo(SUMMARY));
             mPCList.addPreference(pConnRetryDelay, null, new MyPListener.CallInfo(SUMMARY_NOTIFY));
@@ -506,7 +506,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Comman
     private void setupFolderDbSearch() {
         String v = getDefaultDbFolder(ctx);
         String key = pDbFold.getKey();
-        if (sharedPref.getString(key,null)==null)
+        if ((key = sharedPref.getString(key,null))==null || !key.equals(v))
             prefEditor.putString(pDbFold.getKey(), v).commit(); // finally save changes
         File f = new File(v);
         if (!f.exists())
@@ -526,7 +526,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Comman
     private void setupFolderTemplateSearch() {
         String v = getDefaultTempFolder(ctx);
         String key = pDirTemp.getKey();
-        if (sharedPref.getString(key,null)==null)
+        if ((key = sharedPref.getString(key,null))==null || !key.equals(v))
             prefEditor.putString(pDirTemp.getKey(), v).commit(); // finally save changes
         File f = new File(v);
         if (!f.exists())
@@ -1024,8 +1024,11 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Comman
             public boolean onPreferenceClick(Preference preference) {
                 // TODO Auto-generated method stub
                 Activity a = getActivity();
-                if (a != null)
-                    deviceSettings.add(DeviceSettings.newDevice(SettingsFragment.this, a, mPCList, "pref_cat_device", mBinder, SettingsFragment.this));
+                if (a != null) {
+                    DeviceSettings ds = new DeviceSettings();
+                    deviceSettings.add(ds);
+                    ds.newDevice(SettingsFragment.this, a, mPCList, "pref_cat_device", mBinder, SettingsFragment.this);
+                }
                 return true;
             }
         });

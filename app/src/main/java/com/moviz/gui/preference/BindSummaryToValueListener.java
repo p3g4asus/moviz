@@ -27,7 +27,7 @@ public abstract class BindSummaryToValueListener implements Preference.OnPrefere
     protected final SharedPreferences sharedPref;
 
     public CallInfo getCallInfo(Preference pref) {
-        return callMap.get(pref);
+        return callMap.get(pref.getKey());
     }
 
     public static class CallInfo {
@@ -53,7 +53,8 @@ public abstract class BindSummaryToValueListener implements Preference.OnPrefere
             return (callFlag&NOTIFY)!=0;
         }
     }
-    private Map<Preference,CallInfo> callMap = new HashMap<>();
+    private Map<String,CallInfo> callMap = new HashMap<>();
+    private Map<String,Preference> key2Pref = new HashMap<>();
 
     public BindSummaryToValueListener(SharedPreferences prf) {
         sharedPref = prf;
@@ -62,11 +63,18 @@ public abstract class BindSummaryToValueListener implements Preference.OnPrefere
 
     public abstract void notifyChange(CallInfo ci, Preference p, String value);
     public void addPreference(Preference p, String val, CallInfo ci) {
-        callMap.put(p,ci);
-        if (p.getOnPreferenceChangeListener()!=this)
-            p.setOnPreferenceChangeListener(this);
-        if ((ci.callFlag& SUMMARY)!=0) {
-            bindPreferenceSummaryToValue(p,val==null?sharedPref.getString(p.getKey(),""):val);
+        String key = p.getKey();
+        if (key!=null) {
+            callMap.put(key, ci);
+            Preference pOld = key2Pref.get(key);
+            if (pOld != null && pOld.getKey().equals(key) && pOld != p)
+                pOld.setOnPreferenceChangeListener(null);
+            if (p.getOnPreferenceChangeListener() != this)
+                p.setOnPreferenceChangeListener(this);
+            if ((ci.callFlag & SUMMARY) != 0) {
+                bindPreferenceSummaryToValue(p, val == null ? sharedPref.getString(p.getKey(), "") : val);
+            }
+            key2Pref.put(key, p);
         }
     }
 
@@ -100,25 +108,29 @@ public abstract class BindSummaryToValueListener implements Preference.OnPrefere
 
     @Override
     public final boolean onPreferenceChange(Preference p, Object v) {
-        CallInfo ci = callMap.get(p);
-        int cf = ci.callFlag;
-        boolean notify = true;
-        if ((cf&(SUMMARY |SUMMARY_NO_INIT))!=0) {
-            bindPreferenceSummaryToValue(p,v);
+        CallInfo ci = callMap.get(p.getKey());
+        if (ci==null)
+            return false;
+        else {
+            int cf = ci.callFlag;
+            boolean notify = true;
+            if ((cf & (SUMMARY | SUMMARY_NO_INIT)) != 0) {
+                bindPreferenceSummaryToValue(p, v);
+            }
+            if ((cf & LISTENER) != 0) {
+                notify = preferenceChange(ci, p, v);
+            }
+            if (notify && (cf & NOTIFY) != 0) {
+                notifyChange(ci, p, v.toString());
+            }
+            return true;
         }
-        if ((cf& LISTENER)!=0) {
-            notify = preferenceChange(ci,p,v);
-        }
-        if (notify && (cf& NOTIFY)!=0) {
-            notifyChange(ci,p,v.toString());
-        }
-        return true;
     }
 
     public void reflectExternalChangeOnPreference(Preference p, Object v) {
         if (p==null)
             return;
-        CallInfo ci = callMap.get(p);
+        CallInfo ci = callMap.get(p.getKey());
         int origFlag = 0;
         if (ci!=null) {
             origFlag = ci.callFlag;

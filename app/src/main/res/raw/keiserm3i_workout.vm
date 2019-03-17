@@ -1,1 +1,3 @@
+#set($distance2 = "upd_distancer")
+#set($distance1 = "upd_distance")
 #parse("pafers_workout.vm")

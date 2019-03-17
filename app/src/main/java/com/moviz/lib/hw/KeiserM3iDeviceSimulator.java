@@ -1,14 +1,13 @@
 package com.moviz.lib.hw;
 
+import android.util.Log;
+
 import com.moviz.lib.comunication.holder.DeviceUpdate;
 import com.moviz.lib.comunication.plus.holder.PPafersHolder;
 
 public class KeiserM3iDeviceSimulator extends PafersDeviceSimulator {
+    private static String TAG = KeiserM3iDeviceSimulator.class.getSimpleName();
     protected final static int DIST_BUFF_SIZE = 165;
-    protected short time_o_2 = -1;
-    protected short calorie_o_2 = 0;
-    protected double distance_o_2 = 0;
-    protected short last_received_time = 0;
     protected int dist_buff_size = 0;
     protected int dist_buff_idx = 0;
     protected int buffSize = DIST_BUFF_SIZE;
@@ -16,6 +15,13 @@ public class KeiserM3iDeviceSimulator extends PafersDeviceSimulator {
     protected long[] dist_buff_time = new long[DIST_BUFF_SIZE];
     protected double dist_acc = 0.0;
     protected double old_dist = -1.0;
+    protected long timeRms_acc = 0;
+    protected long old_timeRms = 0;
+
+    private int equalTime;
+    private short old_time_orig;
+
+    private static int EQUAL_TIME_THRESHOLD = 4;
 
     public void setBuffSize(int siz) {
         if (siz!=buffSize) {
@@ -26,77 +32,93 @@ public class KeiserM3iDeviceSimulator extends PafersDeviceSimulator {
             dist_buff_size = 0;
             dist_acc = 0.0;
             old_dist = -1.0;
+            timeRms_acc = 0;
+            old_timeRms = 0;
         }
+    }
+
+    @Override
+    protected void detectPause(PPafersHolder f) {
+        if (f.time == old_time_orig) {
+            if (equalTime < EQUAL_TIME_THRESHOLD)
+                equalTime++;
+            Log.v(TAG,"EqualTime "+equalTime);
+        } else {
+            equalTime = 0;
+            old_time_orig = f.time;
+        }
+    }
+
+    @Override
+    public boolean inPause() {
+        return equalTime >= EQUAL_TIME_THRESHOLD || System.currentTimeMillis()-lastUpdateTime>=PAUSE_DELAY_DETECT_THRESHOLD;
     }
 
 
     @Override
     public void reset() {
         super.reset();
-        time_o_2 = -1;
-        calorie_o_2 = 0;
-        distance_o_2 = 0;
-        last_received_time = 0;
+        equalTime = 0;
+        old_time_orig = -1;
         dist_buff_size = 0;
         dist_buff_idx = 0;
         dist_acc = 0.0;
+        timeRms_acc = 0;
         old_dist = -1.0;
+        old_timeRms = 0;
         dist_buff = new double[buffSize];
         dist_buff_time = new long[buffSize];
     }
 
     @Override
-    public boolean step(DeviceUpdate du) {
-        PPafersHolder f = (PPafersHolder) du;
-        long now = System.currentTimeMillis();
-        long t;
+    protected double calcSpeed(PPafersHolder f) {
         double realdist;
-        if (time_o_2>=0) {
-            if (Math.abs(f.time - last_received_time)>20) {
-                time_o = time_o_2;
-                calorie_o = calorie_o_2;
-                distance_o = distance_o_2;
-            }
-            time_o_2 = -1;
-        }
-        last_received_time = f.time;
+        long realtime;
         realdist = f.distance+distance_o;
+        realtime = f.timeRms;
+        //realtime = f.time + time_o;
         if (old_dist<0) {
             old_dist = realdist;
+            old_timeRms = realtime;
+            Log.v(TAG,"Init: old_dist = "+realdist+" old_time = "+realtime);
             f.speed = 0;
         }
         else {
-            double acc;
+            double acc,rem = 0.0;
+            long acc_time,rem_time = 0;
+
             if (dist_buff_size == buffSize) {
                 if (dist_buff_idx == buffSize)
                     dist_buff_idx = 0;
-                dist_acc -= dist_buff[dist_buff_idx];
-                t = now - dist_buff_time[dist_buff_idx];
+                dist_acc -= (rem = dist_buff[dist_buff_idx]);
+                timeRms_acc -= (rem_time = dist_buff_time[dist_buff_idx]);
             } else {
                 dist_buff_size++;
-                t = dist_buff_size==1?0:now - dist_buff_time[0];
             }
-            dist_buff_time[dist_buff_idx] = now;
+            dist_buff_time[dist_buff_idx] = acc_time = realtime - old_timeRms;
             dist_buff[dist_buff_idx++] = acc = realdist-old_dist;
             dist_acc += acc;
-            if (t == 0)
+            timeRms_acc += acc_time;
+            if (timeRms_acc == 0)
                 f.speed = 0;
             else
-                f.speed = dist_acc / ((double) t / 3600000.00);
+                f.speed = dist_acc / ((double) timeRms_acc / 3600000.00);
+            Log.v(TAG,"D = ("+realdist+","+acc+"->"+rem+","+dist_acc+") T = ("+realtime+","+acc_time+"->"+rem_time+","+timeRms_acc+") => "+f.speed);
             old_dist = realdist;
+            old_timeRms = realtime;
         }
+        return f.speed;
+    }
+
+    @Override
+    public boolean step(DeviceUpdate du) {
+        PPafersHolder f = (PPafersHolder) du;
+
         boolean out =  super.step(du);
         f.pulse/=10;
         f.pulseMn/=10.0;
         f.rpm/=10;
         f.rpmMn/=10.0;
         return out;
-    }
-
-    @Override
-    public void setOffsets() {
-        time_o_2 = time_old;
-        calorie_o_2 = calorie_old;
-        distance_o_2 = distance_old;
     }
 }

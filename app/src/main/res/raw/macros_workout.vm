@@ -135,11 +135,17 @@
 		#distance0($D.get("upd_crankdistance") $D.get("upd_distance") $str2)
 	#end
 #end
-#macro(distance $D $str2)
+#macro(distance $D $str2 $f1 $f2)
+    #if (!$f1)
+        #set($f1 = "upd_distancer")
+    #end
+    #if (!$f2)
+        #set($f2 = "upd_distance")
+    #end
 	#if (!$D)
 		#distance0($D $D $str2)
 	#else
-		#distance0($D.get("upd_distancer") $D.get("upd_distance") $str2)
+		#distance0($D.get($f1) $D.get($f2) $str2)
 	#end
 #end
 

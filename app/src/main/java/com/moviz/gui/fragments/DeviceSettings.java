@@ -154,7 +154,7 @@ public class DeviceSettings {
             }
         }
         if (preference == pBluetooth || preference == pType || preference == pEnabled || preference == pAlias || preference == pOrderd) {
-            refreshDB(preference, value);
+            refreshDB(preference, value, false);
             setRootTitle();
             if (preference == pType) {
                 initSubSettings(DeviceType.valueOf(pType.getValue()));
@@ -231,9 +231,9 @@ public class DeviceSettings {
         }
     }
 
-    protected void refreshDB(Preference p, Object value) {
+    protected void refreshDB(Preference p, Object value, boolean addedDb) {
         byte added = -1;
-        if (dev.getId() < 0)
+        if (addedDb)
             added = 1;
         else if (p == null)
             return;
@@ -377,7 +377,7 @@ public class DeviceSettings {
                 subSettings = cl.newInstance();
                 subSettings.restore(pf, ctx, listener, rootScreen, dev, mBinder, mCommandProcessorSource);
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
         }
     }
@@ -470,14 +470,14 @@ public class DeviceSettings {
         return this;
     }
 
-    public static DeviceSettings newDevice(PreferenceFragmentCompat pf, Context ctx, BindSummaryToValueListener listener, String rootkey, CommandManager bnd, CommandProcessor source) {
-        DeviceSettings ds = new DeviceSettings();
+    public DeviceSettings newDevice(PreferenceFragmentCompat pf, Context ctx, BindSummaryToValueListener listener, String rootkey, CommandManager bnd, CommandProcessor source) {
         PDeviceHolder d = new PDeviceHolder();
-        ds.restore(pf, ctx, listener, d, rootkey, bnd, source);
-        ds.refreshDB(null, null);
+        sqlite.newValue(d);
+        restore(pf, ctx, listener, d, rootkey, bnd, source);
+        refreshDB(null, null,true);
         //ds.rootScreen.getDialog().show();
         //pf.getPreferenceScreen().onItemClick(null, null, ds.rootScreen.getOrder(), 0);
-        return ds;
+        return this;
     }
 	
 	/*public void processSettingsRequest() {
