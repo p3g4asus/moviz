@@ -99,6 +99,7 @@ public class PafersDeviceSimulator implements DeviceSimulator {
         }
         else {
             fillTimeRFields(f,now);
+            calcSpeed(f);
         }
         if (nPulses > 0)
             f.pulseMn = (double) sumPulse / (double) nPulses;
