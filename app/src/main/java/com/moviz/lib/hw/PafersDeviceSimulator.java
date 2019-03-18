@@ -68,7 +68,7 @@ public class PafersDeviceSimulator implements DeviceSimulator {
         }
     }
 
-    protected double calcSpeed(PPafersHolder f) {
+    protected double calcSpeed(PPafersHolder f,boolean pause) {
         return f.speed;
     }
 
@@ -89,7 +89,7 @@ public class PafersDeviceSimulator implements DeviceSimulator {
             sumTime += (now - lastUpdateTime);
             fillTimeRFields(f,now);
             nUpdates++;
-            sumSpeed += calcSpeed(f);
+            sumSpeed += calcSpeed(f,false);
             sumRpm += f.rpm;
             sumWatt += f.watt;
             if (f.pulse > VALID_PULSE_THRESHOLD) {
@@ -99,7 +99,7 @@ public class PafersDeviceSimulator implements DeviceSimulator {
         }
         else {
             fillTimeRFields(f,now);
-            calcSpeed(f);
+            calcSpeed(f,true);
         }
         if (nPulses > 0)
             f.pulseMn = (double) sumPulse / (double) nPulses;

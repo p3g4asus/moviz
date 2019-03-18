@@ -238,6 +238,7 @@ public class PafersHolder implements EncDec, HeartUpdate {
             hld = cl.newInstance();
             hld.setId(pref + "time");
             hld.sO((short) time);
+            hld.setPrint(new STimePrinter());
             rv.add(hld);
 
             hld = cl.newInstance();

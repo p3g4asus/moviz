@@ -71,11 +71,11 @@ public class KeiserM3iDeviceSimulator extends PafersDeviceSimulator {
     }
 
     @Override
-    protected double calcSpeed(PPafersHolder f) {
+    protected double calcSpeed(PPafersHolder f,boolean pause) {
         double realdist;
         long realtime;
         realdist = f.distance+distance_o;
-        realtime = f.timeRms;
+        realtime = f.time+time_o;
         //realtime = f.time + time_o;
         if (old_dist<0) {
             old_dist = realdist;
@@ -84,28 +84,38 @@ public class KeiserM3iDeviceSimulator extends PafersDeviceSimulator {
             f.speed = 0;
         }
         else {
-            double acc,rem = 0.0;
-            long acc_time,rem_time = 0;
+            String logv;
+            double acc;
+            long acc_time = realtime - old_timeRms;
+            if (!pause && ((acc = realdist - old_dist)>1e-6 || acc_time>0)) {
+                double rem = 0.0;
+                long rem_time = 0;
+                if (dist_buff_size == buffSize) {
+                    if (dist_buff_idx == buffSize)
+                        dist_buff_idx = 0;
+                    dist_acc -= (rem = dist_buff[dist_buff_idx]);
+                    timeRms_acc -= (rem_time = dist_buff_time[dist_buff_idx]);
+                } else {
+                    dist_buff_size++;
+                }
+                dist_buff_time[dist_buff_idx] = acc_time;
+                dist_buff[dist_buff_idx++] = acc;
+                dist_acc += acc;
+                timeRms_acc += acc_time;
 
-            if (dist_buff_size == buffSize) {
-                if (dist_buff_idx == buffSize)
-                    dist_buff_idx = 0;
-                dist_acc -= (rem = dist_buff[dist_buff_idx]);
-                timeRms_acc -= (rem_time = dist_buff_time[dist_buff_idx]);
-            } else {
-                dist_buff_size++;
+
+                old_dist = realdist;
+                old_timeRms = realtime;
+                logv = "D = ("+realdist+","+acc+"->"+rem+","+dist_acc+") T = ("+realtime+","+acc_time+"->"+rem_time+","+timeRms_acc+") => ";
             }
-            dist_buff_time[dist_buff_idx] = acc_time = realtime - old_timeRms;
-            dist_buff[dist_buff_idx++] = acc = realdist-old_dist;
-            dist_acc += acc;
-            timeRms_acc += acc_time;
+            else
+                logv = "P D = ("+realdist+",- -> -,"+dist_acc+") T = ("+realtime+",- -> -,"+timeRms_acc+") => ";
+
             if (timeRms_acc == 0)
                 f.speed = 0;
             else
-                f.speed = dist_acc / ((double) timeRms_acc / 3600000.00);
-            Log.v(TAG,"D = ("+realdist+","+acc+"->"+rem+","+dist_acc+") T = ("+realtime+","+acc_time+"->"+rem_time+","+timeRms_acc+") => "+f.speed);
-            old_dist = realdist;
-            old_timeRms = realtime;
+                f.speed = dist_acc / ((double) timeRms_acc / 3600.00);
+            Log.v(TAG,logv+f.speed);
         }
         return f.speed;
     }
@@ -113,7 +123,8 @@ public class KeiserM3iDeviceSimulator extends PafersDeviceSimulator {
     @Override
     public boolean step(DeviceUpdate du) {
         PPafersHolder f = (PPafersHolder) du;
-
+        if (old_time_orig>f.time)
+            setOffsets();
         boolean out =  super.step(du);
         f.pulse/=10;
         f.pulseMn/=10.0;
