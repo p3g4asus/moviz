@@ -385,7 +385,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Comman
     @Override
     public void onCreatePreferences(Bundle savedInstanceState,String t) {
         Bundle b = getArguments();
-        String key;
+        String key = null;
         ctx = getActivity().getApplicationContext();
         // Load the preferences from an XML resource
         res = getResources();
@@ -407,25 +407,36 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Comman
                 deviceSettings.add(ss);
                 setPreferenceScreen(ss.getPrefereceScreen());
             }
+            else if (key.equals("pref_db")) {
+                setPreferencesFromResource(R.xml.preferences, key);
+                pUserAdd = (Preference) findPreference("pref_db_uadd");
+                pUserRem = (Preference) findPreference("pref_db_urem");
+                pUserEdt = (Preference) findPreference("pref_db_uedt");
+                pSessRem = (Preference) findPreference("pref_db_srem");
+                pSessJoi = (Preference) findPreference("pref_db_sjoi");
+                pSessExp = (Preference) findPreference("pref_db_sexp");
+                pSessCle = (DBCleanPreference) findPreference("pref_db_scle");
+                pUserSel = (ListPreference) findPreference("pref_db_usel");
+                dateFormat = sharedPref.getString("pref_datef", "dd/MM/yy");
+                pDbFold = (Preference) findPreference("pref_dbfold");
+                setupFolderDbSearch();
+                setupUserList();
+                setupSessionList();
+                mPCList.addPreference(pDbFold, null, new MyPListener.CallInfo(SUMMARY_NOTIFY));
+                mPCList.addPreference(pUserSel, null, new MyPListener.CallInfo(BindSummaryToValueListener.SUMMARY_LISTENER));
+            }
             else
                 setPreferencesFromResource(R.xml.preferences, key);
         }
         else {
             setPreferencesFromResource(R.xml.preferences, t);
             pUser = (ListPreference) findPreference("pref_user");
-            pUserSel = (ListPreference) findPreference("pref_db_usel");
             pDateF = (ListPreference) findPreference("pref_datef");
             pStatusTemp = (ListPreference) findPreference("pref_temp_status");
             pWorkTemp = (ListPreference) findPreference("pref_temp_workout");
             pDirTemp = (Preference) findPreference("pref_temp_dir");
             pDevAdd = (Preference) findPreference("pref_device_add");
-            pUserAdd = (Preference) findPreference("pref_db_uadd");
-            pUserRem = (Preference) findPreference("pref_db_urem");
-            pUserEdt = (Preference) findPreference("pref_db_uedt");
-            pSessRem = (Preference) findPreference("pref_db_srem");
-            pSessJoi = (Preference) findPreference("pref_db_sjoi");
-            pSessExp = (Preference) findPreference("pref_db_sexp");
-            pSessCle = (DBCleanPreference) findPreference("pref_db_scle");
+
             //pSessJoi = (DBJoinPreference)findPreference("pref_db_sjoi");
             pTcpPort = (EditTextPreference) findPreference("pref_tcpport");
             pSessionPoints = (EditTextPreference) findPreference("pref_sessionpoints");
@@ -437,24 +448,22 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Comman
             pConfSh = (ListPreference) findPreference("pref_confsh");
             pConfSave = (ConfNamePreference) findPreference("pref_confsave");
             pScreenOn = (CheckBoxPreference) findPreference("pref_screenon");
-            pDbFold = (Preference) findPreference("pref_dbfold");
             dateFormat = sharedPref.getString("pref_datef", "dd/MM/yy");
             setupConfSelectList();
-            setupFolderDbSearch();
             setupDateFormat();
-            setupUserList();
-            setupSessionList();
+            fillUserList();
+            setupDeviceAdd();
             setupTemplateList("status", pStatusTemp);
             setupTemplateList("workout", pWorkTemp);
             setupFolderTemplateSearch();
             DeviceSettings.restoreAll(this, getActivity(), mPCList, "pref_cat_device", deviceSettings, mBinder, this);
             mPCList.addPreference(pUser, null, new MyPListener.CallInfo(SUMMARY_LISTENER_NOTIFY));
-            mPCList.addPreference(pUserSel, null, new MyPListener.CallInfo(BindSummaryToValueListener.SUMMARY_LISTENER));
+
             mPCList.addPreference(pDateF, null, new MyPListener.CallInfo(BindSummaryToValueListener.SUMMARY_LISTENER_NOTIFY));
             mPCList.addPreference(pStatusTemp, null, new MyPListener.CallInfo(SUMMARY_LISTENER));
             mPCList.addPreference(pWorkTemp, null, new MyPListener.CallInfo(SUMMARY_LISTENER));
             mPCList.addPreference(pDirTemp, null, new MyPListener.CallInfo(SUMMARY));
-            mPCList.addPreference(pDbFold, null, new MyPListener.CallInfo(SUMMARY_NOTIFY));
+
             mPCList.addPreference(pTcpPort, null, new MyPListener.CallInfo(SUMMARY));
             mPCList.addPreference(pSessionPoints, null, new MyPListener.CallInfo(SUMMARY));
             mPCList.addPreference(pConnRetryDelay, null, new MyPListener.CallInfo(SUMMARY_NOTIFY));
@@ -749,7 +758,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Comman
 
         public CorrectDateTextWatcher(EditText etx, int wrongColor) {
             super(etx, wrongColor);
-            sdf = new SimpleDateFormat(pDateF.getValue());
+            sdf = new SimpleDateFormat(dateFormat);
         }
 
         public CorrectDateTextWatcher(EditText etx) {
@@ -794,7 +803,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Comman
                     .findViewById(R.id.weightETX);
             final EditText bornETX = (EditText) layout
                     .findViewById(R.id.bornETX);
-            final SimpleDateFormat sdf = new SimpleDateFormat(pDateF.getValue());
+            final SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
             if (user != null) {
                 nameETX.setText(user.getName());
                 if (user.isMale())
@@ -902,7 +911,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Comman
             public boolean onPreferenceClick(Preference preference) {
                 Activity a = getActivity();
                 if (a != null)
-                    new SessionExporterAction(null, null, pDateF.getValue(), sharedPref.getString("pref_dbfold", getDefaultDbFolder(ctx))).show(a);
+                    new SessionExporterAction(null, null, dateFormat, sharedPref.getString("pref_dbfold", getDefaultDbFolder(ctx))).show(a);
                 return true;
             }
         });
@@ -969,10 +978,31 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Comman
             entryValues[i] = u.getId() + "";
             i++;
         }
-        pUser.setEntries(entries);
-        pUser.setEntryValues(entryValues);
-        pUserSel.setEntries(entries);
-        pUserSel.setEntryValues(entryValues);
+        if (pUser!=null) {
+            pUser.setEntries(entries);
+            pUser.setEntryValues(entryValues);
+        }
+        if (pUserSel!=null) {
+            pUserSel.setEntries(entries);
+            pUserSel.setEntryValues(entryValues);
+        }
+    }
+
+    private void setupDeviceAdd() {
+        pDevAdd.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                // TODO Auto-generated method stub
+                Activity a = getActivity();
+                if (a != null) {
+                    DeviceSettings ds = new DeviceSettings();
+                    deviceSettings.add(ds);
+                    ds.newDevice(SettingsFragment.this, a, mPCList, "pref_cat_device", mBinder, SettingsFragment.this);
+                }
+                return true;
+            }
+        });
     }
 
     private void setupUserList() {
@@ -1010,7 +1040,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Comman
                     MySQLiteHelper sqlite = MySQLiteHelper.newInstance(null, null);
                     if (sqlite != null)
                         sqlite.deleteValue(u);
-                    if (pUser.getValue().equals(u.getId() + ""))
+                    if (pUser!=null && pUser.getValue().equals(u.getId() + ""))
                         clearUser(pUser);
                     clearUser(pUserSel);
                     fillUserList();
@@ -1018,20 +1048,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Comman
                 return true;
             }
         });
-        pDevAdd.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                // TODO Auto-generated method stub
-                Activity a = getActivity();
-                if (a != null) {
-                    DeviceSettings ds = new DeviceSettings();
-                    deviceSettings.add(ds);
-                    ds.newDevice(SettingsFragment.this, a, mPCList, "pref_cat_device", mBinder, SettingsFragment.this);
-                }
-                return true;
-            }
-        });
         pUserAdd.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
             @Override
