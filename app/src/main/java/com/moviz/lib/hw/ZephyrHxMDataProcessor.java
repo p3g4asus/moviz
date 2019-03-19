@@ -99,11 +99,12 @@ public class ZephyrHxMDataProcessor extends BluetoothChatDataProcessor<ZephyrHxM
                             //notifyDeviceConnected();
                             setDeviceDescription(makeDeviceDescription(w));
                         }
-                        if (!mSim.step(w)) {
+                        int pause = mSim.step(w);
+                        if (pause==DeviceSimulator.DEVICE_ONLINE) {
                             setDeviceState(DeviceStatus.RUNNING);
                             setStatusVar(".battery", w.battery);
                             postDeviceUpdate(w);
-                        } else
+                        } else if (pause==DeviceSimulator.PAUSE_DETECTED)
                             setDeviceState(DeviceStatus.PAUSED);
                         return (buffer[bptr + 2] & 0xFF) + 5;
                     } else

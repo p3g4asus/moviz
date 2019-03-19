@@ -135,14 +135,15 @@ public class KeiserM3iDataProcessor extends NonConnectableDataProcessor {
     }
 
     public void performUpdate(PPafersHolder statistic) {
-        boolean pause = mSim.step(statistic);
+        int pause = mSim.step(statistic);
         DeviceStatus status = mDeviceState;
-        if (pause && status != DeviceStatus.DPAUSE) {
+        if (pause==DeviceSimulator.PAUSE_DETECTED && status != DeviceStatus.DPAUSE) {
             setDeviceState(DeviceStatus.DPAUSE);
-        } else if (!pause && status != DeviceStatus.RUNNING) {
+        } else if (pause==DeviceSimulator.DEVICE_ONLINE && status != DeviceStatus.RUNNING) {
             setDeviceState(DeviceStatus.RUNNING);
         }
-        postDeviceUpdate(statistic);
+        if (pause!=DeviceSimulator.DO_NOT_POST_DU)
+            postDeviceUpdate(statistic);
     }
 
     @Override

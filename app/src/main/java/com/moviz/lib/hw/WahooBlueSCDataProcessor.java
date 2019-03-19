@@ -124,7 +124,7 @@ public class WahooBlueSCDataProcessor extends WahooDataProcessor implements Cran
         sh.sensType = upd;
         sh.sensVal = val;
         sh.sensSpd = speed;
-        boolean pause = mSim.step(sh);
+        int pause = mSim.step(sh);
         Log.d(TAG, mDeviceName+" P="+pause);
         DeviceStatus status = mDeviceState;
         long now = System.currentTimeMillis();
@@ -133,12 +133,13 @@ public class WahooBlueSCDataProcessor extends WahooDataProcessor implements Cran
             if (lastBatteryCapability!=null)
                 lastBatteryCapability.sendReadBatteryData();
         }
-        if (pause && status != DeviceStatus.DPAUSE) {
+        if (pause==DeviceSimulator.PAUSE_DETECTED && status != DeviceStatus.DPAUSE) {
             setDeviceState(DeviceStatus.DPAUSE);
-        } else if (!pause && status != DeviceStatus.RUNNING) {
+        } else if (pause==DeviceSimulator.DEVICE_ONLINE && status != DeviceStatus.RUNNING) {
             setDeviceState(DeviceStatus.RUNNING);
         }
-        postDeviceUpdate(sh);
+        if (pause!=DeviceSimulator.DO_NOT_POST_DU)
+            postDeviceUpdate(sh);
     }
 
     protected static final DeviceInfo.Type[] infoKeys = new DeviceInfo.Type[]{

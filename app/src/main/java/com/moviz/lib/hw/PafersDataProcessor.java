@@ -297,15 +297,17 @@ public class PafersDataProcessor extends BluetoothChatDataProcessor<PafersDevice
 
     public void performUpdate(PPafersHolder statistic) {
         if (startNotified) {
-            boolean pause = mSim.step(statistic);
+            int pause = mSim.step(statistic);
             DeviceStatus status = mDeviceState;
-            if (pause && status != DeviceStatus.DPAUSE) {
+            if (pause==DeviceSimulator.PAUSE_DETECTED && status != DeviceStatus.DPAUSE) {
                 setDeviceState(DeviceStatus.DPAUSE);
-            } else if (!pause && status != DeviceStatus.RUNNING) {
+            } else if (pause==DeviceSimulator.DO_NOT_POST_DU && status != DeviceStatus.RUNNING) {
                 setDeviceState(DeviceStatus.RUNNING);
             }
-            postDeviceUpdate(statistic);
-            setStatusVar(".program", program.toString());
+            if (pause!=DeviceSimulator.DO_NOT_POST_DU) {
+                postDeviceUpdate(statistic);
+                setStatusVar(".program", program.toString());
+            }
         }
     }
 
@@ -320,11 +322,12 @@ public class PafersDataProcessor extends BluetoothChatDataProcessor<PafersDevice
 
         statistic.distance = Math.abs(randomV.nextDouble()) * 150.0;
         statistic.speed = Math.abs(randomV.nextDouble()) * 60.0;
-        boolean pause = mSim.step(statistic);
-        if (pause && mDeviceState != DeviceStatus.DPAUSE) {
+        int pause = mSim.step(statistic);
+        if (pause==DeviceSimulator.PAUSE_DETECTED && mDeviceState != DeviceStatus.DPAUSE) {
             setDeviceState(DeviceStatus.DPAUSE);
         }
-        postDeviceUpdate(statistic);
+        if (pause!=DeviceSimulator.DO_NOT_POST_DU)
+            postDeviceUpdate(statistic);
         setStatusVar(".program", program.toString());
     }
 

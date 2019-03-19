@@ -58,10 +58,10 @@ public class HRDataProcessor extends BLEDataProcessor {
             }
             HeartRateMeasurement.SensorWorn val = hrm.getSensorWorn();
             w.worn = (byte) (val == HeartRateMeasurement.SensorWorn.WORN ? 1 : val == HeartRateMeasurement.SensorWorn.NOT_WORN? 0:2);
-            if (!mSim.step(w)) {
+            if ((eeval = mSim.step(w))==DeviceSimulator.DEVICE_ONLINE) {
                 setDeviceState(DeviceStatus.RUNNING);
                 postDeviceUpdate(w);
-            } else
+            } else if (eeval==DeviceSimulator.PAUSE_DETECTED)
                 setDeviceState(DeviceStatus.PAUSED);
             rv = true;
         } else if (Characteristic.MODEL_NUMBER_STRING.equals(cuid) ||

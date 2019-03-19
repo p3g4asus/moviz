@@ -17,6 +17,7 @@ public class KeiserM3iDeviceSimulator extends PafersDeviceSimulator {
     protected double old_dist = -1.0;
     protected long timeRms_acc = 0;
     protected long old_timeRms = 0;
+    protected long lastUpdatePostedTime = 0;
 
     private int equalTime;
     private short old_time_orig;
@@ -66,6 +67,7 @@ public class KeiserM3iDeviceSimulator extends PafersDeviceSimulator {
         timeRms_acc = 0;
         old_dist = -1.0;
         old_timeRms = 0;
+        lastUpdatePostedTime = 0;
         dist_buff = new double[buffSize];
         dist_buff_time = new long[buffSize];
     }
@@ -82,6 +84,7 @@ public class KeiserM3iDeviceSimulator extends PafersDeviceSimulator {
             old_timeRms = realtime;
             Log.v(TAG,"Init: old_dist = "+realdist+" old_time = "+realtime);
             f.speed = 0;
+            lastUpdatePostedTime = f.timeRAbsms;
         }
         else {
             String logv;
@@ -102,14 +105,18 @@ public class KeiserM3iDeviceSimulator extends PafersDeviceSimulator {
                 dist_buff[dist_buff_idx++] = acc;
                 dist_acc += acc;
                 timeRms_acc += acc_time;
+                lastUpdatePostedTime = f.timeRAbsms;
 
 
                 old_dist = realdist;
                 old_timeRms = realtime;
                 logv = "D = ("+realdist+","+acc+"->"+rem+","+dist_acc+") T = ("+realtime+","+acc_time+"->"+rem_time+","+timeRms_acc+") => ";
             }
-            else
-                logv = "P D = ("+realdist+",- -> -,"+dist_acc+") T = ("+realtime+",- -> -,"+timeRms_acc+") => ";
+            else {
+                if (f.timeRAbsms-lastUpdatePostedTime>=1000)
+                    lastUpdatePostedTime = f.timeRAbsms;
+                logv = "P D = (" + realdist + ",- -> -," + dist_acc + ") T = (" + realtime + ",- -> -," + timeRms_acc + ") => ";
+            }
 
             if (timeRms_acc == 0)
                 f.speed = 0;
@@ -121,16 +128,16 @@ public class KeiserM3iDeviceSimulator extends PafersDeviceSimulator {
     }
 
     @Override
-    public boolean step(DeviceUpdate du) {
+    public int step(DeviceUpdate du) {
         PPafersHolder f = (PPafersHolder) du;
         if (old_time_orig>f.time)
             super.setOffsets();
-        boolean out =  super.step(du);
+        int out =  super.step(du);
         f.pulse/=10;
         f.pulseMn/=10.0;
         f.rpm/=10;
         f.rpmMn/=10.0;
-        return out;
+        return lastUpdatePostedTime==f.timeRAbsms?out:DO_NOT_POST_DU;
     }
 
     @Override

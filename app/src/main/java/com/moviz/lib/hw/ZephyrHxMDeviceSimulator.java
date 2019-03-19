@@ -52,7 +52,7 @@ public class ZephyrHxMDeviceSimulator implements DeviceSimulator {
     }
 
     @Override
-    public boolean step(DeviceUpdate du) {
+    public int step(DeviceUpdate du) {
         ZephyrHxMHolder w = (ZephyrHxMHolder) du;
         long now = System.currentTimeMillis();
         boolean active = oldRawDistance >= 0;
@@ -134,7 +134,7 @@ public class ZephyrHxMDeviceSimulator implements DeviceSimulator {
         oldRawDistance = w.rawDistance;
         oldStrides = w.strides;
         oldHeartBeat = w.heartBeat;
-        return !active;
+        return !active?PAUSE_DETECTED:DEVICE_ONLINE;
     }
 
     @Override

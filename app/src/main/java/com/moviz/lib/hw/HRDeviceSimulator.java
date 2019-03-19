@@ -29,7 +29,7 @@ public class HRDeviceSimulator implements DeviceSimulator{
     }
 
     @Override
-    public boolean step(DeviceUpdate du) {
+    public int step(DeviceUpdate du) {
         HRDeviceHolder w = (HRDeviceHolder) du;
         long now = System.currentTimeMillis();
         boolean active = w.pulse > 0 && w.worn != 0;
@@ -65,7 +65,7 @@ public class HRDeviceSimulator implements DeviceSimulator{
             lastTimeTot += timeTotms;
         }
         wasActive = active;
-        return !active;
+        return !active?PAUSE_DETECTED:DEVICE_ONLINE;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.moviz.lib.hw;
 
+import android.renderscript.Double4;
 import android.util.Log;
 
 import com.moviz.lib.comunication.holder.DeviceUpdate;
@@ -247,7 +248,7 @@ public class WahooBlueSCDeviceSimulator implements DeviceSimulator {
 
 
     @Override
-    public boolean step(DeviceUpdate du) {
+    public int step(DeviceUpdate du) {
         WahooBlueSCHolder sh = (WahooBlueSCHolder) du;
         boolean pause = true;
         if (crank.getSessionStart()==0 && wheel.getSessionStart()==0) {
@@ -267,7 +268,7 @@ public class WahooBlueSCDeviceSimulator implements DeviceSimulator {
             sh.updateN+=crank.nUpdates;
             crank.setSessionStart(wheel.getSessionStart());
         }
-        return pause;
+        return pause?PAUSE_DETECTED:DEVICE_ONLINE;
     }
 
     @Override

@@ -80,7 +80,7 @@ public class PafersDeviceSimulator implements DeviceSimulator {
 
 
     @Override
-    public boolean step(DeviceUpdate du) {
+    public int step(DeviceUpdate du) {
         PPafersHolder f = (PPafersHolder) du;
         long now = System.currentTimeMillis();
         boolean wasinpause = inPause();
@@ -122,7 +122,7 @@ public class PafersDeviceSimulator implements DeviceSimulator {
         calorie_old = f.calorie;
         distance_old = f.distance;
         lastUpdateTime = now;
-        return inPause();
+        return inPause()?PAUSE_DETECTED:DEVICE_ONLINE;
     }
 
     @Override
