@@ -49,6 +49,7 @@ public class BLEDeviceSearcher implements DeviceSearcher,BLESearchCallback {
     }
 
     private long mScanTimeout = 10000;
+    private boolean mScanning = false;
 
     public BLEDeviceSearcher() {
         if (mBluetoothAdapter != null && Build.VERSION.SDK_INT >= 21) {
@@ -57,6 +58,10 @@ public class BLEDeviceSearcher implements DeviceSearcher,BLESearchCallback {
                     .setScanMode(ScanSettings.SCAN_MODE_LOW_POWER);
             mScanCallback = new MyScanCallback();
         }
+    }
+
+    public boolean isScanning() {
+        return mScanning;
     }
 
     public ScanSettings.Builder getSettings() {
@@ -76,7 +81,9 @@ public class BLEDeviceSearcher implements DeviceSearcher,BLESearchCallback {
     }
 
     private void scanLeDevice(final boolean enable) {
-        if (enable) {
+        if (mBluetoothAdapter==null || !mBluetoothAdapter.isEnabled())
+            return;
+        if (enable && !mScanning) {
             resultsList.clear();
             addrMap.clear();
             if (mBluetoothAdapter != null) {
@@ -89,24 +96,30 @@ public class BLEDeviceSearcher implements DeviceSearcher,BLESearchCallback {
                             } else {
                                 mLEScanner.stopScan(mScanCallback);
                             }
+                            mScanning = false;
                             searchCallback.onScanTimeout();
                         }
                     }, mScanTimeout);
                 if (Build.VERSION.SDK_INT < 21) {
                     if (!mBluetoothAdapter.startLeScan(mLeScanCallback)) {
                         searchCallback.onScanError(100);
+                        mScanning = false;
                     }
+                    else
+                        mScanning = true;
                 } else {
                     mLEScanner.startScan(new ArrayList<ScanFilter>(), mSettings.build(), mScanCallback);
+                    mScanning = true;
                 }
             } else
                 onScanError(-1);
-        } else {
+        } else if (!enable && mScanning) {
             if (Build.VERSION.SDK_INT < 21) {
                 mBluetoothAdapter.stopLeScan(mLeScanCallback);
             } else {
                 mLEScanner.stopScan(mScanCallback);
             }
+            mScanning = false;
         }
     }
 
@@ -153,6 +166,7 @@ public class BLEDeviceSearcher implements DeviceSearcher,BLESearchCallback {
         @Override
         public void onScanFailed(int errorCode) {
             Log.i(TAG, "onScanFailed "+errorCode);
+            mScanning = false;
             searchCallback.onScanError(errorCode);
         }
     }

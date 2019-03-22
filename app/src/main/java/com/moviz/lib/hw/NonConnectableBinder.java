@@ -32,7 +32,7 @@ public class NonConnectableBinder extends DeviceBinder implements BLESearchCallb
             if (oldst==BluetoothState.CONNECTING)
                 bund.postDeviceError(new ParcelableMessage("exm_errr_connectionfailed"));
             else
-                bund.postDeviceError(new ParcelableMessage("exm_errr_nonconn_multipletileout").put(bund.mDeviceHolder.innerDevice()));
+                bund.postDeviceError(new ParcelableMessage("exm_errr_nonconn_multipletimeout").put(bund.mDeviceHolder.innerDevice()));
             bund.setBluetoothState(BluetoothState.IDLE);
             if (mDevices.isEmpty())
                 mLEScanner.stopSearch();
@@ -60,25 +60,20 @@ public class NonConnectableBinder extends DeviceBinder implements BLESearchCallb
         }
         else {
 
-            boolean needsStart = mDevices.isEmpty();
             final NonConnectableDataProcessor bldevb = (NonConnectableDataProcessor) newDp(device);
 
             BluetoothState bst = bldevb.getBluetoothState();
             if (bst != BluetoothState.CONNECTING && bst != BluetoothState.CONNECTED) {
                 bldevb.setUser(us);
                 bldevb.setBluetoothState(BluetoothState.CONNECTING);
-                if (needsStart) {
-                    if (mLEScanner==null) {
-                        mScanBetween = bldevb.mScanBetween;
-                        mLEScanner = bulildScanner();
-                    }
-                    else {
-                        long st = bldevb.getScanBetween();
-                        if (st<mScanBetween)
-                            mScanBetween = st;
-                    }
-                    mLEScanner.startSearch(null);
-
+                if (mLEScanner==null) {
+                    mScanBetween = bldevb.mScanBetween;
+                    mLEScanner = bulildScanner();
+                }
+                else {
+                    long st = bldevb.getScanBetween();
+                    if (st<mScanBetween)
+                        mScanBetween = st;
                 }
                 acquireData(bldevb);
                 return true;
@@ -96,10 +91,12 @@ public class NonConnectableBinder extends DeviceBinder implements BLESearchCallb
             public void run() {
                 disconnect(bldevb.mDeviceHolder);
                 Log.i(TAG,"Timeout detected for "+bldevb.mDeviceHolder);
-                onScanTimeout();
+                if (bldevb.getBluetoothState()!=BluetoothState.DISCONNECTING)
+                    onScanTimeout();
             }
         };
         bldevb.setTimeoutRunnable(r);
+        onScanTimeout();
         mHandler.postDelayed(r,bldevb.getScanBetween()+bldevb.getScanTimeout());
     }
 
@@ -138,15 +135,14 @@ public class NonConnectableBinder extends DeviceBinder implements BLESearchCallb
     @Override
     public void onScanTimeout() {
         Log.i(TAG,"Scan timeout");
-        if (!mDevices.isEmpty()) {
-            mHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    if (!mDevices.isEmpty())
-                        mLEScanner.startSearch(null);
-                }
-            }, mScanBetween);
-        }
+        if (mLEScanner.isScanning())
+            mLEScanner.stopSearch();
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mLEScanner.startSearch(null);
+            }
+        }, mScanBetween);
 
     }
 }

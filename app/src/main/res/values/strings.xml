@@ -46,7 +46,7 @@
     <string name="exm_errp_disablingbluetooth">Disattivo bluetooth&#8230;</string>
     <string name="exm_errr_connectionlost">Persa la connessione a %1$s</string>
     <string name="exm_errr_connectionfailed">Connessione fallita a %1$s</string>
-    <string name="exm_errr_nonconn_multipletileout">Il dispositivo %1$s non risponde</string>
+    <string name="exm_errr_nonconn_multipletimeout">Il dispositivo %1$s non risponde</string>
     <string name="exm_errr_pafers_program">Programma non valido %2$s per il dispositivo %1$s</string>
     <string name="plot">Grafico</string>
     <string name="button">Comandi</string>

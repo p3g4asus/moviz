@@ -99,7 +99,7 @@ public class DeviceTypeMaps {
         aMap.put(null, new String[]{"pref_temp_status", "pref_temp_workout", "pref_user"});
         aMap.put(DeviceType.pafers, new String[]{"pfold", "pfile"});
         aMap.put(DeviceType.zephyrhxm, new String[0]);
-        aMap.put(DeviceType.keiserm3i, new String[] {"machineids"});
+        aMap.put(DeviceType.keiserm3i, new String[] {"machineid","buffsize"});
         aMap.put(DeviceType.hrdevice, new String[0]);
         aMap.put(DeviceType.wahoobluesc, new String[]{"wheeldiam","gearfactor","currentgear"});
         type2confsave = Collections.unmodifiableMap(aMap);

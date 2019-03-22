@@ -47,7 +47,7 @@ public class KeiserM3iDataProcessor extends NonConnectableDataProcessor {
     }
 
     public KeiserM3iDataProcessor() {
-        super(15000,50);
+        super(5000,50);
         for (DeviceInfo.Type tp : infoKeys)
             infoMap.put(tp.toString(), "");
     }

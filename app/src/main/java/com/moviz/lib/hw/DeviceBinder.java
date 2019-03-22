@@ -46,6 +46,8 @@ public abstract class DeviceBinder extends Binder implements DeviceListener {
         String addr = d.getAddress();
         if (mSimulators.containsKey(addr))
             mSimulators.remove(addr);
+        if (mDevices.containsKey(addr))
+            mDevices.get(addr).setBluetoothState(BluetoothState.DISCONNECTING);
         disconnect(d);
     }
 
