@@ -970,8 +970,8 @@ public class DeviceManagerService extends Service implements CommandProcessor {
                 @Override
                 public void run() {
 
-                    Log.d(TAG, "" + f0);
                     DeviceStatus currentStatus = dev.getDeviceState();
+                    Log.d(TAG, "["+currentStatus+"] " + f0);
                     if (currentStatus != DeviceStatus.PAUSED &&
                             currentStatus != DeviceStatus.DPAUSE) {
                         int un = f0.getUpdateN();

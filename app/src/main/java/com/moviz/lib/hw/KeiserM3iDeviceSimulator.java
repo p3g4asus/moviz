@@ -137,7 +137,9 @@ public class KeiserM3iDeviceSimulator extends PafersDeviceSimulator {
         f.pulseMn/=10.0;
         f.rpm/=10;
         f.rpmMn/=10.0;
-        return lastUpdatePostedTime==f.timeRAbsms?out:DO_NOT_POST_DU;
+        out = lastUpdatePostedTime==f.timeRAbsms||f.updateN==1?out:DO_NOT_POST_DU;
+        Log.v(TAG,"Returning "+out);
+        return out;
     }
 
     @Override

@@ -11,12 +11,38 @@ import android.util.SparseArray;
 import com.moviz.lib.comunication.plus.holder.PUserHolder;
 import com.moviz.lib.utils.ParcelableMessage;
 
+import static com.moviz.lib.hw.DeviceDataProcessor.DF_ACTIVE;
+
 public class NonConnectableBinder extends DeviceBinder implements BLESearchCallback {
     private BLEDeviceSearcher mLEScanner = null;
     protected Handler mHandler = new Handler();
     protected long mScanBetween = 1000;
+    protected Runnable mForceRestart = null;
     public NonConnectableBinder() {
         super();
+    }
+
+    protected void scheduleForceRestart(boolean yes) {
+        if (!yes && mForceRestart!=null) {
+            Log.i(TAG,"Deleting forceRestart");
+            mHandler.removeCallbacks(mForceRestart);
+            mForceRestart = null;
+        }
+        else if (yes) {
+            Log.i(TAG,"Scheduling forceRestart");
+            mForceRestart = new Runnable() {
+                @Override
+                public void run() {
+                    if (!mDevices.isEmpty()) {
+                        mLEScanner.stopSearch();
+                        mLEScanner.startSearch(null);
+                        scheduleForceRestart(true);
+                    }
+                }
+            };
+            mHandler.postDelayed(mForceRestart,900000);
+        }
+
     }
 
     @Override
@@ -34,8 +60,10 @@ public class NonConnectableBinder extends DeviceBinder implements BLESearchCallb
             else
                 bund.postDeviceError(new ParcelableMessage("exm_errr_nonconn_multipletimeout").put(bund.mDeviceHolder.innerDevice()));
             bund.setBluetoothState(BluetoothState.IDLE);
-            if (mDevices.isEmpty())
+            if (mDevices.isEmpty()) {
                 mLEScanner.stopSearch();
+                scheduleForceRestart(false);
+            }
         }
     }
 
@@ -60,20 +88,26 @@ public class NonConnectableBinder extends DeviceBinder implements BLESearchCallb
         }
         else {
 
+            boolean needsStart = mDevices.isEmpty();
             final NonConnectableDataProcessor bldevb = (NonConnectableDataProcessor) newDp(device);
+            bldevb.setIsDebugging(DF_ACTIVE);
 
             BluetoothState bst = bldevb.getBluetoothState();
             if (bst != BluetoothState.CONNECTING && bst != BluetoothState.CONNECTED) {
                 bldevb.setUser(us);
                 bldevb.setBluetoothState(BluetoothState.CONNECTING);
-                if (mLEScanner==null) {
-                    mScanBetween = bldevb.mScanBetween;
-                    mLEScanner = bulildScanner();
-                }
-                else {
-                    long st = bldevb.getScanBetween();
-                    if (st<mScanBetween)
-                        mScanBetween = st;
+                if (needsStart) {
+                    if (mLEScanner==null) {
+                        mScanBetween = bldevb.mScanBetween;
+                        mLEScanner = bulildScanner();
+                    }
+                    else {
+                        long st = bldevb.getScanBetween();
+                        if (st<mScanBetween)
+                            mScanBetween = st;
+                    }
+                    mLEScanner.startSearch(null);
+                    scheduleForceRestart(true);
                 }
                 acquireData(bldevb);
                 return true;
@@ -96,7 +130,6 @@ public class NonConnectableBinder extends DeviceBinder implements BLESearchCallb
             }
         };
         bldevb.setTimeoutRunnable(r);
-        onScanTimeout();
         mHandler.postDelayed(r,bldevb.getScanBetween()+bldevb.getScanTimeout());
     }
 
@@ -135,14 +168,15 @@ public class NonConnectableBinder extends DeviceBinder implements BLESearchCallb
     @Override
     public void onScanTimeout() {
         Log.i(TAG,"Scan timeout");
-        if (mLEScanner.isScanning())
-            mLEScanner.stopSearch();
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mLEScanner.startSearch(null);
-            }
-        }, mScanBetween);
+        if (!mDevices.isEmpty()) {
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (!mDevices.isEmpty())
+                        mLEScanner.startSearch(null);
+                }
+            }, mScanBetween);
+        }
 
     }
 }

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Parcelable;
 import android.util.Log;
 
+import com.moviz.gui.fragments.SettingsFragment;
 import com.moviz.lib.comunication.DeviceStatus;
 import com.moviz.lib.comunication.EncDec;
 import com.moviz.lib.comunication.holder.DeviceUpdate;
@@ -19,6 +20,12 @@ import com.moviz.lib.comunication.plus.holder.PUserHolder;
 import com.moviz.lib.utils.CommandProcessor;
 import com.moviz.lib.utils.ParcelableMessage;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -40,6 +47,9 @@ public abstract class DeviceDataProcessor implements DeviceConnectionListener, C
     protected Vector<DeviceListener> mList;
     protected static final BluetoothAdapter mAdapter = BluetoothAdapter.getDefaultAdapter();
     protected final String TAG = getClass().getSimpleName();
+    protected int mDebugFlag = 0;
+    protected FileOutputStream mDebugFos = null;
+    public static int DF_ACTIVE = 1;
 
     //public abstract DeviceDataProcessor newInstance();
 
@@ -214,6 +224,67 @@ public abstract class DeviceDataProcessor implements DeviceConnectionListener, C
         }
     }
 
+    public void setIsDebugging(int debugFlag) {
+        mDebugFlag = debugFlag;
+    }
+
+    public int isDebugging() {
+        return mDebugFlag;
+    }
+
+    protected void debugFileClose() {
+        if (mDebugFos!=null) {
+            try {
+                mDebugFos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            mDebugFos = null;
+        }
+    }
+
+    protected FileOutputStream debugFileOpen(PDeviceHolder devh) {
+        debugFileClose();
+        if ((mDebugFlag&DF_ACTIVE)!=0) {
+            String fname = SettingsFragment.getDefaultAppDir(ctx) + "/debug";
+            File f = new File(fname);
+            if (!f.exists())
+                f.mkdirs();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyMMddHHmmss");
+            fname += "/" + sdf.format(new Date()) + "_" + devh.getAlias() + "_" + devh.getId() + ".bin";
+            try {
+                mDebugFos = new FileOutputStream(fname);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+        return mDebugFos;
+    }
+
+    protected byte[] debugFileElementHeader(byte[] pld, int pldlen) {
+        return null;
+    }
+
+    protected byte[] debugFileElementFooter(byte[] header,byte[] pld, int pldlen) {
+        return null;
+    }
+
+    protected void debugFileAppendElement(byte[] arr, int len) {
+        if (mDebugFos!=null) {
+            try {
+                byte[] arr2 = debugFileElementHeader(arr,len);
+                if (arr2!=null)
+                    mDebugFos.write(arr2);
+                mDebugFos.write(arr,0,len);
+                byte[] arr3 = debugFileElementFooter(arr2,arr,len);
+                if (arr3!=null)
+                    mDebugFos.write(arr3);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public void postReadData(BluetoothGattCharacteristic characteristic) {
         onReadData(mDeviceHolder, mDeviceHolder.innerDevice(), characteristic);
     }
@@ -232,12 +303,14 @@ public abstract class DeviceDataProcessor implements DeviceConnectionListener, C
     public void onDeviceDisconnected(GenericDevice dev, PDeviceHolder devh) {
         setBluetoothState(BluetoothState.IDLE);
         setDeviceState(DeviceStatus.OFFLINE);
+        debugFileClose();
     }
 
     @Override
     public void onDeviceConnected(GenericDevice dev, PDeviceHolder devh) {
         setDeviceName(mBluetoothDevice.getName());
         setDeviceState(DeviceStatus.STANDBY);
+        debugFileOpen(devh);
     }
 
     @Override
@@ -289,6 +362,7 @@ public abstract class DeviceDataProcessor implements DeviceConnectionListener, C
 
     @Override
     public boolean onReadData(GenericDevice dev, PDeviceHolder devh, byte[] arr, int length) {
+        debugFileAppendElement(arr,length);
         return false;
     }
 

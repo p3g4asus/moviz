@@ -66,7 +66,7 @@ public class KeiserM3iDataProcessor extends NonConnectableDataProcessor {
             // Moves index past prefix bits (some platforms remove prefix bits from data)
             if (bt[index] == 2 && bt[index + 1] == 1)
                 index += 2;
-            return ""+((int)bt[index+3]);
+            return ""+(bt[index+3] & 0xFF);
         }
         else
             return "";
@@ -85,15 +85,15 @@ public class KeiserM3iDataProcessor extends NonConnectableDataProcessor {
         // Moves index past prefix bits (some platforms remove prefix bits from data)
         if (arr[index] == 2 && arr[index + 1] == 1)
             index += 2;
-        int mayor = arr[index++];
-        int minor = arr[index++];
+        int mayor = arr[index++] & 0xFF;
+        int minor = arr[index++] & 0xFF;
         int dt;
         if (mayor==0x06 && arr.length>(index +13) && ((dt = arr[index]&0xFF)==0 || dt>=128 || dt<=227)) {
             if (infoMap.get(DeviceInfo.Type.FIRMWARE_REVISION.toString()).isEmpty()) {
                 infoMap.put(DeviceInfo.Type.DEVICE_NAME.toString(), devh.getName());
                 infoMap.put(DeviceInfo.Type.FIRMWARE_REVISION.toString(), String.format("0x%02X", mayor));
                 infoMap.put(DeviceInfo.Type.SOFTWARE_REVISION.toString(), String.format("0x%02X", minor));
-                infoMap.put(DeviceInfo.Type.SYSTEM_ID.toString(), arr[index + 1]+"");
+                infoMap.put(DeviceInfo.Type.SYSTEM_ID.toString(), (arr[index + 1] & 0xFF)+"");
                 setDeviceDescription(infoMap,"KM3i");
             }
             PKeiserM3iHolder k3 = new PKeiserM3iHolder();
@@ -104,7 +104,7 @@ public class KeiserM3iDataProcessor extends NonConnectableDataProcessor {
                 // Energy as KCal ("energy burned")
             k3.calorie = (short) twoByteConcat(arr[index + 8], arr[index + 9]);
             // Time in Seconds (broadcast as minutes and seconds)
-            k3.time = (short) (arr[index + 10] * 60);
+            k3.time = (short) ((arr[index + 10]&0xFF) * 60);
             k3.time += arr[index + 11];
             int dist = twoByteConcat(arr[index + 12], arr[index + 13]);
             if ((dist & 32768) != 0)

@@ -87,6 +87,7 @@ public class BLEDeviceSearcher implements DeviceSearcher,BLESearchCallback {
             resultsList.clear();
             addrMap.clear();
             if (mBluetoothAdapter != null) {
+                Log.i(TAG, "Starting Search");
                 if (mScanTimeout>0)
                     mHandler.postDelayed(new Runnable() {
                         @Override
@@ -189,6 +190,7 @@ public class BLEDeviceSearcher implements DeviceSearcher,BLESearchCallback {
 
     @Override
     public void stopSearch() {
+        Log.i(TAG, "Stopping Search");
         scanLeDevice(false);
     }
 

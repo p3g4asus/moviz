@@ -47,6 +47,7 @@ public abstract class NonConnectableDataProcessor extends DeviceDataProcessor {
 
     @Override
     public boolean onReadData(GenericDevice dev, PDeviceHolder devh, byte[] arr, int length) {
+        super.onReadData(mDeviceHolder, mDeviceHolder.innerDevice(), arr, length);
         return parseData(dev, devh, arr, length);
     }
 
@@ -59,5 +60,19 @@ public abstract class NonConnectableDataProcessor extends DeviceDataProcessor {
 
     public Runnable getTimeoutRunnable() {
         return mTimeoutRunnable;
+    }
+
+    @Override
+    protected byte[] debugFileElementHeader(byte[] pld, int pldlen) {
+
+        int now = (int) System.currentTimeMillis();
+        byte[] arrHeader = new byte[] {(byte) 0xAA, (byte) ((now>>0)&0xFF), (byte) ((now>>8)&0xFF), (byte) ((now>>16)&0xFF), (byte) ((now>>24)&0xFF)};
+
+        return arrHeader;
+    }
+
+    @Override
+    protected byte[] debugFileElementFooter(byte[] header, byte[] pld, int pldlen) {
+        return new byte[]{0x55};
     }
 }
