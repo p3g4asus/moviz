@@ -61,6 +61,7 @@ public abstract class DeviceBinder extends Binder implements DeviceListener {
             try {
                 dev = mDpClass.newInstance();
                 dev.setParams(d, mList, newSim(d), mBase.getContext());
+                dev.setIsDebugging(d.getDebugFlag());
                 mDevices.put(d.getAddress(), dev);
             } catch (Exception e) {
                 e.printStackTrace();

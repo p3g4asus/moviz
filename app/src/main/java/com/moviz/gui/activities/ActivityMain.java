@@ -118,6 +118,7 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
     private static String TAG_MINUS = "tag_minus";
     private FloatingActionMenu mFABMenu;
     private String startConf = null;
+    private int startDebug = 0;
 
     public static final String TAG = "ActivityMain";
 
@@ -170,6 +171,7 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
         Intent gattServiceIntent = new Intent(this, DeviceManagerService.class);
         gattServiceIntent.setAction(DeviceManagerService.ACTION_LOAD_CONFIGURATION);
         gattServiceIntent.putExtra(DeviceManagerService.EXTRA_CONFIGURATION_NAME, startConf);
+        gattServiceIntent.putExtra(DeviceManagerService.EXTRA_DEBUG_FLAG, startDebug);
         startService(gattServiceIntent);
     }
 
@@ -251,8 +253,9 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
         Intent startingIntent = getIntent();
         if (startingIntent != null && startingIntent.getAction().equals(DeviceManagerService.ACTION_LOAD_CONFIGURATION)) {
             startConf = startingIntent.getStringExtra(DeviceManagerService.EXTRA_CONFIGURATION_NAME);
+            startDebug = startingIntent.getIntExtra(DeviceManagerService.EXTRA_DEBUG_FLAG,0);
         }
-        Logger.d(CA.mLogSession,"Starting activity "+startConf);
+        Logger.d(CA.mLogSession,"Starting activity "+startConf+" df = "+startDebug);
         setupFAB2();
         setupTabs();
         setupDrawer();

@@ -28,6 +28,7 @@ public abstract class GenericDevice implements CommandProcessor {
     protected PUserHolder currentUser = null;
     protected DeviceBinder mBluetoothService;
     protected CommandManager commandManager;
+    protected int debugFlag = 0;
     protected DeviceReadyListener mDeviceReadyListener = null;
     protected final String TAG = getClass().getSimpleName();
 
@@ -111,6 +112,14 @@ public abstract class GenericDevice implements CommandProcessor {
 
     protected Class<? extends BaseMessage>[] getAcceptedMessages() {
         return new Class[] {UserSetMessage.class, DeviceChangedMessage.class};
+    }
+
+    public int getDebugFlag() {
+        return debugFlag;
+    }
+
+    public void setDebugFlag(int debugFlag) {
+        this.debugFlag = debugFlag;
     }
 
     public GenericDevice() {

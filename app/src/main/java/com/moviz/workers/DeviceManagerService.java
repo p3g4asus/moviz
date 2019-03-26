@@ -75,7 +75,9 @@ public class DeviceManagerService extends Service implements CommandProcessor {
     private static final int STATE_EXITING = 32;
     public static final String ACTION_LOAD_CONFIGURATION = "DeviceManagerService.ACTION_LOAD_CONFIGURATION";
     public static final String EXTRA_CONFIGURATION_NAME = "DeviceManagerService.EXTRA_CONFIGURATION_NAME";
+    public static final String EXTRA_DEBUG_FLAG = "DeviceManagerService.EXTRA_DEBUG_FLAG";
 
+    private int mDebugFlag = 0;
     private String dbFold = null;
     private Context ctx = null;
     private int reloadOnDisc = RELOAD_DEVICES | RELOAD_OTHER_SETTINGS;
@@ -503,6 +505,7 @@ public class DeviceManagerService extends Service implements CommandProcessor {
                     GenericDevice inst = DeviceTypeMaps.type2deviceclass.get(devh.getType()).newInstance();
                     inst.setDeviceReadyListener(loglist);
                     if (inst.initOnce(devh, userObj, ctx, mBinder)) {
+                        inst.setDebugFlag(mDebugFlag);
                         inst.loadTransientPref(sharedPref);
                         holder2deviceinstance.put(devh, inst);
                         if (devh.isEnabled())
@@ -1188,6 +1191,7 @@ public class DeviceManagerService extends Service implements CommandProcessor {
             Logger.d(CA.mLogSession,"DeviceManagerSerivice created");
             mDead = DeadState.STARTED;
             String startConf = intent == null ? "" : intent.getStringExtra(EXTRA_CONFIGURATION_NAME);
+            mDebugFlag = intent == null ? 0 : intent.getIntExtra(EXTRA_DEBUG_FLAG,0);
             ctx = getApplicationContext();
             mStatusReceiver = new StatusReceiver();
             mBinder = new DeviceManagerBinder(ctx, mStatusReceiver);

@@ -90,7 +90,7 @@ public class NonConnectableBinder extends DeviceBinder implements BLESearchCallb
 
             boolean needsStart = mDevices.isEmpty();
             final NonConnectableDataProcessor bldevb = (NonConnectableDataProcessor) newDp(device);
-            bldevb.setIsDebugging(DF_ACTIVE);
+            //bldevb.setIsDebugging(DF_ACTIVE);
 
             BluetoothState bst = bldevb.getBluetoothState();
             if (bst != BluetoothState.CONNECTING && bst != BluetoothState.CONNECTED) {
