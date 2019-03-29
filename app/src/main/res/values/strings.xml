@@ -28,6 +28,7 @@
     <string name="da_title">Filtra date</string>
     
     <string name="sessiondlg_title">Seleziona sessione</string>
+    <string name="sessiondlg_removing">Elimino sessione</string>
     <string name="sessiondlg_no">Annulla</string>
     <string name="sessiondlg_dbquery">Interrogo database&#8230;</string>
     <string name="sessiondlg_select">Seleziona</string>

@@ -3,6 +3,7 @@ package com.moviz.gui.fragments;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,6 +15,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
@@ -40,6 +42,7 @@ import com.moviz.gui.R;
 import com.moviz.gui.activities.ActivityMain;
 import com.moviz.gui.app.CA;
 import com.moviz.gui.dialogs.MultipleSessionSelectDialog;
+import com.moviz.gui.dialogs.SessionDateDialog;
 import com.moviz.gui.preference.BindSummaryToValueListener;
 import com.moviz.gui.preference.ConfNamePreference;
 import com.moviz.gui.preference.DBCleanPreference;
@@ -58,6 +61,8 @@ import com.moviz.lib.comunication.plus.message.DeviceChangedMessage;
 import com.moviz.lib.comunication.plus.message.ProcessedOKMessage;
 import com.moviz.lib.comunication.plus.message.UserSetMessage;
 import com.moviz.lib.db.MySQLiteHelper;
+import com.moviz.lib.db.SessionLoadDBProgress;
+import com.moviz.lib.plot.ProgressPub;
 import com.moviz.lib.utils.CommandManager;
 import com.moviz.lib.utils.CommandProcessor;
 import com.moviz.lib.utils.DeviceTypeMaps;
@@ -240,21 +245,61 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Comman
             super(ifd, itd, datef);
         }
 
+        private class SessionRemoveTask extends AsyncTask<Long, SessionLoadDBProgress, Integer> {
+            private MySQLiteHelper sqlite;
+
+            public SessionRemoveTask(MySQLiteHelper sql) {
+                sqlite = sql;
+            }
+
+            @Override
+            protected void onPreExecute() {
+                setupProgressDialog();
+                progress.setMessage("c");
+                progress.setIndeterminate(false);
+                progress.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                progress.show();
+            }
+
+            @Override
+            protected void onProgressUpdate(SessionLoadDBProgress... s) {
+                SessionLoadDBProgress r = s[0];
+                progress.setMax(r.tot);
+                progress.setMessage(res.getString(R.string.sessiondlg_removing) + " " + r.mainSid);
+                progress.setProgress(r.cur);
+            }
+
+            @Override
+            protected Integer doInBackground(
+                    Long... ids) {
+                SessionLoadDBProgress s = new SessionLoadDBProgress(0,ids.length,0,null);
+                for (long id: ids) {
+                    s.cur++;
+                    s.mainSid = id;
+                    publishProgress(new SessionLoadDBProgress[]{s});
+                    sqlite.deleteSessionByMainId(id);
+                }
+                return 0;
+            }
+
+
+            @Override
+            protected void onPostExecute(Integer res) {
+                progress.dismiss();
+            }
+
+        }
+
         @Override
         protected void onSessionSelect(
                 LongSparseArray<List<PSessionHolder>> sessions, List<Long> keys) {
             // TODO Auto-generated method stub
             if (keys != null && !keys.isEmpty()) {
                 MySQLiteHelper sqlite = MySQLiteHelper.newInstance(null, null);
-                if (sqlite != null) {
-                    String msid = "";
-                    for (Long k : keys) {
-                        msid += k + ",";
-                    }
-                    sqlite.deleteSessionByMainIds(msid.substring(0, msid.length() - 1));
-                }
+                new SessionRemoveTask(sqlite).execute(keys.toArray(new Long[0]));
             }
         }
+
     }
 
     ;
