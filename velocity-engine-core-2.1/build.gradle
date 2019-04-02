@@ -1,0 +1,2 @@
+configurations.maybeCreate("default")
+artifacts.add("default", file('velocity-engine-core-2.1.jar'))

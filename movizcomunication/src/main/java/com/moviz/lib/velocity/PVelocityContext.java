@@ -64,8 +64,8 @@ public class PVelocityContext extends AbstractContext implements Cloneable {
         return context.get(key);
     }
 
-    public Object[] internalGetKeys() {
-        return context.keySet().toArray();
+    public String[] internalGetKeys() {
+        return context.keySet().toArray(new String[0]);
     }
 
     public Object internalPut(String key, Object value) {
@@ -73,7 +73,13 @@ public class PVelocityContext extends AbstractContext implements Cloneable {
         return value;
     }
 
-    public Object internalRemove(Object key) {
+    @Override
+    public boolean internalContainsKey(String s) {
+        return context.containsKey(s);
+    }
+
+    @Override
+    public Object internalRemove(String key) {
         if (context.containsKey(key)) {
             context.remove(key);
         }

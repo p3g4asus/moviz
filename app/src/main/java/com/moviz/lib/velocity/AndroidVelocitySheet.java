@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.webkit.WebView;
 
 import org.apache.velocity.app.Velocity;
+import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.RuntimeInstance;
 
 import java.io.InputStream;
@@ -29,8 +30,6 @@ public abstract class AndroidVelocitySheet extends VelocitySheet {
 
     @Override
     protected void runtimeInstanceCommonInit(RuntimeInstance ri) {
-        ri.setProperty(Velocity.RUNTIME_LOG_LOGSYSTEM_CLASS,
-                VelocityLogger.class.getName());
 
         ri.setProperty("android.resource.loader.class",
                 AndroidResourceLoader.class.getName());

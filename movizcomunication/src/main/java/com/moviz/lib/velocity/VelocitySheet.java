@@ -12,6 +12,8 @@ import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.RuntimeInstance;
 import org.apache.velocity.runtime.parser.node.SimpleNode;
 
+import org.apache.commons.lang3.RandomStringUtils;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -84,8 +86,15 @@ public abstract class VelocitySheet {
     public void init() throws Exception {
         String tn = getTemplateName(), fn = getTemplateFilePath(tn);
         File f;
-        ri.setProperty("velocimacro.library", "macros_" + tn + ".vm");
-        ri.setProperty("runtime.introspector.uberspect",
+        ri.setProperty("introspector.conversion_handler.class","none");
+        ri.setProperty("parser.space_gobbling","bc");
+
+        ri.setProperty("directive.if.empty_check", false);
+        ri.setProperty("parser.allow_hyphen_in_identifiers",true);
+
+        ri.setProperty("velocimacro.arguments.preserve_literals",true);
+        ri.setProperty("velocimacro.library.path", "macros_" + tn + ".vm");
+        ri.setProperty("introspector.uberspect.class",
                 "com.moviz.lib.velocity.PublicFieldUberspect");
         runtimeInstanceCommonInit(ri);
         if (!fn.isEmpty() && (f = new File(fn)).isFile() && f.exists()
@@ -136,6 +145,9 @@ public abstract class VelocitySheet {
         // add stuff to your context.
         to.putInContext(ctx);
         // if (rv) printContext(ctx,"PRE ->");
+        //for (int i = 0; i<10; i++)
+        //    sw.append(RandomStringUtils.random(15, true, true)+"<br/>");
+        //to.t.initDocument();
         to.t.merge(ctx, sw);
         to.getFromContext(ctx);
         // if (rv) printContext(ctx,"POST ->");
@@ -226,8 +238,9 @@ public abstract class VelocitySheet {
     public static Template loadTemplate(RuntimeInstance ri, String tn,
             String bufferForYourTemplate) throws Exception {
         StringReader reader = new StringReader(bufferForYourTemplate);
-        SimpleNode node = ri.parse(reader, tn);
         Template template = new Template();
+        template.setName(tn);
+        SimpleNode node = ri.parse(reader, template);
         template.setRuntimeServices(ri);
         template.setData(node);
         template.initDocument();

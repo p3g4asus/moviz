@@ -42,10 +42,8 @@ public class PublicFieldUberspect extends UberspectImpl {
      * @param identifier the name of the property
      * @param i          a bunch of information.
      * @return a valid <code>VelPropertyGet</code>, if it was found.
-     * @throws Exception failed to create a valid <code>VelPropertyGet</code>.
      */
-    public VelPropertyGet getPropertyGet(Object obj, String identifier, Info i)
-            throws Exception {
+    public VelPropertyGet getPropertyGet(Object obj, String identifier, Info i) {
         Class clazz = obj.getClass();
         boolean isArray = clazz.isArray();
         boolean isLength = identifier.equals("length");
@@ -72,7 +70,12 @@ public class PublicFieldUberspect extends UberspectImpl {
         	}
         }*/
 
-        Field field = c.getField(identifier);
+        Field field = null;
+        try {
+            field = c.getField(identifier);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
         if (field != null) {
             return new PublicFieldGetter(field);
         }
@@ -91,16 +94,20 @@ public class PublicFieldUberspect extends UberspectImpl {
      * @param arg        the value to set to the property
      * @param i          a bunch of information.
      * @return a valid <code>VelPropertySet</code>, if it was found.
-     * @throws Exception failed to create a valid <code>VelPropertySet</code>.
      */
     public VelPropertySet getPropertySet(Object obj, String identifier,
-                                         Object arg, Info i) throws Exception {
+                                         Object arg, Info i) {
         VelPropertySet setter = super.getPropertySet(obj, identifier, arg, i);
         if (setter != null) {
             return setter;
         }
 
-        Field field = obj.getClass().getField(identifier);
+        Field field = null;
+        try {
+            field = obj.getClass().getField(identifier);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
         if (field != null) {
             return new PublicFieldSetter(field);
         }

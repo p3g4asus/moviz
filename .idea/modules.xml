@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/moviz.iml" filepath="$PROJECT_DIR$/moviz.iml" />
       <module fileurl="file://$PROJECT_DIR$/movizcomunication/movizcomunication.iml" filepath="$PROJECT_DIR$/movizcomunication/movizcomunication.iml" />
       <module fileurl="file://$PROJECT_DIR$/smartgattlib/smartgattlib.iml" filepath="$PROJECT_DIR$/smartgattlib/smartgattlib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/velocity-engine-core-2.1/velocity-engine-core-2.1.iml" filepath="$PROJECT_DIR$/velocity-engine-core-2.1/velocity-engine-core-2.1.iml" />
     </modules>
   </component>
 </project>

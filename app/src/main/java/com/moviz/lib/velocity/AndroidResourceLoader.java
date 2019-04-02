@@ -2,7 +2,7 @@ package com.moviz.lib.velocity;
 
 import android.content.res.Resources;
 
-import org.apache.commons.collections.ExtendedProperties;
+import org.apache.velocity.util.ExtProperties;;
 import org.apache.velocity.runtime.RuntimeServices;
 import org.apache.velocity.runtime.resource.Resource;
 import org.apache.velocity.runtime.resource.loader.FileResourceLoader;
@@ -13,7 +13,7 @@ public class AndroidResourceLoader extends FileResourceLoader {
     private Resources resources;
     private String packageName;
 
-    public void commonInit(RuntimeServices rs, ExtendedProperties configuration) {
+    public void commonInit(RuntimeServices rs, ExtProperties configuration) {
         super.commonInit(rs, configuration);
         this.resources = (Resources) rs.getProperty("android.content.res.Resources");
         this.packageName = (String) rs.getProperty("packageName");

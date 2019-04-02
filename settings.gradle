@@ -1,1 +1,1 @@
-include ':app', ':movizcomunication', ':smartgattlib'
+include ':app', ':movizcomunication', ':smartgattlib', ':velocity-engine-core-2.1'

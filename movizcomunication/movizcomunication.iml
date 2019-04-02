@@ -27,7 +27,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="Gradle: velocity-1.7-dep" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: velocity-tools-2.0" level="project" />
+    <orderEntry type="module" module-name="velocity-engine-core-2.1" exported="" />
+    <orderEntry type="library" exported="" name="Gradle: commons-lang3-3.8.1" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: slf4j-api-1.7.26" level="project" />
   </component>
 </module>
