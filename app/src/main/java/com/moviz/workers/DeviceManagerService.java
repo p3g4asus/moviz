@@ -1,5 +1,7 @@
 package com.moviz.workers;
 
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
@@ -16,6 +18,7 @@ import android.os.Parcelable;
 import android.support.v7.preference.PreferenceManager;
 import android.util.Log;
 
+import com.moviz.gui.R;
 import com.moviz.gui.app.CA;
 import com.moviz.gui.fragments.SettingsFragment;
 import com.moviz.gui.util.Messages;
@@ -76,6 +79,7 @@ public class DeviceManagerService extends Service implements CommandProcessor {
     public static final String ACTION_LOAD_CONFIGURATION = "DeviceManagerService.ACTION_LOAD_CONFIGURATION";
     public static final String EXTRA_CONFIGURATION_NAME = "DeviceManagerService.EXTRA_CONFIGURATION_NAME";
     public static final String EXTRA_DEBUG_FLAG = "DeviceManagerService.EXTRA_DEBUG_FLAG";
+    private final static int NOTIFICATION_ID = 999998;
 
     private int mDebugFlag = 0;
     private String dbFold = null;
@@ -718,6 +722,7 @@ public class DeviceManagerService extends Service implements CommandProcessor {
             dev.stop();
         }
         mDead = DeadState.DEAD;
+        stopForeground(true);
         stopSelf();
         TerminateMessage tms = new TerminateMessage();
         mBinder.postMessage(tms, this);
@@ -1182,6 +1187,15 @@ public class DeviceManagerService extends Service implements CommandProcessor {
     public void onCreate() {
         super.onCreate();
         Logger.d(CA.mLogSession,"DeviceManagerSerivice onCreate");
+        Intent notificationIntent = new Intent(this, DeviceManagerService.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
+                notificationIntent, 0);
+        Notification notification = new Notification.Builder(this)
+                .setSmallIcon(R.drawable.ic_stat_manager).setContentTitle(DeviceManagerService.class.getSimpleName())
+                .setContentText(DeviceManagerService.class.getSimpleName())
+                .setContentIntent(pendingIntent)
+                .setWhen(System.currentTimeMillis()).build();
+        this.startForeground(NOTIFICATION_ID, notification);
     }
 
     @Override

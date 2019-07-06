@@ -1,6 +1,7 @@
 package com.moviz.lib.hw;
 
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.le.ScanFilter;
 import android.bluetooth.le.ScanRecord;
 import android.bluetooth.le.ScanSettings;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import com.moviz.gui.app.CA;
 import com.moviz.lib.comunication.DeviceType;
 import com.moviz.lib.comunication.plus.holder.PDeviceHolder;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,6 +28,12 @@ public class KeiserM3iDeviceSearcher extends BLEDeviceSearcher {
                     .setCallbackType(ScanSettings.CALLBACK_TYPE_ALL_MATCHES).setReportDelay(0);
         }
         setSettings(sst);
+        ArrayList<ScanFilter> sfs = new ArrayList<>();
+        ScanFilter.Builder b = new ScanFilter.Builder();
+        sfs.add(b.setDeviceName("M3").build());
+        sfs.add(b.setDeviceName("M3s").build());
+        sfs.add(b.setDeviceName("M3i").build());
+        setFilters(sfs);
     }
     public KeiserM3iDeviceSearcher() {
         this(null,10000,-1);
@@ -39,8 +47,7 @@ public class KeiserM3iDeviceSearcher extends BLEDeviceSearcher {
     @Override
     public void onScanOk(BluetoothDevice bd, ScanRecord rec) {
         String addr = bd.getAddress();
-        String nm = bd.getName();
-        if (nm!=null && nm.startsWith("M3") && !resMap.containsKey(addr)) {
+        if (!resMap.containsKey(addr)) {
             String mid = KeiserM3iDataProcessor.getMachineId(rec);
             if (!mid.isEmpty() && (id<0 || (""+id).equals(mid))) {
                 PDeviceHolder cc = new PDeviceHolder(-1, addr, bd.getName(), "", DeviceType.hrdevice, "", "", true);

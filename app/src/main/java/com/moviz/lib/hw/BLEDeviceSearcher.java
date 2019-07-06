@@ -36,6 +36,7 @@ public class BLEDeviceSearcher implements DeviceSearcher,BLESearchCallback {
     private BluetoothLeScanner mLEScanner;
     private ScanSettings.Builder mSettings;
     private ScanCallback mScanCallback;
+    private ArrayList<ScanFilter> mScanFilters = new ArrayList<ScanFilter>();
     private ArrayList<PDeviceHolder> resultsList = new ArrayList<>();
     private HashMap<String, Boolean> addrMap = new HashMap<>();
     private BLESearchCallback searchCallback = this;
@@ -72,12 +73,21 @@ public class BLEDeviceSearcher implements DeviceSearcher,BLESearchCallback {
         this.mSettings = mSettings;
     }
 
+    public void setFilters(ArrayList<ScanFilter> sfs) {
+        this.mScanFilters = sfs;
+    }
+
     public BLEDeviceSearcher(BLESearchCallback sc, long timeout, ScanSettings.Builder scan) {
         this();
         searchCallback = sc==null?this:sc;
         mScanTimeout = timeout;
         if (scan!=null)
             mSettings = scan;
+    }
+
+    public BLEDeviceSearcher(BLESearchCallback sc, long timeout, ScanSettings.Builder scan, ArrayList<ScanFilter> sfs) {
+        this(sc,timeout,scan);
+        mScanFilters = sfs;
     }
 
     private void scanLeDevice(final boolean enable) {
@@ -109,7 +119,7 @@ public class BLEDeviceSearcher implements DeviceSearcher,BLESearchCallback {
                     else
                         mScanning = true;
                 } else {
-                    mLEScanner.startScan(new ArrayList<ScanFilter>(), mSettings.build(), mScanCallback);
+                    mLEScanner.startScan(mScanFilters, mSettings.build(), mScanCallback);
                     mScanning = true;
                 }
             } else

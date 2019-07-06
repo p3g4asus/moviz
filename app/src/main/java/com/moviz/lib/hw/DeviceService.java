@@ -63,7 +63,7 @@ public class DeviceService extends Service {
         public void stop() {
             Logger.d(CA.mLogSession,"DeviceService Stop");
             try {
-                removeNotification();
+                stopForeground(true);
                 stopSelf();
             } catch (Exception e) {
 
