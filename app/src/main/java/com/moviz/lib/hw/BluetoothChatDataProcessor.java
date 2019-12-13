@@ -4,7 +4,6 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
-import android.util.Log;
 
 import com.moviz.lib.comunication.message.BaseMessage;
 import com.moviz.lib.comunication.plus.holder.PDeviceHolder;
@@ -15,6 +14,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.UUID;
+
+import timber.log.Timber;
 
 public abstract class BluetoothChatDataProcessor<T extends Enum<T>> extends DeviceDataProcessor {
     private AcceptThread mAcceptThread;
@@ -83,7 +84,7 @@ public abstract class BluetoothChatDataProcessor<T extends Enum<T>> extends Devi
     @Override
     public boolean onReadData(GenericDevice dev, PDeviceHolder devh, byte[] buf, int length) {
         boolean rv = super.onReadData(mDeviceHolder, mDeviceHolder.innerDevice(), buf, length);
-        //Log.d("BluetoothChatService", "RX "+hexValues(buf,length));
+        //Timber.tag("BluetoothChatService").d("RX "+hexValues(buf,length));
         byte[] buffer;
         if (remainParseA.length == 0) {
             buffer = buf;
@@ -122,7 +123,7 @@ public abstract class BluetoothChatDataProcessor<T extends Enum<T>> extends Devi
                             finished = true;
                         else //if (l2==0)
                             foundMsg = -1;
-                        //Log.d("BluetoothChatService","Parsed message "+Message.values()[foundMsg]);
+                        //Timber.tag("BluetoothChatService").d("Parsed message "+Message.values()[foundMsg]);
                     } else
                         foundMsg = -1;
                 }
@@ -305,14 +306,14 @@ public abstract class BluetoothChatDataProcessor<T extends Enum<T>> extends Devi
             BluetoothServerSocket tmp = null;
             mDev = dev;
             try {
-                Log.i("BT", "Creating listening socket");
+                Timber.tag("BT").i("Creating listening socket");
                 if (mAdapter != null) {
                     tmp = mAdapter
                             .listenUsingRfcommWithServiceRecord("TreadMill",
                                     BluetoothChatDataProcessor.MY_UUID);
                 }
             } catch (IOException e) {
-                Log.e("BluetoothChatService", "listen() failed", e);
+                Timber.tag("BluetoothChatService").e(e, "listen() failed");
             }
             this.mmServerSocket = tmp;
         }
@@ -325,39 +326,37 @@ public abstract class BluetoothChatDataProcessor<T extends Enum<T>> extends Devi
                     + mDev.mBluetoothState);
             while (mDev.mBluetoothState != BluetoothState.CONNECTED) {
                 try {
-                    Log.i("BT", "Accepting now");
+                    Timber.tag("BT").i("Accepting now");
                     System.out.println(" mmServerSocket.accept() 272 ");
                     socket = this.mmServerSocket.accept();
                 } catch (IOException e) {
-                    Log.e("BluetoothChatService", "accept() failed 272 ", e);
+                    Timber.tag("BluetoothChatService").e(e, "accept() failed 272 ");
                     mDev.postDeviceError(new ParcelableMessage("exm_errr_connectionfailed"));
                     ;
                     break;
                 } catch (NullPointerException e) {
-                    Log.e("BluetoothChatService", "mmServerSocket null");
+                    Timber.tag("BluetoothChatService").e("mmServerSocket null");
                     mDev.postDeviceError(new ParcelableMessage("exm_errr_connectionfailed"));
                     ;
                     break;
                 }
                 if (socket != null) {
                     BluetoothDevice dev = socket.getRemoteDevice();
-                    Log.i("BT", "Connected with " + dev.getName() + " (" + dev.getAddress() + ")");
+                    Timber.tag("BT").i("Connected with " + dev.getName() + " (" + dev.getAddress() + ")");
                     synchronized (mDev) {
                         if (mDev.mBluetoothState == BluetoothState.LISTEN || mDev.mBluetoothState == BluetoothState.CONNECTING) {
-                            Log.i("BluetoothChatService", "Calling connected from acceptthread");
+                            Timber.tag("BluetoothChatService").i("Calling connected from acceptthread");
                             mDev.connectedTh(socket);
                         } else if (mDev.mBluetoothState == BluetoothState.IDLE || mDev.mBluetoothState == BluetoothState.CONNECTED) {
                             try {
                                 socket.close();
                             } catch (IOException e) {
-                                Log.e("BluetoothChatService",
-                                        "Could not close unwanted socket", e);
+                                Timber.tag("BluetoothChatService").e(e, "Could not close unwanted socket");
                             }
                         }
                     }
                 }
                 mDev.postDeviceError(new ParcelableMessage("exm_errr_connectionfailed"));
-                ;
             }
         }
 
@@ -365,7 +364,7 @@ public abstract class BluetoothChatDataProcessor<T extends Enum<T>> extends Devi
             try {
                 this.mmServerSocket.close();
             } catch (IOException e) {
-                Log.e("BluetoothChatService", "close() of server failed", e);
+                Timber.tag("BluetoothChatService").e(e, "close() of server failed");
             } catch (NullPointerException e) {
                 e.printStackTrace();
             }
@@ -380,35 +379,33 @@ public abstract class BluetoothChatDataProcessor<T extends Enum<T>> extends Devi
             this.mDev = dev;
             BluetoothSocket tmp = null;
             try {
-                Log.i("BT", "Creating connecting socket");
+                Timber.tag("BT").i("Creating connecting socket");
                 tmp = mDev.mBluetoothDevice
                         .createInsecureRfcommSocketToServiceRecord(BluetoothChatDataProcessor.MY_UUID);
             } catch (IOException e) {
-                Log.e("BluetoothChatService", "create() failed", e);
+                Timber.tag("BluetoothChatService").e(e, "create() failed");
             }
             this.mmSocket = tmp;
             System.out.println("UUID = " + tmp);
         }
 
         public void run() {
-            Log.i("BluetoothChatService", "BEGIN mConnectThread 334");
+            Timber.tag("BluetoothChatService").i("BEGIN mConnectThread 334");
             setName("ConnectThread");
 
             mAdapter.cancelDiscovery();
             try {
-                Log.i("BluetoothChatService", "BEGIN mConnectThread 406");
+                Timber.tag("BluetoothChatService").i("BEGIN mConnectThread 406");
                 this.mmSocket.connect();
-                Log.i("BluetoothChatService", "BEGIN mConnectThread 408");
+                Timber.tag("BluetoothChatService").i("BEGIN mConnectThread 408");
             } catch (IOException e) {
-                Log.i("BluetoothChatService", "mConnectThread err " + e);
+                Timber.tag("BluetoothChatService").e(e,"mConnectThread err ");
                 e.printStackTrace();
                 mDev.postDeviceError(new ParcelableMessage("exm_errr_connectionfailed"));
                 try {
                     this.mmSocket.close();
                 } catch (IOException e2) {
-                    Log.e("BluetoothChatService",
-                            "unable to close() socket during connection failure",
-                            e2);
+                    Timber.tag("BluetoothChatService").e(e2, "unable to close() socket during connection failure");
                 }
                 //BluetoothChatService.this.start();
                 return;
@@ -416,7 +413,7 @@ public abstract class BluetoothChatDataProcessor<T extends Enum<T>> extends Devi
             synchronized (mDev) {
                 mDev.mConnectThread = null;
             }
-            Log.i("BluetoothChatService", "Calling connected from connectthread");
+            Timber.tag("BluetoothChatService").i("Calling connected from connectthread");
             mDev.connectedTh(this.mmSocket);
         }
 
@@ -424,8 +421,7 @@ public abstract class BluetoothChatDataProcessor<T extends Enum<T>> extends Devi
             try {
                 this.mmSocket.close();
             } catch (IOException e) {
-                Log.e("BluetoothChatService",
-                        "close() of connect socket failed", e);
+                Timber.tag("BluetoothChatService").e(e, "close() of connect socket failed");
             }
         }
     }
@@ -437,7 +433,7 @@ public abstract class BluetoothChatDataProcessor<T extends Enum<T>> extends Devi
         private final BluetoothChatDataProcessor<? extends Enum<?>> mDev;
 
         public ConnectedThread(BluetoothChatDataProcessor<? extends Enum<?>> dev, BluetoothSocket socket) {
-            Log.d("BluetoothChatService", "create ConnectedThread");
+            Timber.tag("BluetoothChatService").d("create ConnectedThread");
             this.mmSocket = socket;
             this.mDev = dev;
             InputStream tmpIn = null;
@@ -446,7 +442,7 @@ public abstract class BluetoothChatDataProcessor<T extends Enum<T>> extends Devi
                 tmpIn = socket.getInputStream();
                 tmpOut = socket.getOutputStream();
             } catch (IOException e) {
-                Log.e("BluetoothChatService", "temp sockets not created", e);
+                Timber.tag("BluetoothChatService").e(e, "temp sockets not created");
             }
             this.mmInStream = tmpIn;
 
@@ -454,7 +450,7 @@ public abstract class BluetoothChatDataProcessor<T extends Enum<T>> extends Devi
         }
 
         public void run() {
-            Log.i("BluetoothChatService", "BEGIN mConnectedThread 437 ");
+            Timber.tag("BluetoothChatService").i("BEGIN mConnectedThread 437 ");
             byte[] buffer = new byte[2048];
             int bytes = 7;
             try {
@@ -465,11 +461,11 @@ public abstract class BluetoothChatDataProcessor<T extends Enum<T>> extends Devi
                     }
                 }
             } catch (IOException e) {
-                Log.e("BluetoothChatService", "disconnected 451 ", e);
+                Timber.tag("BluetoothChatService").e(e, "disconnected 451 ");
                 mDev.postDeviceError(new ParcelableMessage("exm_errr_connectionlost"));
             } catch (Exception e) {
                 e.printStackTrace();
-                Log.e("BluetoothChatService", "error ", e);
+                Timber.tag("BluetoothChatService").e(e, "error ");
             }
         }
 
@@ -480,7 +476,7 @@ public abstract class BluetoothChatDataProcessor<T extends Enum<T>> extends Devi
                     mDev.onDataWrite(mDeviceHolder, mDeviceHolder.innerDevice(), buffer, buffer.length);
                 }
             } catch (IOException e) {
-                Log.e("BluetoothChatService", "Exception during write", e);
+                Timber.tag("BluetoothChatService").e(e, "Exception during write");
             }
         }
 
@@ -488,8 +484,7 @@ public abstract class BluetoothChatDataProcessor<T extends Enum<T>> extends Devi
             try {
                 this.mmSocket.close();
             } catch (IOException e) {
-                Log.e("BluetoothChatService",
-                        "close() of connect socket failed", e);
+                Timber.tag("BluetoothChatService").e(e, "close() of connect socket failed");
             }
         }
     }

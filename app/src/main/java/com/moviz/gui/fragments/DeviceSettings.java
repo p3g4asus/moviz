@@ -12,7 +12,6 @@ import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
-import android.util.Log;
 
 import com.moviz.gui.R;
 import com.moviz.gui.preference.AliasPreference;
@@ -34,6 +33,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import timber.log.Timber;
 
 public class DeviceSettings {
     public static String ENABLED_KEY = "pref_device_enabled";
@@ -87,7 +88,7 @@ public class DeviceSettings {
                             if (newenabled != devh.isEnabled()) {
                                 currentd.setEnabled(newenabled);
                                 pEdit.putBoolean(key = ENABLED_KEY + devh.getId(),newenabled);
-                                Log.v(TAG,"Putting "+key+" "+newenabled);
+                                Timber.tag(TAG).v("Putting "+key+" "+newenabled);
                                 rv = true;
                                 reason = DeviceChangedMessage.Reason.BECAUSE_DEVICE_CHANGED;
                             }
@@ -115,7 +116,7 @@ public class DeviceSettings {
                             if (reason == null)
                                 reason = DeviceChangedMessage.Reason.BECAUSE_DEVICE_CONF_CHANGED;
                             additionalS.put(key,value);
-                            Log.v(TAG,"Putting "+key+" "+value);
+                            Timber.tag(TAG).v("Putting "+key+" "+value);
                             pEdit.putString(
                                     PDeviceHolder.getSubSettingKey(currentd,key),
                                     value);

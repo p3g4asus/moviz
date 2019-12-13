@@ -14,7 +14,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Parcelable;
-import android.util.Log;
 
 import com.moviz.gui.app.CA;
 import com.moviz.lib.comunication.DeviceType;
@@ -24,6 +23,8 @@ import com.moviz.lib.utils.ParcelableMessage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import timber.log.Timber;
 
 /**
  * Created by Matteo on 23/10/2016.
@@ -97,7 +98,7 @@ public class BLEDeviceSearcher implements DeviceSearcher,BLESearchCallback {
             resultsList.clear();
             addrMap.clear();
             if (mBluetoothAdapter != null) {
-                Log.i(TAG, "Starting Search");
+                Timber.tag(TAG).i("Starting Search");
                 if (mScanTimeout>0)
                     mHandler.postDelayed(new Runnable() {
                         @Override
@@ -145,7 +146,7 @@ public class BLEDeviceSearcher implements DeviceSearcher,BLESearchCallback {
 
     @Override
     public void onScanError(int errorCode) {
-        Log.e(TAG, "onScanError Error Code: " + errorCode);
+        Timber.tag(TAG).e("onScanError Error Code: " + errorCode);
         if (errorCode<0)
             CA.lbm.sendBroadcast(new Intent(DEVICE_SEARCH_ERROR).putExtra(DEVICE_ERROR_CODE, (Parcelable) new ParcelableMessage("exm_errs_adapter")));
         else
@@ -162,7 +163,7 @@ public class BLEDeviceSearcher implements DeviceSearcher,BLESearchCallback {
 
         @Override
         public void onScanResult(int callbackType, ScanResult result) {
-            Log.i(TAG, "onScanResult "+result.getDevice().getName()+"/"+result.getDevice().getAddress());
+            Timber.tag(TAG).i("onScanResult "+result.getDevice().getName()+"/"+result.getDevice().getAddress());
             searchCallback.onScanOk(result.getDevice(),result.getScanRecord());
 
         }
@@ -176,7 +177,7 @@ public class BLEDeviceSearcher implements DeviceSearcher,BLESearchCallback {
 
         @Override
         public void onScanFailed(int errorCode) {
-            Log.i(TAG, "onScanFailed "+errorCode);
+            Timber.tag(TAG).i("onScanFailed "+errorCode);
             mScanning = false;
             searchCallback.onScanError(errorCode);
         }
@@ -200,7 +201,7 @@ public class BLEDeviceSearcher implements DeviceSearcher,BLESearchCallback {
 
     @Override
     public void stopSearch() {
-        Log.i(TAG, "Stopping Search");
+        Timber.tag(TAG).i("Stopping Search");
         scanLeDevice(false);
     }
 

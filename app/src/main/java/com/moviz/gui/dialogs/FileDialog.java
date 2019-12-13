@@ -6,12 +6,13 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Environment;
-import android.util.Log;
 
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.List;
+
+import timber.log.Timber;
 
 public class FileDialog {
     private static final String PARENT_DIR = "..";
@@ -63,7 +64,7 @@ public class FileDialog {
         if (selectDirectoryOption) {
             builder.setPositiveButton(positiveButtonText, new OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    Log.d(TAG, currentPath.getPath());
+                    Timber.tag(TAG).d(currentPath.getPath());
                     fireDirectorySelectedEvent(currentPath);
                 }
             });

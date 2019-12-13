@@ -5,31 +5,31 @@ import android.bluetooth.le.ScanRecord;
 import android.bluetooth.le.ScanSettings;
 import android.os.Build;
 import android.os.Handler;
-import android.util.Log;
 import android.util.SparseArray;
 
 import com.moviz.lib.comunication.plus.holder.PUserHolder;
 import com.moviz.lib.utils.ParcelableMessage;
 
-import static com.moviz.lib.hw.DeviceDataProcessor.DF_ACTIVE;
+import timber.log.Timber;
 
 public class NonConnectableBinder extends DeviceBinder implements BLESearchCallback {
     private BLEDeviceSearcher mLEScanner = null;
     protected Handler mHandler = new Handler();
     protected long mScanBetween = 1000;
     protected Runnable mForceRestart = null;
+    public String TAG = getClass().getName(); 
     public NonConnectableBinder() {
         super();
     }
 
     protected void scheduleForceRestart(boolean yes) {
         if (!yes && mForceRestart!=null) {
-            Log.i(TAG,"Deleting forceRestart");
+            Timber.tag(TAG).i("Deleting forceRestart");
             mHandler.removeCallbacks(mForceRestart);
             mForceRestart = null;
         }
         else if (yes) {
-            Log.i(TAG,"Scheduling forceRestart");
+            Timber.tag(TAG).i("Scheduling forceRestart");
             mForceRestart = new Runnable() {
                 @Override
                 public void run() {
@@ -55,10 +55,15 @@ public class NonConnectableBinder extends DeviceBinder implements BLESearchCallb
                 mHandler.removeCallbacks(r);
             mDevices.remove(addr);
             BluetoothState oldst = bund.getBluetoothState();
+            String errstr;
             if (oldst==BluetoothState.CONNECTING)
-                bund.postDeviceError(new ParcelableMessage("exm_errr_connectionfailed"));
+                bund.postDeviceError(new ParcelableMessage(errstr = "exm_errr_connectionfailed"));
+            else if (oldst==BluetoothState.DISCONNECTING)
+                bund.postDeviceError(new ParcelableMessage(errstr = "exm_errr_connectionlost"));
             else
-                bund.postDeviceError(new ParcelableMessage("exm_errr_nonconn_multipletimeout").put(bund.mDeviceHolder.innerDevice()));
+                bund.postDeviceError(new ParcelableMessage(errstr = "exm_errr_nonconn_multipletimeout").put(bund.mDeviceHolder.innerDevice()));
+            Timber.tag(TAG).w(
+                    "Disconnecting "+errstr);
             bund.setBluetoothState(BluetoothState.IDLE);
             if (mDevices.isEmpty()) {
                 mLEScanner.stopSearch();
@@ -82,7 +87,7 @@ public class NonConnectableBinder extends DeviceBinder implements BLESearchCallb
     @Override
     public boolean connect(final GenericDevice device, PUserHolder us) {
         if (device == null) {
-            Log.w(TAG,
+            Timber.tag(TAG).w(
                     "BluetoothAdapter not initialized or unspecified address.");
             return false;
         }
@@ -124,7 +129,7 @@ public class NonConnectableBinder extends DeviceBinder implements BLESearchCallb
             @Override
             public void run() {
                 disconnect(bldevb.mDeviceHolder);
-                Log.i(TAG,"Timeout detected for "+bldevb.mDeviceHolder);
+                Timber.tag(TAG).i("Timeout detected for "+bldevb.mDeviceHolder);
                 if (bldevb.getBluetoothState()!=BluetoothState.DISCONNECTING)
                     onScanTimeout();
             }
@@ -140,7 +145,7 @@ public class NonConnectableBinder extends DeviceBinder implements BLESearchCallb
     @Override
     public void onScanOk(BluetoothDevice dev, ScanRecord rec) {
         final NonConnectableDataProcessor bldevb = dataProcessorFromDevice(dev,rec);
-        Log.i(TAG,"onScanOK "+dev.getName()+"/"+dev.getAddress());
+        Timber.tag(TAG).i("onScanOK "+dev.getName()+"/"+dev.getAddress());
         if (bldevb!=null) {
             BluetoothState btst = bldevb.getBluetoothState();
             if (btst!=BluetoothState.DISCONNECTING) {
@@ -167,7 +172,7 @@ public class NonConnectableBinder extends DeviceBinder implements BLESearchCallb
 
     @Override
     public void onScanTimeout() {
-        Log.i(TAG,"Scan timeout");
+        Timber.tag(TAG).i("Scan timeout");
         if (!mDevices.isEmpty()) {
             mHandler.postDelayed(new Runnable() {
                 @Override

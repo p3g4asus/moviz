@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 import android.util.LongSparseArray;
 
 import com.moviz.gui.app.CA;
@@ -28,11 +27,12 @@ import com.moviz.lib.utils.DeviceTypeMaps;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import timber.log.Timber;
 
 public class MySQLiteHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "pafersmain";
@@ -132,8 +132,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.w(MySQLiteHelper.class.getName(),
-                "Upgrading database from version " + oldVersion + " to "
+        Timber.tag(MySQLiteHelper.class.getName()).w("Upgrading database from version " + oldVersion + " to "
                         + newVersion + ", which will destroy all old data");
 		/*Databasable dbl = new PUserHolder();
 		db.execSQL("DROP TABLE IF EXISTS " + dbl.getTableName());

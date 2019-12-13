@@ -18,6 +18,8 @@ import com.wahoofitness.connector.conn.connections.params.ConnectionParams;
 import com.wahoofitness.connector.listeners.discovery.DiscoveryListener;
 import com.wahoofitness.connector.listeners.discovery.DiscoveryResult;
 
+import timber.log.Timber;
+
 /**
  * Created by Fujitsu on 24/10/2016.
  */
@@ -75,7 +77,7 @@ public class WahooBinder extends DeviceBinder {
 
         @Override
         public void onDiscoveredDeviceLost(ConnectionParams params) {
-            Log.v(TAG, "mDiscoveryListener.onDiscoveredDeviceLost " + params);
+            Timber.tag(TAG).v("mDiscoveryListener.onDiscoveredDeviceLost " + params);
         }
 
         @Override
@@ -87,23 +89,23 @@ public class WahooBinder extends DeviceBinder {
 
         /*@Override
         public void connectedSensor(SensorConnection sensorConnection) {
-            Log.v(TAG, "mHardwareConnectorCallback.connectedSensor " + sensorConnection);
+            Timber.tag(TAG).v("mHardwareConnectorCallback.connectedSensor " + sensorConnection);
         }
         @Override
         public void disconnectedSensor(SensorConnection sensorConnection) {
-            Log.v(TAG, "mHardwareConnectorCallback.disconnectedSensor " + sensorConnection);
+            Timber.tag(TAG).v("mHardwareConnectorCallback.disconnectedSensor " + sensorConnection);
         }*/
 
         @Override
         public void onHardwareConnectorStateChanged(HardwareConnectorTypes.NetworkType networkType,
                                           HardwareConnectorEnums.HardwareConnectorState hardwareState) {
-            Log.v(TAG, "mHardwareConnectorCallback.connectorStateChanged " + networkType + " " + hardwareState);
+            Timber.tag(TAG).v("mHardwareConnectorCallback.connectorStateChanged " + networkType + " " + hardwareState);
         }
 
         @Override
         public void onFirmwareUpdateRequired(SensorConnection sensorConnection,
                                              String currentVersionNumber, String recommendedVersion) {
-            Log.v(TAG, "mHardwareConnectorCallback.onFirmwareUpdateRequired " + sensorConnection + " " + currentVersionNumber + " " + recommendedVersion);
+            Timber.tag(TAG).v("mHardwareConnectorCallback.onFirmwareUpdateRequired " + sensorConnection + " " + currentVersionNumber + " " + recommendedVersion);
         }
     };
 
@@ -116,7 +118,7 @@ public class WahooBinder extends DeviceBinder {
         @Override
         public void onNewCapabilityDetected(SensorConnection sensorConnection,
                                             Capability.CapabilityType capabilityType) {
-            Log.v(TAG,"mSensorConnectionListener.onNewCapabilityDetected "+sensorConnection+" "+capabilityType);
+            Timber.tag(TAG).v("mSensorConnectionListener.onNewCapabilityDetected "+sensorConnection+" "+capabilityType);
             DeviceDataProcessor devb = sensorConnection2DataProcessor(sensorConnection);
             if (devb!=null)
                 ((WahooDataProcessor) devb).onNewCapabilityDetected(sensorConnection, capabilityType);
@@ -125,7 +127,7 @@ public class WahooBinder extends DeviceBinder {
         @Override
         public void onSensorConnectionError(SensorConnection sensorConnection,
                                             HardwareConnectorEnums.SensorConnectionError error) {
-            Log.v(TAG,"mSensorConnectionListener.onSensorConnectionError "+sensorConnection+" "+error);
+            Timber.tag(TAG).v("mSensorConnectionListener.onSensorConnectionError "+sensorConnection+" "+error);
             if (error!=HardwareConnectorEnums.SensorConnectionError.BTLE_READ_CHARACTERISTICS_ERROR) {
                 DeviceDataProcessor devb = sensorConnection2DataProcessor(sensorConnection);
                 if (devb != null)
@@ -137,7 +139,7 @@ public class WahooBinder extends DeviceBinder {
         @Override
         public void onSensorConnectionStateChanged(SensorConnection sensorConnection,
                                                    HardwareConnectorEnums.SensorConnectionState state) {
-            Log.v(TAG,"mSensorConnectionListener.onSensorConnectionStateChanged "+sensorConnection+" "+state);
+            Timber.tag(TAG).v("mSensorConnectionListener.onSensorConnectionStateChanged "+sensorConnection+" "+state);
             DeviceDataProcessor devb = sensorConnection2DataProcessor(sensorConnection);
             if (devb!=null) {
                 ParcelableMessage pm;
@@ -178,8 +180,7 @@ public class WahooBinder extends DeviceBinder {
     @Override
     public boolean connect(GenericDevice device, PUserHolder us) {
         if (device == null) {
-            Log.w(TAG,
-                    "BluetoothAdapter not initialized or unspecified address.");
+            Timber.tag(TAG).w("BluetoothAdapter not initialized or unspecified address.");
             return false;
         }
 

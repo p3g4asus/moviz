@@ -123,7 +123,7 @@ public class PlotFragment extends Fragment {
         public void onAfterDraw(Plot arg0, Canvas arg1) {
 
             //long now = System.currentTimeMillis();
-            //Log.d("ciao", "t = "+(now-timeStartPlot)/1000.0);
+            //Timber.tag("ciao").d("t = "+(now-timeStartPlot)/1000.0);
             synchronized (synch) {
                 if (inWork)
                     synch.notifyAll();

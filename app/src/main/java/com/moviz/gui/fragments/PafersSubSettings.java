@@ -7,18 +7,18 @@ import android.content.SharedPreferences.Editor;
 import android.support.v4.app.Fragment;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
-import android.util.Log;
 
 import com.moviz.gui.R;
 import com.moviz.gui.dialogs.FileDialog;
 import com.moviz.gui.dialogs.FolderDialogChange;
-import com.moviz.gui.preference.BindSummaryToValueListener;
 import com.moviz.gui.preference.IntPreference;
 import com.moviz.lib.comunication.plus.holder.PDeviceHolder;
 import com.moviz.lib.program.ProgramParser;
 
 import java.io.File;
 import java.util.Map;
+
+import timber.log.Timber;
 
 public class PafersSubSettings extends DeviceSubSettings {
     private Preference pProgramFold;
@@ -73,8 +73,7 @@ public class PafersSubSettings extends DeviceSubSettings {
                     /*
 					 * fileDialog.addFileListener(new
 					 * FileDialog.FileSelectedListener() { public void
-					 * fileSelected(File file) { Log.d(getClass().getName(),
-					 * "selected file " + file.toString()); } });
+					 * fileSelected(File file) { Timber.tag(getClass().getName()).d(* "selected file " + file.toString()); } });
 					 */
                     fileDialog
                             .addFileListener(new FileDialog.FileSelectedListener() {
@@ -82,7 +81,7 @@ public class PafersSubSettings extends DeviceSubSettings {
                                 @Override
                                 public void fileSelected(File file) {
                                     String d = file.getPath();
-                                    Log.d(getClass().getName(), "selected file " + d);
+                                    Timber.tag(getClass().getName()).d("selected file " + d);
                                     listener.onPreferenceChange(pProgramFile,d);
                                     pProgramFile.setSummary(ProgramParser.extractName(file));
                                 }

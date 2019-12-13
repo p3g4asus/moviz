@@ -1,7 +1,6 @@
 package com.moviz.lib.hw;
 
 import android.bluetooth.BluetoothGattCharacteristic;
-import android.util.Log;
 
 import com.movisens.smartgattlib.Characteristic;
 import com.movisens.smartgattlib.characteristics.BatteryLevel;
@@ -16,6 +15,8 @@ import com.moviz.lib.comunication.plus.holder.PHolderSetter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.UUID;
+
+import timber.log.Timber;
 
 /**
  * Created by Fujitsu on 02/11/2016.
@@ -80,7 +81,7 @@ public class HRDataProcessor extends BLEDataProcessor {
             BatteryLevel hrm = new BatteryLevel(value); // Interpret Characteristic
             lastBattery = (byte) hrm.getBatteryLevel();
             setStatusVar(".battery", lastBattery);
-            Log.d(TAG, "Battery = " + lastBattery + "%");
+            Timber.tag(TAG).d("Battery = " + lastBattery + "%");
             rv = true;
         } else {
             // For all other profiles, writes the data formatted in HEX.
@@ -91,7 +92,7 @@ public class HRDataProcessor extends BLEDataProcessor {
                 for (byte byteChar : data)
                     stringBuilder.append(String.format("%02X ",
                             byteChar));
-                Log.d(TAG, new String(data) + "\n" + stringBuilder.toString());
+                Timber.tag(TAG).d(new String(data) + "\n" + stringBuilder.toString());
             }
         }
         return rv;

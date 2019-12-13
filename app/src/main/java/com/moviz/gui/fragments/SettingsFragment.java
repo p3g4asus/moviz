@@ -30,7 +30,6 @@ import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.util.LongSparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +41,6 @@ import com.moviz.gui.R;
 import com.moviz.gui.activities.ActivityMain;
 import com.moviz.gui.app.CA;
 import com.moviz.gui.dialogs.MultipleSessionSelectDialog;
-import com.moviz.gui.dialogs.SessionDateDialog;
 import com.moviz.gui.preference.BindSummaryToValueListener;
 import com.moviz.gui.preference.ConfNamePreference;
 import com.moviz.gui.preference.DBCleanPreference;
@@ -62,7 +60,6 @@ import com.moviz.lib.comunication.plus.message.ProcessedOKMessage;
 import com.moviz.lib.comunication.plus.message.UserSetMessage;
 import com.moviz.lib.db.MySQLiteHelper;
 import com.moviz.lib.db.SessionLoadDBProgress;
-import com.moviz.lib.plot.ProgressPub;
 import com.moviz.lib.utils.CommandManager;
 import com.moviz.lib.utils.CommandProcessor;
 import com.moviz.lib.utils.DeviceTypeMaps;
@@ -79,6 +76,8 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import timber.log.Timber;
 
 import static com.moviz.gui.preference.BindSummaryToValueListener.LISTENER;
 import static com.moviz.gui.preference.BindSummaryToValueListener.SUMMARY;
@@ -180,7 +179,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Comman
                     String key = s.substring(0, sidx);
                     String value = sidx + 1 < s.length() ? s.substring(sidx + 1) : "";
                     pEdit.putString(key, value);
-                    Log.v(TAG,"Putting "+key+" = "+value);
+                    Timber.tag(TAG).v("Putting "+key+" = "+value);
                     rv = true;
                     if (key.equals("pref_user"))
                         manageUserChange(value, commandManager, source);
@@ -447,7 +446,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Comman
                 sqlite.getValue(d);
                 //setPreferencesFromResource(R.xml.preferences, DeviceSettings.SCREEN_KEY);
                 //Preference pp = findPreference("pref_temp_dir2");
-                //Log.d(TAG,"This is pp "+pp);
+                //Timber.tag(TAG).d("This is pp "+pp);
                 DeviceSettings ss = new DeviceSettings().restore(this, getActivity(), mPCList, d, null, mBinder, this);
                 deviceSettings.add(ss);
                 setPreferenceScreen(ss.getPrefereceScreen());

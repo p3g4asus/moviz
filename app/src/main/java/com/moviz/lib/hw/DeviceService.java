@@ -10,14 +10,13 @@ import android.os.Binder;
 import android.os.IBinder;
 
 import com.moviz.gui.R;
-import com.moviz.gui.app.CA;
 import com.moviz.lib.comunication.message.ProtocolMessage;
 import com.moviz.lib.utils.DeviceTypeMaps;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import no.nordicsemi.android.log.Logger;
+import timber.log.Timber;
 
 public class DeviceService extends Service {
     private int lastIcon = R.drawable.ic_stat_manager;
@@ -45,7 +44,8 @@ public class DeviceService extends Service {
     public final static String EXTRA_DEVICE = "DeviceService.EXTRA_DEVICE";
     public static final String EXTRA_DESCRIPTION = "DeviceService.EXTRA_DESCRIPTION";
     public static final String EXTRA_DEVICE_ERROR = "DeviceService.EXTRA_DEVICE_ERROR";
-
+    public static final String TAG = "DeviceService";
+    
     protected ConcurrentHashMap<String, DeviceDataProcessor> mDevices = new ConcurrentHashMap<>();
     protected ConcurrentHashMap<String, DeviceSimulator> mSimulators = new ConcurrentHashMap<>();
 
@@ -61,7 +61,7 @@ public class DeviceService extends Service {
         }
 
         public void stop() {
-            Logger.d(CA.mLogSession,"DeviceService Stop");
+            Timber.tag(TAG).d("DeviceService Stop");
             try {
                 stopForeground(true);
                 stopSelf();
@@ -94,7 +94,7 @@ public class DeviceService extends Service {
 
     @Override
     public void onDestroy() {
-        Logger.d(CA.mLogSession,"DeviceService Destroyed");
+        Timber.tag(TAG).d("DeviceService Destroyed");
         if (mBinder != null) {
             for (Map.Entry<String, DeviceDataProcessor> entry : mDevices.entrySet()) {
                 mBinder.getBinderForDevice(entry.getValue().mDeviceHolder).stop();
@@ -108,7 +108,7 @@ public class DeviceService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Logger.d(CA.mLogSession,"DeviceService Created");
+        Timber.tag(TAG).d("DeviceService Created");
         Intent notificationIntent = new Intent(this, DeviceService.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
                 notificationIntent, 0);

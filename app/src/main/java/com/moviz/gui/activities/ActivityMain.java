@@ -29,7 +29,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -78,7 +77,7 @@ import java.util.TimerTask;
 import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
 import it.neokree.materialtabs.MaterialTabListener;
-import no.nordicsemi.android.log.Logger;
+import timber.log.Timber;
 
 
 public class ActivityMain extends AppCompatActivity implements MaterialTabListener, View.OnClickListener, View.OnLongClickListener, CommandProcessor {
@@ -220,10 +219,10 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
                     checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
                     checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
                    ) {
-                Log.v(TAG,"Permission is granted");
+                Timber.tag(TAG).v("Permission is granted");
                 return true;
             } else {
-                Log.v(TAG,"Permission is revoked");
+                Timber.tag(TAG).v("Permission is revoked");
                 requestPermissions(new String[]{
                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -235,7 +234,7 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
             }
         }
         else { //permission is automatically granted on sdk<23 upon installation
-            Log.v(TAG,"Permission is granted");
+            Timber.tag(TAG).v("Permission is granted");
             return true;
         }
     }
@@ -255,7 +254,7 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
             startConf = startingIntent.getStringExtra(DeviceManagerService.EXTRA_CONFIGURATION_NAME);
             startDebug = startingIntent.getIntExtra(DeviceManagerService.EXTRA_DEBUG_FLAG,0);
         }
-        Logger.d(CA.mLogSession,"Starting activity "+startConf+" df = "+startDebug);
+        Timber.tag(TAG).d("Starting activity "+startConf+" df = "+startDebug);
         setupFAB2();
         setupTabs();
         setupDrawer();
@@ -288,7 +287,7 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
             if (g!=PackageManager.PERMISSION_GRANTED)
                 return;
         }
-        Log.v(TAG,"Permission: "+permissions[0]+ "was "+grantResults[0]);
+        Timber.tag(TAG).v("Permission: "+permissions[0]+ "was "+grantResults[0]);
         Toast.makeText(this,R.string.auth_ok_restart,Toast.LENGTH_LONG);
     }
 
@@ -353,7 +352,7 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
                     int statusCode = intent.getIntExtra(GoogleFitService.FIT_EXTRA_NOTIFY_FAILED_STATUS_CODE, 0);
                     PendingIntent pendingIntent = intent.getParcelableExtra(GoogleFitService.FIT_EXTRA_NOTIFY_FAILED_INTENT);
                     ConnectionResult result = new ConnectionResult(statusCode, pendingIntent);
-                    Log.i("MainActivity", "Connection failed. Cause: " + result.toString());
+                    Timber.tag("MainActivity").i("Connection failed. Cause: " + result.toString());
                     if (!result.hasResolution()) {
                         // Show the localized error dialog
                         GooglePlayServicesUtil.getErrorDialog(result.getErrorCode(),
@@ -361,20 +360,19 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
                         return;
                     }
                     try {
-                        Log.i("MainActivity", "Attempting to resolve failed connection");
+                        Timber.tag("MainActivity").i("Attempting to resolve failed connection");
                         if (!mAuthInProgress) {
                             mAuthInProgress = true;
                             result.startResolutionForResult(ActivityMain.this,
                                     1);
                         }
                     } catch (IntentSender.SendIntentException e) {
-                        Log.e("MainActivity",
-                                "Exception while starting resolution activity", e);
+                        Timber.tag("MainActivity").e("Exception while starting resolution activity", e);
                     }
                 } else if (intent.hasExtra(GoogleFitService.FIT_EXTRA_NOTIFY_SUSPENDED_REASON)) {
                     msg = "Suspended fit R=" + intent.getIntExtra(GoogleFitService.FIT_EXTRA_NOTIFY_SUSPENDED_REASON, 0)
                             + " K=" + intent.getLongExtra(GoogleFitService.FIT_EXTRA_NOTIFY_SUSPENDED_SESSION, -1);
-                    Log.e("MainActivity", msg);
+                    Timber.tag("MainActivity").e(msg);
                     Toast.makeText(ActivityMain.this, msg, Toast.LENGTH_LONG).show();
                 }
             } else if (msg.equals(Messages.EXCEPTION_MESSAGE)) {
@@ -394,7 +392,7 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
                         //Toast.makeText(ActivityMain.this, msgexc, Toast.LENGTH_LONG).show();
                     } else if (idexc.indexOf("_errs_") >= 0) {
                         showProgressDialog(false, "");
-                        Log.v(TAG,"Ril Error "+idexc);
+                        Timber.tag(TAG).v("Ril Error "+idexc);
                         showError(res.getString(R.string.exm_errs_exception) + "\n" + msgexc);
                     }
                 }
@@ -534,7 +532,7 @@ public class ActivityMain extends AppCompatActivity implements MaterialTabListen
 
     @Override
     public void onDestroy() {
-        Logger.d(CA.mLogSession,"Activity Destroy");
+        Timber.tag(TAG).d("Activity Destroy");
         super.onDestroy();
     }
 

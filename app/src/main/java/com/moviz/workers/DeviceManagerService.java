@@ -16,7 +16,6 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.Parcelable;
 import android.support.v7.preference.PreferenceManager;
-import android.util.Log;
 
 import com.moviz.gui.R;
 import com.moviz.gui.app.CA;
@@ -63,7 +62,7 @@ import java.util.Map;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 
-import no.nordicsemi.android.log.Logger;
+import timber.log.Timber;
 
 
 public class DeviceManagerService extends Service implements CommandProcessor {
@@ -94,7 +93,7 @@ public class DeviceManagerService extends Service implements CommandProcessor {
     private Map<PDeviceHolder, GenericDevice> holder2deviceinstance = Collections.synchronizedMap(new LinkedHashMap<PDeviceHolder, GenericDevice>());
     private Vector<PDeviceHolder> holder2connectingDev = new Vector<>();
     private long mainSessionId = -1;
-    private int setBluetoothAfterDisc = 0;
+    private int setBluetoothAfterDisc = -1;
     private int managerState = 0;
     private int searchDeviceDone = 0;
     private DeviceSearcher currentDS = null;
@@ -176,13 +175,13 @@ public class DeviceManagerService extends Service implements CommandProcessor {
             public void run() {
                 GenericDevice dev;
                 PDeviceHolder devh;
-                Log.w(TAG, "Processing " + hs2.getClass().getSimpleName());
+                Timber.tag(TAG).w("Processing " + hs2.getClass().getSimpleName());
                 if (hs2 instanceof ConnectMessage && (managerState & (STATE_CONNECTING | STATE_STOPPING | STATE_REBINDING | STATE_SEARCHING)) == 0) {
                     connectTimerStop();
                     holder2connectingDev.clear();
                     connRetryStatus = 0;
                     reset();
-                    Log.v(TAG, "1 programStop false");
+                    Timber.tag(TAG).d("1 programStop false");
                     for (Map.Entry<PDeviceHolder, GenericDevice> entry : holder2deviceinstance.entrySet()) {
                         dev = entry.getValue();
                         devh = entry.getKey();
@@ -254,11 +253,11 @@ public class DeviceManagerService extends Service implements CommandProcessor {
                     }
                 } else if (hs2 instanceof ExitMessage) {
                     managerState |= STATE_EXITING;
-                    Log.v(TAG, "1 needtoexit true");
+                    Timber.tag(TAG).d("1 needtoexit true");
                     stopOperations();
                 } else if (hs2 instanceof DisconnectMessage) {
                     //managerState&=(~STATE_EXITING);
-                    Log.v(TAG, "2 needtoexit false");
+                    Timber.tag(TAG).d("2 needtoexit false");
                     stopOperations();
                 }
             }
@@ -460,7 +459,7 @@ public class DeviceManagerService extends Service implements CommandProcessor {
             // TODO Auto-generated catch block
             userN = -1;
         }
-        Log.v(TAG, "User is "+userN);
+        Timber.tag(TAG).d("User is "+userN);
         try {
             if (reloadDBConf() != null) {
                 user = new PUserHolder();
@@ -477,14 +476,14 @@ public class DeviceManagerService extends Service implements CommandProcessor {
     }
 
     private void reset() {
-        Log.v(TAG,"Resetting "+reloadOnDisc);
+        Timber.tag(TAG).d("Resetting "+reloadOnDisc);
         int connectedd = nConnectedDevices();
         connRetryNum = Integer.parseInt(sharedPref.getString("pref_connretrynum", "5"));
         connRetryDelay = Integer.parseInt(sharedPref.getString("pref_connretrydelay", "30"));
         if (connRetryDelay <= 0)
             connRetryDelay = 30;
         if ((reloadOnDisc & RELOAD_OTHER_SETTINGS) != 0 && connectedd == 0) {
-            Log.v(TAG, "Deciding user "+userObj+" "+newUser);
+            Timber.tag(TAG).d("Deciding user "+userObj+" "+newUser);
             if (newUser!= null && (userObj==null || !newUser.equals(userObj))) {
                 userObj = newUser;
             }
@@ -501,7 +500,7 @@ public class DeviceManagerService extends Service implements CommandProcessor {
             for (Map.Entry<PDeviceHolder, GenericDevice> entry : holder2deviceinstance.entrySet()) {
                 dev = entry.getValue();
                 dev.stop();
-                Logger.d(CA.mLogSession,"Stopping "+entry.getKey());
+                Timber.tag(TAG).d("Stopping "+entry.getKey());
             }
             holder2deviceinstance.clear();
             for (PDeviceHolder devh : lst) {
@@ -525,7 +524,7 @@ public class DeviceManagerService extends Service implements CommandProcessor {
     }
 
     private void stopOperations() {
-        Log.v(TAG, "2 programStop true");
+        Timber.tag(TAG).d("2 programStop true");
         managerState |= STATE_STOPPING;
         if ((managerState & STATE_SEARCHING) != 0) {
             currentDS.stopSearch();
@@ -556,7 +555,7 @@ public class DeviceManagerService extends Service implements CommandProcessor {
                     setBluetoothAfterDisc++;
                 }
             }
-            Log.v(TAG, "4 bluetoothafter " + setBluetoothAfterDisc);
+            Timber.tag(TAG).d("4 bluetoothafter " + setBluetoothAfterDisc);
             tcpServer.stopListening();
             if (setBluetoothAfterDisc == 0)
                 setBluetooth(false);
@@ -568,7 +567,7 @@ public class DeviceManagerService extends Service implements CommandProcessor {
         @Override
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
-            Log.w(TAG, "Pairing " + action);
+            Timber.tag(TAG).w("Pairing " + action);
             if (action.equals(BluetoothAdapter.ACTION_STATE_CHANGED)) {
                 final int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE,
                         BluetoothAdapter.ERROR);
@@ -580,6 +579,7 @@ public class DeviceManagerService extends Service implements CommandProcessor {
                             managerState &= (~STATE_STOPPING);
                             setConnectingStatus(new Intent(Messages.EXCEPTION_MESSAGE));
                             setupBluetoothIO(false, null);
+                            setBluetoothAfterDisc = -1;
                         }
                         break;
                     case BluetoothAdapter.STATE_TURNING_OFF:
@@ -690,7 +690,7 @@ public class DeviceManagerService extends Service implements CommandProcessor {
                         it.remove();
                         if (dev != null && devh.isEnabled()) {
                             lastConnectingDevice = devh;
-                            Log.d(TAG,"LastConnectingDevice is now "+devh);
+                            Timber.tag(TAG).d("LastConnectingDevice is now "+devh);
                             dev.connect();
                             return;
                         }
@@ -708,12 +708,12 @@ public class DeviceManagerService extends Service implements CommandProcessor {
         managerState &= (~STATE_CONNECTING);
         setConnectingStatus(new Intent(Messages.EXCEPTION_MESSAGE));
         lastConnectingDevice = null;
-        Log.d(TAG,"LastConnectingDevice is now null");
+        Timber.tag(TAG).d("LastConnectingDevice is now null");
         //connRetryStatus = 0;
     }
 
     private void doExit() {
-        Logger.d(CA.mLogSession,"DoExit DeviceManagerService");
+        Timber.tag(TAG).d("DoExit DeviceManagerService");
         if (sqlite != null)
             sqlite.closeDB();
         GenericDevice dev;
@@ -858,9 +858,9 @@ public class DeviceManagerService extends Service implements CommandProcessor {
             mHandlerThread.runOnMe(new Runnable() {
                 @Override
                 public void run() {
-                    Log.i(TAG, "Device connected " + devh.getName());
+                    Timber.tag(TAG).i("Device connected " + devh.getName());
                     managerState |= STATE_CONNECTED;
-                    if (setBluetoothAfterDisc > 0) {
+                    if (setBluetoothAfterDisc >= 0) {
                         dev.disconnect();
                         connectTimerStop();
                     } else {
@@ -884,22 +884,22 @@ public class DeviceManagerService extends Service implements CommandProcessor {
             mHandlerThread.runOnMe(new Runnable() {
                 @Override
                 public void run() {
-                    Log.i(TAG, "Device " + e);
+                    Timber.tag(TAG).i("Device " + e);
                     if (e != null && e.getId().indexOf("_errs_") >= 0) {
                         connRetryStatus = connRetryNum;
                     }
                     PSessionHolder currentSession = sessionMap.get(devh);
                     if (currentSession != null) {
-                        Log.d(TAG, "Resetting session device for "+devh);
+                        Timber.tag(TAG).d("Resetting session device for "+devh);
                         currentSession.setDevice(new PDeviceHolder());
                     }
                     else
-                        Log.d(TAG, "NULL session for "+devh);
+                        Timber.tag(TAG).d("NULL session for "+devh);
 
                     processStatusMessage(dev, devh, e);
-                    Log.d(TAG,"LastConnectingDevice "+lastConnectingDevice+"; disconnected dev is "+devh+". Equals?= "+(lastConnectingDevice!=null && lastConnectingDevice.equals(devh)));
+                    Timber.tag(TAG).d("LastConnectingDevice "+lastConnectingDevice+"; disconnected dev is "+devh+". Equals?= "+(lastConnectingDevice!=null && lastConnectingDevice.equals(devh)));
                     holder2connectingDev.add((lastConnectingDevice!=null && lastConnectingDevice.equals(devh))?0:holder2connectingDev.size(), devh);
-                    if ((managerState & STATE_STOPPING) == 0 && (lastConnectingDevice==null || lastConnectingDevice.equals(devh))) {
+                    if ((managerState & (STATE_STOPPING|STATE_EXITING)) == 0 && (lastConnectingDevice==null || lastConnectingDevice.equals(devh))) {
                         reset();
                         connectTimerInit(connRetryStatus >= connRetryNum);
                     }
@@ -912,9 +912,12 @@ public class DeviceManagerService extends Service implements CommandProcessor {
             mHandlerThread.runOnMe(new Runnable() {
                 @Override
                 public void run() {
-                    Log.v(TAG, "1 bluetoothafter " + setBluetoothAfterDisc);
+                    Timber.tag(TAG).d("1 bluetoothafter " + setBluetoothAfterDisc);
                     resetConnectedState();
-                    if (setBluetoothAfterDisc > 0) {
+                    if (setBluetoothAfterDisc==0) {
+
+                    }
+                    else if (setBluetoothAfterDisc > 0) {
                         synchronized (DeviceManagerService.this) {
                             setBluetoothAfterDisc--;
                         }
@@ -934,9 +937,12 @@ public class DeviceManagerService extends Service implements CommandProcessor {
             mHandlerThread.runOnMe(new Runnable() {
                 @Override
                 public void run() {
-                    Log.v(TAG, "2 bluetoothafter " + setBluetoothAfterDisc);
+                    Timber.tag(TAG).d("2 bluetoothafter " + setBluetoothAfterDisc);
                     resetConnectedState();
-                    if (setBluetoothAfterDisc > 0) {
+                    if (setBluetoothAfterDisc==0) {
+
+                    }
+                    else if (setBluetoothAfterDisc > 0) {
                         synchronized (DeviceManagerService.this) {
                             setBluetoothAfterDisc--;
                         }
@@ -955,9 +961,12 @@ public class DeviceManagerService extends Service implements CommandProcessor {
             mHandlerThread.runOnMe(new Runnable() {
                 @Override
                 public void run() {
-                    Log.v(TAG, "3 bluetoothafter " + setBluetoothAfterDisc);
+                    Timber.tag(TAG).d("3 bluetoothafter " + setBluetoothAfterDisc);
                     resetConnectedState();
-                    if (setBluetoothAfterDisc > 0) {
+                    if (setBluetoothAfterDisc==0) {
+
+                    }
+                    else if (setBluetoothAfterDisc > 0) {
                         synchronized (DeviceManagerService.this) {
                             setBluetoothAfterDisc--;
                         }
@@ -979,7 +988,7 @@ public class DeviceManagerService extends Service implements CommandProcessor {
                 public void run() {
 
                     DeviceStatus currentStatus = dev.getDeviceState();
-                    Log.d(TAG, "["+currentStatus+"] " + f0);
+                    Timber.tag(TAG).d("["+currentStatus+"] " + f0);
                     if (currentStatus != DeviceStatus.PAUSED &&
                             currentStatus != DeviceStatus.DPAUSE) {
                         int un = f0.getUpdateN();
@@ -991,16 +1000,16 @@ public class DeviceManagerService extends Service implements CommandProcessor {
                             sessionMap.put(devh, currentSession);
                             if (mainSessionId < 0)
                                 mainSessionId = currentSession.getId();
-                            Log.d(TAG, "Creating session for "+devh);
+                            Timber.tag(TAG).d("Creating session for "+devh);
                             mStatusReceiver.onDeviceSession(dev, devh, currentSession);
                         }
                         if (un >= 1) {
                             currentSession = sessionMap.get(devh);
-                            //Log.d(TAG,"Session for "+devh+" IS "+currentSession);
+                            //Timber.d("Session for "+devh+" IS "+currentSession);
                             if (currentSession != null) {
                                 if (!currentSession.getDevice().equals(devh)) {
                                     currentSession.setDevice(devh);
-                                    Log.d(TAG, "Resuming session for "+devh);
+                                    Timber.tag(TAG).d("Resuming session for "+devh);
                                     mStatusReceiver.onDeviceSession(dev, devh, currentSession);
                                 }
                                 f0.setSessionId(currentSession.getId());
@@ -1091,7 +1100,7 @@ public class DeviceManagerService extends Service implements CommandProcessor {
 
     @Override
     public void onDestroy() {
-        Logger.d(CA.mLogSession,"Destroying DeviceManagerService: dead="+mDead);
+        Timber.tag(TAG).d("Destroying DeviceManagerService: dead="+mDead);
         mHandlerThread.waitFinish(new Runnable() {
 
             @Override
@@ -1165,8 +1174,10 @@ public class DeviceManagerService extends Service implements CommandProcessor {
             } else if (!enable) {
                 if ((managerState & STATE_EXITING) != 0)
                     doExit();
-                else
+                else {
                     managerState &= (~STATE_STOPPING);
+                    setBluetoothAfterDisc = -1;
+                }
             }
             if (exc != null)
                 setConnectingStatus(new Intent(Messages.EXCEPTION_MESSAGE).putExtra("except0", (Parcelable) exc.setType(ParcelableMessage.Type.OK)));
@@ -1177,8 +1188,10 @@ public class DeviceManagerService extends Service implements CommandProcessor {
                 needBluetoothEnable = 0;
             if ((managerState & STATE_EXITING) != 0)
                 doExit();
-            else
+            else {
                 managerState &= (~STATE_STOPPING);
+                setBluetoothAfterDisc = -1;
+            }
         }
         return rv;
     }
@@ -1186,7 +1199,7 @@ public class DeviceManagerService extends Service implements CommandProcessor {
     @Override
     public void onCreate() {
         super.onCreate();
-        Logger.d(CA.mLogSession,"DeviceManagerSerivice onCreate");
+        Timber.tag(TAG).d("DeviceManagerSerivice onCreate");
         Intent notificationIntent = new Intent(this, DeviceManagerService.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
                 notificationIntent, 0);
@@ -1202,7 +1215,7 @@ public class DeviceManagerService extends Service implements CommandProcessor {
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent,flags,startId);
         if (mDead==DeadState.NOTSTARTED) {
-            Logger.d(CA.mLogSession,"DeviceManagerSerivice created");
+            Timber.tag(TAG).d("DeviceManagerSerivice created");
             mDead = DeadState.STARTED;
             String startConf = intent == null ? "" : intent.getStringExtra(EXTRA_CONFIGURATION_NAME);
             mDebugFlag = intent == null ? 0 : intent.getIntExtra(EXTRA_DEBUG_FLAG,0);

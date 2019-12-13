@@ -2,7 +2,6 @@ package com.moviz.lib.hw;
 
 import android.os.Binder;
 
-import com.moviz.gui.app.CA;
 import com.moviz.lib.comunication.DeviceStatus;
 import com.moviz.lib.comunication.holder.DeviceUpdate;
 import com.moviz.lib.comunication.message.BaseMessage;
@@ -16,7 +15,7 @@ import java.util.Map;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 
-import no.nordicsemi.android.log.Logger;
+import timber.log.Timber;
 
 public abstract class DeviceBinder extends Binder implements DeviceListener {
     protected ConcurrentHashMap<String, DeviceDataProcessor> mDevices = null;
@@ -72,7 +71,7 @@ public abstract class DeviceBinder extends Binder implements DeviceListener {
 
     protected DeviceSimulator newSim(GenericDevice d) {
         DeviceSimulator sim = mSimulators.get(d.getAddress());
-        Logger.d(CA.mLogSession,"mSimulators "+mSimulators.size()+"; sim = "+sim);
+        Timber.tag(getClass().getName()).d("mSimulators "+mSimulators.size()+"; sim = "+sim);
         if (sim == null) {
             try {
                 sim = mSimClass.newInstance();

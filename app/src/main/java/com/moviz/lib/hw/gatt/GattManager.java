@@ -10,7 +10,6 @@ import android.bluetooth.BluetoothProfile;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
 import com.moviz.lib.hw.BluetoothState;
 import com.moviz.lib.hw.gatt.operations.GattCharacteristicReadOperation;
@@ -25,6 +24,8 @@ import java.util.Iterator;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
+
+import timber.log.Timber;
 
 public class GattManager {
 
@@ -77,13 +78,13 @@ public class GattManager {
     }
 
     public synchronized void cancelCurrentOperationBundle() {
-        Log.v(TAG, "Cancelling current operation. Queue size before: " + mQueue.size());
+        Timber.tag(TAG).v("Cancelling current operation. Queue size before: " + mQueue.size());
         if (mCurrentOperation != null && mCurrentOperation.getBundle() != null) {
             for (GattOperation op : mCurrentOperation.getBundle().getOperations()) {
                 mQueue.remove(op);
             }
         }
-        Log.v(TAG, "Queue size after: " + mQueue.size());
+        Timber.tag(TAG).v("Queue size after: " + mQueue.size());
         mCurrentOperation = null;
         drive();
     }
@@ -100,12 +101,12 @@ public class GattManager {
     }
 
     public synchronized void cancelDeviceOperation() {
-        Log.v(TAG, "Cancelling current operation. Queue size before: " + mQueue.size());
+        Timber.tag(TAG).v("Cancelling current operation. Queue size before: " + mQueue.size());
         if (mCurrentOperation != null) {
             removeOpOfDevice(mCurrentOperation);
             setCurrentOperation(null);
         }
-        Log.v(TAG, "Queue size after: " + mQueue.size() + " (" + this + ")");
+        Timber.tag(TAG).v("Queue size after: " + mQueue.size() + " (" + this + ")");
         drive();
     }
 
@@ -121,7 +122,7 @@ public class GattManager {
             removeOpOfDevice(gattOperation);
         }*/
         mQueue.add(gattOperation);
-        Log.v(TAG, "Queueing Gatt operation (" + gattOperation + "), size will now become: " + mQueue.size());
+        Timber.tag(TAG).v("Queueing Gatt operation (" + gattOperation + "), size will now become: " + mQueue.size());
         drive();
     }
 
@@ -155,7 +156,7 @@ public class GattManager {
         }
         @Override
         public void run() {
-            Log.w(TAG, "Timeout Detected");
+            Timber.tag(TAG).w("Timeout Detected");
             GattBundle deviceGatt = mGatts.get(mDevAddress);
             if (deviceGatt == null || !deviceGatt.mConnected) {
                 if (mConnectionStateChangedListener != null)
@@ -170,7 +171,7 @@ public class GattManager {
             }
                 /*else if (mNumRep<MAX_NUM_REP) {
                     mNumRep++;
-                    Log.w(TAG,"Timeout Detected: repeating");
+                    Timber.tag(TAG).w("Timeout Detected: repeating");
                     setCurrentOperation(null);
                     drive();
                 }*/
@@ -180,7 +181,7 @@ public class GattManager {
                     mConnectionStateChangedListener.error(mDevAddress,
                             new ParcelableMessage("exm_errr_gatt_operationtimeout").put(mOperation.toString()),
                             mOperation);
-                Log.e(TAG, "Timeout ran to completion, time to cancel the entire operation bundle. Abort, abort!");
+                Timber.tag(TAG).e("Timeout ran to completion, time to cancel the entire operation bundle. Abort, abort!");
                 cancelDeviceOperation();
             }
                 /*else {
@@ -192,12 +193,12 @@ public class GattManager {
 
     private synchronized void drive() {
         if (mCurrentOperation != null) {
-            Log.v(TAG, "tried to drive, but currentOperation was not null, " + mCurrentOperation);
+            Timber.tag(TAG).v("tried to drive, but currentOperation was not null, " + mCurrentOperation);
             return;
         }
         mHandler.removeCallbacks(mTimeoutTask);
         if (mQueue.size() == 0) {
-            Log.v(TAG, "Queue empty, drive loop stopped.");
+            Timber.tag(TAG).v("Queue empty, drive loop stopped.");
             mCurrentOperation = null;
             return;
         }
@@ -207,21 +208,21 @@ public class GattManager {
         final GattOperation operation = mQueue.poll();
         final BluetoothDevice device = operation.getDevice();
         final String devAddress = device.getAddress();
-        Log.v(TAG, "Driving Gatt queue, size will now become: " + mQueue.size() + " (" + this + ")");
+        Timber.tag(TAG).v("Driving Gatt queue, size will now become: " + mQueue.size() + " (" + this + ")");
         setCurrentOperation(operation);
 
         mHandler.postDelayed(mTimeoutTask = new TimeoutTask(devAddress,operation),operation.getTimoutInMillis());
 
         GattBundle deviceGatt = mGatts.get(devAddress);
         //DBG
-        //Log.d(TAG,"ECCO 1 "+deviceGatt+" "+(deviceGatt==null?"null2":deviceGatt.mConnected)+" "+mBluetoothManager.getConnectedDevices(BluetoothGatt.GATT).indexOf(device));
+        //Timber.tag(TAG).d("ECCO 1 "+deviceGatt+" "+(deviceGatt==null?"null2":deviceGatt.mConnected)+" "+mBluetoothManager.getConnectedDevices(BluetoothGatt.GATT).indexOf(device));
         if (deviceGatt != null && deviceGatt.mConnected && mBluetoothManager.getConnectedDevices(BluetoothGatt.GATT).indexOf(device) >= 0) {
             execute(deviceGatt.mGatt, operation);
         } else if (operation instanceof GattDisconnectOperation) {
             if (deviceGatt != null)
                 handleDisconnection(deviceGatt.mGatt, devAddress, operation);
         } else if (deviceGatt == null) {
-            Log.i(TAG, "Trying to connect to " + devAddress);
+            Timber.tag(TAG).i("Trying to connect to " + devAddress);
             BluetoothGatt gatt = device.connectGatt(context, false, new BluetoothGattCallback() {
                 @Override
                 public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
@@ -230,18 +231,18 @@ public class GattManager {
                         mConnectionStateChangedListener.stateChanged(devAddress, BluetoothState.values()[newState], operation);
 
                     if (status == 133) {
-                        Log.e(TAG, "Got the status 133 bug, closing gatt");
+                        Timber.tag(TAG).e("Got the status 133 bug, closing gatt");
                         gatt.close();
                         mGatts.remove(devAddress);
                         return;
                     }
 
                     if (newState == BluetoothProfile.STATE_CONNECTED) {
-                        Log.i(TAG, "Gatt connected to device " + devAddress);
+                        Timber.tag(TAG).i("Gatt connected to device " + devAddress);
                         mGatts.get(devAddress).con();
                         gatt.discoverServices();
                     } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
-                        Log.i(TAG, "Disconnected from gatt server " + devAddress + ", newState: " + newState);
+                        Timber.tag(TAG).i("Disconnected from gatt server " + devAddress + ", newState: " + newState);
                         handleDisconnection(gatt, devAddress, null);
                     }
                 }
@@ -274,7 +275,7 @@ public class GattManager {
                 @Override
                 public void onServicesDiscovered(BluetoothGatt gatt, int status) {
                     super.onServicesDiscovered(gatt, status);
-                    Log.d(TAG, "services discovered, status: " + status);
+                    Timber.tag(TAG).d("services discovered, status: " + status);
                     execute(gatt, operation);
                 }
 
@@ -282,7 +283,7 @@ public class GattManager {
                 @Override
                 public void onCharacteristicWrite(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
                     super.onCharacteristicWrite(gatt, characteristic, status);
-                    Log.d(TAG, "Characteristic " + characteristic.getUuid() + "written to on device " + device.getAddress());
+                    Timber.tag(TAG).d("Characteristic " + characteristic.getUuid() + "written to on device " + device.getAddress());
                     setCurrentOperation(null);
                     drive();
                 }
@@ -290,7 +291,7 @@ public class GattManager {
                 @Override
                 public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
                     super.onCharacteristicChanged(gatt, characteristic);
-                    //Log.e(TAG,"Characteristic " + characteristic.getUuid() + "was changed, device: " + device.getAddress());
+                    //Timber.tag(TAG).e("Characteristic " + characteristic.getUuid() + "was changed, device: " + device.getAddress());
                     if (mCharacteristicChangeListeners.containsKey(characteristic.getUuid())) {
                         for (CharacteristicChangeListener listener : mCharacteristicChangeListeners.get(characteristic.getUuid())) {
                             listener.onCharacteristicChanged(devAddress, characteristic);
@@ -300,7 +301,7 @@ public class GattManager {
             });
             mGatts.put(devAddress, new GattBundle(gatt));
         } else {
-            Log.w(TAG, "It seems I am disconnected but I was not notified");
+            Timber.tag(TAG).w("It seems I am disconnected but I was not notified");
             cancelDeviceOperation();
         }
     }
@@ -310,7 +311,7 @@ public class GattManager {
             return;
         }
         try {
-            Log.d(TAG, "Executing " + operation);
+            Timber.tag(TAG).d("Executing " + operation);
             operation.execute(gatt);
             if (!operation.hasAvailableCompletionCallback()) {
                 setCurrentOperation(null);

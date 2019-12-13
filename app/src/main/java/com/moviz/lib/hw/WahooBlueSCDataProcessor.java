@@ -1,17 +1,13 @@
 package com.moviz.lib.hw;
 
-import android.util.Log;
-
 import com.moviz.lib.comunication.DeviceStatus;
 import com.moviz.lib.comunication.holder.BatteryLevelPrinter;
-import com.moviz.lib.comunication.holder.Holder;
 import com.moviz.lib.comunication.message.BaseMessage;
 import com.moviz.lib.comunication.plus.holder.PDeviceHolder;
 import com.moviz.lib.comunication.plus.holder.PHolder;
 import com.moviz.lib.comunication.plus.holder.PHolderSetter;
 import com.moviz.lib.comunication.plus.holder.PWahooBlueSCHolder;
 import com.moviz.lib.comunication.plus.message.DeviceChangeRequestMessage;
-import com.moviz.lib.comunication.plus.message.ProcessedOKMessage;
 import com.moviz.lib.comunication.tcp.TCPMessageTypes;
 import com.wahoofitness.connector.capabilities.Battery;
 import com.wahoofitness.connector.capabilities.Capability.CapabilityType;
@@ -26,6 +22,8 @@ import org.json.JSONException;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import timber.log.Timber;
 
 /**
  * Created by Fujitsu on 25/10/2016.
@@ -125,7 +123,7 @@ public class WahooBlueSCDataProcessor extends WahooDataProcessor implements Cran
         sh.sensVal = val;
         sh.sensSpd = speed;
         int pause = mSim.step(sh);
-        Log.d(TAG, mDeviceName+" P="+pause);
+        Timber.tag(TAG).d(mDeviceName+" P="+pause);
         DeviceStatus status = mDeviceState;
         long now = System.currentTimeMillis();
         if (now-lastBatteryMS>5*60000) {
@@ -200,7 +198,7 @@ public class WahooBlueSCDataProcessor extends WahooDataProcessor implements Cran
 
     @Override
     public void onNewCapabilityDetected(SensorConnection sensorConnection, CapabilityType capabilityType) {
-        Log.v(TAG, "New Cap " + capabilityType);
+        Timber.tag(TAG).v("New Cap " + capabilityType);
         if (capabilityType == CapabilityType.CrankRevs) {
             CrankRevs crankRevs = (CrankRevs) sensorConnection.getCurrentCapability(CapabilityType.CrankRevs);
             crankRevs.addListener(this);
@@ -230,39 +228,39 @@ public class WahooBlueSCDataProcessor extends WahooDataProcessor implements Cran
 
     @Override
     public void onCrankRevsData(CrankRevs.Data data) {
-        Log.v(TAG, "New Cap onCrankRevsData " + data.getAccumulatedCrankRevs());
+        Timber.tag(TAG).v("New Cap onCrankRevsData " + data.getAccumulatedCrankRevs());
         updateVal(PWahooBlueSCHolder.SensorType.CRANK, data.getAccumulatedCrankRevs(), data.getCrankSpeed().asRevolutionsPerMinute());
     }
 
     @Override
     public void onWheelRevsData(WheelRevs.Data data) {
-        Log.v(TAG, "New Cap onWheelRevsData " + data.getAccumulatedWheelRevs());
+        Timber.tag(TAG).v("New Cap onWheelRevsData " + data.getAccumulatedWheelRevs());
         updateVal(PWahooBlueSCHolder.SensorType.WHEEL, data.getAccumulatedWheelRevs(), data.getWheelSpeed().asRevolutionsPerMinute());
     }
 
     @Override
     public void onBatteryData(Battery.Data data) {
-        Log.v(TAG, "New Cap onBatteryData " + data.getBatteryLevel());
+        Timber.tag(TAG).v("New Cap onBatteryData " + data.getBatteryLevel());
         lastBattery = (byte) data.getBatteryLevel().ordinal();
         setStatusVar(".batterylev", lastBattery);
     }
 
     @Override
     public void onDeviceInfo(DeviceInfo.Type type, String s) {
-        Log.v(TAG, "New Cap onDeviceInfo " + type.toString() + " = " + s);
+        Timber.tag(TAG).v("New Cap onDeviceInfo " + type.toString() + " = " + s);
         infoMap.put(type.toString(), s);
         setDeviceDescription(infoMap, "Wahoo");
     }
 
     @Override
     public void onFirmwareVersion(String s) {
-        Log.v(TAG, "New Cap onFirmwareVersion " + s);
+        Timber.tag(TAG).v("New Cap onFirmwareVersion " + s);
         infoMap.put(DeviceInfo.Type.FIRMWARE_REVISION.toString(), s);
     }
 
     @Override
     public void onFirmwareUpgradeRequired(String s, String s1) {
-        Log.v(TAG, "New Cap onFirmwareUpgradeRequired " + s + " " + s1);
+        Timber.tag(TAG).v("New Cap onFirmwareUpgradeRequired " + s + " " + s1);
     }
 
     public int getCurrentGear() {

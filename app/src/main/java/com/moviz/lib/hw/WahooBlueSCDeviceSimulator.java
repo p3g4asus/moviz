@@ -1,13 +1,12 @@
 package com.moviz.lib.hw;
 
-import android.renderscript.Double4;
-import android.util.Log;
-
 import com.moviz.lib.comunication.holder.DeviceUpdate;
 import com.moviz.lib.comunication.holder.WahooBlueSCHolder;
 import com.moviz.lib.comunication.plus.holder.PUserHolder;
 
 import java.util.Arrays;
+
+import timber.log.Timber;
 
 /**
  * Created by Matteo on 28/10/2016.
@@ -110,12 +109,12 @@ public class WahooBlueSCDeviceSimulator implements DeviceSimulator {
                 Arrays.fill(sensGear,0);
             if (timeGear!=null)
                 Arrays.fill(timeGear,0);
-            Log.v(TAG,"Resetting");
+            Timber.tag(TAG).v("Resetting");
         }
 
         public void setOffsets() {
             sensVal_o = sensVal_old;
-            Log.v(TAG,"Setting offset "+sensVal_o);
+            Timber.tag(TAG).v("Setting offset "+sensVal_o);
         }
 
         public boolean step(WahooBlueSCHolder sh) {
@@ -155,7 +154,7 @@ public class WahooBlueSCDeviceSimulator implements DeviceSimulator {
                     sensGear[currentGear] += diff;
                 sh.sensSpdMn = sumSpeed / (double) nUpdates;
                 sh.sensSpdMnR = (double) sh.sensVal / (sumTime / 60000.0);
-                Log.v(TAG,"pre = "+pconv+" post = "+ sh.sensSpd+" latorsensspd = "+sh.sensSpdMn+" R = "+sh.sensSpdMnR);
+                Timber.tag(TAG).v("pre = "+pconv+" post = "+ sh.sensSpd+" latorsensspd = "+sh.sensSpdMn+" R = "+sh.sensSpdMnR);
                 sh.timeRms = sumTime;
                 sh.timeRAbsms = now - sessionStart;
                 double tm = (double) sumTime / 1000.0;

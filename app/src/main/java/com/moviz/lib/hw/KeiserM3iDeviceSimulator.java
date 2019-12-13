@@ -1,9 +1,9 @@
 package com.moviz.lib.hw;
 
-import android.util.Log;
-
 import com.moviz.lib.comunication.holder.DeviceUpdate;
 import com.moviz.lib.comunication.plus.holder.PPafersHolder;
+
+import timber.log.Timber;
 
 public class KeiserM3iDeviceSimulator extends PafersDeviceSimulator {
     private static String TAG = KeiserM3iDeviceSimulator.class.getSimpleName();
@@ -43,7 +43,7 @@ public class KeiserM3iDeviceSimulator extends PafersDeviceSimulator {
         if (f.time == old_time_orig) {
             if (equalTime < EQUAL_TIME_THRESHOLD)
                 equalTime++;
-            Log.v(TAG,"EqualTime "+equalTime);
+            Timber.tag(TAG).v("EqualTime "+equalTime);
         } else {
             equalTime = 0;
             old_time_orig = f.time;
@@ -82,7 +82,7 @@ public class KeiserM3iDeviceSimulator extends PafersDeviceSimulator {
         if (old_dist<0) {
             old_dist = realdist;
             old_timeRms = realtime;
-            Log.v(TAG,"Init: old_dist = "+realdist+" old_time = "+realtime);
+            Timber.tag(TAG).v("Init: old_dist = "+realdist+" old_time = "+realtime);
             f.speed = 0;
             lastUpdatePostedTime = f.timeRAbsms;
         }
@@ -122,7 +122,7 @@ public class KeiserM3iDeviceSimulator extends PafersDeviceSimulator {
                 f.speed = 0;
             else
                 f.speed = dist_acc / ((double) timeRms_acc / 3600.00);
-            Log.v(TAG,logv+f.speed);
+            Timber.tag(TAG).v(logv+f.speed);
         }
         return f.speed;
     }
@@ -138,7 +138,7 @@ public class KeiserM3iDeviceSimulator extends PafersDeviceSimulator {
         f.rpm/=10;
         f.rpmMn/=10.0;
         out = lastUpdatePostedTime==f.timeRAbsms||f.updateN==1?out:DO_NOT_POST_DU;
-        Log.v(TAG,"Returning "+out);
+        Timber.tag(TAG).v("Returning "+out);
         return out;
     }
 

@@ -3,7 +3,6 @@ package com.moviz.workers;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.preference.PreferenceManager;
-import android.util.Log;
 
 import com.moviz.lib.comunication.ComunicationConstants;
 import com.moviz.lib.comunication.holder.DeviceUpdate;
@@ -28,7 +27,6 @@ import com.moviz.lib.comunication.plus.holder.PStatusHolder;
 import com.moviz.lib.comunication.plus.holder.PUserHolder;
 import com.moviz.lib.comunication.plus.message.DeviceChangeRequestMessage;
 import com.moviz.lib.comunication.plus.message.ProcessedOKMessage;
-import com.moviz.lib.comunication.plus.message.UserSetMessage;
 import com.moviz.lib.comunication.tcp.TCPProtocol;
 import com.moviz.lib.comunication.tcp.TCPStatus;
 import com.moviz.lib.db.MySQLiteHelper;
@@ -46,6 +44,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import timber.log.Timber;
 
 
 public class TCPServer implements Runnable, CommandProcessor, AdvancedListener {
@@ -83,7 +83,7 @@ public class TCPServer implements Runnable, CommandProcessor, AdvancedListener {
                             while (outBB.hasRemaining() && !wStopped) {
                                 try {
                                     stream.write(outBB);
-                                    Log.d("TCPServer", "writing");
+                                    Timber.tag("TCPServer").d("writing");
                                 } catch (IOException e) {
                                     stream = null;
                                     break;
@@ -284,7 +284,7 @@ public class TCPServer implements Runnable, CommandProcessor, AdvancedListener {
     public boolean write(CommandMessage m) {
         if (intStatus == TCPStatus.CONNECTED) {
             if (writer.isConnected()) {
-                Log.d("TCPServer", "Attempting to write " + m.getClass().getSimpleName());
+                Timber.tag("TCPServer").d("Attempting to write " + m.getClass().getSimpleName());
                 writer.write(m);
                 return true;
             } else
@@ -419,7 +419,7 @@ public class TCPServer implements Runnable, CommandProcessor, AdvancedListener {
     }
 
     private void processIncomingMessage(CommandMessage prt) {
-        Log.d("TCPServer", "inc " + prt.getClass().getSimpleName());
+        Timber.tag("TCPServer").d("inc " + prt.getClass().getSimpleName());
         boolean cmd2notify = false;
         CommandMessage resp = null;
         if ((prt instanceof PauseMessage) ||
@@ -531,7 +531,7 @@ public class TCPServer implements Runnable, CommandProcessor, AdvancedListener {
     }
 
     private void setIntStatus(TCPStatus intStatus) {
-        Log.d("TCPServer", "changing from " + this.intStatus + " to " + intStatus);
+        Timber.tag("TCPServer").d("changing from " + this.intStatus + " to " + intStatus);
         this.intStatus = intStatus;
         if (intStatus == TCPStatus.IDLE || intStatus == TCPStatus.ERROR)
             reset();

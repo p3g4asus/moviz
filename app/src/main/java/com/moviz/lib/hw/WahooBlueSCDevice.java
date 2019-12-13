@@ -1,10 +1,7 @@
 package com.moviz.lib.hw;
 
-import android.util.Log;
-
 import com.moviz.lib.comunication.message.BaseMessage;
 import com.moviz.lib.comunication.message.UpDownMessage;
-import com.moviz.lib.comunication.plus.holder.PHolder;
 import com.moviz.lib.comunication.plus.message.DeviceChangedMessage;
 import com.moviz.lib.comunication.plus.message.UserSetMessage;
 

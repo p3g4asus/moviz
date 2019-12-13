@@ -58,6 +58,8 @@ import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 
+import timber.log.Timber;
+
 
 public class GoogleFitService extends Service implements MySyncStatusObserver.Callback {
 
@@ -127,7 +129,7 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
             mSQL = null;
         }
         removeNotification();
-        Log.i(TAG, "Service stopped");
+        Timber.tag(TAG).i("Service stopped");
         stopSelf();
     }
 
@@ -143,13 +145,13 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
 
         SyncAdapterType[] types = ContentResolver.getSyncAdapterTypes();
         for (SyncAdapterType type : types) {
-            Log.d(TAG, "--------------------");
-            Log.d(TAG, type.authority + "--" + type.accountType);
+            Timber.tag(TAG).d("--------------------");
+            Timber.tag(TAG).d(type.authority + "--" + type.accountType);
             acct = acm.getAccountsByType(type.accountType);
             for (int i = 0; i < acct.length; i++) {
                 int p = ContentResolver.getIsSyncable(acct[i], type.authority);
-                Log.i(TAG, "account name: " + acct[i].name);
-                Log.i(TAG, "syncable: " + String.valueOf(p));
+                Timber.tag(TAG).i("account name: " + acct[i].name);
+                Timber.tag(TAG).i("syncable: " + String.valueOf(p));
             }
         }
     }
@@ -217,7 +219,7 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
     }
 
 //MAIN
-//    Log.i(TAG, "Connection failed. Cause: " + result.toString());
+//    Timber.tag(TAG).i("Connection failed. Cause: " + result.toString());
 //    if (!result.hasResolution()) {
 //        // Show the localized error dialog
 //        GooglePlayServicesUtil.getErrorDialog(result.getErrorCode(),
@@ -229,13 +231,12 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
 //    // authorization dialog is displayed to the user.
 //    if (!authInProgress) {
 //        try {
-//            Log.i(TAG, "Attempting to resolve failed connection");
+//            Timber.tag(TAG).i("Attempting to resolve failed connection");
 //            authInProgress = true;
 //            result.startResolutionForResult(MainActivity.this,
 //                    REQUEST_OAUTH);
 //        } catch (IntentSender.SendIntentException e) {
-//            Log.e(TAG,
-//                    "Exception while starting resolution activity", e);
+//            Timber.tag(TAG).e(//                    "Exception while starting resolution activity", e);
 //        }
 //    }
 
@@ -324,14 +325,14 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
         .deleteAllSessions()
 		.setTimeInterval(w.sesStartTime, w.sesStopTime, TimeUnit.MILLISECONDS)
 		.build();
-		Log.i(TAG, "Deleting session");
+		Timber.tag(TAG).i("Deleting session");
 		Status dstat = Fitness.HistoryApi.deleteData(mClient,ddr).await(5, TimeUnit.MINUTES);
 		if (dstat.isSuccess()) {*/
         Status dstat = new Status(CommonStatusCodes.SUCCESS);
         DataDeleteRequest ddr;
         for (int jj = 0; jj < w.dsources.size(); jj++) {
             DataSource ds = w.dsources.get(jj);
-            Log.i(TAG, "Deleting data " + ds.getDataType());
+            Timber.tag(TAG).i("Deleting data " + ds.getDataType());
             ddr = new DataDeleteRequest.Builder()
                     .deleteAllSessions()
                     .setTimeInterval(w.sesStartTime, w.sesStopTime, TimeUnit.MILLISECONDS)
@@ -347,7 +348,7 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
 
     private Status deleteSessions(long sta, long sto) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd_HHmmss");
-        Log.i(TAG, "Deleting all data from " + sdf.format(sta) + " to " + sdf.format(sto));
+        Timber.tag(TAG).i("Deleting all data from " + sdf.format(sta) + " to " + sdf.format(sto));
         DataDeleteRequest ddr = new DataDeleteRequest.Builder()
                 .deleteAllSessions()
                 .setTimeInterval(sta, sto, TimeUnit.MILLISECONDS)
@@ -390,7 +391,7 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
                     if (!rv.isSuccess())
                         return rv;
                 }*/
-                //Log.v(TAG, fp.getDataType()+" ST="+stime+",EN="+etime);
+                //Timber.tag(TAG).v(fp.getDataType()+" ST="+stime+",EN="+etime);
                 DataReadRequest drr = new DataReadRequest.Builder()
                         .enableServerQueries()
                         .setTimeRange(stime, etime, TimeUnit.MILLISECONDS)
@@ -408,7 +409,7 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
                         if (Math.abs(diff = dtp2.size()-dpoints.size())<5)
                             okcheck = true;
                         else
-                            Log.e(TAG,"Diff for "+d.getDataType()+" = "+diff);
+                            Timber.tag(TAG).e("Diff for "+d.getDataType()+" = "+diff);
                         break;
                     }
                     if (!okcheck)
@@ -493,7 +494,7 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
             tintStart = tintStop == w.sesStopTime ? w.sesStartTime : tintStop + 1;
 	        /*List<DataType> datas = DataType.getAggregatesForInput(ds.getDataType());
 			if (datas==null && !datas.isEmpty()) {
-				Log.w(TAG,"Start Buckets");
+				Timber.tag(TAG).w("Start Buckets");
 				DataReadRequest drr = new DataReadRequest.Builder()
 						.enableServerQueries()
 						.setTimeRange(w.sesStartTime, w.sesStopTime, TimeUnit.MILLISECONDS)
@@ -507,7 +508,7 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
 						}
 					}
 				}
-				Log.w(TAG,"End Buckets");
+				Timber.tag(TAG).w("End Buckets");
 			}*/
         }
         for (ArrayList<DataPoint> dataSet : points) {
@@ -544,7 +545,7 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
         if (pir.datasetsToPlace != null) {
             SessionInsertRequest.Builder reqB = new SessionInsertRequest.Builder();
 
-            Log.i(TAG, "INSERTING "+getSessionDebugString(pir));
+            Timber.tag(TAG).i("INSERTING "+getSessionDebugString(pir));
             Session session = new Session.Builder()
                     .setName(pir.sesName)
                     .setIdentifier(getSessionIdentifier(w))
@@ -565,13 +566,13 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
 					/*dbglst = d.getDataPoints();
 					dbgf = dbglst.get(0);
 					dbgl = dbglst.get(dbglst.size()-1);
-					Log.i(TAG, "Adding DS");
+					Timber.tag(TAG).i("Adding DS");
 					dumpDataSet(d);
-					Log.i(TAG, "DP FIRST");
+					Timber.tag(TAG).i("DP FIRST");
 					dumpDataPoint(dbgf);
-					Log.i(TAG, "DP LAST");
+					Timber.tag(TAG).i("DP LAST");
 					dumpDataPoint(dbgl);*/
-                    Log.v(TAG, "PUT " + d.toString());
+                    Timber.tag(TAG).v("PUT " + d.toString());
                     tmpStat = Fitness.HistoryApi.insertData(mClient, d).await(
                             5, TimeUnit.MINUTES);
                     if (!tmpStat.isSuccess()/* || dbgrm++==1*/) {
@@ -579,7 +580,7 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
                             for (DataSet dd : pir.datasetsToPlace) {
                                 if (dd.getDataType().equals(d.getDataType())) {
                                     if (dd==d) {
-                                        Log.e(TAG,"-ERROR HERE-");
+                                        Timber.tag(TAG).e("-ERROR HERE-");
                                     }
                                     dumpDataSetAndPoints(dd);
                                 }
@@ -592,7 +593,7 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
             }
         } else
             tmpStat = new Status(CommonStatusCodes.SERVICE_MISSING);
-        Log.println(tmpStat.isSuccess() ? Log.INFO : Log.ERROR, TAG,
+        Timber.tag(TAG).log(tmpStat.isSuccess() ? Log.INFO : Log.ERROR,
                 "K=" + w.mainId + " ST=" + tmpStat.getStatusCode() + " ["
                         + tmpStat.getStatusMessage() + "]");
         return tmpStat;
@@ -620,8 +621,7 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
                     sesDescription += " - ";
                 sesDescription += dev.getAlias();
                 sesvals = entry.getValue().ups;
-                Log.i(TAG,
-                        "Size is " + sesvals.size() + " for device "
+                Timber.tag(TAG).i("Size is " + sesvals.size() + " for device "
                                 + dev.getAlias());
                 if (!sesvals.isEmpty()) {
                     baseTs = entry.getValue().ts;
@@ -768,11 +768,11 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
             if (pir.datasetsToPlace!=null) {
                 Status sta = readSessionCheck(pir);
                 if (sta.isSuccess()) {
-                    Log.v(TAG, "NOTHING " + getSessionDebugString(pir));
+                    Timber.tag(TAG).v("NOTHING " + getSessionDebugString(pir));
                     return sta;
                 } else {
                     //Status sta;
-                    Log.e(TAG, "Should insert " + getSessionDebugString(pir));
+                    Timber.tag(TAG).e("Should insert " + getSessionDebugString(pir));
                     return sta;
                     /*if ((sta = insertSession(pir)).isSuccess()) {
                         return new Status(CommonStatusCodes.AUTH_API_INVALID_CREDENTIALS);
@@ -861,7 +861,7 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
 //				sesDescription+=" - ";
 //			sesDescription+=dev.getAlias();
 //			sesvals = entry.getValue().ups;
-//			Log.i(TAG, "Size is "+sesvals.size()+" for device "+dev.getAlias());
+//			Timber.tag(TAG).i("Size is "+sesvals.size()+" for device "+dev.getAlias());
 //			if (!sesvals.isEmpty()) {
 //				baseTs = entry.getValue().ts;
 //				lastTs = 0; 
@@ -906,7 +906,7 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
 //		reqB.addDataSet(actSegments.createDataset());
 //		
 //		SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd_HHmmss");
-//		Log.i(TAG, "Id Of Session = "+mainDevice+"_"+sdf.format(sesStartTime)+" Finish = "+sdf.format(sesStopTime));
+//		Timber.tag(TAG).i("Id Of Session = "+mainDevice+"_"+sdf.format(sesStartTime)+" Finish = "+sdf.format(sesStopTime));
 //		Session session = new Session.Builder()
 //	    .setName(mainDevice+" "+mainActivity+" session")
 //         .setIdentifier(mainDevice+"_"+sdf.format(sesStartTime))
@@ -955,7 +955,7 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
 //	}
 
     private void dumpDataSet(DataSet dataSet) {
-        Log.i(TAG, "DST = " + dataSet.getDataType().getName() + " (" + dataSet.getDataPoints().size() + ")" +
+        Timber.tag(TAG).i("DST = " + dataSet.getDataType().getName() + " (" + dataSet.getDataPoints().size() + ")" +
                 " DSN = " + dataSet.getDataSource().getStreamName() +
                 " DSI=" + dataSet.getDataSource().getStreamIdentifier());
     }
@@ -970,16 +970,16 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
             t += "F_" + field.getName() + "=" + dp.getValue(field) + " / ";
         }
         t += "}";
-        Log.i(TAG, t);
+        Timber.tag(TAG).i(t);
     }
 
     private void dumpDataSetAndPoints(DataSet dataSet) {
-        Log.i(TAG, "----------------------------------");
+        Timber.tag(TAG).i("----------------------------------");
         dumpDataSet(dataSet);
         for (DataPoint dp : dataSet.getDataPoints()) {
             dumpDataPoint(dp);
         }
-        Log.i(TAG, "----------------------------------");
+        Timber.tag(TAG).i("----------------------------------");
     }
 
     private void dumpPoints(ArrayList<DataPoint> adp) {
@@ -990,7 +990,7 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
 
     private void dumpSession(Session session) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMdd_HHmmss");
-        Log.i(TAG, "Data returned for Session: " + session.getName() + " [" + session.getIdentifier() + "]"
+        Timber.tag(TAG).i("Data returned for Session: " + session.getName() + " [" + session.getIdentifier() + "]"
                 + "\n\tDescription: " + session.getDescription()
                 + "\n\tStart: " + session.getStartTime(TimeUnit.MILLISECONDS)
                 + "\n\tEnd: " + session.getEndTime(TimeUnit.MILLISECONDS));
@@ -1013,12 +1013,12 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
 
     @Override
     public void onSyncsStarted() {
-        Log.i(TAG,"Synch started");
+        Timber.tag(TAG).i("Synch started");
     }
 
     @Override
     public void onSyncsFinished() {
-        Log.i(TAG,"Synch finished");
+        Timber.tag(TAG).i("Synch finished");
 
         setAutoSynch(false);
         if (mRepeatAfterSynch>=0)
@@ -1031,7 +1031,7 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
         final Account[] accounts = AccountManager.get(this).getAccountsByType("com.google");
         for (final Account account : accountList) {
             // Request the sync
-            Log.i(TAG,"Processing "+account.name);
+            Timber.tag(TAG).i("Processing "+account.name);
             ContentResolver.setSyncAutomatically(account, FIT_AUTHORITY, ena);
         }
 
@@ -1058,7 +1058,7 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
                                 mSessionOperation == FIT_EXTRA_SESSION_OPERATION_INSERT && mSessionKey<0 && mSessionKeys==null?
                                         Boolean.valueOf(false) : null);
                     } catch (Exception e) {
-                        Log.e(TAG, "Cannot get sessions");
+                        Timber.tag(TAG).e("Cannot get sessions");
                         e.printStackTrace();
                         CA.lbm.sendBroadcast(new Intent(FIT_NOTIFY_INTENT).putExtra(FIT_EXTRA_NOTIFY_SUSPENDED_REASON, 8000));
                     }
@@ -1091,13 +1091,13 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
                         n = mSessions.size();
                     else
                         n = mSessionNumber;
-                    Log.i(TAG, "Session number is " + mSessions.size());
+                    Timber.tag(TAG).i("Session number is " + mSessions.size());
 
                     if (mSessionOperation == FIT_EXTRA_SESSION_OPERATION_DELETEALL) {
                         if (mSessionDateSta >= 0 && mSessionDateSto >= 0) {
                             statusC = deleteSessions(mSessionDateSta, mSessionDateSto);
                             if (!statusC.isSuccess())
-                                Log.e(TAG, "Interrupped DeleteAll SC=" + statusC.getStatusCode());
+                                Timber.tag(TAG).e("Interrupped DeleteAll SC=" + statusC.getStatusCode());
                             else {
                                 for (int i = 0; i < mSessions.size() && mIsRunning == MyStatus.RUNNING; i++) {
                                     currentKey = mSessions.keyAt(i);
@@ -1111,7 +1111,7 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
                         String outputStr = "";
                         for (int i = mSessionOffset; i < mSessions.size() && i < mSessionOffset + n && mIsRunning == MyStatus.RUNNING; i++) {
                             cS = mSessions.get(currentKey = mSessions.keyAt(i));
-                            Log.i(TAG, "Processing session " + i + "th [K=" + currentKey + "]");
+                            Timber.tag(TAG).i("Processing session " + i + "th [K=" + currentKey + "]");
                             if (mSessionOperation!=FIT_EXTRA_SESSION_OPERATION_INSERT || !isExported(cS)) {
                                 try {
                                     if (i == mSessionOffset)
@@ -1125,7 +1125,7 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
                                         CA.lbm.sendBroadcast(new Intent(FIT_NOTIFY_INTENT)
                                                 .putExtra(FIT_EXTRA_NOTIFY_SUSPENDED_REASON, statusC.getStatusCode())
                                                 .putExtra(FIT_EXTRA_NOTIFY_SUSPENDED_SESSION, currentKey));
-                                        Log.e(TAG, "Interrupped SC=" + statusC.getStatusCode() + " " + " at " + currentKey);
+                                        Timber.tag(TAG).e("Interrupped SC=" + statusC.getStatusCode() + " " + " at " + currentKey);
                                     }
                                     if (statusC != null) {
                                         if (mSessionOperation==FIT_EXTRA_SESSION_OPERATION_INSCHECK) {
@@ -1151,7 +1151,7 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
                             }
                         }
                         if (!outputStr.isEmpty())
-                            Log.e(TAG,"INSCHECK "+outputStr.substring(1));
+                            Timber.tag(TAG).e("INSCHECK "+outputStr.substring(1));
                     }
                 }
                 else
@@ -1202,7 +1202,7 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
 
                             @Override
                             public void onConnected(Bundle bundle) {
-                                Log.i(TAG, "Connected!!!");
+                                Timber.tag(TAG).i("Connected!!!");
                                 new WorkerThread().start();
                             }
 
@@ -1211,12 +1211,12 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
                                 // If your connection to the sensor gets lost at some point,
                                 // you'll be able to determine the reason and react to it here.
                                 if (i == ConnectionCallbacks.CAUSE_NETWORK_LOST) {
-                                    Log.e(TAG, "Connection lost.  Cause: Network Lost.");
+                                    Timber.tag(TAG).e("Connection lost.  Cause: Network Lost.");
                                 } else if (i == ConnectionCallbacks.CAUSE_SERVICE_DISCONNECTED) {
-                                    Log.e(TAG, "Connection lost.  Reason: Service Disconnected");
+                                    Timber.tag(TAG).e("Connection lost.  Reason: Service Disconnected");
                                 }
                                 else {
-                                    Log.e(TAG, "Connection error SC="+i);
+                                    Timber.tag(TAG).e("Connection error SC="+i);
                                 }
                                 CA.lbm.sendBroadcast(new Intent(FIT_NOTIFY_INTENT).putExtra(FIT_EXTRA_NOTIFY_SUSPENDED_REASON, i));
                                 stop();
@@ -1228,7 +1228,7 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
                             // Called whenever the API client fails to connect.
                             @Override
                             public void onConnectionFailed(ConnectionResult result) {
-                                Log.i(TAG, "Connection failed.  Reason: " + result.getErrorCode());
+                                Timber.tag(TAG).i("Connection failed.  Reason: " + result.getErrorCode());
                                 notifyUiFailedConnection(result);
                             }
                         }
@@ -1240,7 +1240,7 @@ public class GoogleFitService extends Service implements MySyncStatusObserver.Ca
     public void onCreate() {
         super.onCreate();
         accountList = AccountManager.get(this).getAccountsByType("com.google");
-        Log.i(TAG, "Service Started.");
+        Timber.tag(TAG).i("Service Started.");
     }
 
     @Override

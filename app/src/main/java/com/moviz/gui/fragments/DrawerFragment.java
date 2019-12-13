@@ -4,15 +4,14 @@ package com.moviz.gui.fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -26,6 +25,8 @@ import com.moviz.gui.util.Information;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import timber.log.Timber;
 
 
 /**
@@ -155,7 +156,7 @@ public class DrawerFragment extends Fragment {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                Log.d("VIVZ", "onDrawerOpened");
+                Timber.tag("VIVZ").d("onDrawerOpened");
                 if (!mUserLearnedDrawer) {
                     mUserLearnedDrawer = true;
                     sharedPref.edit().putBoolean(KEY_USER_LEARNED_DRAWER, mUserLearnedDrawer).apply();
@@ -166,7 +167,7 @@ public class DrawerFragment extends Fragment {
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
-                Log.d("VIVZ", "onDrawerClosed");
+                Timber.tag("VIVZ").d("onDrawerClosed");
                 getActivity().supportInvalidateOptionsMenu();
             }
 

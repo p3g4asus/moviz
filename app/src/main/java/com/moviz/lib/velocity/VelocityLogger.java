@@ -1,9 +1,9 @@
 package com.moviz.lib.velocity;
 
-import android.util.Log;
-
 import org.apache.velocity.runtime.RuntimeServices;
 import org.apache.velocity.runtime.log.LogChute;
+
+import timber.log.Timber;
 
 public class VelocityLogger implements LogChute {
     private final static String tag = "Velocity";
@@ -21,19 +21,19 @@ public class VelocityLogger implements LogChute {
     public void log(int level, String msg) {
         switch (level) {
             case LogChute.DEBUG_ID:
-                Log.d(tag, msg);
+                Timber.tag(tag).d(msg);
                 break;
             case LogChute.ERROR_ID:
-                Log.e(tag, msg);
+                Timber.tag(tag).e(msg);
                 break;
             case LogChute.INFO_ID:
-                Log.i(tag, msg);
+                Timber.tag(tag).i(msg);
                 break;
             case LogChute.TRACE_ID:
-                Log.d(tag, msg);
+                Timber.tag(tag).d(msg);
                 break;
             case LogChute.WARN_ID:
-                Log.w(tag, msg);
+                Timber.tag(tag).w(msg);
         }
     }
 
@@ -41,19 +41,19 @@ public class VelocityLogger implements LogChute {
     public void log(int level, String msg, Throwable t) {
         switch (level) {
             case LogChute.DEBUG_ID:
-                Log.d(tag, msg, t);
+                Timber.tag(tag).d(msg, t);
                 break;
             case LogChute.ERROR_ID:
-                Log.e(tag, msg, t);
+                Timber.tag(tag).e(msg, t);
                 break;
             case LogChute.INFO_ID:
-                Log.i(tag, msg, t);
+                Timber.tag(tag).i(msg, t);
                 break;
             case LogChute.TRACE_ID:
-                Log.d(tag, msg, t);
+                Timber.tag(tag).d(msg, t);
                 break;
             case LogChute.WARN_ID:
-                Log.w(tag, msg, t);
+                Timber.tag(tag).w(msg, t);
         }
     }
 }

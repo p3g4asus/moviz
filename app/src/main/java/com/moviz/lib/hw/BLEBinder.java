@@ -3,7 +3,6 @@ package com.moviz.lib.hw;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.le.ScanRecord;
-import android.util.Log;
 
 import com.movisens.smartgattlib.Descriptor;
 import com.moviz.lib.comunication.plus.holder.PUserHolder;
@@ -19,6 +18,8 @@ import com.moviz.lib.hw.gatt.operations.GattSetNotificationOperation;
 import com.moviz.lib.utils.ParcelableMessage;
 
 import java.util.ArrayList;
+
+import timber.log.Timber;
 
 public class BLEBinder extends DeviceBinder implements BLESearchCallback {
     private GattManager mGattManager = null;
@@ -126,8 +127,7 @@ public class BLEBinder extends DeviceBinder implements BLESearchCallback {
     @Override
     public boolean connect(GenericDevice device, PUserHolder us) {
         if (device == null) {
-            Log.w(TAG,
-                    "BluetoothAdapter not initialized or unspecified address.");
+            Timber.tag(TAG).w("BluetoothAdapter not initialized or unspecified address.");
             return false;
         }
         else {
@@ -155,7 +155,7 @@ public class BLEBinder extends DeviceBinder implements BLESearchCallback {
         @Override
         public void stateChanged(String address, BluetoothState newState, GattOperation op) {
             DeviceDataProcessor devb = mDevices.get(address);
-            Log.i(TAG, "New Bluetooth state " + newState);
+            Timber.tag(TAG).i("New Bluetooth state " + newState);
             if (devb != null)
                 devb.setBluetoothState(newState);
 
@@ -165,7 +165,7 @@ public class BLEBinder extends DeviceBinder implements BLESearchCallback {
         public void error(String address, ParcelableMessage e, GattOperation op) {
             String id = e.getId();
             DeviceDataProcessor devb = mDevices.get(address);
-            Log.i(TAG, "Gatt server " + id);
+            Timber.tag(TAG).i("Gatt server " + id);
             if (devb != null) {
                 if (id.equals("exm_errr_gatt_operationfailed") || id.equals("exm_errr_gatt_operationtimeout"))
                     disconnect(devb.mDeviceHolder);

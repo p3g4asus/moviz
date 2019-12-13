@@ -66,7 +66,7 @@ public class StatusFragment extends DeviceFragment {
 
     @Override
     public void updateVelocity() {
-        //Log.v(TAG, "Here to update velocity "+velSheet+" "+lastMap);
+        //Timber.tag(TAG).v("Here to update velocity "+velSheet+" "+lastMap);
         if (velSheet!=null && lastMap!=null) {
             velSheet.updateValues(new VelocitySheet.SheetUpdate(lastMap,"status"));
             lastMap = null;
@@ -81,7 +81,7 @@ public class StatusFragment extends DeviceFragment {
 
     @Override
     public void onDeviceStatus(PDeviceHolder devh, PStatusHolder sta, Map<PDeviceHolder, PStatusHolder> uM) {
-        //Log.v(TAG, "Request Velocity Update "+uM);
+        //Timber.tag(TAG).v("Request Velocity Update "+uM);
         lastMap = uM;
         updateCacher.notifyNeedsUpdate(this);
     }

@@ -97,7 +97,7 @@ public class StatusReceiver implements DeviceListenerPlus {
         for (Map.Entry<PDeviceHolder, PStatusHolder> entry : statusMap.entrySet()) {
             status = entry.getValue();
             if ((flag & MODIFIED_TCPSTATUS) != 0) {
-                //Log.d("TCPStatus",privStatus.tcpStatus+" TCP");
+                //Timber.tag("TCPStatus").d(privStatus.tcpStatus+" TCP");
                 status.tcpStatus = privStatus.tcpStatus;
                 status.tcpAddress = privStatus.tcpAddress;
             }
@@ -110,7 +110,7 @@ public class StatusReceiver implements DeviceListenerPlus {
 
     @Override
     public void onDeviceUpdate(GenericDevice dev, PDeviceHolder devh, DeviceUpdate upd) {
-        //Log.d("DevUpdateSTA", "" + upd+" updN "+upd.getUpdateN());
+        //Timber.tag("DevUpdateSTA").d("" + upd+" updN "+upd.getUpdateN());
         int cm = 0;
         PStatusHolder status = statusMap.get(devh);
         if (status!=null) {
@@ -134,7 +134,7 @@ public class StatusReceiver implements DeviceListenerPlus {
                 postDeviceUpdate(devh, lastUpdate);
             if ((cm & MODIFIED_UPDATEN) != 0)
                 postDeviceStatus(devh, status);
-            //Log.d("DevUpdateSTA", "" + upd+" updN "+upd.getUpdateN()+" ccm = "+cm);
+            //Timber.tag("DevUpdateSTA").d("" + upd+" updN "+upd.getUpdateN()+" ccm = "+cm);
         }
     }
 
@@ -220,7 +220,7 @@ public class StatusReceiver implements DeviceListenerPlus {
                                      PHolderSetter hs) {
         PStatusHolder status = statusMap.get(devh);
         if (status!=null) {
-            //Log.i("StatusReceiver","STAT1 "+msg+" - "+devh+" - "+stat);
+            //Timber.tag("StatusReceiver").i("STAT1 "+msg+" - "+devh+" - "+stat);
             status.newHolder(hs);
             status.lastStatus = com.moviz.lib.comunication.DeviceStatus.valueOf(hs.get(0).getString());
             privStatus.lastAction = Messages.STATUSCHANGE_MESSAGE;

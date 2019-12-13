@@ -1,7 +1,5 @@
 package com.moviz.lib.hw;
 
-import android.util.Log;
-
 import com.moviz.lib.comunication.DeviceStatus;
 import com.moviz.lib.comunication.message.BaseMessage;
 import com.moviz.lib.comunication.message.ProgramChangeMessage;
@@ -25,6 +23,8 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import timber.log.Timber;
 
 /**
  * Created by Fujitsu on 02/11/2016.
@@ -388,7 +388,7 @@ public class PafersDataProcessor extends BluetoothChatDataProcessor<PafersDevice
     }
 
     public void setProgramParams(String pfold, String pfile, long del) {
-        Log.w(TAG, "set3 " + pfile);
+        Timber.tag(TAG).w("set3 " + pfile);
         programFold = pfold;
         programFile = pfile;
         programDelay = del;
@@ -842,8 +842,7 @@ public class PafersDataProcessor extends BluetoothChatDataProcessor<PafersDevice
                     waitMsg(-1, 200L);
                     //onDeviceStarted();
                 } else {
-                    Log.w(TAG,
-                            "Watt mode not support for Treadmill");
+                    Timber.tag(TAG).w("Watt mode not support for Treadmill");
                 }
             }
         }.start();
@@ -943,7 +942,7 @@ public class PafersDataProcessor extends BluetoothChatDataProcessor<PafersDevice
         programFile = adds.get("pfile");
         if (programFile==null)
             programFile = "";
-        Log.i(TAG,"New conf "+programFold+" "+programFile+" "+programDelay);
+        Timber.tag(TAG).i("New conf "+programFold+" "+programFile+" "+programDelay);
 
     }
 }

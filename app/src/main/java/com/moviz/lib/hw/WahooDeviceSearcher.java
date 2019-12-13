@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.moviz.gui.app.CA;
 import com.moviz.lib.comunication.DeviceType;
@@ -24,6 +22,8 @@ import com.wahoofitness.connector.listeners.discovery.DiscoveryResult;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import timber.log.Timber;
 
 /**
  * Created by Fujitsu on 24/10/2016.
@@ -61,7 +61,7 @@ public class WahooDeviceSearcher implements DeviceSearcher {
 
         @Override
         public void onDiscoveredDeviceLost(ConnectionParams params) {
-            Log.v(TAG, "mDiscoveryListener.onDiscoveredDeviceLost " + params);
+            Timber.tag(TAG).v("mDiscoveryListener.onDiscoveredDeviceLost " + params);
         }
 
         @Override
@@ -73,24 +73,24 @@ public class WahooDeviceSearcher implements DeviceSearcher {
 
         /*@Override
         public void connectedSensor(SensorConnection sensorConnection) {
-            Log.v(TAG, "mHardwareConnectorCallback.connectedSensor " + sensorConnection);
+            Timber.tag(TAG).v("mHardwareConnectorCallback.connectedSensor " + sensorConnection);
         }
 
         @Override
         public void disconnectedSensor(SensorConnection sensorConnection) {
-            Log.v(TAG, "mHardwareConnectorCallback.disconnectedSensor " + sensorConnection);
+            Timber.tag(TAG).v("mHardwareConnectorCallback.disconnectedSensor " + sensorConnection);
         }*/
 
         @Override
         public void onHardwareConnectorStateChanged(HardwareConnectorTypes.NetworkType networkType,
                                           HardwareConnectorEnums.HardwareConnectorState hardwareState) {
-            Log.v(TAG, "mHardwareConnectorCallback.connectorStateChanged " + networkType + " " + hardwareState);
+            Timber.tag(TAG).v("mHardwareConnectorCallback.connectorStateChanged " + networkType + " " + hardwareState);
         }
 
         @Override
         public void onFirmwareUpdateRequired(SensorConnection sensorConnection,
                                              String currentVersionNumber, String recommendedVersion) {
-            Log.v(TAG, "mHardwareConnectorCallback.onFirmwareUpdateRequired " + sensorConnection + " " + currentVersionNumber + " " + recommendedVersion);
+            Timber.tag(TAG).v("mHardwareConnectorCallback.onFirmwareUpdateRequired " + sensorConnection + " " + currentVersionNumber + " " + recommendedVersion);
         }
     };
 

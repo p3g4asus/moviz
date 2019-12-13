@@ -6,7 +6,6 @@ import android.bluetooth.BluetoothGattCharacteristic;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
-import android.util.Log;
 
 import com.moviz.gui.fragments.SettingsFragment;
 import com.moviz.lib.comunication.DeviceStatus;
@@ -30,6 +29,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
+
+import timber.log.Timber;
 
 public abstract class DeviceDataProcessor implements DeviceConnectionListener, CommandProcessor {
     protected PHolderSetter statusVars = new PHolderSetter();
@@ -131,7 +132,7 @@ public abstract class DeviceDataProcessor implements DeviceConnectionListener, C
 
     public synchronized void setBluetoothState(BluetoothState newState) {
         if (newState != mBluetoothState) {
-            Log.i(TAG,"New state for device "+mBluetoothDevice.getName()+": "+newState);
+            Timber.tag(TAG).i("New state for device "+mBluetoothDevice.getName()+": "+newState);
             this.mBluetoothState = newState;
             if (newState == BluetoothState.CONNECTED) {
                 onDeviceConnected(mDeviceHolder, mDeviceHolder.innerDevice());
@@ -202,9 +203,9 @@ public abstract class DeviceDataProcessor implements DeviceConnectionListener, C
     public void postDeviceError(ParcelableMessage e) {
         ctx.sendBroadcast(new Intent(DeviceService.ACTION_DEVICE_ERROR).putExtra(DeviceService.EXTRA_DEVICE_ERROR, (Parcelable) e).putExtra(DeviceService.EXTRA_DEVICE, mDeviceHolder.innerDevice()));
         String id = e.getId();
-        Log.e("DeviceDataProcessor", "Error " + id);
+        Timber.tag("DeviceDataProcessor").e("Error " + id);
         if (id.equals("exm_errr_connectionfailed")) {
-            Log.e("DeviceDataProcessor", mBluetoothDevice + " disconnected");
+            Timber.tag("DeviceDataProcessor").e(mBluetoothDevice + " disconnected");
             onDeviceConnectionFailed(mDeviceHolder, mDeviceHolder.innerDevice());
             for (DeviceListener dl : mList)
                 dl.onDeviceConnectionFailed(mDeviceHolder, mDeviceHolder.innerDevice());

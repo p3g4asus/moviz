@@ -98,14 +98,14 @@ public class ZephyrHxMDeviceSimulator implements DeviceSimulator {
                             adj += 65536;
                         oldTs = w.ts[w.okts - 1];
                         oldTsR = (int) (now - adj - sessionStart);
-                        //Log.i("ciao","1ts o="+oldTs+" r="+oldTsR);
+                        //Timber.tag("ciao").i("1ts o="+oldTs+" r="+oldTsR);
                     }
                     int dif;
                     for (int i = w.okts - 1; i >= 0; i--) {
                         w.tsR[i] = ((dif = w.ts[i] - oldTs) < 0 ? dif + 65536 : dif) + oldTsR;
                         oldTs = w.ts[i];
                         oldTsR = w.tsR[i];
-                        //Log.i("ciao","2ts o="+oldTs+" r="+oldTsR+" d="+dif+" k"+w.okts);
+                        //Timber.tag("ciao").i("2ts o="+oldTs+" r="+oldTsR+" d="+dif+" k"+w.okts);
                     }
 
                 }

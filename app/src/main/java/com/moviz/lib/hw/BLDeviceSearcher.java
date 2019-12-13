@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Parcelable;
-import android.util.Log;
 
 import com.moviz.gui.app.CA;
 import com.moviz.lib.comunication.DeviceType;
@@ -19,6 +18,8 @@ import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
+
+import timber.log.Timber;
 
 /**
  * Created by Matteo on 22/10/2016.
@@ -53,7 +54,7 @@ public class BLDeviceSearcher implements DeviceSearcher {
         private void exitPair(String error) {
             setupBluetoothIO(false, null);
             if (error != null) {
-                Log.e(TAG, error);
+                Timber.tag(TAG).e(error);
                 CA.lbm.sendBroadcast(new Intent(DEVICE_REBIND_ERROR).putExtra(DEVICE_ERROR_CODE, (Parcelable) new ParcelableMessage(error)).putExtra(DEVICE_ERROR_IDX, currentDev));
             } else
                 CA.lbm.sendBroadcast(new Intent(DEVICE_REBIND_OK).putExtra(DEVICE_FOUND, deviceFound));
@@ -78,7 +79,7 @@ public class BLDeviceSearcher implements DeviceSearcher {
 
         private void confirmBluetoothPasskey(BluetoothDevice device) {
             try {
-                Log.w(TAG, "Try confirm");
+                Timber.tag(TAG).w("Try confirm");
                 Method m = device.getClass().getMethod("setPairingConfirmation", boolean.class);
                 boolean rv = (Boolean) m.invoke(device, true);
                 if (!rv)
@@ -90,7 +91,7 @@ public class BLDeviceSearcher implements DeviceSearcher {
 
         private void cancelPairing(BluetoothDevice device) {
             try {
-                Log.w(TAG, "Try cancel");
+                Timber.tag(TAG).w("Try cancel");
                 Method m = device.getClass().getMethod("cancelPairingUserInput");
                 m.invoke(device);
             } catch (Exception e) {
@@ -101,16 +102,16 @@ public class BLDeviceSearcher implements DeviceSearcher {
         private void setBluetoothPairingPin(BluetoothDevice device, String pin) {
             byte[] pinBytes = pin.getBytes(Charset.forName("UTF-8"));
             try {
-                Log.w(TAG, "Try to set the PIN");
+                Timber.tag(TAG).w("Try to set the PIN");
                 Method m = device.getClass().getMethod("setPin", byte[].class);
                 boolean rv = (Boolean) m.invoke(device, pinBytes);
                 if (rv) {
-                    Log.w(TAG, "Success to add the PIN.");
+                    Timber.tag(TAG).w("Success to add the PIN.");
                     rv = (Boolean) (device.getClass().getMethod(
                             "setPairingConfirmation", boolean.class)
                             .invoke(device, true));
                     if (rv)
-                        Log.w(TAG, "Success to setPairingConfirmation.");
+                        Timber.tag(TAG).w("Success to setPairingConfirmation.");
                 }
                 if (!rv)
                     throw new Exception("Cannot Pair to " + device.getAddress());
@@ -143,7 +144,7 @@ public class BLDeviceSearcher implements DeviceSearcher {
         @Override
         public void onReceive(Context context, Intent intent) {
             final String action = intent.getAction();
-            Log.w(TAG, "Pairing " + action);
+            Timber.tag(TAG).w("Pairing " + action);
             if (doExit) {
                 mBluetoothAdapter.cancelDiscovery();
                 exitPair(null);
@@ -189,7 +190,7 @@ public class BLDeviceSearcher implements DeviceSearcher {
                 } else if (state == BluetoothDevice.ERROR) {
                     exitPair("exm_errs_stateerror");
                 }
-                Log.w(TAG, String.format("prevs=%d sta=%d", prevState, state));
+                Timber.tag(TAG).w(String.format("prevs=%d sta=%d", prevState, state));
             } else if (BluetoothDevice.ACTION_PAIRING_REQUEST.equals(action)) {
                 searchDevicePairingReq = true;
                 int type = intent.getIntExtra(BluetoothDevice.EXTRA_PAIRING_VARIANT,

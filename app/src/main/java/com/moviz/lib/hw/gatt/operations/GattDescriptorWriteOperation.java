@@ -3,13 +3,14 @@ package com.moviz.lib.hw.gatt.operations;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattDescriptor;
-import android.util.Log;
 
 import com.movisens.smartgattlib.Characteristic;
 import com.movisens.smartgattlib.Descriptor;
 import com.movisens.smartgattlib.Service;
 
 import java.util.UUID;
+
+import timber.log.Timber;
 
 public class GattDescriptorWriteOperation extends GattOperation {
 
@@ -26,7 +27,7 @@ public class GattDescriptorWriteOperation extends GattOperation {
 
     @Override
     public void execute(BluetoothGatt gatt) {
-        Log.d("GattManager", "Writing to " + mDescriptor);
+        Timber.tag("GattManager").d("Writing to " + mDescriptor);
         BluetoothGattDescriptor descriptor = gatt.getService(mService).getCharacteristic(mCharacteristic).getDescriptor(mDescriptor);
         gatt.writeDescriptor(descriptor);
     }

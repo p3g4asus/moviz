@@ -13,6 +13,8 @@ import java.util.Date;
 
 import no.nordicsemi.android.log.LogSession;
 import no.nordicsemi.android.log.Logger;
+import no.nordicsemi.android.log.timber.nRFLoggerTree;
+import timber.log.Timber;
 
 public class CA extends MultiDexApplication {
     public static LocalBroadcastManager lbm = null;
@@ -45,7 +47,8 @@ public class CA extends MultiDexApplication {
         PACKAGE_NAME = getApplicationContext().getPackageName();
         Stetho.initializeWithDefaults(this);
         mLogSession = Logger.newSession(getApplicationContext(), new SimpleDateFormat("dd_MM_yy_HH_mm_ss").format(new Date()), "Moviz");
-
+        Timber.plant(new nRFLoggerTree(mLogSession));
+        Timber.plant(new Timber.DebugTree());
         lbm = LocalBroadcastManager.getInstance(getApplicationContext());
     }
 

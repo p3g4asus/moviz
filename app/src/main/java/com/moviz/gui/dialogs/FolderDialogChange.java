@@ -3,11 +3,12 @@ package com.moviz.gui.dialogs;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.support.v7.preference.Preference;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v7.preference.Preference;
 
 import java.io.File;
+
+import timber.log.Timber;
 
 public class FolderDialogChange implements Preference.OnPreferenceClickListener {
     protected String defaultDir;
@@ -39,14 +40,13 @@ public class FolderDialogChange implements Preference.OnPreferenceClickListener 
             /*
 			 * fileDialog.addFileListener(new
 			 * FileDialog.FileSelectedListener() { public void
-			 * fileSelected(File file) { Log.d(getClass().getName(),
-			 * "selected file " + file.toString()); } });
+			 * fileSelected(File file) { Timber.tag(getClass().getName()).d(* "selected file " + file.toString()); } });
 			 */
             fileDialog
                     .addDirectoryListener(new FileDialog.DirectorySelectedListener() {
                         public void directorySelected(File directory) {
                             String d = directory.toString();
-                            Log.d(getClass().getName(), "selected dir " + d);
+                            Timber.tag(getClass().getName()).d("selected dir " + d);
                             Editor prefEditor = sharedPref.edit();
                             prefEditor.putString(k, d); // set your
                             // default
