@@ -6,14 +6,14 @@ android {
     packagingOptions {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
-        exclude 'org/apache/velocity/tools/view/velocity.properties'
-        exclude 'org/apache/velocity/tools/generic/times.properties'
-        exclude 'org/apache/velocity/runtime/defaults/directive.properties'
-        exclude 'org/apache/velocity/runtime/defaults/velocity.properties'
-        exclude 'org/apache/velocity/tools/view/tools.xml'
-        exclude 'org/apache/velocity/tools/struts/tools.xml'
-        exclude 'org/apache/velocity/tools/generic/tools.xml'
-        exclude 'org/apache/velocity/texen/defaults/texen.properties'
+        //exclude 'org/apache/velocity/tools/view/velocity.properties'
+        //exclude 'org/apache/velocity/tools/generic/times.properties'
+        //exclude 'org/apache/velocity/runtime/defaults/directive.properties'
+        //exclude 'org/apache/velocity/runtime/defaults/velocity.properties'
+        //exclude 'org/apache/velocity/tools/view/tools.xml'
+        //exclude 'org/apache/velocity/tools/struts/tools.xml'
+        //exclude 'org/apache/velocity/tools/generic/tools.xml'
+        //exclude 'org/apache/velocity/texen/defaults/texen.properties'
         exclude 'META-INF/velocity-view.tld'
     }
     repositories{

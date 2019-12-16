@@ -67,7 +67,12 @@ public abstract class GenericDevice implements CommandProcessor {
 
 
     public void setDeviceReadyListener(DeviceReadyListener drl) {
-        mDeviceReadyListener = drl;
+        if (mDeviceReadyListener!=drl) {
+            mDeviceReadyListener = drl;
+            if (isReady() && drl != null) {
+                mDeviceReadyListener.onDeviceReady(GenericDevice.this, device);
+            }
+        }
     }
 
     protected abstract void prepareServiceConnection();

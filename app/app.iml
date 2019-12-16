@@ -92,8 +92,6 @@
     <orderEntry type="library" name="Gradle: __local_aars__:D.\Dati\GoogleDrive\android\moviz\app\libs\androidplot-core-0.6.1.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:D.\Dati\GoogleDrive\android\moviz\app\libs\jmatio.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: __local_aars__:D.\Dati\GoogleDrive\android\moviz\app\libs\libGoogleAnalyticsServices.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" name="Gradle: __local_aars__:D.\Dati\GoogleDrive\android\moviz\app\libs\velocity-1.7-dep.jar:unspecified@jar" level="project" />
-    <orderEntry type="library" name="Gradle: __local_aars__:D.\Dati\GoogleDrive\android\moviz\app\libs\velocity-tools-2.0.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:support-annotations:28.0.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.mcxiaoke.volley:library:1.0.19@jar" level="project" />
     <orderEntry type="library" name="Gradle: com.nineoldandroids:library:2.4.0@jar" level="project" />
@@ -135,6 +133,10 @@
     <orderEntry type="library" name="Gradle: com.facebook.stetho:stetho:1.4.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.support:multidex:1.0.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.wahoofitness.connector:wahoo_fitness_android_api:@aar" level="project" />
+    <orderEntry type="module" module-name="movizcomunication" />
+    <orderEntry type="module" module-name="smartgattlib" />
+    <orderEntry type="module" module-name="movizcomunication" />
+    <orderEntry type="module" module-name="smartgattlib" />
     <orderEntry type="module" module-name="movizcomunication" />
     <orderEntry type="module" module-name="smartgattlib" />
   </component>

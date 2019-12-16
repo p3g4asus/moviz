@@ -294,7 +294,7 @@ public class TCPServer implements Runnable, CommandProcessor, AdvancedListener {
     }
 
     public void startListening() {
-        if (intStatus == TCPStatus.IDLE) {
+        if (intStatus == TCPStatus.IDLE && stopped) {
             new Thread(this).start();
             writer = new WriterThread2();
             writer.start();

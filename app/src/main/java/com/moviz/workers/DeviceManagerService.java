@@ -506,13 +506,13 @@ public class DeviceManagerService extends Service implements CommandProcessor {
             for (PDeviceHolder devh : lst) {
                 try {
                     GenericDevice inst = DeviceTypeMaps.type2deviceclass.get(devh.getType()).newInstance();
-                    inst.setDeviceReadyListener(loglist);
                     if (inst.initOnce(devh, userObj, ctx, mBinder)) {
                         inst.setDebugFlag(mDebugFlag);
                         inst.loadTransientPref(sharedPref);
                         holder2deviceinstance.put(devh, inst);
                         if (devh.isEnabled())
                             holder2connectingDev.add(devh);
+                        inst.setDeviceReadyListener(loglist);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -1254,7 +1254,6 @@ public class DeviceManagerService extends Service implements CommandProcessor {
                 //updateTimerInit();
                 setupIO(true);
                 reset();
-                prepareConnection();
             }
         });
     }
