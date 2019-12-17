@@ -42,25 +42,33 @@ public class StatusReceiver implements DeviceListenerPlus {
 
 
     public void removeAdvancedListener(AdvancedListener al) {
-        mAdvancedListeners.remove(al);
+        synchronized(mAdvancedListeners) {
+            mAdvancedListeners.remove(al);
+        }
     }
 
     public void addAdvancedListener(AdvancedListener al) {
-        mAdvancedListeners.add(al);
+        synchronized(mAdvancedListeners) {
+            mAdvancedListeners.add(al);
+        }
     }
 
     protected void postDeviceUpdate(PDeviceHolder devh, DeviceUpdate upd) {
         Map<PDeviceHolder, DeviceUpdate> uM = new HashMap<>();
         uM.putAll(updateMap);
-        for (AdvancedListener adv : mAdvancedListeners)
-            adv.onDeviceUpdate(devh, upd, uM);
+        synchronized(mAdvancedListeners) {
+            for (AdvancedListener adv : mAdvancedListeners)
+                adv.onDeviceUpdate(devh, upd, uM);
+        }
     }
 
     protected void postDeviceStatus(PDeviceHolder devh, PStatusHolder sta) {
         Map<PDeviceHolder, PStatusHolder> uM = new HashMap<>();
         uM.putAll(statusMap);
-        for (AdvancedListener adv : mAdvancedListeners)
-            adv.onDeviceStatus(devh, sta, uM);
+        synchronized(mAdvancedListeners) {
+            for (AdvancedListener adv : mAdvancedListeners)
+                adv.onDeviceStatus(devh, sta, uM);
+        }
     }
 
     public StatusReceiver() {
