@@ -163,10 +163,16 @@ public abstract class GenericDevice implements CommandProcessor {
     }
 
     public void stop() {
-        if (mBluetoothService != null) {
-            mBluetoothService.stop();
+        try {
+            if (mBluetoothService != null) {
+                mBluetoothService.stop();
+                mBluetoothService = null;
+                ctx.unbindService(mServiceConnection);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
             mBluetoothService = null;
-            ctx.unbindService(mServiceConnection);
         }
         commandManager.removeCommandProcessor(this,getAcceptedMessages());
     }

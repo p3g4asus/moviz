@@ -722,8 +722,13 @@ public class DeviceManagerService extends Service implements CommandProcessor {
             dev.stop();
         }
         mDead = DeadState.DEAD;
-        stopForeground(true);
-        stopSelf();
+        try {
+            stopForeground(true);
+            stopSelf();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
         TerminateMessage tms = new TerminateMessage();
         mBinder.postMessage(tms, this);
     }
